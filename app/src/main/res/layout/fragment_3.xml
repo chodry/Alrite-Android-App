@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragments.Patient.Fragment3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/green_main"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="Patient's Details - Step 2"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="10dp"
+            android:fadeScrollbars="true"
+            android:padding="10dp"
+            android:layout_above="@id/buttons"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="What is the child's sex?"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/black"
+                        android:text="Male"
+                        android:id="@+id/yes"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/black"
+                        android:text="Female"
+                        android:id="@+id/no"
+                        android:textSize="18sp" />
+
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="How old is the child?"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:id="@+id/years"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight=".5"
+                        android:background="@drawable/text_input_bg"
+                        android:inputType="number"
+                        android:gravity="center"
+                        android:layout_margin="10dp"
+                        android:paddingLeft="10dp"
+                        android:saveEnabled="false" />
+
+                    <LinearLayout
+                        android:id="@+id/vnc"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_margin="10dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/style_spinner"
+                        android:orientation="vertical">
+
+                        <Spinner
+                            android:id="@+id/yearsormonths"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="What is the child's weight?"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:weightSum="1"
+                    android:layout_marginBottom="10dp">
+
+                    <EditText
+                        android:id="@+id/kg1"
+                        android:layout_width="0dp"
+                        android:inputType="number"
+                        android:gravity="center"
+                        android:hint="5"
+                        android:maxLength="2"
+                        android:layout_height="50dp"
+                        android:layout_weight=".2"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/text_input_bg"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".02"
+                        android:text="."
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/green"/>
+
+                    <EditText
+                        android:id="@+id/kg2"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:inputType="number"
+                        android:gravity="center"
+                        android:hint="0"
+                        android:maxLength="1"
+                        android:layout_margin="10dp"
+                        android:layout_weight=".15"
+                        android:background="@drawable/text_input_bg"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:text="Kilograms"
+                        android:textSize="18sp"
+                        android:layout_marginBottom="7dp"
+                        android:layout_gravity="bottom"/>
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_button"
+                android:text="Back"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/primary_button"
+                android:text="next"
+                android:textColor="@color/white"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000</color>
+    <color name="darkGray">#444</color>
+    <color name="lightGray">#9E9E9E</color>
+    <color name="softGray">#FAFAFA</color>
+    <color name="white">#fff</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#32CD32</color>
+    <color name="greenLight">#F2FCF2</color>
+
+    <color name="buttonHighlight">#EFC40A</color>
+
+    <color name="primaryAccentColor">#D7FFF1</color>
+    <color name="topBarColor">#285843</color>
+    <color name="primaryButtonColor">#42A57A</color>
+    <color name="secondaryButtonColor">#8CD78F</color>
+
+    <color name="mildDiagnosisColor">#8CD78F</color>
+    <color name="moderateDiagnosisColor">#EFC40A</color>
+    <color name="severeDiagnosisColor">#FF6500</color>
+
+    <color name="green_main">#42A57A</color>
+    <color name="green_light">#8CD78F</color>
+    <color name="green_dark">#285843</color>
+    <color name="color_background">#e8fff6</color>
+
+    <color name="lineSeparatorColor">#e6e6e6</color>
+</resources>
