@@ -7,6 +7,13 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.ug.air.alrite.Fragments.Patient.Fragment1;
+import com.ug.air.alrite.Fragments.Patient.Fragment10;
+import com.ug.air.alrite.Fragments.Patient.Fragment4;
+import com.ug.air.alrite.Fragments.Patient.Fragment5;
+import com.ug.air.alrite.Fragments.Patient.Fragment6;
+import com.ug.air.alrite.Fragments.Patient.Fragment7;
+import com.ug.air.alrite.Fragments.Patient.Fragment8;
+import com.ug.air.alrite.Fragments.Patient.Fragment9;
 import com.ug.air.alrite.R;
 
 public class PatientActivity extends AppCompatActivity {

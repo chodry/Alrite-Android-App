@@ -8,4 +8,26 @@
         <item>Years</item>
         <item>Months</item>
     </string-array>
+
+    <string name="first_dose">Give first dose of appropriate antibiotic- intramuscular injection Ampicillin/Gentamicin recommended, oral Amoxicillin otherwise</string>
+    <string name="first_dose_IM">Dilute 500mg vial Ampicillin or 2ml vial Gentamicin with 2.1 ml sterile water</string>
+    <string name="IM_dosing_under1">Inject 2ml Ampicillin or 1.1 ml Gentamicin into upper arm, thigh, or bottom with sterile needle</string>
+    <string name="give_diazepam_if">If convulsing, treat with anticonvulsant like Diazepam</string>
+    <string name="refer_urgently">Refer URGENTLY to hospital</string>
+    <string name="severe">Diagnosis: Severe pneumonia OR very severe disease</string>
+
+    <string name="child_is_healthy">The child is not showing signs of pneumonia or asthma</string>
+    <string name="soothe_throat">No antibiotics or bronchodilator needed. Soothe the throat and relieve the cough with a safe remedy</string>
+    <string name="no_signs">Diagnosis: No signs of pneumonia or asthma</string>
+
+    <string name="tap_on_inhale">Tap on inhale</string>
+    <string name="elapsed_time">Elapsed time:</string>
+    <string name="start_text">START ASSESSMENT</string>
+
+    <string name="normal_breathing"><b>Normal breathing</b></string>
+    <string name="breathing_info_under1">The Normal breathing rate for children between 2 to 12 months is under 50 breaths per minute</string>
+    <string name="breathing_info_over1">The Normal rate for children ages 1–5 years is under 40 breaths per minute</string>
+    <string name="breathing_info_under2">The Normal rate for children below 2 months is under 60 breaths per minute</string>
+
+
 </resources>

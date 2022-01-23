@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.Patient.Fragment2">
+    tools:context=".Fragments.Patient.Fragment7">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:text="Patient's History (Cough) - 1"
+            android:text="Patient's History (HIV) - 3"
             android:textColor="@color/white"
             android:textSize="18sp"/>
 
@@ -32,24 +32,25 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/buttons"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="10dp"
             android:fadeScrollbars="true"
             android:padding="10dp"
+            android:layout_above="@id/buttons"
             android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"
-                    android:text="Does the child have a cough or difficulty breathing?"
+                    android:text="Does the child have HIV?"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -76,8 +77,16 @@
                         android:id="@+id/no"
                         android:textSize="18sp" />
 
-                </RadioGroup>
+                    <RadioButton
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/black"
+                        android:text="Not Sure"
+                        android:id="@+id/not_sure"
+                        android:textSize="18sp" />
 
+                </RadioGroup>
 
             </LinearLayout>
 

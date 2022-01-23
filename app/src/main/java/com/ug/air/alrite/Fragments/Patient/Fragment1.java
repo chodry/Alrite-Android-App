@@ -74,7 +74,7 @@ public class Fragment1 extends Fragment {
                     fr.commit();
 
                 } else {
-                    Toast.makeText(getActivity(), "Select one option", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Please Select one option", Toast.LENGTH_SHORT).show();
                 }
             }
         });
