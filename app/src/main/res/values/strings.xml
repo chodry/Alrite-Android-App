@@ -28,6 +28,11 @@
     <string name="breathing_info_under1">The Normal breathing rate for children between 2 to 12 months is under 50 breaths per minute</string>
     <string name="breathing_info_over1">The Normal rate for children ages 1–5 years is under 40 breaths per minute</string>
     <string name="breathing_info_under2">The Normal rate for children below 2 months is under 60 breaths per minute</string>
+    <string name="stridor"><u>Stridor?</u></string>
+    <string name="chest"><u>Chest Indrawing?</u></string>
+    <string name="wheezing"><u>Wheezing?</u></string>
+    <string name="wheez">A high-pitched whistling sound associated with labored breathing</string>
+    <string name="chest_in">The lower ribs on both sides of the chest are pulled in when the child breathes in, even when the child is not crying.</string>
 
 
 </resources>

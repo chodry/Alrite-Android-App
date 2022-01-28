@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -37,39 +35,38 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Fragment10 extends Fragment {
+public class Fragment11 extends Fragment {
 
     View view;
-    Button back, next, btnSave;
+    Button back, next;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2;
-    String value7 = "none";
-    TextView stridor, txtDisease, txtDefinition, txtOk,txtDiagnosis;
-    LinearLayout linearLayoutDisease, linearLayout_instruction;
+    String value8 = "none";
+    TextView chest, txtDisease, txtDefinition, txtOk;
+    LinearLayout linearLayoutDisease;
     VideoView videoView;
-    MediaPlayer mediaPlayer;
-    Dialog dialog, dialog1;
+    Dialog dialog;
     RecyclerView recyclerView;
     ArrayList<Assessment> assessments;
     AssessmentAdapter assessmentAdapter;
-    CardView inst;
     private static final int YES = 0;
     private static final int NO = 1;
-    public static final String CHOICE6 = "choice6";
+    public static final String CHOICE7 = "choice7";
     public static final String SHARED_PREFS = "sharedPrefs";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_10, container, false);
+        view = inflater.inflate(R.layout.fragment_11, container, false);
+
 
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
         radioGroup = view.findViewById(R.id.radioGroup);
         radioButton1 = view.findViewById(R.id.yes);
         radioButton2 = view.findViewById(R.id.no);
-        stridor = view.findViewById(R.id.stridor);
+        chest = view.findViewById(R.id.chest);
 
 
         loadData();
@@ -83,10 +80,10 @@ public class Fragment10 extends Fragment {
 
                 switch (index) {
                     case YES:
-                        value7 = "Yes";
+                        value8 = "Yes";
                         break;
                     case NO:
-                        value7 = "No";
+                        value8 = "No";
                         break;
                     default:
                         break;
@@ -97,7 +94,7 @@ public class Fragment10 extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (value7.isEmpty()){
+                if (value8.isEmpty()){
                     Toast.makeText(getActivity(), "Please select at least one of the options", Toast.LENGTH_SHORT).show();
                 }else {
                     saveData();
@@ -109,12 +106,12 @@ public class Fragment10 extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment9());
+                fr.replace(R.id.fragment_container, new Fragment10());
                 fr.commit();
             }
         });
 
-        stridor.setOnClickListener(new View.OnClickListener() {
+        chest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
@@ -128,28 +125,30 @@ public class Fragment10 extends Fragment {
         SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString(CHOICE6, value7);
+        editor.putString(CHOICE7, value8);
         editor.apply();
 
-        checkIfNone();
-        
+        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+        fr.replace(R.id.fragment_container, new Fragment12());
+        fr.addToBackStack(null);
+        fr.commit();
+
     }
 
     private void loadData() {
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        value7 = sharedPreferences.getString(CHOICE6, "");
+        value8 = sharedPreferences.getString(CHOICE7, "");
     }
 
     private void updateViews() {
-        if (value7.equals("Yes")){
+        if (value8.equals("Yes")){
             radioButton1.setChecked(true);
-        }else if (value7.equals("No")){
+        }else if (value8.equals("No")){
             radioButton2.setChecked(true);
         }else {
             radioButton1.setChecked(false);
             radioButton2.setChecked(false);
         }
-
     }
 
     private void showDialog() {
@@ -163,15 +162,16 @@ public class Fragment10 extends Fragment {
         txtOk = dialog.findViewById(R.id.ok);
         linearLayoutDisease = dialog.findViewById(R.id.disease);
         videoView = dialog.findViewById(R.id.video_view);
-        inst = dialog.findViewById(R.id.inst);
+        recyclerView = dialog.findViewById(R.id.recyclerView2);
+        CardView inst = dialog.findViewById(R.id.inst);
 
         inst.setVisibility(View.GONE);
 
-        txtDisease.setText("Stridor");
-        txtDefinition.setText("A noise on breathing in due to obstruction of the upper airway");
+        txtDisease.setText("Chest Indrawing");
+        txtDefinition.setText(R.string.chest_in);
         linearLayoutDisease.setBackgroundColor(getResources().getColor(R.color.green_dark));
 
-        String videoPath = "android.resource://" + Objects.requireNonNull(getActivity()).getPackageName() + "/" + R.raw.stridor_glossary_video;
+        String videoPath = "android.resource://" + Objects.requireNonNull(getActivity()).getPackageName() + "/" + R.raw.chest_indrawing_glossary_video;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
         videoView.start();
@@ -186,59 +186,4 @@ public class Fragment10 extends Fragment {
 
         dialog.show();
     }
-
-    private void checkIfNone() {
-        if (value7.equals("No")){
-            FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Fragment11());
-            fr.addToBackStack(null);
-            fr.commit();
-        }else{
-            displayDialog();
-        }
-    }
-
-    private void displayDialog() {
-        dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.assessment_layout);
-        dialog.setCancelable(false);
-        Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-
-        linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
-        txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
-        recyclerView = dialog.findViewById(R.id.recyclerView1);
-        btnSave = dialog.findViewById(R.id.btnSave);
-
-        linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
-        txtDiagnosis.setText(R.string.severe);
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-
-        assessments = new ArrayList<>();
-        assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
-
-        List<Integer> messages = Arrays.asList(R.string.first_dose, R.string.first_dose_IM, R.string.IM_dosing_under1, R.string.give_diazepam_if, R.string.refer_urgently);
-        for (int i = 0; i < messages.size(); i++){
-            Assessment assessment = new Assessment(messages.get(i));
-            assessments.add(assessment);
-        }
-        recyclerView.setAdapter(assessmentAdapter);
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveForm();
-            }
-        });
-
-        dialog.getWindow().setLayout(650, 1300);
-        dialog.getWindow().setGravity(Gravity.CENTER);
-        dialog.show();
-    }
-
-    private void saveForm() {
-    }
-
 }

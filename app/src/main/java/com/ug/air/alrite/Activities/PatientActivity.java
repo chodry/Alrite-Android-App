@@ -8,6 +8,9 @@ import android.widget.Toast;
 
 import com.ug.air.alrite.Fragments.Patient.Fragment1;
 import com.ug.air.alrite.Fragments.Patient.Fragment10;
+import com.ug.air.alrite.Fragments.Patient.Fragment11;
+import com.ug.air.alrite.Fragments.Patient.Fragment12;
+import com.ug.air.alrite.Fragments.Patient.Fragment2v1;
 import com.ug.air.alrite.Fragments.Patient.Fragment4;
 import com.ug.air.alrite.Fragments.Patient.Fragment5;
 import com.ug.air.alrite.Fragments.Patient.Fragment6;
