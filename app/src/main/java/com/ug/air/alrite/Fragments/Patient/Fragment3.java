@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.ug.air.alrite.R;
 
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -33,7 +34,7 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
     Button back, next;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2;
-    String age, weight, text, kg1, kg2;
+    String age, weight, text, kg1, kg2, fileName;
     Spinner spinner;
     String value2 = "none";
     private static final int YES = 0;
@@ -42,6 +43,9 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
     public static final String KILO = "kilo";
     public static final String CHOICE = "choice";
     public static final String SHARED_PREFS = "sharedPrefs";
+    SharedPreferences sharedPreferences, sharedPreferences1;
+    SharedPreferences.Editor editor;
+    Bundle bundle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,9 +67,6 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
-        loadData();
-        updateViews();
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -90,6 +91,29 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
         etKilo1.addTextChangedListener(textWatcher1);
         etKilo2.addTextChangedListener(textWatcher2);
 
+        bundle = this.getArguments();
+        if (bundle != null){
+            fileName = bundle.getString("fileName");
+            String names = fileName.replace(".xml", "");
+            sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(names, Context.MODE_PRIVATE);
+            sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+            editor = sharedPreferences1.edit();
+            Map<String, ?> all = sharedPreferences.getAll();
+            for (Map.Entry<String, ?> x : all.entrySet()) {
+                if (x.getValue().getClass().equals(String.class))  editor.putString(x.getKey(),  (String)x.getValue());
+            }
+
+            editor.commit();
+
+            loadData();
+            updateViews();
+
+        }else {
+            sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+
+            loadData();
+            updateViews();
+        }
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,8 +222,7 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
     };
 
     private void saveData() {
-        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor = sharedPreferences1.edit();
 
         editor.putString(AGE, age);
         editor.putString(KILO, weight);

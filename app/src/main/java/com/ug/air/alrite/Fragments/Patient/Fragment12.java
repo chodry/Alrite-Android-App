@@ -32,7 +32,11 @@ import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -54,6 +58,8 @@ public class Fragment12 extends Fragment {
     private static final int YES = 0;
     private static final int NO = 1;
     public static final String CHOICE8 = "choice8";
+    public static final String DATE = "date";
+    public static final String UUIDS = "uuid";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
@@ -127,21 +133,30 @@ public class Fragment12 extends Fragment {
     }
 
     private void saveData() {
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+        String formattedDate = df.format(currentTime);
+
+        String uniqueID = UUID.randomUUID().toString();
 
         editor.putString(CHOICE8, value9);
+        editor.putString(DATE, formattedDate);
+        editor.putString(UUIDS, uniqueID);
         editor.apply();
-        String uniqueID = UUID.randomUUID().toString();
+
+        uniqueID = formattedDate + "_" + uniqueID;
+
         sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
         editor1 = sharedPreferences1.edit();
         Map<String, ?> all = sharedPreferences.getAll();
         for (Map.Entry<String, ?> x : all.entrySet()) {
             if (x.getValue().getClass().equals(String.class))  editor1.putString(x.getKey(),  (String)x.getValue());
+            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
         }
         editor1.commit();
         editor.clear();
         editor.commit();
         startActivity(new Intent(getActivity(), Dashboard.class));
-//        renaming();
 
     }
 
@@ -197,17 +212,5 @@ public class Fragment12 extends Fragment {
         dialog.show();
     }
 
-    private void renaming() {
-        String uniqueID = UUID.randomUUID().toString();
-        sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
-        editor1 = sharedPreferences1.edit();
-        Map<String, ?> all = sharedPreferences.getAll();
-        for (Map.Entry<String, ?> x : all.entrySet()) {
-           if (x.getValue().getClass().equals(String.class))  editor1.putString(x.getKey(),  (String)x.getValue());
-        }
-        editor1.commit();
-        editor.clear();
-        editor.commit();
-        startActivity(new Intent(getActivity(), Dashboard.class));
-    }
+
 }

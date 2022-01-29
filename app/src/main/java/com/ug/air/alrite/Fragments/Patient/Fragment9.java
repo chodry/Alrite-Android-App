@@ -53,7 +53,7 @@ public class Fragment9 extends Fragment {
     public static final String FASTBREATHING = "fastBreathing";
     public static final String RATE = "rate";
     String age, rate, rating;
-    long ag = 0;
+    float ag = 0;
     int score = 0;
 
     @Override
@@ -71,7 +71,7 @@ public class Fragment9 extends Fragment {
         sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         age = sharedPreferences.getString(AGE, "");
-        ag = Long.parseLong(age);
+        ag = Float.parseFloat(age);
 
         numBreaths = 5;
         margin=13;
@@ -240,7 +240,7 @@ public class Fragment9 extends Fragment {
         updateElapsedTimeView(0);
     }
 
-    public void evalFastBreathing(Long birthday){
+    public void evalFastBreathing(float birthday){
         if(isCompleted()) {
             if (birthday <= 0.2){
                 if (value > 60){
@@ -328,7 +328,7 @@ public class Fragment9 extends Fragment {
                 if (rate.isEmpty()){
                     Toast.makeText(getActivity(), "Please fill in the required field", Toast.LENGTH_SHORT).show();
                 }else {
-                    ag = Long.parseLong(age);
+                    ag = Float.parseFloat(age);
                     double rt = Double.parseDouble(rate);
                     value = rt;
                     dialog.dismiss();
@@ -352,7 +352,8 @@ public class Fragment9 extends Fragment {
         btnContinue = dialog1.findViewById(R.id.ContinueButton);
 
         rate = String.valueOf(value);
-        txtRate.setText(rate);
+        String[] separated = rate.split("\\.");
+        txtRate.setText(separated[0]);
 
         if (fastBreathing){
             rating = "Fast Breathing";

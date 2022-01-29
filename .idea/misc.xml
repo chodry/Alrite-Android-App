@@ -8,6 +8,7 @@
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/drawable/circle_background.xml" value="0.1953125" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/drawable/header_layout.xml" value="0.1953125" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/drawable/homebackground.xml" value="0.1953125" />
+        <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/drawable/ic_add_circle_black_24dp.xml" value="0.1953125" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1953125" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/drawable/ic_login.xml" value="0.1953125" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/drawable/ic_menu.xml" value="0.1953125" />
@@ -21,12 +22,14 @@
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/activity_patient.xml" value="0.17916666666666667" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/activity_splash.xml" value="0.17916666666666667" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/assessment_layout.xml" value="0.2" />
+        <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment2v2.xml" value="0.22" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_1.xml" value="0.17916666666666667" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_10.xml" value="0.18" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_11.xml" value="0.17916666666666667" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_12.xml" value="0.17916666666666667" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_2.xml" value="0.2" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_2v1.xml" value="0.25" />
+        <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_2v2.xml" value="0.22" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_3.xml" value="0.25" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_4.xml" value="0.17916666666666667" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_5.xml" value="0.17916666666666667" />
@@ -41,6 +44,7 @@
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/learn_popup.xml" value="0.17916666666666667" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/manual_layout.xml" value="0.25" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/patient.xml" value="0.25" />
+        <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/patient_history.xml" value="0.17916666666666667" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/respiratory_results_ayout.xml" value="0.25" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/video_layout.xml" value="0.25" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/menu/navigation_menu.xml" value="0.17916666666666667" />

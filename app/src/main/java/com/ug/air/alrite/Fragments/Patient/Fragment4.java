@@ -134,7 +134,7 @@ public class Fragment4 extends Fragment {
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
 
         check1 = sharedPreferences.getBoolean(CHECK1, false);
         check2 = sharedPreferences.getBoolean(CHECK2, false);
