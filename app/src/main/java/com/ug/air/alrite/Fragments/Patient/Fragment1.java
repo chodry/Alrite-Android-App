@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.ug.air.alrite.Activities.Dashboard;
 import com.ug.air.alrite.R;
 
 import java.util.Objects;
@@ -34,6 +36,7 @@ public class Fragment1 extends Fragment {
         view =  inflater.inflate(R.layout.fragment_1, container, false);
 
         next = view.findViewById(R.id.next);
+        back = view.findViewById(R.id.back);
         radioGroup = view.findViewById(R.id.radioGroup);
         radioButton1 = view.findViewById(R.id.yes);
         radioButton2 = view.findViewById(R.id.no);
@@ -76,6 +79,13 @@ public class Fragment1 extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Please Select one option", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), Dashboard.class));
             }
         });
 

@@ -37,4 +37,10 @@ public class Dashboard extends AppCompatActivity {
         NavController navController = androidx.navigation.Navigation.findNavController(this, R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 }

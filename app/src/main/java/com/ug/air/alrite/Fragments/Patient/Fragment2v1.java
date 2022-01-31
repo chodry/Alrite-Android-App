@@ -82,50 +82,53 @@ public class Fragment2v1 extends Fragment {
         ArrayList<String> files = new ArrayList<String>();
 
         File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs");
-        File[] contents = src.listFiles();
+        if (src.exists()){
+            File[] contents = src.listFiles();
 //        Toast.makeText(getActivity(), "" + contents, Toast.LENGTH_SHORT).show();
-        if (contents.length != 0) {
-            for (File f : contents) {
-                if (f.isFile()) {
-                    String name = f.getName().toString();
-                    files.add(name);
-                }
-            }
-            Collections.reverse(files);
-            ArrayList<String> types = new ArrayList<String>();
-            for(String name : files){
-                if (!name.equals("sharedPrefs.xml")){
-                    String names = name.replace(".xml", "");
-                    SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
-                    sName = sharedPreferences.getString(SURNAME, "");
-                    oName = sharedPreferences.getString(OTHERNAME, "");
-                    mName = sharedPreferences.getString(MIDDLENAME, "");
-                    phone = sharedPreferences.getString(DATE, "");
-                    String namesy = sName + " " + oName + " " + mName;
-                    if (!types.contains(namesy)){
-                        types.add(namesy);
-                        char inti1 = sName.charAt(0);
-                        char inti2 = oName.charAt(0);
-                        String inti = inti1 + "" + inti2;
-
-                        try {
-                            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-                            Date date = df.parse(phone);
-                            SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
-                            String formattedDate = df1.format(date);
-                            Patient patient = new Patient(namesy, formattedDate, inti, name);
-                            items.add(new Item(0, patient));
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
+            if (contents.length != 0) {
+                for (File f : contents) {
+                    if (f.isFile()) {
+                        String name = f.getName().toString();
+                        files.add(name);
                     }
-
                 }
-            }
+                Collections.reverse(files);
+                ArrayList<String> types = new ArrayList<String>();
+                for(String name : files){
+                    if (!name.equals("sharedPrefs.xml")){
+                        String names = name.replace(".xml", "");
+                        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
+                        sName = sharedPreferences.getString(SURNAME, "");
+                        oName = sharedPreferences.getString(OTHERNAME, "");
+                        mName = sharedPreferences.getString(MIDDLENAME, "");
+                        phone = sharedPreferences.getString(DATE, "");
+                        String namesy = sName + " " + oName + " " + mName;
+                        if (!types.contains(namesy)){
+                            types.add(namesy);
+                            char inti1 = sName.charAt(0);
+                            char inti2 = oName.charAt(0);
+                            String inti = inti1 + "" + inti2;
 
-        }else{
+                            try {
+                                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+                                Date date = df.parse(phone);
+                                SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
+                                String formattedDate = df1.format(date);
+                                Patient patient = new Patient(namesy, formattedDate, inti, name);
+                                items.add(new Item(0, patient));
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+                }
+
+            }else{
 //            Toast.makeText(this, "empty", Toast.LENGTH_SHORT).show();
+            }
         }
+
 
         patientAdapter = new PatientAdapter(getActivity(), items);
         recyclerView.setAdapter(patientAdapter);
