@@ -23,18 +23,17 @@ import com.ug.air.alrite.R;
 import java.util.Objects;
 
 
-public class Fragment7v1 extends Fragment {
+public class Fragment7v4 extends Fragment {
 
     View view;
     Button back, next;
     RadioGroup radioGroup;
-    RadioButton radioButton1, radioButton2, radioButton3;
+    RadioButton radioButton1, radioButton2;
     String value4 = "none";
     private static final int YES = 0;
     private static final int NO = 1;
-    public static final String CHOICEHC = "choiceHc";
+    public static final String CHOICE3Y2 = "choice3Y2";
     public static final String SHARED_PREFS = "sharedPrefs";
-    String cough, hist;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
@@ -42,7 +41,7 @@ public class Fragment7v1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_7v1, container, false);
+        view = inflater.inflate(R.layout.fragment_7v4, container, false);
 
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
@@ -90,9 +89,8 @@ public class Fragment7v1 extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment7());
+                fr.replace(R.id.fragment_container, new Fragment7v3());
                 fr.commit();
-
             }
         });
 
@@ -100,29 +98,33 @@ public class Fragment7v1 extends Fragment {
     }
 
     private void saveData() {
-        editor.putString(CHOICEHC, value4);
+        editor.putString(CHOICE3Y2, value4);
         editor.apply();
 
         FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment7v3());
+        fr.replace(R.id.fragment_container, new Fragment8v1());
         fr.addToBackStack(null);
         fr.commit();
 
     }
 
     private void loadData() {
-        value4 = sharedPreferences.getString(CHOICEHC, "");
+        value4 = sharedPreferences.getString(CHOICE3Y2, "");
     }
 
     private void updateViews() {
         if (value4.equals("Yes")){
             radioButton1.setChecked(true);
-        }else if (value4.equals("No")){
+        }else if (value4.equals("No")) {
             radioButton2.setChecked(true);
         }else {
             radioButton1.setChecked(false);
             radioButton2.setChecked(false);
         }
+
+    }
+
+    private void makeAssessment() {
 
     }
 

@@ -1,7 +1,9 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Fragment6.DAY1;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v6.CHOICET1;
 import static com.ug.air.alrite.Fragments.Patient.Fragment6v7.CHOICET2;
+import static com.ug.air.alrite.Fragments.Patient.Fragment7v1.CHOICEHC;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -118,7 +120,8 @@ public class Fragment7 extends Fragment {
             fr.replace(R.id.fragment_container, new Fragment7v1());
 
         }else {
-            fr.replace(R.id.fragment_container, new Fragment8());
+            deleteSharedPreferences();
+            fr.replace(R.id.fragment_container, new Fragment7v3());
         }
         fr.addToBackStack(null);
         fr.commit();
@@ -142,6 +145,11 @@ public class Fragment7 extends Fragment {
             radioButton3.setChecked(false);
         }
 
+    }
+
+    private void deleteSharedPreferences() {
+        editor.remove(CHOICEHC);
+        editor.apply();
     }
 
 }

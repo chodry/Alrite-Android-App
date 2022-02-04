@@ -40,7 +40,7 @@ public class Fragment11 extends Fragment {
     View view;
     Button back, next;
     RadioGroup radioGroup;
-    RadioButton radioButton1, radioButton2;
+    RadioButton radioButton1, radioButton2, radioButton3;
     String value8 = "none";
     TextView chest, txtDisease, txtDefinition, txtOk;
     LinearLayout linearLayoutDisease;
@@ -51,6 +51,7 @@ public class Fragment11 extends Fragment {
     AssessmentAdapter assessmentAdapter;
     private static final int YES = 0;
     private static final int NO = 1;
+    private static final int NOT = 2;
     public static final String CHOICE7 = "choice7";
     public static final String SHARED_PREFS = "sharedPrefs";
 
@@ -66,6 +67,7 @@ public class Fragment11 extends Fragment {
         radioGroup = view.findViewById(R.id.radioGroup);
         radioButton1 = view.findViewById(R.id.yes);
         radioButton2 = view.findViewById(R.id.no);
+        radioButton3 = view.findViewById(R.id.not);
         chest = view.findViewById(R.id.chest);
 
 
@@ -80,10 +82,13 @@ public class Fragment11 extends Fragment {
 
                 switch (index) {
                     case YES:
-                        value8 = "Yes";
+                        value8 = "Mild";
                         break;
                     case NO:
                         value8 = "No";
+                        break;
+                    case NOT:
+                        value8 = "Moderate/Severe";
                         break;
                     default:
                         break;
@@ -141,13 +146,16 @@ public class Fragment11 extends Fragment {
     }
 
     private void updateViews() {
-        if (value8.equals("Yes")){
+        if (value8.equals("Mild")){
             radioButton1.setChecked(true);
         }else if (value8.equals("No")){
             radioButton2.setChecked(true);
+        }else if (value8.equals("Moderate/Severe")){
+            radioButton3.setChecked(true);
         }else {
             radioButton1.setChecked(false);
             radioButton2.setChecked(false);
+            radioButton3.setChecked(false);
         }
     }
 

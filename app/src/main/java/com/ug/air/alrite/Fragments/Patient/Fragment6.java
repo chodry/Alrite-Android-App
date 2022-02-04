@@ -139,7 +139,6 @@ public class Fragment6 extends Fragment {
     }
 
     private void deleteSharedPreferences() {
-        editor = sharedPreferences.edit();
         editor.remove(DAY2);
         editor.remove(CHOICEX);
         editor.remove(CHECK11);

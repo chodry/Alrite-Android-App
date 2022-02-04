@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"
-                    android:text="Does the child have HIV?"
+                    android:text="Is the child HIV-exposed?"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 

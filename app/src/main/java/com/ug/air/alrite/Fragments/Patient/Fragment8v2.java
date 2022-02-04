@@ -24,11 +24,13 @@ import java.util.Objects;
 public class Fragment8v2 extends Fragment {
 
     View view;
-    EditText etDay;
+    EditText etDay, etDay2;
     Button back, next;
-    String temp;
+    String temp, temp1, temp2;
     public static final String TEMP = "temp";
     public static final String SHARED_PREFS = "sharedPrefs";
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,10 +39,14 @@ public class Fragment8v2 extends Fragment {
         view = inflater.inflate(R.layout.fragment_8v2, container, false);
 
         etDay = view.findViewById(R.id.days);
+        etDay2 = view.findViewById(R.id.kg2);
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
 
         etDay.requestFocus();
+
+        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         loadData();
         updateViews();
@@ -50,9 +56,10 @@ public class Fragment8v2 extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                temp = etDay.getText().toString();
-                if (temp.isEmpty()){
-                    Toast.makeText(getActivity(), "Please fill in the field before you continue", Toast.LENGTH_SHORT).show();
+                temp1 = etDay.getText().toString();
+                temp2 = etDay2.getText().toString();
+                if (temp1.isEmpty() || temp2.isEmpty()){
+                    Toast.makeText(getActivity(), "Please fill in the fields before you continue", Toast.LENGTH_SHORT).show();
                 }else{
                     saveData();
                 }
@@ -82,8 +89,16 @@ public class Fragment8v2 extends Fragment {
             temp = etDay.getText().toString();
             if (!temp.isEmpty()){
                 long dy = Long.parseLong(temp);
-                if (dy == 0){
-                    etDay.setError("The number of days should not be 0");
+                if (dy < 33){
+                    etDay.setError("The minimum temperature is 33.0");
+                }else if (dy > 44){
+                    etDay.setError("The maximum temperature is 44.0");
+                }else if(dy == 44){
+                    etDay2.setText("0");
+                    etDay2.setEnabled(false);
+                }else {
+                    etDay2.setText("");
+                    etDay2.setEnabled(true);
                 }
             }
         }
@@ -95,9 +110,7 @@ public class Fragment8v2 extends Fragment {
     };
 
     private void saveData() {
-        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
+        temp = temp1 + "." + temp2;
         editor.putString(TEMP, temp);
         editor.apply();
 
@@ -108,11 +121,14 @@ public class Fragment8v2 extends Fragment {
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         temp = sharedPreferences.getString(TEMP, "");
     }
 
     private void updateViews() {
-        etDay.setText(temp);
+        if (!temp.isEmpty()){
+            String[] separated = temp.split("\\.");
+            etDay.setText(separated[0]);
+            etDay2.setText(separated[1]);
+        }
     }
 }

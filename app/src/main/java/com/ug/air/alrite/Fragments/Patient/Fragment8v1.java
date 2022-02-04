@@ -1,5 +1,8 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v7.CHOICET2;
+import static com.ug.air.alrite.Fragments.Patient.Fragment7v4.CHOICE3Y2;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,6 +34,8 @@ public class Fragment8v1 extends Fragment {
     private static final int NO1 = 1;
     public static final String CHOICE5 = "choice5";
     public static final String SHARED_PREFS = "sharedPrefs";
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,6 +68,9 @@ public class Fragment8v1 extends Fragment {
             }
         });
 
+        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
         loadData();
         updateViews();
 
@@ -81,8 +89,14 @@ public class Fragment8v1 extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String hist = sharedPreferences.getString(CHOICE3Y2, "");
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment8());
+                if (hist.isEmpty()){
+                    fr.replace(R.id.fragment_container, new Fragment7v3());
+                }else {
+                    fr.replace(R.id.fragment_container, new Fragment7v4());
+                }
                 fr.commit();
             }
         });
@@ -91,8 +105,6 @@ public class Fragment8v1 extends Fragment {
     }
 
     private void saveData() {
-        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString(CHOICE5, value6);
         editor.apply();
@@ -104,7 +116,6 @@ public class Fragment8v1 extends Fragment {
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         value6 = sharedPreferences.getString(CHOICE5, "");
     }
 

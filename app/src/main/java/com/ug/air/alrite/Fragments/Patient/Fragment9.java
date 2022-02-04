@@ -251,7 +251,7 @@ public class Fragment9 extends Fragment {
                 fastBreathing = false;
             }
             if (birthday <= 1 && birthday > 0.2 ){
-                if (value > 60){
+                if (value > 50){
                     fastBreathing = true;
                     score = R.string.breathing_info_under1;
                     return;
