@@ -19,6 +19,12 @@
     <string name="child_is_healthy">The child is not showing signs of pneumonia or asthma</string>
     <string name="soothe_throat">No antibiotics or bronchodilator needed. Soothe the throat and relieve the cough with a safe remedy</string>
     <string name="no_signs">Diagnosis: No signs of pneumonia or asthma</string>
+    <string name="asthma">Diagnosis: Asthma Risk</string>
+
+    <string name="asthma1">Prescribe salbutamol inhaler</string>
+    <string name="asthma2">Instruct the parent to give 2-4 puffs every 4-6 hours as needed for cough or wheezing. Use with spacer</string>
+    <string name="asthma3">Refer to specialist to assess and treat asthma</string>
+
 
     <string name="tap_on_inhale">Tap on inhale</string>
     <string name="elapsed_time">Elapsed time:</string>

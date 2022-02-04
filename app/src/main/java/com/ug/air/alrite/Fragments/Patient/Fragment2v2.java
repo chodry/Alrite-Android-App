@@ -1,11 +1,12 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment12.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Fragment2.MIDDLENAME;
 import static com.ug.air.alrite.Fragments.Patient.Fragment2.OTHERNAME;
 import static com.ug.air.alrite.Fragments.Patient.Fragment2.SURNAME;
 import static com.ug.air.alrite.Fragments.Patient.Fragment3.AGE;
 import static com.ug.air.alrite.Fragments.Patient.Fragment3.CHOICE;
+import static com.ug.air.alrite.Fragments.Patient.Fragment4.DIAGNOSIS;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -48,7 +49,7 @@ public class Fragment2v2 extends Fragment {
     ImageView back;
     LinearLayout newVisit;
     TextView txtName, txtAge, txtNumber, txtGender;
-    String name, fileName, age, number, gender, sName, oName, mName, date1;
+    String name, fileName, age, number, gender, sName, oName, mName, date1, diagnosis;
     RecyclerView recyclerView;
     ArrayList<Item> items;
     PatientAdapter patientAdapter;
@@ -125,6 +126,7 @@ public class Fragment2v2 extends Fragment {
                         oName = sharedPreferences2.getString(OTHERNAME, "");
                         mName = sharedPreferences2.getString(MIDDLENAME, "");
                         date1 = sharedPreferences2.getString(DATE, "");
+                        diagnosis = sharedPreferences2.getString(DIAGNOSIS, "");
                         String namesy = sName + " " + oName + " " + mName;
                         if (namesy.equals(name)){
                             try {
@@ -132,7 +134,7 @@ public class Fragment2v2 extends Fragment {
                                 Date date = df.parse(date1);
                                 SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
                                 String formattedDate = df1.format(date);
-                                History history = new History("Severe disease", formattedDate);
+                                History history = new History(diagnosis, formattedDate);
                                 items.add(new Item(1, history));
                             } catch (ParseException e) {
                                 e.printStackTrace();

@@ -1,6 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment12.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Fragment2.MIDDLENAME;
 import static com.ug.air.alrite.Fragments.Patient.Fragment2.OTHERNAME;
 import static com.ug.air.alrite.Fragments.Patient.Fragment2.PHONE;

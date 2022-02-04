@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.Patient.Fragment6">
+    tools:context=".Fragments.Patient.Fragment6v7">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,11 +32,11 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@id/buttons"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="10dp"
             android:fadeScrollbars="true"
             android:padding="10dp"
-            android:layout_above="@id/buttons"
             android:scrollbars="none">
 
             <LinearLayout
@@ -48,23 +48,46 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"
-                    android:text="For about how many days has the child had trouble breathing or been coughing?"
+                    android:text="Does any of the family members burn kerosene or charcoal in the home?"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/days"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="25dp"
-                    android:background="@drawable/text_input_bg"
-                    android:inputType="number"
-                    android:gravity="center"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:saveEnabled="false"
-                    android:layout_marginBottom="10dp"/>
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <RadioButton
+                        android:id="@+id/yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/black"
+                        android:text="Yes"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:buttonTint="@color/black"
+                        android:text="No"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/not"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:buttonTint="@color/black"
+                        android:text="Not Sure"
+                        android:textSize="18sp" />
+
+
+                </RadioGroup>
 
             </LinearLayout>
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.Patient.Fragment6">
+    tools:context=".Fragments.Patient.Fragment4">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,24 +49,45 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="For about how many days has the child had trouble breathing or been coughing?"
+                    android:text="Is the child usually breathless;"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/days"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="25dp"
-                    android:background="@drawable/text_input_bg"
-                    android:inputType="number"
-                    android:gravity="center"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:saveEnabled="false"
-                    android:layout_marginBottom="10dp"/>
+                <CheckBox
+                    android:id="@+id/drink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:text="At night?" />
+
+                <CheckBox
+                    android:id="@+id/vomit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:text="When playing, so they have to take a break?" />
+
+                <CheckBox
+                    android:id="@+id/responsive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:text="When laughing/crying or exposed to smoke or strong smells?" />
+
+                <CheckBox
+                    android:id="@+id/none"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:text="None of these" />
+
 
             </LinearLayout>
+
 
         </ScrollView>
 

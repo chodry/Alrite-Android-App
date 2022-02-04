@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.Patient.Fragment6">
+    tools:context=".Fragments.Patient.Fragment6v1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="For about how many days has the child had trouble breathing or been coughing?"
+                    android:text="How many times has the child suffered from a respiratory illness in the past 12 months?"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 

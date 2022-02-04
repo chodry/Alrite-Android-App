@@ -1,6 +1,8 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Fragment2.PHONE;
+import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Fragment4.UUIDS;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -58,8 +60,6 @@ public class Fragment12 extends Fragment {
     private static final int YES = 0;
     private static final int NO = 1;
     public static final String CHOICE8 = "choice8";
-    public static final String DATE = "date";
-    public static final String UUIDS = "uuid";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;

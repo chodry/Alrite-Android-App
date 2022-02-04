@@ -1,5 +1,15 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Fragment4.DIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Fragment4.UUIDS;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6.DAY1;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v1.DAY2;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v2.CHOICEX;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v3.S5;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v4.CHOICEX2;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v5.CHOICEY2;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,8 +28,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,14 +51,21 @@ import java.util.Objects;
 import java.util.UUID;
 
 
-public class Fragment4 extends Fragment {
+public class Fragment6v7 extends Fragment {
 
     View view;
     Button back, next, btnSave;
-    CheckBox drink, vomit, resp, convu, none;
-    String s = "";
-    Boolean check1, check2, check3, check4, check5;
+    RadioGroup radioGroup;
+    RadioButton radioButton1, radioButton2, radioButton3;
+    String value5 = "none";
     Dialog dialog;
+    private static final int YES = 0;
+    private static final int NO = 1;
+    private static final int NOT = 2;
+    public static final String CHOICET2 = "choiceT2";
+    public static final String SHARED_PREFS = "sharedPrefs";
+    SharedPreferences sharedPreferences, sharedPreferences1;
+    SharedPreferences.Editor editor, editor1;
     RecyclerView recyclerView;
     LinearLayout linearLayout_instruction;
     TextView txtDiagnosis;
@@ -55,32 +73,40 @@ public class Fragment4 extends Fragment {
     AssessmentAdapter assessmentAdapter;
     String diagnosis;
 
-    public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String CHECK1 = "check1";
-    public static final String CHECK2 = "check2";
-    public static final String CHECK3 = "check3";
-    public static final String CHECK4 = "check4";
-    public static final String CHECK5 = "check5";
-    public static final String DATE = "date";
-    public static final String UUIDS = "uuid";
-    public static final String S4 = "s4";
-    public static final String DIAGNOSIS = "diagnosis";
-    SharedPreferences sharedPreferences, sharedPreferences1;
-    SharedPreferences.Editor editor, editor1;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_4, container, false);
+        view = inflater.inflate(R.layout.fragment_6v7, container, false);
 
-        back = view.findViewById(R.id.back);
         next = view.findViewById(R.id.next);
-        drink = view.findViewById(R.id.drink);
-        vomit = view.findViewById(R.id.vomit);
-        none = view.findViewById(R.id.none);
-        convu = view.findViewById(R.id.convu);
-        resp = view.findViewById(R.id.responsive);
+        back = view.findViewById(R.id.back);
+        radioGroup = view.findViewById(R.id.radioGroup);
+        radioButton1 = view.findViewById(R.id.yes);
+        radioButton2 = view.findViewById(R.id.no);
+        radioButton3 = view.findViewById(R.id.not);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                View radioButton = radioGroup.findViewById(checkedId);
+                int index = radioGroup.indexOfChild(radioButton);
+
+                switch (index) {
+                    case YES:
+                        value5 = "Yes";
+                        break;
+                    case NO:
+                        value5 = "No";
+                        break;
+                    case NOT:
+                        value5 = "Not Sure";
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
 
         sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -91,91 +117,89 @@ public class Fragment4 extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkedList();
+                if (value5.isEmpty()){
+                    Toast.makeText(getActivity(), "Please select at least one option", Toast.LENGTH_SHORT).show();
+                }else {
+                    saveData();
+                }
             }
         });
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment3());
+                fr.replace(R.id.fragment_container, new Fragment6v6());
                 fr.commit();
             }
         });
 
+
         return view;
     }
 
-    private void checkedList() {
-        s = "";
+    private void saveData() {
 
-        if(drink.isChecked()){
-            s += "Unable to drink or breastfeed, ";
-        }
-        if(vomit.isChecked()){
-            s += "Vomiting Everything, ";
-        }
-        if(resp.isChecked()){
-            s += "Unresponsive, no awareness of surroundings, ";
-        }
-        if(convu.isChecked()){
-            s += "Convulsions (uncontrolled jerking/ seizures), ";
-        }
-        if(none.isChecked()){
-            s = "None of these, ";
-        }
-        s = s.replaceAll(", $", "");
-        if (s.isEmpty()){
-            Toast.makeText(getActivity(), "Choose at least one option", Toast.LENGTH_SHORT).show();
-        }else {
-            saveData(s);
-        }
-
-    }
-
-    private void saveData(String s) {
-
-        editor.putBoolean(CHECK1, drink.isChecked());
-        editor.putBoolean(CHECK2, vomit.isChecked());
-        editor.putBoolean(CHECK3, resp.isChecked());
-        editor.putBoolean(CHECK4, convu.isChecked());
-        editor.putBoolean(CHECK5, none.isChecked());
-        editor.putString(S4, s);
-
+        editor.putString(CHOICET2, value5);
         editor.apply();
 
-        checkIfNone();
+        makeAssessment();
     }
 
     private void loadData() {
-        check1 = sharedPreferences.getBoolean(CHECK1, false);
-        check2 = sharedPreferences.getBoolean(CHECK2, false);
-        check3 = sharedPreferences.getBoolean(CHECK3, false);
-        check4 = sharedPreferences.getBoolean(CHECK4, false);
-        check5 = sharedPreferences.getBoolean(CHECK5, false);
+        value5 = sharedPreferences.getString(CHOICET2, "");
     }
+
 
     private void updateViews() {
-        drink.setChecked(check1);
-        vomit.setChecked(check2);
-        resp.setChecked(check3);
-        convu.setChecked(check4);
-        none.setChecked(check5);
+        if (value5.equals("Yes")){
+            radioButton1.setChecked(true);
+        }else if (value5.equals("No")){
+            radioButton2.setChecked(true);
+        }else if (value5.equals("Not Sure")){
+            radioButton3.setChecked(true);
+        }else {
+            radioButton1.setChecked(false);
+            radioButton2.setChecked(false);
+            radioButton3.setChecked(false);
+        }
+
     }
 
-    private void checkIfNone() {
-        if (s.contains("None of these")){
+    private void makeAssessment() {
+        int total = 0;
+        String cough = sharedPreferences.getString(DAY1, "");
+        int co = Integer.parseInt(cough);
+        if (co > 10 && co < 14){
+            total = total + 1;
+        }
+        String episodes = sharedPreferences.getString(DAY2, "");
+        int ep = Integer.parseInt(episodes);
+        if (ep > 3){
+            total = total + 1;
+        }
+        String wheezing = sharedPreferences.getString(CHOICEX, "");
+        String breathe = sharedPreferences.getString(S5, "");
+        if (wheezing.equals("Yes") || !breathe.contains("None of these")){
+            total = total + 1;
+        }
+        String hist1 = sharedPreferences.getString(CHOICEX2, "");
+        String hist2 = sharedPreferences.getString(CHOICEY2, "");
+        if (hist1.equals("Yes") || hist2.equals("Yes")){
+            total = total + 1;
+        }
+        if (total >= 3){
+            showDialog();
+        }else {
             FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Fragment5());
+            fr.replace(R.id.fragment_container, new Fragment7());
             fr.addToBackStack(null);
             fr.commit();
-        }else{
-            displayDialog();
         }
     }
 
-    private void displayDialog() {
+    private void showDialog() {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.assessment_layout);
         dialog.setCancelable(true);
@@ -188,7 +212,7 @@ public class Fragment4 extends Fragment {
         btnSave = dialog.findViewById(R.id.btnSave);
 
         linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
-        txtDiagnosis.setText(R.string.severe);
+        txtDiagnosis.setText(R.string.asthma);
         diagnosis = txtDiagnosis.getText().toString();
 
         recyclerView.setHasFixedSize(true);
@@ -197,13 +221,13 @@ public class Fragment4 extends Fragment {
         assessments = new ArrayList<>();
         assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
 
-        List<Integer> messages = Arrays.asList(R.string.first_dose, R.string.first_dose_IM, R.string.IM_dosing_under1, R.string.give_diazepam_if, R.string.refer_urgently);
+        List<Integer> messages = Arrays.asList(R.string.asthma1, R.string.asthma2, R.string.asthma3);
         for (int i = 0; i < messages.size(); i++){
             Assessment assessment = new Assessment(messages.get(i));
             assessments.add(assessment);
         }
         recyclerView.setAdapter(assessmentAdapter);
-        
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,7 +235,7 @@ public class Fragment4 extends Fragment {
             }
         });
 
-        dialog.getWindow().setLayout(650, 1300);
+        dialog.getWindow().setLayout(650, 800);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
     }

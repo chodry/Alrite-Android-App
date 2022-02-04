@@ -1,5 +1,17 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v1.DAY2;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v2.CHOICEX;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v3.CHECK11;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v3.CHECK21;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v3.CHECK31;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v3.CHECK41;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v3.S5;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v4.CHOICEX2;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v5.CHOICEY2;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v6.CHOICET1;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v7.CHOICET2;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,6 +41,8 @@ public class Fragment6 extends Fragment {
     String day1;
     public static final String DAY1 = "day1";
     public static final String SHARED_PREFS = "sharedPrefs";
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +55,9 @@ public class Fragment6 extends Fragment {
         back = view.findViewById(R.id.back);
 
         etDay.requestFocus();
+
+        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         loadData();
         updateViews();
@@ -95,25 +112,46 @@ public class Fragment6 extends Fragment {
     };
 
     private void saveData() {
-        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString(DAY1, day1);
         editor.apply();
 
+        int dt = Integer.parseInt(day1);
+
         FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment7());
+        if (dt > 10) {
+            fr.replace(R.id.fragment_container, new Fragment6v1());
+        }else {
+            deleteSharedPreferences();
+            fr.replace(R.id.fragment_container, new Fragment7());
+        }
         fr.addToBackStack(null);
         fr.commit();
+
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         day1 = sharedPreferences.getString(DAY1, "");
     }
 
     private void updateViews() {
         etDay.setText(day1);
+    }
+
+    private void deleteSharedPreferences() {
+        editor = sharedPreferences.edit();
+        editor.remove(DAY2);
+        editor.remove(CHOICEX);
+        editor.remove(CHECK11);
+        editor.remove(CHECK21);
+        editor.remove(CHECK31);
+        editor.remove(CHECK41);
+        editor.remove(S5);
+        editor.remove(CHOICEX2);
+        editor.remove(CHOICEY2);
+        editor.remove(CHOICET2);
+        editor.remove(CHOICET1);
+        editor.apply();
     }
 
 }
