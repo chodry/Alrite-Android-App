@@ -214,7 +214,7 @@ public class Fragment10 extends Fragment {
     private void displayDialog() {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.assessment_layout);
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
         Window window = dialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 

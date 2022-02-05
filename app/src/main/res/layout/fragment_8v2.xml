@@ -32,11 +32,11 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@id/buttons"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="10dp"
             android:fadeScrollbars="true"
             android:padding="10dp"
-            android:layout_above="@id/buttons"
             android:scrollbars="none">
 
             <LinearLayout
@@ -56,45 +56,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="5dp"
-                    android:weightSum="1"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
                     <EditText
                         android:id="@+id/days"
                         android:layout_width="0dp"
-                        android:inputType="number"
-                        android:gravity="center"
-                        android:hint="33"
-                        android:maxLength="2"
                         android:layout_height="50dp"
-                        android:layout_weight=".2"
                         android:layout_margin="10dp"
-                        android:background="@drawable/text_input_bg"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".02"
-                        android:text="."
-                        android:textSize="20sp"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:textColor="@color/green"/>
-
-                    <EditText
-                        android:id="@+id/kg2"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:inputType="number"
-                        android:gravity="center"
-                        android:hint="0"
-                        android:maxLength="1"
-                        android:layout_margin="10dp"
-                        android:layout_weight=".15"
+                        android:layout_weight=".5"
                         android:background="@drawable/text_input_bg"
-                        />
+                        android:gravity="center"
+                        android:hint="33.0 - 44.0"
+                        android:inputType="numberDecimal"
+                        android:maxLength="4" />
 
                 </LinearLayout>
 

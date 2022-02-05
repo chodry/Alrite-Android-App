@@ -1,8 +1,12 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Fragment11.CHOICE7;
 import static com.ug.air.alrite.Fragments.Patient.Fragment2.PHONE;
 import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Fragment4.UUIDS;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6.DAY1;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v2.CHOICEX;
+import static com.ug.air.alrite.Fragments.Patient.Fragment9.FASTBREATHING;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -14,8 +18,10 @@ import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +42,10 @@ import com.ug.air.alrite.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -46,14 +54,16 @@ import java.util.UUID;
 public class Fragment12 extends Fragment {
 
     View view;
-    Button back, next;
+    Button back, next, btnSave;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2;
     String value9 = "none";
-    TextView wheez, txtDisease, txtDefinition, txtOk;
+    TextView wheez, txtDisease, txtDefinition, txtOk, txtDiagnosis;
     LinearLayout linearLayoutDisease;
+    LinearLayout linearLayout_instruction;
     VideoView videoView;
     Dialog dialog;
+    String diagnosis;
     RecyclerView recyclerView;
     ArrayList<Assessment> assessments;
     AssessmentAdapter assessmentAdapter;
@@ -133,31 +143,12 @@ public class Fragment12 extends Fragment {
     }
 
     private void saveData() {
-        Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
-        String formattedDate = df.format(currentTime);
-
-        String uniqueID = UUID.randomUUID().toString();
 
         editor.putString(CHOICE8, value9);
-        editor.putString(DATE, formattedDate);
-        editor.putString(UUIDS, uniqueID);
         editor.apply();
 
-        uniqueID = formattedDate + "_" + uniqueID;
-
-        sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
-        editor1 = sharedPreferences1.edit();
-        Map<String, ?> all = sharedPreferences.getAll();
-        for (Map.Entry<String, ?> x : all.entrySet()) {
-            if (x.getValue().getClass().equals(String.class))  editor1.putString(x.getKey(),  (String)x.getValue());
-            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
-        }
-        editor1.commit();
-        editor.clear();
-        editor.commit();
-        startActivity(new Intent(getActivity(), Dashboard.class));
-
+//        saveForm();
+        makeAssessment();
     }
 
     private void loadData() {
@@ -212,5 +203,75 @@ public class Fragment12 extends Fragment {
         dialog.show();
     }
 
+    private void saveForm() {
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+        String formattedDate = df.format(currentTime);
 
+        String uniqueID = UUID.randomUUID().toString();
+
+        editor.putString(CHOICE8, value9);
+        editor.putString(DATE, formattedDate);
+        editor.putString(UUIDS, uniqueID);
+        editor.apply();
+
+        uniqueID = formattedDate + "_" + uniqueID;
+
+        sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
+        editor1 = sharedPreferences1.edit();
+        Map<String, ?> all = sharedPreferences.getAll();
+        for (Map.Entry<String, ?> x : all.entrySet()) {
+            if (x.getValue().getClass().equals(String.class))  editor1.putString(x.getKey(),  (String)x.getValue());
+            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
+        }
+        editor1.commit();
+        editor.clear();
+        editor.commit();
+        startActivity(new Intent(getActivity(), Dashboard.class));
+    }
+
+    private void makeAssessment() {
+
+    }
+
+    private void showDialog2() {
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.assessment_layout);
+        dialog.setCancelable(true);
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
+        txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
+        recyclerView = dialog.findViewById(R.id.recyclerView1);
+        btnSave = dialog.findViewById(R.id.btnSave);
+
+        linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
+        txtDiagnosis.setText(R.string.pneumonia);
+        diagnosis = txtDiagnosis.getText().toString();
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        assessments = new ArrayList<>();
+        assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
+
+        List<Integer> messages = Arrays.asList(R.string.pneumonia1, R.string.pneumonia2, R.string.pneumonia3);
+        for (int i = 0; i < messages.size(); i++){
+            Assessment assessment = new Assessment(messages.get(i));
+            assessments.add(assessment);
+        }
+        recyclerView.setAdapter(assessmentAdapter);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveForm();
+            }
+        });
+
+        dialog.getWindow().setLayout(650, 800);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.show();
+    }
 }

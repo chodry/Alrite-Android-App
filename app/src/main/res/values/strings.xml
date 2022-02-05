@@ -22,11 +22,21 @@
     <string name="asthma">Diagnosis: Asthma Risk</string>
 
     <string name="asthma1">Prescribe salbutamol inhaler</string>
-    <string name="asthma2">Instruct the parent to give 2-4 puffs every 4-6 hours as needed for cough or wheezing. Use with spacer</string>
+    <string name="asthma2">Instruct the parent to give 2–4 puffs every 4–6 hours as needed for cough or wheezing. Use with spacer</string>
     <string name="asthma3">Refer to specialist to assess and treat asthma</string>
 
     <string name="low_oxygen">Give oxygen if available at the health facility</string>
 
+    <string name="pneumonia">Diagnosis: Pneumonia</string>
+    <string name="pneumonia1">Give oral amoxicillin twice daily for 5 days</string>
+    <string name="pneumonia2">Soothe the throat and relieve the cough with a safe remedy</string>
+    <string name="pneumonia3">Follow up in 3 days, earlier if worsening</string>
+
+    <string name="cold">Diagnosis: Cough/Cold/No pneumonia</string>
+    <string name="cold1">No signs of pneumonia or asthma</string>
+    <string name="cold2">No antibiotics recommended</string>
+    <string name="cold3">Soothe the throat and relieve the cough with a safe remedy</string>
+    <string name="cold4">Follow up in 5 days if not improving, earlier if getting worse</string>
 
     <string name="tap_on_inhale">Tap on inhale</string>
     <string name="elapsed_time">Elapsed time:</string>

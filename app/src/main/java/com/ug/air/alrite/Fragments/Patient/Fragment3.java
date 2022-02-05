@@ -34,7 +34,7 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
     Button back, next;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2;
-    String age, weight, text, kg1, kg2, fileName;
+    String age, weight, text, kg1, fileName;
     Spinner spinner;
     String value2 = "none";
     private static final int YES = 0;
@@ -60,7 +60,7 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
         radioButton2 = view.findViewById(R.id.no);
         etAge = view.findViewById(R.id.years);
         etKilo1 = view.findViewById(R.id.kg1);
-        etKilo2 = view.findViewById(R.id.kg2);
+//        etKilo2 = view.findViewById(R.id.kg2);
         spinner = view.findViewById(R.id.yearsormonths);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.same, android.R.layout.simple_spinner_item);
@@ -89,7 +89,7 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
         });
 
         etKilo1.addTextChangedListener(textWatcher1);
-        etKilo2.addTextChangedListener(textWatcher2);
+//        etKilo2.addTextChangedListener(textWatcher2);
 
         bundle = this.getArguments();
         if (bundle != null){
@@ -120,9 +120,9 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
             public void onClick(View v) {
                 age = etAge.getText().toString();
                 kg1 = etKilo1.getText().toString();
-                kg2 = etKilo2.getText().toString();
+//                kg2 = etKilo2.getText().toString();
 
-                if (value2.equals("none") || age.isEmpty() || kg1.isEmpty() || kg2.isEmpty()){
+                if (value2.equals("none") || age.isEmpty() || kg1.isEmpty()){
                     Toast.makeText(getActivity(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                 }else{
                     long ag = Long.parseLong(age);
@@ -136,7 +136,7 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
                         if (text.equals("Months")){
                             age = "0." + age;
                         }
-                        weight = kg1 + "." + kg2;
+                        weight = kg1;
                         saveData();
                     }
                 }
@@ -175,15 +175,11 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             kg1 = etKilo1.getText().toString();
             if (!kg1.isEmpty()){
-                long k1 = Long.parseLong(kg1);
-                if (k1 > 30){
+                float k1 = Float.parseFloat(kg1);
+                if (k1 > 30.0){
                     etKilo1.setError("The maximum kilograms for a child has to be 30.0kgs");
-                }else if (k1 == 30){
-                    etKilo2.setText("0");
-                    etKilo2.setEnabled(false);
-                }else {
-                    etKilo2.setEnabled(true);
-                    etKilo2.setText("");
+                }else if (k1 < 0.5){
+                    etKilo1.setError("The minimum kilograms for a child has to be 0.5kgs");
                 }
             }
 
@@ -195,31 +191,6 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
         }
     };
 
-    public TextWatcher textWatcher2 = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            kg1 = etKilo1.getText().toString();
-            kg2 = etKilo2.getText().toString();
-            if (!kg1.isEmpty() && !kg2.isEmpty()){
-                long k1 = Long.parseLong(kg1);
-                long k2 = Long.parseLong(kg2);
-                if (k1 == 0 && k2 < 5){
-                    etKilo2.setError("The minimum weight has to be .5kgs");
-                }
-            }
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    };
 
     private void saveData() {
         editor = sharedPreferences1.edit();
@@ -262,9 +233,7 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
             spinner.setSelection(0);
         }
         if (!weight.isEmpty()){
-            String[] separated = weight.split("\\.");
-            etKilo1.setText(separated[0]);
-            etKilo2.setText(separated[1]);
+            etKilo1.setText(weight);
         }
         if (age.contains(".")){
             String[] separated = age.split("\\.");

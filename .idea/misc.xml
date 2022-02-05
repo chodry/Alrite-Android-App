@@ -34,8 +34,11 @@
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_4.xml" value="0.17916666666666667" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_5.xml" value="0.17916666666666667" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_6.xml" value="0.25" />
+        <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_6v1.xml" value="0.17916666666666667" />
+        <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_6v2.xml" value="0.17916666666666667" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_7.xml" value="0.17916666666666667" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_8.xml" value="0.25" />
+        <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_8v2.xml" value="0.25" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_9.xml" value="0.22" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_account.xml" value="0.22" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/fragment_home.xml" value="0.17916666666666667" />
@@ -48,34 +51,6 @@
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/respiratory_results_ayout.xml" value="0.25" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/video_layout.xml" value="0.25" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/menu/navigation_menu.xml" value="0.17916666666666667" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_1.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_10.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_11.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_12.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_2v2.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_3.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_4.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_5.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_6.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_6v1.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_6v2.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_6v3.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_6v4.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_6v5.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_6v6.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_6v7.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_7.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_7v1.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_7v2.xml" value="0.35260416666666666" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_7v3.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_7v4.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_8.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_8v1.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_8v2.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_8v3.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/layout/patient_history.xml" value="0.36666666666666664" />
-        <entry key="..\:/chodrine/android project/dont/Alrite/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3828125" />
       </map>
     </option>
   </component>

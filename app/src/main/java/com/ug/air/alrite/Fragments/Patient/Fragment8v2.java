@@ -24,9 +24,9 @@ import java.util.Objects;
 public class Fragment8v2 extends Fragment {
 
     View view;
-    EditText etDay, etDay2;
+    EditText etDay;
     Button back, next;
-    String temp, temp1, temp2;
+    String temp;
     public static final String TEMP = "temp";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences;
@@ -39,7 +39,6 @@ public class Fragment8v2 extends Fragment {
         view = inflater.inflate(R.layout.fragment_8v2, container, false);
 
         etDay = view.findViewById(R.id.days);
-        etDay2 = view.findViewById(R.id.kg2);
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
 
@@ -56,10 +55,9 @@ public class Fragment8v2 extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                temp1 = etDay.getText().toString();
-                temp2 = etDay2.getText().toString();
-                if (temp1.isEmpty() || temp2.isEmpty()){
-                    Toast.makeText(getActivity(), "Please fill in the fields before you continue", Toast.LENGTH_SHORT).show();
+                temp = etDay.getText().toString();
+                if (temp.isEmpty()){
+                    Toast.makeText(getActivity(), "Please fill in the field before you continue", Toast.LENGTH_SHORT).show();
                 }else{
                     saveData();
                 }
@@ -88,17 +86,11 @@ public class Fragment8v2 extends Fragment {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             temp = etDay.getText().toString();
             if (!temp.isEmpty()){
-                long dy = Long.parseLong(temp);
-                if (dy < 33){
+                float dy = Float.parseFloat(temp);
+                if (dy < 33.0){
                     etDay.setError("The minimum temperature is 33.0");
-                }else if (dy > 44){
+                }else if (dy > 44.0){
                     etDay.setError("The maximum temperature is 44.0");
-                }else if(dy == 44){
-                    etDay2.setText("0");
-                    etDay2.setEnabled(false);
-                }else {
-                    etDay2.setText("");
-                    etDay2.setEnabled(true);
                 }
             }
         }
@@ -110,7 +102,6 @@ public class Fragment8v2 extends Fragment {
     };
 
     private void saveData() {
-        temp = temp1 + "." + temp2;
         editor.putString(TEMP, temp);
         editor.apply();
 
@@ -126,9 +117,7 @@ public class Fragment8v2 extends Fragment {
 
     private void updateViews() {
         if (!temp.isEmpty()){
-            String[] separated = temp.split("\\.");
-            etDay.setText(separated[0]);
-            etDay2.setText(separated[1]);
+            etDay.setText(temp);
         }
     }
 }

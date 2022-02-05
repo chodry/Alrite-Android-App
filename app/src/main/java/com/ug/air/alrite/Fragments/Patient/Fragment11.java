@@ -1,7 +1,14 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Fragment4.UUIDS;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6.DAY1;
+import static com.ug.air.alrite.Fragments.Patient.Fragment6v2.CHOICEX;
+import static com.ug.air.alrite.Fragments.Patient.Fragment9.FASTBREATHING;
+
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -13,6 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,34 +34,45 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.ug.air.alrite.Activities.Dashboard;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Fragment11 extends Fragment {
 
     View view;
-    Button back, next;
+    Button back, next, btnSave;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2, radioButton3;
     String value8 = "none";
-    TextView chest, txtDisease, txtDefinition, txtOk;
+    String diagnosis;
+    TextView chest, txtDisease, txtDefinition, txtOk, txtDiagnosis;
     LinearLayout linearLayoutDisease;
+    LinearLayout linearLayout_instruction;
     VideoView videoView;
     Dialog dialog;
     RecyclerView recyclerView;
     ArrayList<Assessment> assessments;
     AssessmentAdapter assessmentAdapter;
-    private static final int YES = 0;
-    private static final int NO = 1;
+    private static final int YES = 1;
+    private static final int NO = 0;
     private static final int NOT = 2;
     public static final String CHOICE7 = "choice7";
     public static final String SHARED_PREFS = "sharedPrefs";
+    SharedPreferences sharedPreferences, sharedPreferences1;
+    SharedPreferences.Editor editor, editor1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,11 +84,13 @@ public class Fragment11 extends Fragment {
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
         radioGroup = view.findViewById(R.id.radioGroup);
-        radioButton1 = view.findViewById(R.id.yes);
-        radioButton2 = view.findViewById(R.id.no);
+        radioButton1 = view.findViewById(R.id.no);
+        radioButton2 = view.findViewById(R.id.yes);
         radioButton3 = view.findViewById(R.id.not);
         chest = view.findViewById(R.id.chest);
 
+        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         loadData();
         updateViews();
@@ -81,11 +102,11 @@ public class Fragment11 extends Fragment {
                 int index = radioGroup.indexOfChild(radioButton);
 
                 switch (index) {
-                    case YES:
-                        value8 = "Mild";
-                        break;
                     case NO:
                         value8 = "No";
+                        break;
+                    case YES:
+                        value8 = "Mild";
                         break;
                     case NOT:
                         value8 = "Moderate/Severe";
@@ -127,29 +148,23 @@ public class Fragment11 extends Fragment {
     }
 
     private void saveData() {
-        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString(CHOICE7, value8);
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment12());
-        fr.addToBackStack(null);
-        fr.commit();
+        makeAssessment();
 
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         value8 = sharedPreferences.getString(CHOICE7, "");
     }
 
     private void updateViews() {
         if (value8.equals("Mild")){
-            radioButton1.setChecked(true);
-        }else if (value8.equals("No")){
             radioButton2.setChecked(true);
+        }else if (value8.equals("No")){
+            radioButton1.setChecked(true);
         }else if (value8.equals("Moderate/Severe")){
             radioButton3.setChecked(true);
         }else {
@@ -193,5 +208,110 @@ public class Fragment11 extends Fragment {
         });
 
         dialog.show();
+    }
+
+    private void makeAssessment() {
+        int total = 0;
+        String cough = sharedPreferences.getString(DAY1, "");
+        int co = Integer.parseInt(cough);
+        String wheezing = sharedPreferences.getString(CHOICEX, "");
+        if (co > 0 || wheezing.equals("Yes")){
+            total = total + 1;
+        }
+        String fastBreathing = sharedPreferences.getString(FASTBREATHING, "");
+        if (fastBreathing.equals("Fast Breathing") || value8.equals("Mild") || value8.equals("Moderate/Severe")){
+            total = total + 1;
+        }
+        if (fastBreathing.equals("Normal Breathing") && value8.equals("No")){
+            total = total + 2;
+        }
+        if (total == 2){
+            showDialog2(total);
+        }else if (total == 3){
+            showDialog2(total);
+        }else {
+            FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+            fr.replace(R.id.fragment_container, new Fragment12());
+            fr.addToBackStack(null);
+            fr.commit();
+        }
+    }
+
+    private void showDialog2(int total) {
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.assessment_layout);
+        dialog.setCancelable(true);
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
+        txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
+        recyclerView = dialog.findViewById(R.id.recyclerView1);
+        btnSave = dialog.findViewById(R.id.btnSave);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        assessments = new ArrayList<>();
+        assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
+
+        List<Integer> messages = new ArrayList<>();
+
+        if (total == 2){
+            linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
+            txtDiagnosis.setText(R.string.pneumonia);
+            messages = Arrays.asList(R.string.pneumonia1, R.string.pneumonia2, R.string.pneumonia3);
+            dialog.getWindow().setLayout(650, 800);
+        }else{
+            linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));
+            txtDiagnosis.setText(R.string.cold);
+            messages = Arrays.asList(R.string.cold1, R.string.cold2, R.string.cold3, R.string.cold4);
+            dialog.getWindow().setLayout(650, 1000);
+        }
+
+        diagnosis = txtDiagnosis.getText().toString();
+
+        for (int i = 0; i < messages.size(); i++){
+            Assessment assessment = new Assessment(messages.get(i));
+            assessments.add(assessment);
+        }
+        recyclerView.setAdapter(assessmentAdapter);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveForm();
+            }
+        });
+
+//        dialog.getWindow().setLayout(650, 800);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.show();
+    }
+
+    private void saveForm() {
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+        String formattedDate = df.format(currentTime);
+
+        String uniqueID = UUID.randomUUID().toString();
+
+        editor.putString(DATE, formattedDate);
+        editor.putString(UUIDS, uniqueID);
+        editor.apply();
+
+        uniqueID = formattedDate + "_" + uniqueID;
+
+        sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
+        editor1 = sharedPreferences1.edit();
+        Map<String, ?> all = sharedPreferences.getAll();
+        for (Map.Entry<String, ?> x : all.entrySet()) {
+            if (x.getValue().getClass().equals(String.class))  editor1.putString(x.getKey(),  (String)x.getValue());
+            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
+        }
+        editor1.commit();
+        editor.clear();
+        editor.commit();
+        startActivity(new Intent(getActivity(), Dashboard.class));
     }
 }
