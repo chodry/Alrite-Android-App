@@ -1,6 +1,7 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Fragment4.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Fragment4.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.Fragment6.DAY1;
 import static com.ug.air.alrite.Fragments.Patient.Fragment6v2.CHOICEX;
@@ -296,6 +297,7 @@ public class Fragment11 extends Fragment {
 
         String uniqueID = UUID.randomUUID().toString();
 
+        editor.putString(DIAGNOSIS, diagnosis);
         editor.putString(DATE, formattedDate);
         editor.putString(UUIDS, uniqueID);
         editor.apply();
