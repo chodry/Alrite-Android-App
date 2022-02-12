@@ -49,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="Parent's/Guardian's Phone Number"
+                    android:text="Parent's/Guardian's Contact Number"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 

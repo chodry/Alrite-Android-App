@@ -127,7 +127,7 @@ public class Fragment12 extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment11());
+                fr.replace(R.id.fragment_container, new Fragment6());
                 fr.commit();
             }
         });
@@ -146,9 +146,13 @@ public class Fragment12 extends Fragment {
 
         editor.putString(CHOICE8, value9);
         editor.apply();
+        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+        fr.replace(R.id.fragment_container, new Fragment9());
+        fr.addToBackStack(null);
+        fr.commit();
 
 //        saveForm();
-        makeAssessment();
+//        makeAssessment();
     }
 
     private void loadData() {

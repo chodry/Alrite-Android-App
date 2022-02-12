@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -134,6 +135,7 @@ public class Fragment4 extends Fragment {
 
     }
 
+
     private void saveData(String s) {
 
         editor.putBoolean(CHECK1, drink.isChecked());
@@ -180,7 +182,7 @@ public class Fragment4 extends Fragment {
         dialog.setContentView(R.layout.assessment_layout);
         dialog.setCancelable(true);
         Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
 
         linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
         txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
@@ -211,7 +213,7 @@ public class Fragment4 extends Fragment {
             }
         });
 
-        dialog.getWindow().setLayout(650, 1300);
+//        dialog.getWindow().setLayout(650, WindowManager.LayoutParams.MATCH_PARENT);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
     }

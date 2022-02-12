@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"
-                    android:text="Does any of the family members burn kerosene or charcoal in the home?"
+                    android:text="Does any of the family members use kerosene or charcoal in the home?"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 

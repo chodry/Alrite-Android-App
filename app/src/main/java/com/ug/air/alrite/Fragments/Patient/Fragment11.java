@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Fragment12.CHOICE8;
 import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Fragment4.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Fragment4.UUIDS;
@@ -215,9 +216,12 @@ public class Fragment11 extends Fragment {
         int total = 0;
         String cough = sharedPreferences.getString(DAY1, "");
         int co = Integer.parseInt(cough);
-        String wheezing = sharedPreferences.getString(CHOICEX, "");
-        if (co > 0 || wheezing.equals("Yes")){
+        String wheezing = sharedPreferences.getString(CHOICE8, "");
+        if (co > 0 && wheezing.equals("No")){
             total = total + 1;
+        }
+        if (co > 0 && wheezing.equals("Yes")){
+            total = total + 3;
         }
         String fastBreathing = sharedPreferences.getString(FASTBREATHING, "");
         if (fastBreathing.equals("Fast Breathing") || value8.equals("Mild") || value8.equals("Moderate/Severe")){
@@ -229,6 +233,8 @@ public class Fragment11 extends Fragment {
         if (total == 2){
             showDialog2(total);
         }else if (total == 3){
+            showDialog2(total);
+        }else if (total == 4){
             showDialog2(total);
         }else {
             FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
@@ -242,8 +248,8 @@ public class Fragment11 extends Fragment {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.assessment_layout);
         dialog.setCancelable(true);
-        Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+//        Window window = dialog.getWindow();
+//        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
         linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
         txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
@@ -262,12 +268,17 @@ public class Fragment11 extends Fragment {
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
             txtDiagnosis.setText(R.string.pneumonia);
             messages = Arrays.asList(R.string.pneumonia1, R.string.pneumonia2, R.string.pneumonia3);
-            dialog.getWindow().setLayout(650, 800);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
+        }else if (total == 4) {
+            linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
+            txtDiagnosis.setText(R.string.wheezing1);
+            messages = Arrays.asList(R.string.wheezing2);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
         }else{
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));
             txtDiagnosis.setText(R.string.cold);
             messages = Arrays.asList(R.string.cold1, R.string.cold2, R.string.cold3, R.string.cold4);
-            dialog.getWindow().setLayout(650, 1000);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
         }
 
         diagnosis = txtDiagnosis.getText().toString();

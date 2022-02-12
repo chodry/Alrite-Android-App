@@ -80,7 +80,7 @@ public class Fragment6v1 extends Fragment {
         editor.apply();
 
         FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment6v2());
+        fr.replace(R.id.fragment_container, new Fragment6v3());
         fr.addToBackStack(null);
         fr.commit();
 

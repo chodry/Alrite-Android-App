@@ -90,13 +90,13 @@ public class Fragment8v1 extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String hist = sharedPreferences.getString(CHOICE3Y2, "");
+//                String hist = sharedPreferences.getString(CHOICE3Y2, "");
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                if (hist.isEmpty()){
-                    fr.replace(R.id.fragment_container, new Fragment7v3());
-                }else {
-                    fr.replace(R.id.fragment_container, new Fragment7v4());
-                }
+//                if (hist.isEmpty()){
+                fr.replace(R.id.fragment_container, new Fragment5());
+//                }else {
+//                    fr.replace(R.id.fragment_container, new Fragment7v4());
+//                }
                 fr.commit();
             }
         });

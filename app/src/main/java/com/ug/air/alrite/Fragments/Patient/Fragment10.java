@@ -216,7 +216,7 @@ public class Fragment10 extends Fragment {
         dialog.setContentView(R.layout.assessment_layout);
         dialog.setCancelable(true);
         Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+//        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
         linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
         txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
@@ -247,7 +247,7 @@ public class Fragment10 extends Fragment {
             }
         });
 
-        dialog.getWindow().setLayout(650, 1300);
+        dialog.getWindow().setLayout(700, 1300);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
     }

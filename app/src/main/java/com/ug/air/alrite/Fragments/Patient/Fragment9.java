@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Fragment12.CHOICE8;
 import static com.ug.air.alrite.Fragments.Patient.Fragment3.AGE;
 
 import android.app.Dialog;
@@ -107,8 +108,13 @@ public class Fragment9 extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String wheezing = sharedPreferences.getString(CHOICE8, "");
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment8());
+                if (wheezing.equals("Yes") || wheezing.equals("No")){
+                    fr.replace(R.id.fragment_container, new Fragment12());
+                }else {
+                    fr.replace(R.id.fragment_container, new Fragment6v7());
+                }
                 fr.commit();
             }
         });

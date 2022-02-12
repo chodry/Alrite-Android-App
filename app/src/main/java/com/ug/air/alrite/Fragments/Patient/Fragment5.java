@@ -164,7 +164,7 @@ public class Fragment5 extends Fragment {
         dialog.setContentView(R.layout.assessment_layout);
         dialog.setCancelable(true);
         Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
 
         linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
         txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
@@ -181,7 +181,7 @@ public class Fragment5 extends Fragment {
         assessments = new ArrayList<>();
         assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
 
-        List<Integer> messages = Arrays.asList(R.string.child_is_healthy, R.string.soothe_throat);
+        List<Integer> messages = Arrays.asList(R.string.child_is_healthy, R.string.soothe_throat, R.string.soothe_throat2);
         for (int i = 0; i < messages.size(); i++){
             Assessment assessment = new Assessment(messages.get(i));
             assessments.add(assessment);
@@ -195,7 +195,7 @@ public class Fragment5 extends Fragment {
             }
         });
 
-        dialog.getWindow().setLayout(650, 800);
+//        dialog.getWindow().setLayout(650, 800);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
     }
@@ -225,6 +225,10 @@ public class Fragment5 extends Fragment {
         editor.clear();
         editor.commit();
         dialog.dismiss();
-        startActivity(new Intent(getActivity(), Dashboard.class));
+//        startActivity(new Intent(getActivity(), Dashboard.class));
+        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+        fr.replace(R.id.fragment_container, new Fragment8v1());
+        fr.addToBackStack(null);
+        fr.commit();
     }
 }

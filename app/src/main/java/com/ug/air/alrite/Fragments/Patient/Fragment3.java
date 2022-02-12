@@ -27,14 +27,13 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedListener {
-
+public class Fragment3 extends Fragment {
     View view;
-    EditText etAge, etKilo1, etKilo2;
+    EditText etYears, etKilo1, etKilo2, etMonths;
     Button back, next;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2;
-    String age, weight, text, kg1, fileName;
+    String age, weight, text, kg1, fileName, months, years;
     Spinner spinner;
     String value2 = "none";
     private static final int YES = 0;
@@ -58,15 +57,16 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
         radioGroup = view.findViewById(R.id.radioGroup);
         radioButton1 = view.findViewById(R.id.yes);
         radioButton2 = view.findViewById(R.id.no);
-        etAge = view.findViewById(R.id.years);
+        etYears = view.findViewById(R.id.years);
+        etMonths = view.findViewById(R.id.months);
         etKilo1 = view.findViewById(R.id.kg1);
 //        etKilo2 = view.findViewById(R.id.kg2);
-        spinner = view.findViewById(R.id.yearsormonths);
+//        spinner = view.findViewById(R.id.yearsormonths);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.same, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.same, android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(adapter);
+//        spinner.setOnItemSelectedListener(this);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -89,7 +89,8 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
         });
 
         etKilo1.addTextChangedListener(textWatcher1);
-//        etKilo2.addTextChangedListener(textWatcher2);
+        etYears.addTextChangedListener(textWatcher2);
+        etMonths.addTextChangedListener(textWatcher3);
 
         bundle = this.getArguments();
         if (bundle != null){
@@ -118,27 +119,17 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                age = etAge.getText().toString();
+                years = etYears.getText().toString();
+                months = etMonths.getText().toString();
                 kg1 = etKilo1.getText().toString();
 //                kg2 = etKilo2.getText().toString();
 
-                if (value2.equals("none") || age.isEmpty() || kg1.isEmpty()){
+                if (value2.equals("none") || years.isEmpty() || kg1.isEmpty() || months.isEmpty()){
                     Toast.makeText(getActivity(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                 }else{
-                    long ag = Long.parseLong(age);
-                    if (text.equals("Select One")){
-                        Toast.makeText(getActivity(), "Please select whether the age selected is in months or years", Toast.LENGTH_SHORT).show();
-                    }else if (ag > 5 && text.equals("Years")){
-                        etAge.setError("The age should not be greater than 5 years");
-                    }else if (ag > 12 && text.equals("Months")){
-                        etAge.setError("The months should not be greater than 12 months");
-                    }else {
-                        if (text.equals("Months")){
-                            age = "0." + age;
-                        }
-                        weight = kg1;
-                        saveData();
-                    }
+                    age = years + "." + months;
+                    weight = kg1;
+                    saveData();
                 }
             }
         });
@@ -155,15 +146,15 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
         return view;
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        text = parent.getItemAtPosition(position).toString();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+//    @Override
+//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//        text = parent.getItemAtPosition(position).toString();
+//    }
+//
+//    @Override
+//    public void onNothingSelected(AdapterView<?> parent) {
+//
+//    }
 
     public TextWatcher textWatcher1 = new TextWatcher() {
         @Override
@@ -191,6 +182,59 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
         }
     };
 
+    public TextWatcher textWatcher2 = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            years = etYears.getText().toString();
+            if (!years.isEmpty()){
+                int yr = Integer.parseInt(years);
+                if (yr > 5){
+                    etYears.setError("The maximum number of years should be 5");
+                    etMonths.setText("");
+                    etMonths.setEnabled(true);
+                }else if (yr == 5) {
+                    etMonths.setText("0");
+                    etMonths.setEnabled(false);
+                }else {
+                    etMonths.setText("");
+                    etMonths.setEnabled(true);
+                }
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    public TextWatcher textWatcher3 = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            months = etMonths.getText().toString();
+            if (!months.isEmpty()){
+                int yr = Integer.parseInt(months);
+                if (yr > 11){
+                    etMonths.setError("The maximum number of months should be 11");
+                }
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
     private void saveData() {
         editor = sharedPreferences1.edit();
@@ -222,25 +266,15 @@ public class Fragment3 extends Fragment implements AdapterView.OnItemSelectedLis
             radioButton1.setChecked(false);
             radioButton2.setChecked(false);
         }
-//        etAge.setText(age);
-        if (age.contains(".")){
-            text = "Months";
-            spinner.setSelection(2);
-        }else if (!age.contains(".") && !age.isEmpty()){
-            text = "Years";
-            spinner.setSelection(1);
-        }else {
-            spinner.setSelection(0);
-        }
+
         if (!weight.isEmpty()){
             etKilo1.setText(weight);
         }
-        if (age.contains(".")){
-            String[] separated = age.split("\\.");
-            etAge.setText(separated[1]);
-        }else{
-            etAge.setText(age);
-        }
 
+        if (!age.isEmpty()) {
+            String[] separated = age.split("\\.");
+            etYears.setText(separated[0]);
+            etMonths.setText(separated[1]);
+        }
     }
 }

@@ -49,6 +49,8 @@ public class Fragment2 extends Fragment {
         loadData();
         updateViews();
 
+        etPhone.addTextChangedListener(textWatcher);
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +60,7 @@ public class Fragment2 extends Fragment {
                 otherName = etOther.getText().toString();
                 phone = etPhone.getText().toString();
 
-                if (phone.isEmpty() || surname.isEmpty() || otherName.isEmpty()){
+                if (surname.isEmpty() || otherName.isEmpty()){
                     Toast.makeText(getActivity(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                 }else {
                     saveData();
@@ -78,6 +80,27 @@ public class Fragment2 extends Fragment {
         return view;
     }
 
+    TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            phone = etPhone.getText().toString();
+            if (!phone.isEmpty()){
+                if (!phone.startsWith("0") || phone.length() != 10){
+                    etPhone.setError("the contact number should start with a 0 and be with 10 digits");
+                }
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
     private void saveData() {
         SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);

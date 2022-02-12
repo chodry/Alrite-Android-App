@@ -193,7 +193,7 @@ public class Fragment6v7 extends Fragment {
             showDialog();
         }else {
             FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Fragment7());
+            fr.replace(R.id.fragment_container, new Fragment9());
             fr.addToBackStack(null);
             fr.commit();
         }
@@ -204,7 +204,7 @@ public class Fragment6v7 extends Fragment {
         dialog.setContentView(R.layout.assessment_layout);
         dialog.setCancelable(true);
         Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
 
         linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
         txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
@@ -235,7 +235,7 @@ public class Fragment6v7 extends Fragment {
             }
         });
 
-        dialog.getWindow().setLayout(650, 800);
+//        dialog.getWindow().setLayout(650, 800);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
     }
