@@ -295,6 +295,7 @@ public class Assess extends Fragment {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editor.putString(DIAGNOSIS, diagnosis);
                 dialog.dismiss();
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.fragment_container, new Temperature());

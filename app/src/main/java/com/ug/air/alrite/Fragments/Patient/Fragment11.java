@@ -1,6 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment12.CHOICE8;
+import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHOICE8;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
@@ -236,7 +236,7 @@ public class Fragment11 extends Fragment {
             showDialog2(total);
         }else {
             FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Fragment12());
+            fr.replace(R.id.fragment_container, new Wheezing());
             fr.addToBackStack(null);
             fr.commit();
         }

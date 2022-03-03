@@ -51,7 +51,7 @@ import java.util.UUID;
 public class Stridor extends Fragment {
 
     View view;
-    Button back, next, btnSave, btnStridor;
+    Button back, next, btnSave, btnStridor, btnContinue;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2;
     String value7 = "none";
@@ -68,6 +68,7 @@ public class Stridor extends Fragment {
     private static final int YES = 0;
     private static final int NO = 1;
     public static final String CHOICE6 = "choice6";
+    public static final String STDIAGNOSIS = "stDiagnosis";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
@@ -202,7 +203,7 @@ public class Stridor extends Fragment {
     private void checkIfNone() {
         if (value7.equals("No")){
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Fragment11());
+            fr.replace(R.id.fragment_container, new Wheezing());
             fr.addToBackStack(null);
             fr.commit();
         }else{
@@ -221,6 +222,7 @@ public class Stridor extends Fragment {
         txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
         recyclerView = dialog.findViewById(R.id.recyclerView1);
         btnSave = dialog.findViewById(R.id.btnSave);
+        btnContinue = dialog.findViewById(R.id.btnContinue);
 
         linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
         txtDiagnosis.setText(R.string.severe);
@@ -246,13 +248,25 @@ public class Stridor extends Fragment {
             }
         });
 
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor.putString(STDIAGNOSIS, diagnosis);
+                dialog.dismiss();
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new Wheezing());
+                fr.addToBackStack(null);
+                fr.commit();
+            }
+        });
+
         dialog.getWindow().setLayout(700, 1300);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
     }
 
     private void saveForm() {
-        editor.putString(DIAGNOSIS, diagnosis);
+        editor.putString(STDIAGNOSIS, diagnosis);
 
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());

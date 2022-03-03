@@ -14,7 +14,7 @@
     <string name="IM_dosing_under1">Inject 2ml Ampicillin or 1.1 ml Gentamicin into upper arm, thigh, or bottom with sterile needle</string>
     <string name="give_diazepam_if">If convulsing, treat with anticonvulsant like Diazepam</string>
     <string name="refer_urgently">Refer URGENTLY to hospital</string>
-    <string name="severe">Diagnosis: Severe pneumonia OR very severe disease</string>
+    <string name="severe">Diagnosis: Severe Pneumonia OR very Severe Disease</string>
 
     <string name="selected">You have selected that this child does NOT have a cough or difficulty breathing</string>
     <string name="alrite">ALRITE is to help diagnose children with a cough or difficulty breathing</string>

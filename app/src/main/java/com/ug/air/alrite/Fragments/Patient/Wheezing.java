@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -46,24 +47,28 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Fragment12 extends Fragment {
+public class Wheezing extends Fragment {
 
     View view;
-    Button back, next, btnSave;
+    Button back, next, btnSave, btnWheez;
     RadioGroup radioGroup;
-    RadioButton radioButton1, radioButton2;
+    CheckBox checkBox;
+    RadioButton radioButton1, radioButton2, radioButton3;
     String value9 = "none";
-    TextView wheez, txtDisease, txtDefinition, txtOk, txtDiagnosis;
+    TextView txtDisease, txtDefinition, txtOk, txtDiagnosis;
     LinearLayout linearLayoutDisease;
     LinearLayout linearLayout_instruction;
     VideoView videoView;
     Dialog dialog;
-    String diagnosis;
+    String diagnosis, s;
     RecyclerView recyclerView;
+    Boolean check1;
     ArrayList<Assessment> assessments;
     AssessmentAdapter assessmentAdapter;
     private static final int YES = 0;
     private static final int NO = 1;
+    private static final int NOT = 2;
+    public static final String CHECKSTETHO = "checkStetho";
     public static final String CHOICE8 = "choice8";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
@@ -73,16 +78,18 @@ public class Fragment12 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_12, container, false);
+        view = inflater.inflate(R.layout.fragment_wheezing, container, false);
 
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
         radioGroup = view.findViewById(R.id.radioGroup);
-        radioButton1 = view.findViewById(R.id.yes);
-        radioButton2 = view.findViewById(R.id.no);
-        wheez = view.findViewById(R.id.chest);
+        radioButton1 = view.findViewById(R.id.wheezing);
+        radioButton2 = view.findViewById(R.id.noisy_breathing);
+        radioButton3 = view.findViewById(R.id.normal);
+        btnWheez = view.findViewById(R.id.wheez);
+        checkBox = view.findViewById(R.id.stethoscope);
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
@@ -96,10 +103,13 @@ public class Fragment12 extends Fragment {
 
                 switch (index) {
                     case YES:
-                        value9 = "Yes";
+                        value9 = "Wheezing";
                         break;
                     case NO:
-                        value9 = "No";
+                        value9 = "Noisy breathing";
+                        break;
+                    case NOT:
+                        value9 = "Normal breathing";
                         break;
                     default:
                         break;
@@ -121,13 +131,13 @@ public class Fragment12 extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new CoughD());
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new Stridor());
                 fr.commit();
             }
         });
 
-        wheez.setOnClickListener(new View.OnClickListener() {
+        btnWheez.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
@@ -140,30 +150,35 @@ public class Fragment12 extends Fragment {
     private void saveData() {
 
         editor.putString(CHOICE8, value9);
+        editor.putBoolean(CHECKSTETHO, checkBox.isChecked());
         editor.apply();
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new RRCounter());
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+        fr.replace(R.id.fragment_container, new Nasal());
         fr.addToBackStack(null);
         fr.commit();
 
-//        saveForm();
-//        makeAssessment();
     }
 
     private void loadData() {
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         value9 = sharedPreferences.getString(CHOICE8, "");
+        check1 = sharedPreferences.getBoolean(CHECKSTETHO, false);
     }
 
     private void updateViews() {
-        if (value9.equals("Yes")){
+        if (value9.equals("Wheezing")){
             radioButton1.setChecked(true);
-        }else if (value9.equals("No")){
+        }else if (value9.equals("Noisy breathing")){
             radioButton2.setChecked(true);
+        }else if (value9.equals("Normal breathing")){
+            radioButton3.setChecked(true);
         }else {
             radioButton1.setChecked(false);
             radioButton2.setChecked(false);
+            radioButton3.setChecked(true);
         }
+
+        checkBox.setChecked(check1);
     }
 
     private void showDialog() {
@@ -186,7 +201,7 @@ public class Fragment12 extends Fragment {
         txtDefinition.setText(R.string.wheez);
         linearLayoutDisease.setBackgroundColor(getResources().getColor(R.color.green_dark));
 
-        String videoPath = "android.resource://" + Objects.requireNonNull(getActivity()).getPackageName() + "/" + R.raw.wheezing_glossary_video;
+        String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.wheezing_glossary_video;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
         videoView.start();
@@ -199,78 +214,6 @@ public class Fragment12 extends Fragment {
             }
         });
 
-        dialog.show();
-    }
-
-    private void saveForm() {
-        Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
-        String formattedDate = df.format(currentTime);
-
-        String uniqueID = UUID.randomUUID().toString();
-
-        editor.putString(CHOICE8, value9);
-        editor.putString(DATE, formattedDate);
-        editor.putString(UUIDS, uniqueID);
-        editor.apply();
-
-        uniqueID = formattedDate + "_" + uniqueID;
-
-        sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
-        editor1 = sharedPreferences1.edit();
-        Map<String, ?> all = sharedPreferences.getAll();
-        for (Map.Entry<String, ?> x : all.entrySet()) {
-            if (x.getValue().getClass().equals(String.class))  editor1.putString(x.getKey(),  (String)x.getValue());
-            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
-        }
-        editor1.commit();
-        editor.clear();
-        editor.commit();
-        startActivity(new Intent(getActivity(), Dashboard.class));
-    }
-
-    private void makeAssessment() {
-
-    }
-
-    private void showDialog2() {
-        dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.assessment_layout);
-        dialog.setCancelable(true);
-        Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-
-        linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
-        txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
-        recyclerView = dialog.findViewById(R.id.recyclerView1);
-        btnSave = dialog.findViewById(R.id.btnSave);
-
-        linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
-        txtDiagnosis.setText(R.string.pneumonia);
-        diagnosis = txtDiagnosis.getText().toString();
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-
-        assessments = new ArrayList<>();
-        assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
-
-        List<Integer> messages = Arrays.asList(R.string.pneumonia1, R.string.pneumonia2, R.string.pneumonia3);
-        for (int i = 0; i < messages.size(); i++){
-            Assessment assessment = new Assessment(messages.get(i));
-            assessments.add(assessment);
-        }
-        recyclerView.setAdapter(assessmentAdapter);
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveForm();
-            }
-        });
-
-        dialog.getWindow().setLayout(650, 800);
-        dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
     }
 }
