@@ -1,14 +1,9 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
-import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
-import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.FTouch.TOUCH;
-import static com.ug.air.alrite.Fragments.Patient.Fragment12.CHOICE8;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -31,21 +26,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ug.air.alrite.Activities.Dashboard;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
 
 
 public class Oxygen extends Fragment {
@@ -117,7 +104,10 @@ public class Oxygen extends Fragment {
         btSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new RRCounter());
+                fr.addToBackStack(null);
+                fr.commit();
             }
         });
 
@@ -157,7 +147,7 @@ public class Oxygen extends Fragment {
         percent = Integer.parseInt(oxy);
         if (percent >= 92){
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Fragment9());
+            fr.replace(R.id.fragment_container, new RRCounter());
             fr.addToBackStack(null);
             fr.commit();
         }else if (percent > 89 && percent < 92){

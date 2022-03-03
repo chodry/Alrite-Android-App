@@ -142,7 +142,7 @@ public class Fragment12 extends Fragment {
         editor.putString(CHOICE8, value9);
         editor.apply();
         FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment9());
+        fr.replace(R.id.fragment_container, new RRCounter());
         fr.addToBackStack(null);
         fr.commit();
 

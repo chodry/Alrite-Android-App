@@ -193,7 +193,7 @@ public class Fragment6v7 extends Fragment {
             showDialog();
         }else {
             FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Fragment9());
+            fr.replace(R.id.fragment_container, new RRCounter());
             fr.addToBackStack(null);
             fr.commit();
         }

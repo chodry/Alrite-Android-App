@@ -48,14 +48,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Fragment10 extends Fragment {
+public class Stridor extends Fragment {
 
     View view;
-    Button back, next, btnSave;
+    Button back, next, btnSave, btnStridor;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2;
     String value7 = "none";
-    TextView stridor, txtDisease, txtDefinition, txtOk,txtDiagnosis;
+    TextView txtDisease, txtDefinition, txtOk,txtDiagnosis;
     LinearLayout linearLayoutDisease, linearLayout_instruction;
     VideoView videoView;
     MediaPlayer mediaPlayer;
@@ -76,16 +76,16 @@ public class Fragment10 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_10, container, false);
+        view = inflater.inflate(R.layout.fragment_stridor, container, false);
 
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
         radioGroup = view.findViewById(R.id.radioGroup);
         radioButton1 = view.findViewById(R.id.yes);
         radioButton2 = view.findViewById(R.id.no);
-        stridor = view.findViewById(R.id.stridor);
+        btnStridor = view.findViewById(R.id.stridor);
 
-        sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = this.requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
@@ -124,13 +124,13 @@ public class Fragment10 extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment9());
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new RRCounter());
                 fr.commit();
             }
         });
 
-        stridor.setOnClickListener(new View.OnClickListener() {
+        btnStridor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
@@ -183,7 +183,7 @@ public class Fragment10 extends Fragment {
         txtDefinition.setText("A noise on breathing in due to obstruction of the upper airway");
         linearLayoutDisease.setBackgroundColor(getResources().getColor(R.color.green_dark));
 
-        String videoPath = "android.resource://" + Objects.requireNonNull(getActivity()).getPackageName() + "/" + R.raw.stridor_glossary_video;
+        String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.stridor_glossary_video;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
         videoView.start();
@@ -201,7 +201,7 @@ public class Fragment10 extends Fragment {
 
     private void checkIfNone() {
         if (value7.equals("No")){
-            FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
             fr.replace(R.id.fragment_container, new Fragment11());
             fr.addToBackStack(null);
             fr.commit();
@@ -265,7 +265,7 @@ public class Fragment10 extends Fragment {
         editor.apply();
 
         uniqueID = formattedDate + "_" + uniqueID;
-        sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
+        sharedPreferences1 = requireActivity().getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
         editor1 = sharedPreferences1.edit();
         Map<String, ?> all = sharedPreferences.getAll();
         for (Map.Entry<String, ?> x : all.entrySet()) {

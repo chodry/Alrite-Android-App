@@ -1,6 +1,5 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment12.CHOICE8;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 
 import android.app.Dialog;
@@ -26,11 +25,10 @@ import com.ug.air.alrite.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 
-public class Fragment9 extends Fragment {
+public class RRCounter extends Fragment {
 
     View view;
     Button next, back, reset, manual, btnRate, btnReset, btnContinue;
@@ -59,15 +57,16 @@ public class Fragment9 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_9, container, false);
+        view = inflater.inflate(R.layout.fragment_rr_counter, container, false);
 
         back = view.findViewById(R.id.back);
+        next = view.findViewById(R.id.next);
         reset = view.findViewById(R.id.reset);
         manual = view.findViewById(R.id.manual);
         txtElapse = view.findViewById(R.id.elapsedTime);
         tap = view.findViewById(R.id.Circle);
 
-        sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = this.requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         age = sharedPreferences.getString(AGE, "");
         ag = Float.parseFloat(age);
@@ -77,6 +76,9 @@ public class Fragment9 extends Fragment {
         durations = new ArrayList<>();
         newTimer();
         lastBreath=-1;
+
+        loadData();
+        updateViews();
 
         tap.setOnClickListener(view -> {
             view.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.circle_animation));
@@ -106,13 +108,17 @@ public class Fragment9 extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String wheezing = sharedPreferences.getString(CHOICE8, "");
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                if (wheezing.equals("Yes") || wheezing.equals("No")){
-                    fr.replace(R.id.fragment_container, new Fragment12());
-                }else {
-                    fr.replace(R.id.fragment_container, new Fragment6v7());
-                }
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new Oxygen());
+                fr.commit();
+            }
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new Stridor());
                 fr.commit();
             }
         });
@@ -397,10 +403,30 @@ public class Fragment9 extends Fragment {
         editor.putString(RATE, rate);
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment10());
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+        fr.replace(R.id.fragment_container, new Stridor());
         fr.addToBackStack(null);
         fr.commit();
+    }
+
+    private void loadData() {
+        rate = sharedPreferences.getString(RATE, "");
+    }
+
+    private void updateViews() {
+        if (!rate.isEmpty()){
+            reset.setVisibility(View.GONE);
+            manual.setVisibility(View.GONE);
+            tap.setVisibility(View.GONE);
+            txtElapse.setText("Respiratory Rate was already captured, click NEXT to continue");
+            next.setVisibility(View.VISIBLE);
+        }else {
+            reset.setVisibility(View.VISIBLE);
+            manual.setVisibility(View.VISIBLE);
+            tap.setVisibility(View.VISIBLE);
+            txtElapse.setText("Elapsed time:");
+            next.setVisibility(View.GONE);
+        }
     }
 
 }

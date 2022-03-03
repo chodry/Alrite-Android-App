@@ -5,7 +5,7 @@ import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.CoughD.DAY1;
-import static com.ug.air.alrite.Fragments.Patient.Fragment9.FASTBREATHING;
+import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -132,7 +132,7 @@ public class Fragment11 extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment10());
+                fr.replace(R.id.fragment_container, new Stridor());
                 fr.commit();
             }
         });
