@@ -1,8 +1,8 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.DIAGNOSIS;
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.UUIDS;
+import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.Fragment6.DAY1;
 import static com.ug.air.alrite.Fragments.Patient.Fragment6v1.DAY2;
 import static com.ug.air.alrite.Fragments.Patient.Fragment6v2.CHOICEX;

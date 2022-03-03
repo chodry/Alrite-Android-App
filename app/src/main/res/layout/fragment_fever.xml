@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.Patient.Fragment8v2">
+    tools:context=".Fragments.Patient.Fever">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:text="Patient's History"
+            android:text="Patient's Examination"
             android:textColor="@color/white"
             android:textSize="18sp"/>
 
@@ -48,39 +48,37 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
                     android:gravity="center_horizontal"
-                    android:text="What is the child's temperature?"
+                    android:text="Does the child have a fever?"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <RadioGroup
+                    android:id="@+id/radioGroup1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:layout_marginTop="20dp">
 
-                    <EditText
-                        android:id="@+id/days"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_weight=".5"
-                        android:background="@drawable/text_input_bg"
-                        android:gravity="center"
-                        android:hint="33.0 - 44.0"
-                        android:inputType="numberDecimal"
-                        android:maxLength="4" />
+                    <RadioButton
+                        android:id="@+id/yes1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/black"
+                        android:text="Yes"
+                        android:textSize="18sp" />
 
-                </LinearLayout>
+                    <RadioButton
+                        android:id="@+id/no1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:buttonTint="@color/black"
+                        android:text="No"
+                        android:textSize="18sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="In degrees celcius - range (33.0 - 44.0)"
-                    android:textSize="12sp" />
+
+                </RadioGroup>
 
             </LinearLayout>
 

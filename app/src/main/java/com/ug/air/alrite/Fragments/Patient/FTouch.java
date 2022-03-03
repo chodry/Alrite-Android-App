@@ -1,8 +1,5 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v7.CHOICET2;
-import static com.ug.air.alrite.Fragments.Patient.Fragment7v4.CHOICE3Y2;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,8 +19,7 @@ import com.ug.air.alrite.R;
 
 import java.util.Objects;
 
-
-public class Fragment8v1 extends Fragment {
+public class FTouch extends Fragment {
 
     View view;
     Button back, next;
@@ -32,7 +28,7 @@ public class Fragment8v1 extends Fragment {
     String value6 = "none";
     private static final int YES1 = 0;
     private static final int NO1 = 1;
-    public static final String CHOICE5 = "choice5";
+    public static final String TOUCH = "touch";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -41,7 +37,7 @@ public class Fragment8v1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_8v1, container, false);
+        view = inflater.inflate(R.layout.fragment_touch, container, false);
 
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
@@ -90,33 +86,28 @@ public class Fragment8v1 extends Fragment {
             @Override
             public void onClick(View v) {
 
-//                String hist = sharedPreferences.getString(CHOICE3Y2, "");
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-//                if (hist.isEmpty()){
-                fr.replace(R.id.fragment_container, new Fragment5());
-//                }else {
-//                    fr.replace(R.id.fragment_container, new Fragment7v4());
-//                }
+                fr.replace(R.id.fragment_container, new Temperature());
                 fr.commit();
             }
         });
 
-        return  view;
+        return view;
     }
 
     private void saveData() {
 
-        editor.putString(CHOICE5, value6);
+        editor.putString(TOUCH, value6);
         editor.apply();
 
         FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment8v2());
+        fr.replace(R.id.fragment_container, new Oxygen());
         fr.addToBackStack(null);
         fr.commit();
     }
 
     private void loadData() {
-        value6 = sharedPreferences.getString(CHOICE5, "");
+        value6 = sharedPreferences.getString(TOUCH, "");
     }
 
     private void updateViews() {

@@ -21,11 +21,11 @@ import com.ug.air.alrite.R;
 import java.util.Objects;
 
 
-public class Fragment8v2 extends Fragment {
+public class Temperature extends Fragment {
 
     View view;
     EditText etDay;
-    Button back, next;
+    Button back, next, btnSkip;
     String temp;
     public static final String TEMP = "temp";
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -36,11 +36,12 @@ public class Fragment8v2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_8v2, container, false);
+        view = inflater.inflate(R.layout.fragment_temperature, container, false);
 
         etDay = view.findViewById(R.id.days);
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
+        btnSkip = view.findViewById(R.id.skip);
 
         etDay.requestFocus();
 
@@ -68,7 +69,17 @@ public class Fragment8v2 extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment8v1());
+                fr.replace(R.id.fragment_container, new Assess());
+                fr.commit();
+            }
+        });
+
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new FTouch());
+                fr.addToBackStack(null);
                 fr.commit();
             }
         });
@@ -106,7 +117,7 @@ public class Fragment8v2 extends Fragment {
         editor.apply();
 
         FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment8v3());
+        fr.replace(R.id.fragment_container, new Oxygen());
         fr.addToBackStack(null);
         fr.commit();
     }

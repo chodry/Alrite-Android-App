@@ -1,19 +1,8 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.DIAGNOSIS;
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.UUIDS;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v1.DAY2;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v2.CHOICEX;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v3.CHECK11;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v3.CHECK21;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v3.CHECK31;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v3.CHECK41;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v3.S5;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v4.CHOICEX2;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v5.CHOICEY2;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v6.CHOICET1;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v7.CHOICET2;
+import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 
 import android.app.Dialog;
 import android.content.Context;

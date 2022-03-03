@@ -1,7 +1,7 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Fragment12.CHOICE8;
-import static com.ug.air.alrite.Fragments.Patient.Fragment3.AGE;
+import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -15,8 +15,6 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;

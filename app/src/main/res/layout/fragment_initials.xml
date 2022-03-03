@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.Patient.Fragment4">
+    tools:context=".Fragments.Patient.Initials">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:text="Assess patient"
+            android:text="Patient's Details"
             android:textColor="@color/white"
             android:textSize="18sp"/>
 
@@ -32,70 +32,62 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@id/buttons"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="10dp"
             android:fadeScrollbars="true"
             android:padding="10dp"
-            android:layout_above="@id/buttons"
             android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Which symptoms does the patient have?"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="Parent's/Guardian's Initials"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
-                <CheckBox
-                    android:id="@+id/drink"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textSize="14sp"
-                    android:text="Unable to drink or breastfeed" />
+                <EditText
+                    android:id="@+id/pin"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/text_input_bg"
+                    android:gravity="center"
+                    android:maxLength="5"
+                    android:inputType="textCapCharacters"
+                    android:saveEnabled="false" />
 
-                <CheckBox
-                    android:id="@+id/vomit"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textSize="14sp"
-                    android:text="Vomiting Everything" />
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="Child's Initials"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
-                <CheckBox
-                    android:id="@+id/responsive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textSize="14sp"
-                    android:text="Unresponsive, no awareness of surroundings" />
-
-                <CheckBox
-                    android:id="@+id/convu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textSize="14sp"
-                    android:text="Convulsions (uncontrolled jerking/ seizures)" />
-
-                <CheckBox
-                    android:id="@+id/none"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textSize="14sp"
-                    android:text="None of these" />
+                <EditText
+                    android:id="@+id/cin"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/text_input_bg"
+                    android:gravity="center"
+                    android:maxLength="5"
+                    android:inputType="textCapCharacters"
+                    android:saveEnabled="false" />
 
 
             </LinearLayout>
-
 
         </ScrollView>
 

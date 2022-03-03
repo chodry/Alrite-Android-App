@@ -48,13 +48,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.btn_start_assessment).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PatientActivity.class);
-                startActivity(intent);
-            }
-        });
+//        view.findViewById(R.id.btn_start_assessment).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), PatientActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         return view;
     }

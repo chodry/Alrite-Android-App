@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.Patient.Initials">
+    tools:context=".Fragments.Patient.Temperature">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,44 +42,74 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="Does the child have a cough or difficulty breathing?"
+                    android:text="What is the child's temperature?"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
-                <RadioGroup
-                    android:id="@+id/radioGroup"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:id="@+id/days"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight=".5"
+                        android:background="@drawable/text_input_bg"
+                        android:gravity="center"
+                        android:hint="33.0 - 44.0"
+                        android:inputType="numberDecimal"
+                        android:maxLength="4" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="In degrees celcius - range (33.0 - 44.0)"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/black"
-                        android:text="Yes"
-                        android:id="@+id/yes"
-                        android:textSize="18sp" />
+                        android:gravity="center_horizontal"
+                        android:text="If the thermometer is not available"
+                        android:textSize="12sp" />
 
-                    <RadioButton
-                        android:layout_marginTop="10dp"
+                    <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/black"
-                        android:text="No"
-                        android:id="@+id/no"
-                        android:textSize="18sp" />
+                        android:layout_height="30dp"
+                        android:text="Skip"
+                        android:id="@+id/skip"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/color_background"
+                        android:background="@drawable/bg_button"
+                        android:layout_marginTop="5dp"/>
 
-                </RadioGroup>
-
+                </LinearLayout>
 
             </LinearLayout>
+
 
         </ScrollView>
 

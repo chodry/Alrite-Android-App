@@ -72,7 +72,7 @@ public class Fragment1 extends Fragment {
 
                 } else if (value.equals("No")){
                     FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                    fr.replace(R.id.fragment_container, new Fragment2());
+                    fr.replace(R.id.fragment_container, new Initials());
                     fr.addToBackStack(null);
                     fr.commit();
 

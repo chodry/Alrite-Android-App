@@ -1,7 +1,5 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment6.DAY1;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v7.CHOICET2;
 import static com.ug.air.alrite.Fragments.Patient.Fragment7v1.CHOICEHC;
 import static com.ug.air.alrite.Fragments.Patient.Fragment7v4.CHOICE3Y2;
 
@@ -122,7 +120,7 @@ public class Fragment7v3 extends Fragment {
         }else {
             deleteSharedPreferences();
             FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Fragment8v1());
+            fr.replace(R.id.fragment_container, new Fever());
             fr.addToBackStack(null);
             fr.commit();
         }

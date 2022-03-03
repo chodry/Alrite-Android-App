@@ -1,12 +1,7 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment11.CHOICE7;
-import static com.ug.air.alrite.Fragments.Patient.Fragment2.PHONE;
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.UUIDS;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6.DAY1;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v2.CHOICEX;
-import static com.ug.air.alrite.Fragments.Patient.Fragment9.FASTBREATHING;
+import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 
 import android.app.Dialog;
 import android.content.Context;

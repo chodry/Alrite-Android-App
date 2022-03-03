@@ -1,18 +1,16 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Fragment12.CHOICE8;
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.DIAGNOSIS;
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.UUIDS;
+import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.Fragment6.DAY1;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v2.CHOICEX;
 import static com.ug.air.alrite.Fragments.Patient.Fragment9.FASTBREATHING;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.Patient.Fragment3">
+    tools:context=".Fragments.Patient.Sex">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:text="Patient's Details - Step 2"
+            android:text="Patient's Details"
             android:textColor="@color/white"
             android:textSize="18sp"/>
 
@@ -151,27 +151,6 @@
                         android:inputType="numberDecimal"
                         android:maxLength="4" />
 
-<!--                    <TextView-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight=".02"-->
-<!--                        android:gravity="center"-->
-<!--                        android:text="."-->
-<!--                        android:textColor="@color/green"-->
-<!--                        android:textSize="20sp"-->
-<!--                        android:textStyle="bold" />-->
-
-<!--                    <EditText-->
-<!--                        android:id="@+id/kg2"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        android:layout_margin="10dp"-->
-<!--                        android:layout_weight=".15"-->
-<!--                        android:background="@drawable/text_input_bg"-->
-<!--                        android:gravity="center"-->
-<!--                        android:hint="0"-->
-<!--                        android:inputType="number"-->
-<!--                        android:maxLength="1" />-->
 
                     <TextView
                         android:layout_width="0dp"
@@ -179,10 +158,55 @@
                         android:layout_gravity="bottom"
                         android:layout_marginBottom="7dp"
                         android:layout_weight=".5"
-                        android:text="Kilograms"
+                        android:text="Kg"
                         android:textSize="18sp" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="What is the child's MUAC?"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:id="@+id/muac"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight=".5"
+                        android:background="@drawable/text_input_bg"
+                        android:gravity="center"
+                        android:hint="9.0 - 40.0"
+                        android:inputType="numberDecimal"
+                        android:maxLength="4" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="7dp"
+                        android:layout_weight=".5"
+                        android:text="cm"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This field for MUAC is optional"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="10dp"/>
 
 
             </LinearLayout>

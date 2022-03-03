@@ -43,18 +43,18 @@
                 android:textColor="@color/white"
                 android:gravity="center_horizontal"/>
 
-            <Button
-                android:id="@+id/btn_start_assessment"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:background="@drawable/bg_button"
-                android:text="Start Assessment"
-                android:textColor="@color/white"
-                android:layout_marginTop="16dp"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
-                android:textAllCaps="false"
-                style="@style/Widget.AppCompat.Button.Borderless"/>
+<!--            <Button-->
+<!--                android:id="@+id/btn_start_assessment"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:background="@drawable/bg_button"-->
+<!--                android:text="Start Assessment"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:paddingLeft="32dp"-->
+<!--                android:paddingRight="32dp"-->
+<!--                android:textAllCaps="false"-->
+<!--                style="@style/Widget.AppCompat.Button.Borderless"/>-->
 
         </LinearLayout>
 
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:text="Assessment"
                     android:textColor="@color/green_dark"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"/>
             </LinearLayout>
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:text="Active Patients"
                     android:textColor="@color/green_dark"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"/>
             </LinearLayout>
@@ -185,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:text="Clinic Setting"
                     android:textColor="@color/green_dark"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"/>
             </LinearLayout>
@@ -224,7 +224,7 @@
                     android:layout_height="wrap_content"
                     android:text="Learn"
                     android:textColor="@color/green_dark"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"/>
             </LinearLayout>

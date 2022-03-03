@@ -12,8 +12,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -27,19 +25,20 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class Fragment3 extends Fragment {
+public class Sex extends Fragment {
     View view;
-    EditText etYears, etKilo1, etKilo2, etMonths;
+    EditText etYears, etKilo1, etKilo2, etMonths, etMuac;
     Button back, next;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2;
-    String age, weight, text, kg1, fileName, months, years;
+    String age, weight, text, kg1, fileName, months, years, muac;
     Spinner spinner;
     String value2 = "none";
     private static final int YES = 0;
     private static final int NO = 1;
     public static final String AGE = "age";
     public static final String KILO = "kilo";
+    public static final String MUAC = "MUAC";
     public static final String CHOICE = "choice";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
@@ -50,7 +49,7 @@ public class Fragment3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_3, container, false);
+        view = inflater.inflate(R.layout.fragment_sex, container, false);
 
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
@@ -60,13 +59,7 @@ public class Fragment3 extends Fragment {
         etYears = view.findViewById(R.id.years);
         etMonths = view.findViewById(R.id.months);
         etKilo1 = view.findViewById(R.id.kg1);
-//        etKilo2 = view.findViewById(R.id.kg2);
-//        spinner = view.findViewById(R.id.yearsormonths);
-
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.same, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
-//        spinner.setOnItemSelectedListener(this);
+        etMuac = view.findViewById(R.id.muac);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -91,6 +84,7 @@ public class Fragment3 extends Fragment {
         etKilo1.addTextChangedListener(textWatcher1);
         etYears.addTextChangedListener(textWatcher2);
         etMonths.addTextChangedListener(textWatcher3);
+        etMuac.addTextChangedListener(textWatcher4);
 
         bundle = this.getArguments();
         if (bundle != null){
@@ -122,6 +116,7 @@ public class Fragment3 extends Fragment {
                 years = etYears.getText().toString();
                 months = etMonths.getText().toString();
                 kg1 = etKilo1.getText().toString();
+                muac = etMuac.getText().toString();
 //                kg2 = etKilo2.getText().toString();
 
                 if (value2.equals("none") || years.isEmpty() || kg1.isEmpty() || months.isEmpty()){
@@ -138,23 +133,13 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment2());
+                fr.replace(R.id.fragment_container, new Initials());
                 fr.commit();
             }
         });
 
         return view;
     }
-
-//    @Override
-//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        text = parent.getItemAtPosition(position).toString();
-//    }
-//
-//    @Override
-//    public void onNothingSelected(AdapterView<?> parent) {
-//
-//    }
 
     public TextWatcher textWatcher1 = new TextWatcher() {
         @Override
@@ -171,6 +156,32 @@ public class Fragment3 extends Fragment {
                     etKilo1.setError("The maximum kilograms for a child has to be 30.0kgs");
                 }else if (k1 < 0.5){
                     etKilo1.setError("The minimum kilograms for a child has to be 0.5kgs");
+                }
+            }
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    public TextWatcher textWatcher4 = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            muac = etMuac.getText().toString();
+            if (!muac.isEmpty()){
+                float k1 = Float.parseFloat(muac);
+                if (k1 > 40.0){
+                    etMuac.setError("The maximum value for MUAC has to be 40.0cm");
+                }else if (k1 < 9.0){
+                    etMuac.setError("The minimum value for MUAC has to be 9.0cm");
                 }
             }
 
@@ -240,12 +251,13 @@ public class Fragment3 extends Fragment {
         editor = sharedPreferences1.edit();
 
         editor.putString(AGE, age);
+        editor.putString(MUAC, muac);
         editor.putString(KILO, weight);
         editor.putString(CHOICE, value2);
         editor.apply();
 
         FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment4());
+        fr.replace(R.id.fragment_container, new Assess());
         fr.addToBackStack(null);
         fr.commit();
     }
@@ -253,6 +265,7 @@ public class Fragment3 extends Fragment {
     private void loadData() {
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         age = sharedPreferences.getString(AGE, "");
+        muac = sharedPreferences.getString(MUAC, "");
         weight = sharedPreferences.getString(KILO, "");
         value2 = sharedPreferences.getString(CHOICE, "");
     }
@@ -269,6 +282,9 @@ public class Fragment3 extends Fragment {
 
         if (!weight.isEmpty()){
             etKilo1.setText(weight);
+        }
+        if (!muac.isEmpty()){
+            etMuac.setText(muac);
         }
 
         if (!age.isEmpty()) {

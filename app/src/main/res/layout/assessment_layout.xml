@@ -28,7 +28,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/btnSave"
+            android:layout_above="@+id/linear"
             android:layout_below="@id/diagnosis"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
@@ -60,8 +60,8 @@
 
         </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/btnSave"
+        <LinearLayout
+            android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -69,11 +69,38 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/primary_button"
-            android:text="save and continue"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_marginBottom="10dp">
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/bg_button"
+                android:text="exit"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnContinue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:background="@drawable/primary_button"
+                android:text="continue"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 

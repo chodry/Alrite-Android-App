@@ -1,8 +1,8 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.DIAGNOSIS;
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.UUIDS;
+import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -26,7 +26,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;

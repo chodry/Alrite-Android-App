@@ -1,12 +1,11 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.DATE;
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.DIAGNOSIS;
-import static com.ug.air.alrite.Fragments.Patient.Fragment4.UUIDS;
+import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -28,7 +27,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ug.air.alrite.Activities.Dashboard;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
@@ -119,7 +117,7 @@ public class Fragment5 extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment4());
+                fr.replace(R.id.fragment_container, new Assess());
                 fr.commit();
             }
         });
@@ -227,7 +225,7 @@ public class Fragment5 extends Fragment {
         dialog.dismiss();
 //        startActivity(new Intent(getActivity(), Dashboard.class));
         FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment8v1());
+        fr.replace(R.id.fragment_container, new Fever());
         fr.addToBackStack(null);
         fr.commit();
     }
