@@ -1,8 +1,5 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment6.DAY1;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v7.CHOICET2;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,7 +20,7 @@ import com.ug.air.alrite.R;
 import java.util.Objects;
 
 
-public class Fragment7v1 extends Fragment {
+public class HIVCare extends Fragment {
 
     View view;
     Button back, next;
@@ -42,7 +39,7 @@ public class Fragment7v1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_7v1, container, false);
+        view = inflater.inflate(R.layout.fragment_hiv_care, container, false);
 
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
@@ -69,7 +66,7 @@ public class Fragment7v1 extends Fragment {
             }
         });
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
@@ -89,8 +86,8 @@ public class Fragment7v1 extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment7());
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new HIVStatus());
                 fr.commit();
 
             }
@@ -103,8 +100,8 @@ public class Fragment7v1 extends Fragment {
         editor.putString(CHOICEHC, value4);
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment7v3());
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+        fr.replace(R.id.fragment_container, new Temperature());
         fr.addToBackStack(null);
         fr.commit();
 

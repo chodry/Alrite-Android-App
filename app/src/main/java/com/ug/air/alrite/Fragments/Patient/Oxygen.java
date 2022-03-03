@@ -3,6 +3,8 @@ package com.ug.air.alrite.Fragments.Patient;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
+import static com.ug.air.alrite.Fragments.Patient.FTouch.TOUCH;
+import static com.ug.air.alrite.Fragments.Patient.Fragment12.CHOICE8;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -50,17 +52,17 @@ public class Oxygen extends Fragment {
 
     View view;
     EditText etDay;
-    Button back, next, btnSave;
+    Button back, next, btnSave, btSkip,btnContinue,btnContinue2;
     String oxy;
     public static final String OXY = "oxy";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
     long percent = 0;
-    Dialog dialog;
+    Dialog dialog, dialog2;
     RecyclerView recyclerView;
     LinearLayout linearLayout_instruction;
-    TextView txtDiagnosis;
+    TextView txtDiagnosis, txtOxygen;
     ArrayList<Assessment> assessments;
     AssessmentAdapter assessmentAdapter;
     String diagnosis;
@@ -74,10 +76,11 @@ public class Oxygen extends Fragment {
         etDay = view.findViewById(R.id.days);
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
+        btSkip = view.findViewById(R.id.skip);
 
         etDay.requestFocus();
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
@@ -100,9 +103,21 @@ public class Oxygen extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Temperature());
+                String touch = sharedPreferences.getString(TOUCH, "");
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                if (touch.isEmpty()){
+                    fr.replace(R.id.fragment_container, new Temperature());
+                }else {
+                    fr.replace(R.id.fragment_container, new FTouch());
+                }
                 fr.commit();
+            }
+        });
+
+        btSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
@@ -120,10 +135,10 @@ public class Oxygen extends Fragment {
             oxy = etDay.getText().toString();
             if (!oxy.isEmpty()){
                 long dy = Long.parseLong(oxy);
-                if (dy == 0){
-                    etDay.setError("Please provide a value");
+                if (dy < 50){
+                    etDay.setError("The minimum accepted value is 50");
                 }else if (dy > 100){
-                    etDay.setError("The maximum value is 100");
+                    etDay.setError("The maximum accepted value is 100");
                 }
             }
         }
@@ -140,12 +155,14 @@ public class Oxygen extends Fragment {
         editor.apply();
 
         percent = Integer.parseInt(oxy);
-        if (percent >= 90){
-            FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+        if (percent >= 92){
+            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
             fr.replace(R.id.fragment_container, new Fragment9());
             fr.addToBackStack(null);
             fr.commit();
-        }else {
+        }else if (percent > 89 && percent < 92){
+            showDialog2();
+        } else {
             showDialog();
         }
     }
@@ -169,6 +186,7 @@ public class Oxygen extends Fragment {
         txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
         recyclerView = dialog.findViewById(R.id.recyclerView1);
         btnSave = dialog.findViewById(R.id.btnSave);
+        btnContinue = dialog.findViewById(R.id.btnContinue);
 
         linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
         txtDiagnosis.setText(R.string.severe);
@@ -180,17 +198,18 @@ public class Oxygen extends Fragment {
         assessments = new ArrayList<>();
         assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
 
-        List<Integer> messages = Arrays.asList(R.string.low_oxygen, R.string.refer_urgently);
+        List<Integer> messages = Arrays.asList(R.string.first_dose, R.string.first_dose_IM, R.string.IM_dosing_under1, R.string.give_diazepam_if, R.string.low_oxygen, R.string.refer_urgently);
         for (int i = 0; i < messages.size(); i++){
             Assessment assessment = new Assessment(messages.get(i));
             assessments.add(assessment);
         }
         recyclerView.setAdapter(assessmentAdapter);
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        btnSave.setVisibility(View.GONE);
+        btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                saveForm();
+            public void onClick(View view) {
+                dialog.dismiss();
             }
         });
 
@@ -199,31 +218,24 @@ public class Oxygen extends Fragment {
         dialog.show();
     }
 
-    private void saveForm() {
-        editor.putString(DIAGNOSIS, diagnosis);
+    private void showDialog2() {
+        dialog2 = new Dialog(getActivity());
+        dialog2.setContentView(R.layout.oxygen);
+        dialog2.setCancelable(true);
 
-        Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
-        String formattedDate = df.format(currentTime);
+        txtOxygen = dialog2.findViewById(R.id.oxygen);
+        btnContinue2 = dialog2.findViewById(R.id.ContinueButton);
 
-        String uniqueID = UUID.randomUUID().toString();
+        txtOxygen.setText(oxy + "%");
 
-        editor.putString(DATE, formattedDate);
-        editor.putString(UUIDS, uniqueID);
-        editor.apply();
+        btnContinue2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog2.dismiss();
+            }
+        });
 
-        uniqueID = formattedDate + "_" + uniqueID;
-        sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
-        editor1 = sharedPreferences1.edit();
-        Map<String, ?> all = sharedPreferences.getAll();
-        for (Map.Entry<String, ?> x : all.entrySet()) {
-            if (x.getValue().getClass().equals(String.class))  editor1.putString(x.getKey(),  (String)x.getValue());
-            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
-        }
-        editor1.commit();
-        editor.clear();
-        editor.commit();
-        dialog.dismiss();
-        startActivity(new Intent(getActivity(), Dashboard.class));
+        dialog2.show();
+
     }
 }

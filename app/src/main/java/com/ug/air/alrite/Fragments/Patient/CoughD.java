@@ -46,7 +46,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 
-public class Fragment6 extends Fragment {
+public class CoughD extends Fragment {
 
     View view;
     EditText etDay;
@@ -55,11 +55,7 @@ public class Fragment6 extends Fragment {
     public static final String DAY1 = "day1";
     public static final String SHARED_PREFS = "sharedPrefs";
     Dialog dialog;
-    RecyclerView recyclerView;
-    LinearLayout linearLayout_instruction;
-    TextView txtDiagnosis;
-    ArrayList<Assessment> assessments;
-    AssessmentAdapter assessmentAdapter;
+    TextView txtMessage;
     String diagnosis;
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
@@ -68,7 +64,7 @@ public class Fragment6 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_6, container, false);
+        view = inflater.inflate(R.layout.fragment_cough_d, container, false);
 
         etDay = view.findViewById(R.id.days);
         next = view.findViewById(R.id.next);
@@ -76,7 +72,7 @@ public class Fragment6 extends Fragment {
 
         etDay.requestFocus();
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
@@ -99,8 +95,8 @@ public class Fragment6 extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment5());
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new Cough());
                 fr.commit();
             }
         });
@@ -138,16 +134,17 @@ public class Fragment6 extends Fragment {
 
         int dt = Integer.parseInt(day1);
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
         if (dt < 10) {
-            fr.replace(R.id.fragment_container, new Fragment12());
+            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+            fr.replace(R.id.fragment_container, new HIVStatus());
+            fr.addToBackStack(null);
+            fr.commit();
         }else if (dt >= 14){
-            showDialog();
+            showDialog(dt);
         }else {
-            fr.replace(R.id.fragment_container, new Fragment6v2());
+            showDialog(dt);
         }
-        fr.addToBackStack(null);
-        fr.commit();
+
 
     }
 
@@ -159,87 +156,32 @@ public class Fragment6 extends Fragment {
         etDay.setText(day1);
     }
 
-    private void deleteSharedPreferences() {
-//        editor.remove(DAY2);
-//        editor.remove(CHOICEX);
-//        editor.remove(CHECK11);
-//        editor.remove(CHECK21);
-//        editor.remove(CHECK31);
-//        editor.remove(CHECK41);
-//        editor.remove(S5);
-//        editor.remove(CHOICEX2);
-//        editor.remove(CHOICEY2);
-//        editor.remove(CHOICET2);
-//        editor.remove(CHOICET1);
-//        editor.apply();
-    }
-
-    private void showDialog() {
+    private void showDialog(int dt) {
         dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.assessment_layout);
+        dialog.setContentView(R.layout.assess);
         dialog.setCancelable(true);
-        Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
 
-        linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
-        txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
-        recyclerView = dialog.findViewById(R.id.recyclerView1);
-        btnSave = dialog.findViewById(R.id.btnSave);
+        txtMessage = dialog.findViewById(R.id.message);
+        btnSave = dialog.findViewById(R.id.ContinueButton);
 
-        linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
-        txtDiagnosis.setText(R.string.tuber);
-        diagnosis = txtDiagnosis.getText().toString();
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-
-        assessments = new ArrayList<>();
-        assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
-
-        List<Integer> messages = Arrays.asList(R.string.first_dose, R.string.tuber1, R.string.tuber2);
-        for (int i = 0; i < messages.size(); i++){
-            Assessment assessment = new Assessment(messages.get(i));
-            assessments.add(assessment);
+        if (dt >= 14){
+            txtMessage.setText("Children with prolonged cough (>= 14 days) should be assessed for both Asthma and Tuberculosis");
+        }else {
+            txtMessage.setText("Children with prolonged cough (>= 10 days) should be assessed for Asthma");
         }
-        recyclerView.setAdapter(assessmentAdapter);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                saveForm();
+            public void onClick(View view) {
+                dialog.dismiss();
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new HIVStatus());
+                fr.addToBackStack(null);
+                fr.commit();
             }
         });
 
-//        dialog.getWindow().setLayout(650, WindowManager.LayoutParams.MATCH_PARENT);
-        dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
-    }
-
-    private void saveForm() {
-        Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
-        String formattedDate = df.format(currentTime);
-
-        String uniqueID = UUID.randomUUID().toString();
-
-        editor.putString(DIAGNOSIS, diagnosis);
-        editor.putString(DATE, formattedDate);
-        editor.putString(UUIDS, uniqueID);
-        editor.apply();
-
-        uniqueID = formattedDate + "_" + uniqueID;
-
-        sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
-        editor1 = sharedPreferences1.edit();
-        Map<String, ?> all = sharedPreferences.getAll();
-        for (Map.Entry<String, ?> x : all.entrySet()) {
-            if (x.getValue().getClass().equals(String.class))  editor1.putString(x.getKey(),  (String)x.getValue());
-            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
-        }
-        editor1.commit();
-        editor.clear();
-        editor.commit();
-        startActivity(new Intent(getActivity(), Dashboard.class));
     }
 
 }

@@ -1,5 +1,11 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
+import static com.ug.air.alrite.Fragments.Patient.FTouch.TOUCH;
+import static com.ug.air.alrite.Fragments.Patient.Fragment7v4.CHOICE3Y2;
+import static com.ug.air.alrite.Fragments.Patient.HIVCare.CHOICEHC;
+import static com.ug.air.alrite.Fragments.Patient.HIVStatus.CHOICE3;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -45,11 +51,12 @@ public class Temperature extends Fragment {
 
         etDay.requestFocus();
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
         updateViews();
+
 
         etDay.addTextChangedListener(textWatcher);
 
@@ -68,8 +75,17 @@ public class Temperature extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Assess());
+                String assess = sharedPreferences.getString(S4, "");
+                String care = sharedPreferences.getString(CHOICEHC, "");
+
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                if (!assess.equals("None of these")){
+                    fr.replace(R.id.fragment_container, new Assess());
+                }else if (care.isEmpty()){
+                    fr.replace(R.id.fragment_container, new HIVStatus());
+                }else{
+                    fr.replace(R.id.fragment_container, new HIVCare());
+                }
                 fr.commit();
             }
         });
@@ -77,7 +93,7 @@ public class Temperature extends Fragment {
         btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.fragment_container, new FTouch());
                 fr.addToBackStack(null);
                 fr.commit();
@@ -98,11 +114,14 @@ public class Temperature extends Fragment {
             temp = etDay.getText().toString();
             if (!temp.isEmpty()){
                 float dy = Float.parseFloat(temp);
+                btnSkip.setEnabled(false);
                 if (dy < 33.0){
                     etDay.setError("The minimum temperature is 33.0");
                 }else if (dy > 44.0){
                     etDay.setError("The maximum temperature is 44.0");
                 }
+            }else {
+                btnSkip.setEnabled(true);
             }
         }
 
@@ -116,7 +135,8 @@ public class Temperature extends Fragment {
         editor.putString(TEMP, temp);
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+        deleteSharedPreferences();
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
         fr.replace(R.id.fragment_container, new Oxygen());
         fr.addToBackStack(null);
         fr.commit();
@@ -129,6 +149,14 @@ public class Temperature extends Fragment {
     private void updateViews() {
         if (!temp.isEmpty()){
             etDay.setText(temp);
+            btnSkip.setEnabled(false);
+        }else {
+            btnSkip.setEnabled(true);
         }
+    }
+
+    private void deleteSharedPreferences() {
+        editor.remove(TOUCH);
+        editor.apply();
     }
 }

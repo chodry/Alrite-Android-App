@@ -6,6 +6,7 @@ import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -27,6 +28,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ug.air.alrite.Activities.Dashboard;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
@@ -39,14 +41,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 
-public class Fragment5 extends Fragment {
+public class Cough extends Fragment {
 
     View view;
-    Button back, next, btnSave;
+    Button back, next, btnSave, btnContinue;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2;
     String value3 = "none";
@@ -68,7 +69,7 @@ public class Fragment5 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_5, container, false);
+        view = inflater.inflate(R.layout.fragment_cough, container, false);
 
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
@@ -76,7 +77,7 @@ public class Fragment5 extends Fragment {
         radioButton1 = view.findViewById(R.id.yes);
         radioButton2 = view.findViewById(R.id.no);
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
@@ -116,7 +117,7 @@ public class Fragment5 extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.fragment_container, new Assess());
                 fr.commit();
             }
@@ -132,8 +133,8 @@ public class Fragment5 extends Fragment {
         if (value3.equals("No")){
             showDialog();
         }else{
-            FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Fragment6());
+            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+            fr.replace(R.id.fragment_container, new CoughD());
             fr.addToBackStack(null);
             fr.commit();
         }
@@ -168,6 +169,7 @@ public class Fragment5 extends Fragment {
         txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
         recyclerView = dialog.findViewById(R.id.recyclerView1);
         btnSave = dialog.findViewById(R.id.btnSave);
+        btnContinue = dialog.findViewById(R.id.btnContinue);
 
         linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.green_main));
         txtDiagnosis.setText(R.string.no_signs);
@@ -179,12 +181,14 @@ public class Fragment5 extends Fragment {
         assessments = new ArrayList<>();
         assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
 
-        List<Integer> messages = Arrays.asList(R.string.child_is_healthy, R.string.soothe_throat, R.string.soothe_throat2);
+        List<Integer> messages = Arrays.asList(R.string.selected, R.string.alrite, R.string.no_anti, R.string.other_illness);
         for (int i = 0; i < messages.size(); i++){
             Assessment assessment = new Assessment(messages.get(i));
             assessments.add(assessment);
         }
         recyclerView.setAdapter(assessmentAdapter);
+
+        btnContinue.setVisibility(View.GONE);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,7 +216,7 @@ public class Fragment5 extends Fragment {
         editor.apply();
 
         uniqueID = formattedDate + "_" + uniqueID;
-        sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
+        sharedPreferences1 = requireActivity().getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
         editor1 = sharedPreferences1.edit();
         Map<String, ?> all = sharedPreferences.getAll();
         for (Map.Entry<String, ?> x : all.entrySet()) {
@@ -223,10 +227,10 @@ public class Fragment5 extends Fragment {
         editor.clear();
         editor.commit();
         dialog.dismiss();
-//        startActivity(new Intent(getActivity(), Dashboard.class));
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fever());
-        fr.addToBackStack(null);
-        fr.commit();
+        startActivity(new Intent(getActivity(), Dashboard.class));
+//        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+//        fr.replace(R.id.fragment_container, new Fever());
+//        fr.addToBackStack(null);
+//        fr.commit();
     }
 }

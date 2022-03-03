@@ -1,9 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment6.DAY1;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v6.CHOICET1;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v7.CHOICET2;
-import static com.ug.air.alrite.Fragments.Patient.Fragment7v1.CHOICEHC;
+import static com.ug.air.alrite.Fragments.Patient.HIVCare.CHOICEHC;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,10 +19,8 @@ import android.widget.Toast;
 
 import com.ug.air.alrite.R;
 
-import java.util.Objects;
 
-
-public class Fragment7 extends Fragment {
+public class HIVStatus extends Fragment {
 
     View view;
     Button back, next;
@@ -45,7 +40,7 @@ public class Fragment7 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_7, container, false);
+        view = inflater.inflate(R.layout.fragment_hiv_status, container, false);
 
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
@@ -62,13 +57,13 @@ public class Fragment7 extends Fragment {
 
                 switch (index) {
                     case YES:
-                        value4 = "Yes";
+                        value4 = "Known HIV";
                         break;
                     case NO:
-                        value4 = "No";
+                        value4 = "Exposed to HIV";
                         break;
                     case NOT:
-                        value4 = "Not Sure";
+                        value4 = "None of these";
                         break;
                     default:
                         break;
@@ -76,7 +71,7 @@ public class Fragment7 extends Fragment {
             }
         });
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
@@ -96,13 +91,8 @@ public class Fragment7 extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hist = sharedPreferences.getString(CHOICET2, "");
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                if (hist.isEmpty()){
-                    fr.replace(R.id.fragment_container, new Fragment6());
-                }else{
-                    fr.replace(R.id.fragment_container, new Fragment6v7());
-                }
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new CoughD());
                 fr.commit();
 
             }
@@ -115,13 +105,13 @@ public class Fragment7 extends Fragment {
         editor.putString(CHOICE3, value4);
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        if (value4.equals("Yes")) {
-            fr.replace(R.id.fragment_container, new Fragment7v1());
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+        if (!value4.equals("None of these")) {
+            fr.replace(R.id.fragment_container, new HIVCare());
 
         }else {
             deleteSharedPreferences();
-            fr.replace(R.id.fragment_container, new Fragment7v3());
+            fr.replace(R.id.fragment_container, new Temperature());
         }
         fr.addToBackStack(null);
         fr.commit();
@@ -133,11 +123,11 @@ public class Fragment7 extends Fragment {
     }
 
     private void updateViews() {
-        if (value4.equals("Yes")){
+        if (value4.equals("Known HIV")){
             radioButton1.setChecked(true);
-        }else if (value4.equals("No")){
+        }else if (value4.equals("Exposed to HIV")){
             radioButton2.setChecked(true);
-        }else if (value4.equals("Not Sure")){
+        }else if (value4.equals("None of these")){
             radioButton3.setChecked(true);
         }else {
             radioButton1.setChecked(false);

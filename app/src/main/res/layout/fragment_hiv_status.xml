@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.Patient.Fragment7">
+    tools:context=".Fragments.Patient.HIVStatus">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"
-                    android:text="Is the child HIV-exposed?"
+                    android:text="What is the child’s HIV status?"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/black"
-                        android:text="Yes"
+                        android:text="Known HIV"
                         android:id="@+id/yes"
                         android:textSize="18sp" />
 
@@ -73,7 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/black"
-                        android:text="No"
+                        android:text="Exposed to HIV"
                         android:id="@+id/no"
                         android:textSize="18sp" />
 
@@ -82,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/black"
-                        android:text="Not Sure"
+                        android:text="None of these"
                         android:id="@+id/not_sure"
                         android:textSize="18sp" />
 

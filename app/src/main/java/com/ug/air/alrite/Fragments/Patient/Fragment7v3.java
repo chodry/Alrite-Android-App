@@ -1,6 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Fragment7v1.CHOICEHC;
+import static com.ug.air.alrite.Fragments.Patient.HIVCare.CHOICEHC;
 import static com.ug.air.alrite.Fragments.Patient.Fragment7v4.CHOICE3Y2;
 
 import android.content.Context;
@@ -97,9 +97,9 @@ public class Fragment7v3 extends Fragment {
                 String hist = sharedPreferences.getString(CHOICEHC, "");
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
                 if (hist.isEmpty()){
-                    fr.replace(R.id.fragment_container, new Fragment7());
+                    fr.replace(R.id.fragment_container, new HIVStatus());
                 }else {
-                    fr.replace(R.id.fragment_container, new Fragment7v1());
+                    fr.replace(R.id.fragment_container, new HIVCare());
                 }
                 fr.commit();
             }

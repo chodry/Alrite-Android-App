@@ -4,7 +4,7 @@ import static com.ug.air.alrite.Fragments.Patient.Fragment12.CHOICE8;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6.DAY1;
+import static com.ug.air.alrite.Fragments.Patient.CoughD.DAY1;
 import static com.ug.air.alrite.Fragments.Patient.Fragment9.FASTBREATHING;
 
 import android.app.Dialog;

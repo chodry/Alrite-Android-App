@@ -64,7 +64,7 @@ public class FTouch extends Fragment {
             }
         });
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
@@ -86,7 +86,7 @@ public class FTouch extends Fragment {
             @Override
             public void onClick(View v) {
 
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.fragment_container, new Temperature());
                 fr.commit();
             }
@@ -100,7 +100,7 @@ public class FTouch extends Fragment {
         editor.putString(TOUCH, value6);
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
         fr.replace(R.id.fragment_container, new Oxygen());
         fr.addToBackStack(null);
         fr.commit();

@@ -122,7 +122,7 @@ public class Fragment12 extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment6());
+                fr.replace(R.id.fragment_container, new CoughD());
                 fr.commit();
             }
         });

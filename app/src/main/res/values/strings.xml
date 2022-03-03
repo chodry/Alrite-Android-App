@@ -16,10 +16,12 @@
     <string name="refer_urgently">Refer URGENTLY to hospital</string>
     <string name="severe">Diagnosis: Severe pneumonia OR very severe disease</string>
 
-    <string name="child_is_healthy">The child is not showing signs of pneumonia or asthma</string>
-    <string name="soothe_throat">No antibiotics or bronchodilator needed. Soothe the throat and relieve the cough with a safe remedy</string>
-    <string name="soothe_throat2">Assess for other illness</string>
-    <string name="no_signs">Diagnosis: No signs of pneumonia or asthma</string>
+    <string name="selected">You have selected that this child does NOT have a cough or difficulty breathing</string>
+    <string name="alrite">ALRITE is to help diagnose children with a cough or difficulty breathing</string>
+    <string name="no_anti">No antibiotics or a bronchodilator needed for breathing difficulty</string>
+    <string name="other_illness">Assess for other illness</string>
+
+    <string name="no_signs">Diagnosis: No signs of Pneumonia or Wheezing illness</string>
     <string name="asthma">Diagnosis: Asthma Risk</string>
 
     <string name="asthma1">Prescribe salbutamol inhaler</string>
@@ -30,7 +32,7 @@
     <string name="tuber1">Refer to assess and treat for potential TB</string>
     <string name="tuber2">This will include TB testing and chest x-ray</string>
 
-    <string name="low_oxygen">Give oxygen if available at the health facility</string>
+    <string name="low_oxygen">Start oxygen therapy if oxygen is available at the health facility</string>
 
     <string name="pneumonia">Diagnosis: Pneumonia</string>
     <string name="pneumonia1">Give oral amoxicillin twice daily for 5 days</string>
@@ -41,7 +43,7 @@
     <string name="wheezing2">I need the instructions for this diagnosis</string>
 
     <string name="cold">Diagnosis: Cough/Cold/No pneumonia</string>
-    <string name="cold1">No signs of pneumonia or asthma</string>
+    <string name="cold1">No signs of Pneumonia or Wheezing illness</string>
     <string name="cold2">No antibiotics recommended</string>
     <string name="cold3">Soothe the throat and relieve the cough with a safe remedy</string>
     <string name="cold4">Follow up in 5 days if not improving, earlier if getting worse</string>

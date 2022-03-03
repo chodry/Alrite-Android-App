@@ -67,10 +67,11 @@
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:orientation="horizontal"
             android:weightSum="1"
+            android:gravity="center"
             android:layout_marginBottom="10dp">
 
             <Button
@@ -78,9 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_margin="5dp"
                 android:background="@drawable/bg_button"
                 android:text="exit"
                 android:textColor="@color/white"
@@ -93,9 +92,7 @@
                 android:layout_weight=".5"
                 android:background="@drawable/primary_button"
                 android:text="continue"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_margin="5dp"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 

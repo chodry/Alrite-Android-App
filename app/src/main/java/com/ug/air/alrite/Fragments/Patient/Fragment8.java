@@ -83,7 +83,7 @@ public class Fragment8 extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment7());
+                fr.replace(R.id.fragment_container, new HIVStatus());
                 fr.commit();
             }
         });

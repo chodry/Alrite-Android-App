@@ -62,6 +62,20 @@
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/respiratory_results_ayout.xml" value="0.25" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/video_layout.xml" value="0.25" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/menu/navigation_menu.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/assess.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/assessment_layout.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/fragment_6.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/fragment_7.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/fragment_7v1.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/fragment_cough.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/fragment_coughD.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/fragment_cough_d.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/fragment_hiv_status.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/fragment_oxygen.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/fragment_temperature.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/oxygen.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/respiratory_results_ayout.xml" value="0.33559782608695654" />
       </map>
     </option>
   </component>

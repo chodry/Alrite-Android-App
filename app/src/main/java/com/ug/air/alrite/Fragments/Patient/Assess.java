@@ -83,7 +83,7 @@ public class Assess extends Fragment {
         convu = view.findViewById(R.id.convu);
         resp = view.findViewById(R.id.responsive);
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
@@ -172,7 +172,7 @@ public class Assess extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.fragment_container, new Sex());
                 fr.commit();
             }
@@ -214,7 +214,6 @@ public class Assess extends Fragment {
 
     }
 
-
     private void saveData(String s) {
 
         editor.putBoolean(CHECK1, drink.isChecked());
@@ -247,8 +246,8 @@ public class Assess extends Fragment {
 
     private void checkIfNone() {
         if (s.contains("None of these")){
-            FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Fragment5());
+            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+            fr.replace(R.id.fragment_container, new Cough());
             fr.addToBackStack(null);
             fr.commit();
         }else{
@@ -297,7 +296,7 @@ public class Assess extends Fragment {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.fragment_container, new Temperature());
                 fr.addToBackStack(null);
                 fr.commit();
@@ -323,7 +322,7 @@ public class Assess extends Fragment {
         editor.apply();
 
         uniqueID = formattedDate + "_" + uniqueID;
-        sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
+        sharedPreferences1 = requireActivity().getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
         editor1 = sharedPreferences1.edit();
         Map<String, ?> all = sharedPreferences.getAll();
         for (Map.Entry<String, ?> x : all.entrySet()) {
