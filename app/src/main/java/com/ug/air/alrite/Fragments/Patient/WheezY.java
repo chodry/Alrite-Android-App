@@ -16,9 +16,7 @@ import android.widget.Toast;
 
 import com.ug.air.alrite.R;
 
-import java.util.Objects;
-
-public class Fragment6v1 extends Fragment {
+public class WheezY extends Fragment {
 
     View view;
     EditText etDay;
@@ -33,7 +31,7 @@ public class Fragment6v1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_6v1, container, false);
+        view = inflater.inflate(R.layout.fragment_wheez_y, container, false);
 
         etDay = view.findViewById(R.id.days);
         next = view.findViewById(R.id.next);
@@ -41,7 +39,7 @@ public class Fragment6v1 extends Fragment {
 
         etDay.requestFocus();
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
@@ -62,8 +60,8 @@ public class Fragment6v1 extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new CoughD());
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new WheezD());
                 fr.commit();
             }
         });
@@ -77,8 +75,8 @@ public class Fragment6v1 extends Fragment {
         editor.putString(DAY2, day1);
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment6v3());
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+        fr.replace(R.id.fragment_container, new Breathless());
         fr.addToBackStack(null);
         fr.commit();
 

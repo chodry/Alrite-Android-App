@@ -17,30 +17,29 @@ import android.widget.Toast;
 
 import com.ug.air.alrite.R;
 
-import java.util.Objects;
 
-
-public class Fragment6v6 extends Fragment {
+public class Eczema extends Fragment {
 
     View view;
-    Button back, next;
+    Button back, next, btnEczema;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2, radioButton3;
     String value5 = "none";
     private static final int YES = 0;
     private static final int NO = 1;
     private static final int NOT = 2;
-    public static final String CHOICET1 = "choiceT1";
+    public static final String CHOICEX2 = "choiceX2";
     public static final String SHARED_PREFS = "sharedPrefs";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_6v6, container, false);
+        view = inflater.inflate(R.layout.fragment_eczema, container, false);
 
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
+        btnEczema = view.findViewById(R.id.eczema);
         radioGroup = view.findViewById(R.id.radioGroup);
         radioButton1 = view.findViewById(R.id.yes);
         radioButton2 = view.findViewById(R.id.no);
@@ -88,8 +87,15 @@ public class Fragment6v6 extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment6v5());
+                fr.replace(R.id.fragment_container, new Breathless());
                 fr.commit();
+            }
+        });
+
+        btnEczema.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
@@ -98,21 +104,21 @@ public class Fragment6v6 extends Fragment {
     }
 
     private void saveData() {
-        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString(CHOICET1, value5);
+        editor.putString(CHOICEX2, value5);
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment6v7());
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+        fr.replace(R.id.fragment_container, new Allergies());
         fr.addToBackStack(null);
         fr.commit();
     }
 
     private void loadData() {
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        value5 = sharedPreferences.getString(CHOICET1, "");
+        value5 = sharedPreferences.getString(CHOICEX2, "");
     }
 
 

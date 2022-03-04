@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.Patient.Fragment8">
+    tools:context=".Fragments.Patient.Kerosene">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:text="Patient's History (Illnesses) - 4"
+            android:text="Patient's History"
             android:textColor="@color/white"
             android:textSize="18sp"/>
 
@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"
-                    android:text="Has the child had wheezing or breathing difficulties before this illness?"
+                    android:text="Does any of the family members use kerosene, charcoal, or other biomass in the home?"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -75,6 +75,15 @@
                         android:layout_marginTop="10dp"
                         android:buttonTint="@color/black"
                         android:text="No"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/not"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:buttonTint="@color/black"
+                        android:text="Not Sure"
                         android:textSize="18sp" />
 
 

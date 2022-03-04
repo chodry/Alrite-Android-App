@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.Patient.Fragment6v5">
+    tools:context=".Fragments.Patient.Eczema">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,6 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
@@ -50,11 +51,25 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"
-                    android:text="Has the child’s parents or siblings had similar breathing problems, other diseases with breathing problems or allergies?"
+                    android:text="Has the child ever had eczema or any allergies?"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
+                <Button
+                    android:id="@+id/eczema"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Eczema?"
+                    android:paddingLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/color_background"
+                    android:background="@drawable/bg_button"
+                    android:textAllCaps="false"
+                    android:gravity="center"
+                    android:drawableRight="@drawable/ic_play"/>
+
                 <RadioGroup
+                    android:layout_gravity="left"
                     android:id="@+id/radioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

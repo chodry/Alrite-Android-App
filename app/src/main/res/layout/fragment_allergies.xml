@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.Patient.Fragment6v7">
+    tools:context=".Fragments.Patient.Allergies">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"
-                    android:text="Does any of the family members use kerosene or charcoal in the home?"
+                    android:text="Has the child’s parents or siblings had similar breathing problems, other diseases with breathing problems or allergies?"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 

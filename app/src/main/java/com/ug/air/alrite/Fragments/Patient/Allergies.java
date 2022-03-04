@@ -17,10 +17,8 @@ import android.widget.Toast;
 
 import com.ug.air.alrite.R;
 
-import java.util.Objects;
 
-
-public class Fragment6v4 extends Fragment {
+public class Allergies extends Fragment {
 
     View view;
     Button back, next;
@@ -30,14 +28,14 @@ public class Fragment6v4 extends Fragment {
     private static final int YES = 0;
     private static final int NO = 1;
     private static final int NOT = 2;
-    public static final String CHOICEX2 = "choiceX2";
+    public static final String CHOICEY2 = "choiceY2";
     public static final String SHARED_PREFS = "sharedPrefs";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_6v4, container, false);
+        view = inflater.inflate(R.layout.fragment_allergies, container, false);
 
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
@@ -87,8 +85,8 @@ public class Fragment6v4 extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment6v3());
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new Eczema());
                 fr.commit();
             }
         });
@@ -98,21 +96,21 @@ public class Fragment6v4 extends Fragment {
     }
 
     private void saveData() {
-        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString(CHOICEX2, value5);
+        editor.putString(CHOICEY2, value5);
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment6v5());
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+        fr.replace(R.id.fragment_container, new Smoke());
         fr.addToBackStack(null);
         fr.commit();
     }
 
     private void loadData() {
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        value5 = sharedPreferences.getString(CHOICEX2, "");
+        value5 = sharedPreferences.getString(CHOICEY2, "");
     }
 
 

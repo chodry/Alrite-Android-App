@@ -4,11 +4,12 @@ import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.CoughD.DAY1;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v1.DAY2;
+import static com.ug.air.alrite.Fragments.Patient.HIVStatus.CHOICE3;
+import static com.ug.air.alrite.Fragments.Patient.WheezY.DAY2;
 import static com.ug.air.alrite.Fragments.Patient.WheezD.CHOICEX;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v3.S5;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v4.CHOICEX2;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v5.CHOICEY2;
+import static com.ug.air.alrite.Fragments.Patient.Breathless.S5;
+import static com.ug.air.alrite.Fragments.Patient.Eczema.CHOICEX2;
+import static com.ug.air.alrite.Fragments.Patient.Allergies.CHOICEY2;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -35,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ug.air.alrite.Activities.Dashboard;
+import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
@@ -51,19 +53,20 @@ import java.util.Objects;
 import java.util.UUID;
 
 
-public class Fragment6v7 extends Fragment {
+public class Kerosene extends Fragment {
 
     View view;
     Button back, next, btnSave;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2, radioButton3;
     String value5 = "none";
-    Dialog dialog;
+    Dialog dialog, dialog2;
     private static final int YES = 0;
     private static final int NO = 1;
     private static final int NOT = 2;
     public static final String CHOICET2 = "choiceT2";
     public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String ADIAGNOSIS = "aDiagnosis";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
     RecyclerView recyclerView;
@@ -77,7 +80,7 @@ public class Fragment6v7 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_6v7, container, false);
+        view = inflater.inflate(R.layout.fragment_kerosene, container, false);
 
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
@@ -130,7 +133,7 @@ public class Fragment6v7 extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment6v6());
+                fr.replace(R.id.fragment_container, new Smoke());
                 fr.commit();
             }
         });
@@ -169,33 +172,39 @@ public class Fragment6v7 extends Fragment {
 
     private void makeAssessment() {
         int total = 0;
-        String cough = sharedPreferences.getString(DAY1, "");
-        int co = Integer.parseInt(cough);
-        if (co > 10 && co < 14){
-            total = total + 1;
-        }
         String episodes = sharedPreferences.getString(DAY2, "");
-        int ep = Integer.parseInt(episodes);
-        if (ep > 3){
+        String breathless = sharedPreferences.getString(S5, "");
+        String eczema = sharedPreferences.getString(CHOICEX2, "");
+        String allergies = sharedPreferences.getString(CHOICEY2, "");
+        if (!episodes.isEmpty()){
+            int ep = Integer.parseInt(episodes);
+            if (ep >= 3){
+                total = total + 1;
+            }
+        }
+        if (!breathless.contains("None of these")){
             total = total + 1;
         }
-        String wheezing = sharedPreferences.getString(CHOICEX, "");
-        String breathe = sharedPreferences.getString(S5, "");
-        if (wheezing.equals("Yes") || !breathe.contains("None of these")){
+        if (eczema.equals("Yes")){
             total = total + 1;
         }
-        String hist1 = sharedPreferences.getString(CHOICEX2, "");
-        String hist2 = sharedPreferences.getString(CHOICEY2, "");
-        if (hist1.equals("Yes") || hist2.equals("Yes")){
+        if (allergies.equals("Yes")){
             total = total + 1;
         }
-        if (total >= 3){
+
+        if (total >= 2){
             showDialog();
         }else {
-            FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new RRCounter());
-            fr.addToBackStack(null);
-            fr.commit();
+            String cough = sharedPreferences.getString(DAY1, "");
+            long co = Long.parseLong(cough);
+            String hiv = sharedPreferences.getString(CHOICE3, "");
+            String dif = sharedPreferences.getString(CHOICEX, "");
+            if (co > 14 || (hiv.equals("Known HIV") && dif.equals("Yes"))){
+                showDialog2();
+            }else {
+                saveForm();
+            }
+
         }
     }
 
@@ -210,8 +219,9 @@ public class Fragment6v7 extends Fragment {
         txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
         recyclerView = dialog.findViewById(R.id.recyclerView1);
         btnSave = dialog.findViewById(R.id.btnSave);
+        Button btnContinue = dialog.findViewById(R.id.btnContinue);
 
-        linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
+        linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.moderateDiagnosisColor));
         txtDiagnosis.setText(R.string.asthma);
         diagnosis = txtDiagnosis.getText().toString();
 
@@ -228,10 +238,21 @@ public class Fragment6v7 extends Fragment {
         }
         recyclerView.setAdapter(assessmentAdapter);
 
+        btnContinue.setVisibility(View.GONE);
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveForm();
+                String cough = sharedPreferences.getString(DAY1, "");
+                long co = Long.parseLong(cough);
+                String hiv = sharedPreferences.getString(CHOICE3, "");
+                String dif = sharedPreferences.getString(CHOICEX, "");
+                if (co > 14 || (hiv.equals("Known HIV") && dif.equals("Yes"))){
+                    showDialog2();
+                }else {
+                    saveForm();
+                }
+                dialog.dismiss();
             }
         });
 
@@ -240,8 +261,53 @@ public class Fragment6v7 extends Fragment {
         dialog.show();
     }
 
+    private void showDialog2() {
+        dialog2 = new Dialog(getActivity());
+        dialog2.setContentView(R.layout.assessment_layout);
+        dialog2.setCancelable(true);
+        Window window = dialog2.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
+
+        linearLayout_instruction = dialog2.findViewById(R.id.diagnosis);
+        txtDiagnosis = dialog2.findViewById(R.id.txtDiagnosis);
+        recyclerView = dialog2.findViewById(R.id.recyclerView1);
+        btnSave = dialog2.findViewById(R.id.btnSave);
+        Button btnContinue = dialog2.findViewById(R.id.btnContinue);
+
+        linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.moderateDiagnosisColor));
+        txtDiagnosis.setText(R.string.tuber);
+        diagnosis = txtDiagnosis.getText().toString();
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        assessments = new ArrayList<>();
+        assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
+
+        List<Integer> messages = Arrays.asList(R.string.tuber1, R.string.tuber);
+        for (int i = 0; i < messages.size(); i++){
+            Assessment assessment = new Assessment(messages.get(i));
+            assessments.add(assessment);
+        }
+        recyclerView.setAdapter(assessmentAdapter);
+
+        btnContinue.setVisibility(View.GONE);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveForm();
+                dialog2.dismiss();
+            }
+        });
+
+//        dialog.getWindow().setLayout(650, 800);
+        dialog2.getWindow().setGravity(Gravity.CENTER);
+        dialog2.show();
+    }
+
     private void saveForm() {
-        editor.putString(DIAGNOSIS, diagnosis);
+        editor.putString(ADIAGNOSIS, diagnosis);
 
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
@@ -254,7 +320,7 @@ public class Fragment6v7 extends Fragment {
         editor.apply();
 
         uniqueID = formattedDate + "_" + uniqueID;
-        sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
+        sharedPreferences1 = requireActivity().getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
         editor1 = sharedPreferences1.edit();
         Map<String, ?> all = sharedPreferences.getAll();
         for (Map.Entry<String, ?> x : all.entrySet()) {
@@ -264,8 +330,7 @@ public class Fragment6v7 extends Fragment {
         editor1.commit();
         editor.clear();
         editor.commit();
-        dialog.dismiss();
-        startActivity(new Intent(getActivity(), Dashboard.class));
+        startActivity(new Intent(getActivity(), DiagnosisActivity.class));
     }
 
 }

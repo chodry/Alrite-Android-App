@@ -1,32 +1,29 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import android.app.Dialog;
+import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
+import static com.ug.air.alrite.Fragments.Patient.WheezY.DAY2;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
-import com.ug.air.alrite.Adapters.AssessmentAdapter;
-import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class Fragment6v3 extends Fragment {
+public class Breathless extends Fragment {
 
    View view;
     Button back, next;
@@ -47,7 +44,7 @@ public class Fragment6v3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_6v3, container, false);
+        view = inflater.inflate(R.layout.fragment_breathless, container, false);
 
         back = view.findViewById(R.id.back);
         next = view.findViewById(R.id.next);
@@ -56,7 +53,7 @@ public class Fragment6v3 extends Fragment {
         none = view.findViewById(R.id.none);
         resp = view.findViewById(R.id.responsive);
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
@@ -72,14 +69,81 @@ public class Fragment6v3 extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment6v1());
+                String day2 = sharedPreferences.getString(DAY2, "");
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                if (day2.isEmpty()){
+                    fr.replace(R.id.fragment_container, new WheezD());
+                }else {
+                    fr.replace(R.id.fragment_container, new WheezY());
+                }
                 fr.commit();
             }
         });
 
+        vomit.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (vomit.isChecked() ){
+                    none.setChecked(false);
+                    none.setSelected(false);
+                    none.setEnabled(false);
+                }
+                else if (!resp.isChecked() && !drink.isChecked() && !vomit.isChecked()){
+                    none.setEnabled(true);
+                }
+            }
+        });
+
+        drink.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (drink.isChecked() ){
+                    none.setChecked(false);
+                    none.setSelected(false);
+                    none.setEnabled(false);
+                }
+                else if (!resp.isChecked() && !drink.isChecked() && !vomit.isChecked()){
+                    none.setEnabled(true);
+                }
+            }
+        });
+
+        resp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (resp.isChecked() ){
+                    none.setChecked(false);
+                    none.setSelected(false);
+                    none.setEnabled(false);
+                }
+                else if (!resp.isChecked() && !drink.isChecked() && !vomit.isChecked()){
+                    none.setEnabled(true);
+                }
+            }
+        });
+
+        none.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (none.isChecked()){
+                    checked(vomit);
+                    checked(drink);
+                    checked(resp);
+                }else {
+                    vomit.setEnabled(true);
+                    drink.setEnabled(true);
+                    resp.setEnabled(true);
+                }
+            }
+        });
 
         return view;
+    }
+
+    private void checked(CheckBox checkBox){
+        checkBox.setChecked(false);
+        checkBox.setSelected(false);
+        checkBox.setEnabled(false);
     }
 
     private void checkedList() {
@@ -116,8 +180,8 @@ public class Fragment6v3 extends Fragment {
 
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment6v4());
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+        fr.replace(R.id.fragment_container, new Eczema());
         fr.addToBackStack(null);
         fr.commit();
     }

@@ -1,5 +1,8 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.FTouch.TOUCH;
+import static com.ug.air.alrite.Fragments.Patient.WheezY.DAY2;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -32,6 +35,8 @@ public class WheezD extends Fragment {
     private static final int NOT = 2;
     public static final String CHOICEX = "choiceX";
     public static final String SHARED_PREFS = "sharedPrefs";
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +50,9 @@ public class WheezD extends Fragment {
         radioButton1 = view.findViewById(R.id.yes);
         radioButton2 = view.findViewById(R.id.no);
         radioButton3 = view.findViewById(R.id.not);
+
+        sharedPreferences = this.requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -87,34 +95,33 @@ public class WheezD extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new CoughD());
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new Bronchodilator2());
                 fr.commit();
             }
         });
-
 
         return view;
     }
 
     private void saveData() {
-        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
         editor.putString(CHOICEX, value5);
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment6v1());
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+        if (value5.equals("No")) {
+            deleteSharedPreferences();
+            fr.replace(R.id.fragment_container, new Breathless());
+        }else {
+            fr.replace(R.id.fragment_container, new WheezY());
+        }
         fr.addToBackStack(null);
         fr.commit();
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         value5 = sharedPreferences.getString(CHOICEX, "");
     }
-
 
     private void updateViews() {
         if (value5.equals("Yes")){
@@ -129,6 +136,11 @@ public class WheezD extends Fragment {
             radioButton3.setChecked(false);
         }
 
+    }
+
+    private void deleteSharedPreferences() {
+        editor.remove(DAY2);
+        editor.apply();
     }
 
 }

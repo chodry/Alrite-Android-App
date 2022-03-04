@@ -28,13 +28,13 @@
     <string name="no_signs">Diagnosis: No signs of Pneumonia or Wheezing illness</string>
     <string name="asthma">Diagnosis: Asthma Risk</string>
 
-    <string name="asthma1">Prescribe salbutamol inhaler</string>
-    <string name="asthma2">Instruct the parent to give 2–4 puffs every 4–6 hours as needed for cough or wheezing. Use with spacer</string>
-    <string name="asthma3">Refer to specialist to assess and treat asthma</string>
+    <string name="asthma1">Give inhaled salbutamol , 4-6 puffs every 4-6 hours for 5 days</string>
+    <string name="asthma2">Use with spacer</string>
+    <string name="asthma3">Counsel caregiver to reduce exposure to smoke and strong-smelling odors, including tobacco smoke and biofuels (charcoal, kerosene, waste products)</string>
 
     <string name="tuber">Diagnosis: Tuberculosis risk</string>
-    <string name="tuber1">Refer to assess and treat for potential TB</string>
-    <string name="tuber2">This will include TB testing and chest x-ray</string>
+    <string name="tuber1">Ask about potential TB exposures</string>
+    <string name="tuber2">TRefer to assess and treat for potential TB. This will include TB testing and chest x-ray</string>
 
     <string name="low_oxygen">Start oxygen therapy if oxygen is available at the health facility</string>
 
