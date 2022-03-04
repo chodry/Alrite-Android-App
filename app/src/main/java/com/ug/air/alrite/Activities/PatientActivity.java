@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.ug.air.alrite.Fragments.Patient.Assess;
+import com.ug.air.alrite.Fragments.Patient.Bronchodilator;
+import com.ug.air.alrite.Fragments.Patient.ChestIndrawing;
 import com.ug.air.alrite.Fragments.Patient.CoughD;
 import com.ug.air.alrite.Fragments.Patient.HIVStatus;
 import com.ug.air.alrite.Fragments.Patient.Nasal;
@@ -21,7 +23,7 @@ public class PatientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_patient);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, new Nasal());
+        fragmentTransaction.add(R.id.fragment_container, new Bronchodilator());
         fragmentTransaction.commit();
 
     }

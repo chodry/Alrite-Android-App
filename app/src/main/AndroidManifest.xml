@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Activities.DiagnosisActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.PatientActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
@@ -20,16 +23,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.GlossaryActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activities.SplashActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".Activities.Dashboard"

@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.ug.air.alrite.R;
 
-public class GlossaryActivity extends AppCompatActivity {
+public class DiagnosisActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_glossary);
+        setContentView(R.layout.activity_diagnosis);
     }
 }

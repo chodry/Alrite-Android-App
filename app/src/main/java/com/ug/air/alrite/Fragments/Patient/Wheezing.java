@@ -1,6 +1,7 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 
 import android.app.Dialog;
@@ -32,6 +33,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.ug.air.alrite.Activities.Dashboard;
+import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
@@ -60,7 +62,7 @@ public class Wheezing extends Fragment {
     LinearLayout linearLayout_instruction;
     VideoView videoView;
     Dialog dialog;
-    String diagnosis, s;
+    String diagnosis, s, assess;
     RecyclerView recyclerView;
     Boolean check1;
     ArrayList<Assessment> assessments;
@@ -92,6 +94,7 @@ public class Wheezing extends Fragment {
         sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
+        assess = sharedPreferences.getString(S4, "");
         loadData();
         updateViews();
 
@@ -131,8 +134,13 @@ public class Wheezing extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Stridor());
+                if (!assess.equals("None of these")){
+                    fr.replace(R.id.fragment_container, new Oxygen());
+                }else {
+                    fr.replace(R.id.fragment_container, new Stridor());
+                }
                 fr.commit();
             }
         });
@@ -152,10 +160,14 @@ public class Wheezing extends Fragment {
         editor.putString(CHOICE8, value9);
         editor.putBoolean(CHECKSTETHO, checkBox.isChecked());
         editor.apply();
-        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Nasal());
-        fr.addToBackStack(null);
-        fr.commit();
+        if (!assess.equals("None of these")){
+            startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+        }else {
+            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+            fr.replace(R.id.fragment_container, new Nasal());
+            fr.addToBackStack(null);
+            fr.commit();
+        }
 
     }
 

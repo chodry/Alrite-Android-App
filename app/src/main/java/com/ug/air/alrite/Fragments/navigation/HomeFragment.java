@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ug.air.alrite.Activities.GlossaryActivity;
 import com.ug.air.alrite.Activities.PatientActivity;
 import com.ug.air.alrite.R;
 
@@ -27,8 +26,8 @@ public class HomeFragment extends Fragment {
         view.findViewById(R.id.btn_learn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), GlossaryActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), GlossaryActivity.class);
+//                startActivity(intent);
             }
         });
 

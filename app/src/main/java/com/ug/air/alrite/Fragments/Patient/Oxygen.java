@@ -1,6 +1,8 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.FTouch.TOUCH;
+import static com.ug.air.alrite.Fragments.Patient.HIVCare.CHOICEHC;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -42,6 +44,7 @@ public class Oxygen extends Fragment {
     Button back, next, btnSave, btSkip,btnContinue,btnContinue2;
     String oxy;
     public static final String OXY = "oxy";
+    public static final String OXDIAGNOSIS = "oxDiagnosis";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
@@ -146,10 +149,7 @@ public class Oxygen extends Fragment {
 
         percent = Integer.parseInt(oxy);
         if (percent >= 92){
-            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new RRCounter());
-            fr.addToBackStack(null);
-            fr.commit();
+            nextInterface();
         }else if (percent > 89 && percent < 92){
             showDialog2();
         } else {
@@ -188,7 +188,10 @@ public class Oxygen extends Fragment {
         assessments = new ArrayList<>();
         assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
 
-        List<Integer> messages = Arrays.asList(R.string.first_dose, R.string.first_dose_IM, R.string.IM_dosing_under1, R.string.give_diazepam_if, R.string.low_oxygen, R.string.refer_urgently);
+        List<Integer> messages = Arrays.asList(R.string.first_dose, R.string.first_dose_IM,
+                R.string.IM_dosing_under1, R.string.give_diazepam_if,
+                R.string.low_oxygen, R.string.quick, R.string.quick2, R.string.quick3,
+                R.string.refer_urgently);
         for (int i = 0; i < messages.size(); i++){
             Assessment assessment = new Assessment(messages.get(i));
             assessments.add(assessment);
@@ -199,7 +202,10 @@ public class Oxygen extends Fragment {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                editor.putString(OXDIAGNOSIS, diagnosis);
+                editor.apply();
                 dialog.dismiss();
+                nextInterface();
             }
         });
 
@@ -222,10 +228,24 @@ public class Oxygen extends Fragment {
             @Override
             public void onClick(View view) {
                 dialog2.dismiss();
+                nextInterface();
             }
         });
 
         dialog2.show();
 
+    }
+
+    private void nextInterface(){
+        String assess = sharedPreferences.getString(S4, "");
+
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+        if (!assess.equals("None of these")){
+            fr.replace(R.id.fragment_container, new Wheezing());
+        }else {
+            fr.replace(R.id.fragment_container, new RRCounter());
+        }
+        fr.addToBackStack(null);
+        fr.commit();
     }
 }

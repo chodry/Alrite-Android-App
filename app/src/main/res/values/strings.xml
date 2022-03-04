@@ -21,6 +21,10 @@
     <string name="no_anti">No antibiotics or a bronchodilator needed for breathing difficulty</string>
     <string name="other_illness">Assess for other illness</string>
 
+    <string name="quick">Quickly complete the assessment</string>
+    <string name="quick2">Treat to prevent low blood sugar</string>
+    <string name="quick3">Keep the child warm</string>
+
     <string name="no_signs">Diagnosis: No signs of Pneumonia or Wheezing illness</string>
     <string name="asthma">Diagnosis: Asthma Risk</string>
 
@@ -42,9 +46,9 @@
     <string name="wheezing1">Diagnosis: Pneumonia and Wheezing illness</string>
     <string name="wheezing2">I need the instructions for this diagnosis</string>
 
-    <string name="cold">Diagnosis: Cough/Cold/No pneumonia</string>
+    <string name="cold">Diagnosis: Cough/Cold/No Pneumonia</string>
     <string name="cold1">No signs of Pneumonia or Wheezing illness</string>
-    <string name="cold2">No antibiotics recommended</string>
+    <string name="cold2">No antibiotics or bronchodilators recommended</string>
     <string name="cold3">Soothe the throat and relieve the cough with a safe remedy</string>
     <string name="cold4">Follow up in 5 days if not improving, earlier if getting worse</string>
 

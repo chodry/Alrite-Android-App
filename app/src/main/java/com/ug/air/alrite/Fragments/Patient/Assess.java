@@ -278,7 +278,9 @@ public class Assess extends Fragment {
         assessments = new ArrayList<>();
         assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
 
-        List<Integer> messages = Arrays.asList(R.string.first_dose, R.string.first_dose_IM, R.string.IM_dosing_under1, R.string.give_diazepam_if, R.string.refer_urgently);
+        List<Integer> messages = Arrays.asList(R.string.first_dose, R.string.first_dose_IM,
+                R.string.IM_dosing_under1, R.string.give_diazepam_if, R.string.quick,
+                R.string.quick2, R.string.quick3, R.string.refer_urgently);
         for (int i = 0; i < messages.size(); i++){
             Assessment assessment = new Assessment(messages.get(i));
             assessments.add(assessment);

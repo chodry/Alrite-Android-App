@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
 import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHOICE8;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
@@ -35,6 +36,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.ug.air.alrite.Activities.Dashboard;
+import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
@@ -50,15 +52,16 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Fragment11 extends Fragment {
+public class ChestIndrawing extends Fragment {
 
     View view;
-    Button back, next, btnSave;
+    Button back, next, btnSave, btnChest, btnContinue;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2, radioButton3;
     String value8 = "none";
-    String diagnosis;
-    TextView chest, txtDisease, txtDefinition, txtOk, txtDiagnosis;
+    String diagnosis, wheezing;
+    long day;
+    TextView txtDisease, txtDefinition, txtOk, txtDiagnosis;
     LinearLayout linearLayoutDisease;
     LinearLayout linearLayout_instruction;
     VideoView videoView;
@@ -71,6 +74,7 @@ public class Fragment11 extends Fragment {
     private static final int NOT = 2;
     public static final String CHOICE7 = "choice7";
     public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String CIDIAGNOSIS = "ciDiagnosis";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
 
@@ -78,7 +82,7 @@ public class Fragment11 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_11, container, false);
+        view = inflater.inflate(R.layout.fragment_indrawing, container, false);
 
 
         next = view.findViewById(R.id.next);
@@ -87,9 +91,9 @@ public class Fragment11 extends Fragment {
         radioButton1 = view.findViewById(R.id.no);
         radioButton2 = view.findViewById(R.id.yes);
         radioButton3 = view.findViewById(R.id.not);
-        chest = view.findViewById(R.id.chest);
+        btnChest = view.findViewById(R.id.chest);
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
@@ -131,13 +135,13 @@ public class Fragment11 extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Stridor());
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new Nasal());
                 fr.commit();
             }
         });
 
-        chest.setOnClickListener(new View.OnClickListener() {
+        btnChest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
@@ -152,7 +156,7 @@ public class Fragment11 extends Fragment {
         editor.putString(CHOICE7, value8);
         editor.apply();
 
-        makeAssessment();
+        makeAssessment2();
 
     }
 
@@ -194,7 +198,7 @@ public class Fragment11 extends Fragment {
         txtDefinition.setText(R.string.chest_in);
         linearLayoutDisease.setBackgroundColor(getResources().getColor(R.color.green_dark));
 
-        String videoPath = "android.resource://" + Objects.requireNonNull(getActivity()).getPackageName() + "/" + R.raw.chest_indrawing_glossary_video;
+        String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.chest_indrawing_glossary_video;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
         videoView.start();
@@ -210,39 +214,30 @@ public class Fragment11 extends Fragment {
         dialog.show();
     }
 
-    private void makeAssessment() {
-        int total = 0;
-        String cough = sharedPreferences.getString(DAY1, "");
-        int co = Integer.parseInt(cough);
-        String wheezing = sharedPreferences.getString(CHOICE8, "");
-        if (co > 0 && wheezing.equals("No")){
-            total = total + 1;
-        }
-        if (co > 0 && wheezing.equals("Yes")){
-            total = total + 3;
-        }
+    private void makeAssessment2(){
+        String cough = sharedPreferences.getString(CHOICE2, "");
         String fastBreathing = sharedPreferences.getString(FASTBREATHING, "");
-        if (fastBreathing.equals("Fast Breathing") || value8.equals("Mild") || value8.equals("Moderate/Severe")){
-            total = total + 1;
-        }
-        if (fastBreathing.equals("Normal Breathing") && value8.equals("No")){
-            total = total + 2;
-        }
-        if (total == 2){
-            showDialog2(total);
-        }else if (total == 3){
-            showDialog2(total);
-        }else if (total == 4){
-            showDialog2(total);
-        }else {
-            FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Wheezing());
-            fr.addToBackStack(null);
-            fr.commit();
+        wheezing = sharedPreferences.getString(CHOICE8, "");
+        String days = sharedPreferences.getString(DAY1, "");
+        day = Long.parseLong(days);
+        if ((cough.equals("Yes") && fastBreathing.equals("Fast Breathing")) ||
+                (cough.equals("Yes") && (value8.equals("Mild") || value8.equals("Moderate/Severe")))){
+            showDialog2("pneumonia");
+        }else if (cough.equals("Yes") && fastBreathing.equals("Normal Breathing") && value8.equals("No") && wheezing.equals("Normal breathing")){
+            showDialog2("cold");
+        } else {
+            if (wheezing.equals("Wheezing")  || day >= 10){
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new Bronchodilator());
+                fr.addToBackStack(null);
+                fr.commit();
+            }else {
+                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+            }
         }
     }
 
-    private void showDialog2(int total) {
+    private void showDialog2(String disease) {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.assessment_layout);
         dialog.setCancelable(true);
@@ -253,6 +248,7 @@ public class Fragment11 extends Fragment {
         txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
         recyclerView = dialog.findViewById(R.id.recyclerView1);
         btnSave = dialog.findViewById(R.id.btnSave);
+        btnContinue = dialog.findViewById(R.id.btnContinue);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -262,17 +258,12 @@ public class Fragment11 extends Fragment {
 
         List<Integer> messages = new ArrayList<>();
 
-        if (total == 2){
-            linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
+        if (disease.equals("pneumonia")){
+            linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.moderateDiagnosisColor));
             txtDiagnosis.setText(R.string.pneumonia);
             messages = Arrays.asList(R.string.pneumonia1, R.string.pneumonia2, R.string.pneumonia3);
             dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
-        }else if (total == 4) {
-            linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
-            txtDiagnosis.setText(R.string.wheezing1);
-            messages = Arrays.asList(R.string.wheezing2);
-            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
-        }else{
+        }else {
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));
             txtDiagnosis.setText(R.string.cold);
             messages = Arrays.asList(R.string.cold1, R.string.cold2, R.string.cold3, R.string.cold4);
@@ -294,6 +285,25 @@ public class Fragment11 extends Fragment {
             }
         });
 
+        if (wheezing.equals("Wheezing") || day >= 10){
+            btnContinue.setVisibility(View.VISIBLE);
+        }else {
+            btnContinue.setVisibility(View.GONE);
+        }
+
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor.putString(CIDIAGNOSIS, diagnosis);
+                editor.apply();
+                dialog.dismiss();
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new Bronchodilator());
+                fr.addToBackStack(null);
+                fr.commit();
+            }
+        });
+
 //        dialog.getWindow().setLayout(650, 800);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
@@ -306,14 +316,14 @@ public class Fragment11 extends Fragment {
 
         String uniqueID = UUID.randomUUID().toString();
 
-        editor.putString(DIAGNOSIS, diagnosis);
+        editor.putString(CIDIAGNOSIS, diagnosis);
         editor.putString(DATE, formattedDate);
         editor.putString(UUIDS, uniqueID);
         editor.apply();
 
         uniqueID = formattedDate + "_" + uniqueID;
 
-        sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
+        sharedPreferences1 = requireActivity().getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
         editor1 = sharedPreferences1.edit();
         Map<String, ?> all = sharedPreferences.getAll();
         for (Map.Entry<String, ?> x : all.entrySet()) {
@@ -323,6 +333,7 @@ public class Fragment11 extends Fragment {
         editor1.commit();
         editor.clear();
         editor.commit();
-        startActivity(new Intent(getActivity(), Dashboard.class));
+        dialog.dismiss();
+        startActivity(new Intent(getActivity(), DiagnosisActivity.class));
     }
 }

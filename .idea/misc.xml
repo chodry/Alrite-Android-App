@@ -73,16 +73,22 @@
         <entry key="app/src/main/res/layout/fragment_7v1.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_9.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_assess.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/fragment_bronchodilator.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_cough.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_coughD.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_cough_d.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_hiv_status.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/fragment_nasal.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_oxygen.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_rr_counter.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_stridor.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_temperature.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_touch.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/instructions_layout.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/learn_popup.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/manual_layout.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/oxygen.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/patient.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/respiratory_results_ayout.xml" value="0.33559782608695654" />
       </map>
     </option>
