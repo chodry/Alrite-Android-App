@@ -5,7 +5,7 @@ import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.CoughD.DAY1;
 import static com.ug.air.alrite.Fragments.Patient.Fragment6v1.DAY2;
-import static com.ug.air.alrite.Fragments.Patient.Fragment6v2.CHOICEX;
+import static com.ug.air.alrite.Fragments.Patient.WheezD.CHOICEX;
 import static com.ug.air.alrite.Fragments.Patient.Fragment6v3.S5;
 import static com.ug.air.alrite.Fragments.Patient.Fragment6v4.CHOICEX2;
 import static com.ug.air.alrite.Fragments.Patient.Fragment6v5.CHOICEY2;

@@ -20,7 +20,7 @@ import com.ug.air.alrite.R;
 import java.util.Objects;
 
 
-public class Fragment6v2 extends Fragment {
+public class WheezD extends Fragment {
 
     View view;
     Button back, next;
@@ -37,7 +37,7 @@ public class Fragment6v2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_6v2, container, false);
+        view = inflater.inflate(R.layout.fragment_wheez_d, container, false);
 
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);

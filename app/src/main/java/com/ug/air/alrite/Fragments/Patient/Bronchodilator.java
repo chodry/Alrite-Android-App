@@ -2,6 +2,7 @@ package com.ug.air.alrite.Fragments.Patient;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -12,15 +13,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.R;
 
 public class Bronchodilator extends Fragment {
 
-   View view;
-   Button btnBron, btnGiven, btnNot;
-   Dialog dialog;
-   String bronchodilator;
+    View view;
+    Button btnBron, btnGiven, btnNot, btnSave;
+    Dialog dialog;
+    String bronchodilator;
+    TextView txtMessage;
     public static final String BRONCHODILATOR = "bronchodilator";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
@@ -73,6 +77,25 @@ public class Bronchodilator extends Fragment {
     }
 
     private void showDialog() {
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.assess);
+        dialog.setCancelable(true);
+
+        txtMessage = dialog.findViewById(R.id.message);
+        btnSave = dialog.findViewById(R.id.ContinueButton);
+
+        txtMessage.setText("Please wait for 15 minutes then reassess the patient");
+        btnSave.setText("OK");
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+            }
+        });
+
+        dialog.show();
     }
 
     private void showVideoDialog() {
