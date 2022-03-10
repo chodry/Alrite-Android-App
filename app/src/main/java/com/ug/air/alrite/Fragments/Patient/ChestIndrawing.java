@@ -223,7 +223,7 @@ public class ChestIndrawing extends Fragment {
         if ((cough.equals("Yes") && fastBreathing.equals("Fast Breathing")) ||
                 (cough.equals("Yes") && (value8.equals("Mild") || value8.equals("Moderate/Severe")))){
             showDialog2("pneumonia");
-        }else if (cough.equals("Yes") && fastBreathing.equals("Normal Breathing") && value8.equals("No") && wheezing.equals("Normal breathing")){
+        }else if (cough.equals("Yes") && fastBreathing.equals("Normal Breathing") && value8.equals("No") && (wheezing.equals("Normal breathing") || wheezing.equals("Noisy breathing"))){
             showDialog2("cold");
         } else {
             if (wheezing.equals("Wheezing")  || day >= 10){

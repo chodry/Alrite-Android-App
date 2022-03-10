@@ -1,5 +1,8 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
+import static com.ug.air.alrite.Fragments.Patient.HIVCare.CHOICEHC;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -65,7 +68,7 @@ public class Fever extends Fragment {
             }
         });
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         loadData();
@@ -87,13 +90,17 @@ public class Fever extends Fragment {
             @Override
             public void onClick(View v) {
 
-//                String hist = sharedPreferences.getString(CHOICE3Y2, "");
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-//                if (hist.isEmpty()){
-                fr.replace(R.id.fragment_container, new Assess());
-//                }else {
-//                    fr.replace(R.id.fragment_container, new Fragment7v4());
-//                }
+                String assess = sharedPreferences.getString(S4, "");
+                String care = sharedPreferences.getString(CHOICEHC, "");
+
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                if (!assess.equals("None of these")){
+                    fr.replace(R.id.fragment_container, new Assess());
+                }else if (care.isEmpty()){
+                    fr.replace(R.id.fragment_container, new HIVStatus());
+                }else{
+                    fr.replace(R.id.fragment_container, new HIVCare());
+                }
                 fr.commit();
             }
         });
@@ -106,7 +113,7 @@ public class Fever extends Fragment {
         editor.putString(CHOICE5, value6);
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
         fr.replace(R.id.fragment_container, new Temperature());
         fr.addToBackStack(null);
         fr.commit();

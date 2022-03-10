@@ -300,7 +300,7 @@ public class Assess extends Fragment {
                 editor.putString(DIAGNOSIS, diagnosis);
                 dialog.dismiss();
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Temperature());
+                fr.replace(R.id.fragment_container, new Fever());
                 fr.addToBackStack(null);
                 fr.commit();
             }
