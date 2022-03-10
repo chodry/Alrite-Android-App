@@ -92,7 +92,7 @@
                             android:textColor="@color/black"
                             android:text="Age: 2years"
                             android:textSize="14sp"
-                            android:id="@+id/patient_name"/>
+                            android:id="@+id/patient_age"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -100,7 +100,7 @@
                             android:text="Sex: Female"
                             android:textSize="14sp"
                             android:textColor="@color/black"
-                            android:id="@+id/patient_no"
+                            android:id="@+id/patient_sex"
                             android:layout_marginTop="4dp"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -123,6 +123,7 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:id="@+id/clickable"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
@@ -137,10 +138,99 @@
                                 android:text="Summary"/>
 
                             <ImageView
+                                android:id="@+id/accordion"
+                                android:layout_width="0dp"
+                                android:layout_height="20dp"
+                                android:layout_weight=".2"
+                                android:src="@drawable/ic_add"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/summary2"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:layout_marginTop="10dp">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#EDECEC"
+                                android:layout_marginBottom="10dp"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/recyclerView1"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/color_background"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/clickable2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:weightSum="1"
+                            android:orientation="horizontal">
+
+                            <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight=".8"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:text="Diagnosis"/>
+
+                            <ImageView
+                                android:id="@+id/accordion2"
+                                android:layout_width="0dp"
+                                android:layout_height="20dp"
                                 android:layout_weight=".2"
-                                android:src="@drawable/ic_sub"/>
+                                android:src="@drawable/ic_add"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/summary3"
+                            android:layout_width="match_parent"
+                            android:layout_height="350dp"
+                            android:orientation="vertical"
+                            android:visibility="visible"
+                            android:layout_marginTop="5dp">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#EDECEC"
+                                android:layout_marginBottom="10dp"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                tools:listitem="@layout/diagnosis"
+                                android:id="@+id/recyclerView2"/>
 
                         </LinearLayout>
 

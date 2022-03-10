@@ -17,11 +17,9 @@ import java.util.List;
 public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.AssessmentViewHolder> {
 
     List<Assessment> assessmentList;
-    Context context;
 
-    public AssessmentAdapter(List<Assessment> assessmentList, Context context) {
+    public AssessmentAdapter(List<Assessment> assessmentList) {
         this.assessmentList = assessmentList;
-        this.context = context;
     }
 
     @NonNull
