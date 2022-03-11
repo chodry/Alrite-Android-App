@@ -12,6 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".5"
+        android:layout_marginEnd="3dp"
         android:text="Respiratory rate"/>
 
     <TextView
@@ -19,6 +20,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".5"
+        android:layout_marginStart="3dp"
         android:textColor="@color/black"
         android:gravity="end"
         android:text="Vomiting Everything hjb bb bb jkbk b  j j"/>

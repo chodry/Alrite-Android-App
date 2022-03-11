@@ -32,8 +32,9 @@ public class Temperature extends Fragment {
     View view;
     EditText etDay;
     Button back, next, btnSkip;
-    String temp;
+    String temp, diagnosis;
     public static final String TEMP = "temp";
+    public static final String TDIAGNOSIS = "tDiagnosis";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -133,10 +134,19 @@ public class Temperature extends Fragment {
     };
 
     private void saveData() {
+        deleteSharedPreferences();
+
+        String assess = sharedPreferences.getString(S4, "");
+        float tp = Float.parseFloat(temp);
+        if (tp >= 38.5 && assess.contains("None of these")){
+            diagnosis = "Fever without danger signs";
+            editor.putString(TDIAGNOSIS, diagnosis);
+        }
+
         editor.putString(TEMP, temp);
         editor.apply();
 
-        deleteSharedPreferences();
+
         FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
         fr.replace(R.id.fragment_container, new Oxygen());
         fr.addToBackStack(null);
@@ -158,6 +168,7 @@ public class Temperature extends Fragment {
 
     private void deleteSharedPreferences() {
         editor.remove(TOUCH);
+        editor.remove(TDIAGNOSIS);
         editor.apply();
     }
 }

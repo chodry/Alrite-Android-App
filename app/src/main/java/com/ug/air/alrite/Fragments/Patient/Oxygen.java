@@ -181,6 +181,7 @@ public class Oxygen extends Fragment {
         linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
         txtDiagnosis.setText(R.string.severe);
         diagnosis = txtDiagnosis.getText().toString();
+        diagnosis = diagnosis.replace("Diagnosis: ", "");
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));

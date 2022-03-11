@@ -1,28 +1,46 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
+import static com.ug.air.alrite.Fragments.Patient.Temperature.TDIAGNOSIS;
+
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ug.air.alrite.Activities.DiagnosisActivity;
+import com.ug.air.alrite.Adapters.AssessmentAdapter;
+import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class FTouch extends Fragment {
 
     View view;
-    Button back, next;
+    Button back, next, btnExit, btnContinue;
     RadioGroup radioGroup1;
     RadioButton radioButton3, radioButton4;
     String value6 = "none";
@@ -32,6 +50,13 @@ public class FTouch extends Fragment {
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    Dialog dialog;
+    RecyclerView recyclerView;
+    LinearLayout linearLayout_instruction;
+    TextView txtDiagnosis;
+    ArrayList<Assessment> assessments;
+    AssessmentAdapter assessmentAdapter;
+    String diagnosis;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,10 +125,15 @@ public class FTouch extends Fragment {
         editor.putString(TOUCH, value6);
         editor.apply();
 
-        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Oxygen());
-        fr.addToBackStack(null);
-        fr.commit();
+        String assess = sharedPreferences.getString(S4, "");
+        if (value6.equals("Yes") && !assess.equals("None of these")){
+            showDialog();
+        }else {
+            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+            fr.replace(R.id.fragment_container, new Oxygen());
+            fr.addToBackStack(null);
+            fr.commit();
+        }
     }
 
     private void loadData() {
@@ -121,5 +151,56 @@ public class FTouch extends Fragment {
             radioButton4.setChecked(false);
         }
 
+    }
+
+    private void showDialog() {
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.assessment_layout);
+        dialog.setCancelable(true);
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
+
+        linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
+        txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
+        recyclerView = dialog.findViewById(R.id.recyclerView1);
+        btnExit = dialog.findViewById(R.id.btnSave);
+        btnContinue = dialog.findViewById(R.id.btnContinue);
+
+        linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
+        txtDiagnosis.setText(R.string.febril);
+        diagnosis = txtDiagnosis.getText().toString();
+        diagnosis = diagnosis.replace("Diagnosis: ", "");
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        assessments = new ArrayList<>();
+        assessmentAdapter = new AssessmentAdapter(assessments);
+
+        List<Integer> messages = Arrays.asList(R.string.febril1, R.string.febril2, R.string.refer_urgently);
+        for (int i = 0; i < messages.size(); i++){
+            Assessment assessment = new Assessment(messages.get(i));
+            assessments.add(assessment);
+        }
+        recyclerView.setAdapter(assessmentAdapter);
+
+        btnExit.setVisibility(View.GONE);
+
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putString(TDIAGNOSIS, diagnosis);
+                editor.apply();
+                dialog.dismiss();
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new Oxygen());
+                fr.addToBackStack(null);
+                fr.commit();
+            }
+        });
+
+//        dialog.getWindow().setLayout(650, WindowManager.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.show();
     }
 }

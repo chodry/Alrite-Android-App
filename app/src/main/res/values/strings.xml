@@ -88,4 +88,14 @@
     <string name="muac6">Assess the child\'s feeding and counsel the mother on the feeding recommendations</string>
     <string name="muac7">If feeding problem, follow up in 7 days. Otherwise, follow-up in 30 days</string>
 
+    <string name="febril">Diagnosis: Very severe febrile illness</string>
+    <string name="febril1">Give first dose of artesunate or quinine [INSERT DOSES] for severe malaria</string>
+    <string name="febril2">Give one dose of paracetamol [INSERT DOSE] for high fever 38.5C or above</string>
+
+    <string name="febril3">Consider testing for malaria if risk high and no other cause of fever identified</string>
+    <string name="febril4">Give paracetamol [INSERT DOSE AND FREQUENCY] to relieve fever</string>
+    <string name="febril5">Encourage the child to take oral liquids</string>
+    <string name="febril6">Monitor for signs of dehydration and new or worsening symptoms</string>
+    <string name="febril7">Follow up in 5–7 days if no improvement, earlier of worsening symptoms</string>
+
 </resources>
