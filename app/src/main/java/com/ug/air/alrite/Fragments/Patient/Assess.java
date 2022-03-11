@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ug.air.alrite.Activities.Dashboard;
+import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
@@ -271,12 +272,13 @@ public class Assess extends Fragment {
         linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
         txtDiagnosis.setText(R.string.severe);
         diagnosis = txtDiagnosis.getText().toString();
+        diagnosis = diagnosis.replace("Diagnosis: ", "");
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
         assessments = new ArrayList<>();
-        assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
+        assessmentAdapter = new AssessmentAdapter(assessments);
 
         List<Integer> messages = Arrays.asList(R.string.first_dose, R.string.first_dose_IM,
                 R.string.IM_dosing_under1, R.string.give_diazepam_if, R.string.quick,
@@ -290,7 +292,10 @@ public class Assess extends Fragment {
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveForm();
+                editor.putString(DIAGNOSIS, diagnosis);
+                editor.apply();
+//                Toast.makeText(getActivity(), diagnosis, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
             }
         });
 
@@ -298,9 +303,10 @@ public class Assess extends Fragment {
             @Override
             public void onClick(View v) {
                 editor.putString(DIAGNOSIS, diagnosis);
+                editor.apply();
                 dialog.dismiss();
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fever());
+                fr.replace(R.id.fragment_container, new Temperature());
                 fr.addToBackStack(null);
                 fr.commit();
             }

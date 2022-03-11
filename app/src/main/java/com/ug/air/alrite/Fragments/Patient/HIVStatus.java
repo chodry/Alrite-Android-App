@@ -111,7 +111,7 @@ public class HIVStatus extends Fragment {
 
         }else {
             deleteSharedPreferences();
-            fr.replace(R.id.fragment_container, new Fever());
+            fr.replace(R.id.fragment_container, new Temperature());
         }
         fr.addToBackStack(null);
         fr.commit();

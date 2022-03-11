@@ -229,7 +229,7 @@ public class Kerosene extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
         assessments = new ArrayList<>();
-        assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
+        assessmentAdapter = new AssessmentAdapter(assessments);
 
         List<Integer> messages = Arrays.asList(R.string.asthma1, R.string.asthma2, R.string.asthma3);
         for (int i = 0; i < messages.size(); i++){
@@ -282,7 +282,7 @@ public class Kerosene extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
         assessments = new ArrayList<>();
-        assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
+        assessmentAdapter = new AssessmentAdapter(assessments);
 
         List<Integer> messages = Arrays.asList(R.string.tuber1, R.string.tuber);
         for (int i = 0; i < messages.size(); i++){

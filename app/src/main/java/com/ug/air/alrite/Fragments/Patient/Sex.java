@@ -31,11 +31,12 @@ public class Sex extends Fragment {
     Button back, next;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2;
-    String age, weight, text, kg1, fileName, months, years, muac;
+    String age, weight, text, kg1, fileName, months, years, muac, diagnosis;
     Spinner spinner;
     String value2 = "none";
     private static final int YES = 0;
     private static final int NO = 1;
+    public static final String MDIAGNOSIS = "mDiagnosis";
     public static final String AGE = "age";
     public static final String KILO = "kilo";
     public static final String MUAC = "MUAC";
@@ -248,12 +249,25 @@ public class Sex extends Fragment {
     };
 
     private void saveData() {
+
+        float mw = Float.parseFloat(muac);
+        if (mw < 11.5){
+            diagnosis = "Severe Acute malnutrition";
+        }else if (mw >= 11.5 && mw <= 12.4){
+            diagnosis = "Moderate acute malnutrition";
+        }else {
+            diagnosis = "none";
+        }
+
         editor = sharedPreferences1.edit();
 
         editor.putString(AGE, age);
         editor.putString(MUAC, muac);
         editor.putString(KILO, weight);
         editor.putString(CHOICE, value2);
+        if (!diagnosis.equals("none")){
+            editor.putString(MDIAGNOSIS, diagnosis);
+        }
         editor.apply();
 
         FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();

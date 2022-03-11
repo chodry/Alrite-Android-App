@@ -101,7 +101,7 @@ public class HIVCare extends Fragment {
         editor.apply();
 
         FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fever());
+        fr.replace(R.id.fragment_container, new Temperature());
         fr.addToBackStack(null);
         fr.commit();
 

@@ -9,7 +9,9 @@ import com.ug.air.alrite.Fragments.Patient.Assess;
 import com.ug.air.alrite.Fragments.Patient.Bronchodilator;
 import com.ug.air.alrite.Fragments.Patient.ChestIndrawing;
 import com.ug.air.alrite.Fragments.Patient.CoughD;
+import com.ug.air.alrite.Fragments.Patient.Fragment1;
 import com.ug.air.alrite.Fragments.Patient.HIVStatus;
+import com.ug.air.alrite.Fragments.Patient.Initials;
 import com.ug.air.alrite.Fragments.Patient.Kerosene;
 import com.ug.air.alrite.Fragments.Patient.Nasal;
 import com.ug.air.alrite.Fragments.Patient.Oxygen;
@@ -25,7 +27,7 @@ public class PatientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_patient);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, new Kerosene());
+        fragmentTransaction.add(R.id.fragment_container, new Initials());
         fragmentTransaction.commit();
 
     }

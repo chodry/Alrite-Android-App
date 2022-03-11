@@ -179,7 +179,7 @@ public class Cough extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
         assessments = new ArrayList<>();
-        assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
+        assessmentAdapter = new AssessmentAdapter(assessments);
 
         List<Integer> messages = Arrays.asList(R.string.selected, R.string.alrite, R.string.no_anti, R.string.other_illness);
         for (int i = 0; i < messages.size(); i++){

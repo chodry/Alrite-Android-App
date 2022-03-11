@@ -219,7 +219,7 @@ public class Bronchodilator2 extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
         assessments = new ArrayList<>();
-        assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
+        assessmentAdapter = new AssessmentAdapter(assessments);
 
         List<Integer> messages = new ArrayList<>();
 

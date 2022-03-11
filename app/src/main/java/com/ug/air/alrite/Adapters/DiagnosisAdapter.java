@@ -21,15 +21,26 @@ public class DiagnosisAdapter extends RecyclerView.Adapter<DiagnosisAdapter.Diag
     private List<Diagnosis> diagnosisList;
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
 
+    private OnItemClickListener mListener;
+
     public DiagnosisAdapter(List<Diagnosis> diagnosisList) {
         this.diagnosisList = diagnosisList;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onClick(int position);
+        void onClick2(int position);
     }
 
     @NonNull
     @Override
     public DiagnosisViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.diagnosis, parent, false);
-        DiagnosisViewHolder diagnosisViewHolder = new DiagnosisViewHolder(view);
+        DiagnosisViewHolder diagnosisViewHolder = new DiagnosisViewHolder(view, mListener);
         return diagnosisViewHolder;
     }
 
@@ -62,13 +73,49 @@ public class DiagnosisAdapter extends RecyclerView.Adapter<DiagnosisAdapter.Diag
         private TextView txtDiagnosis;
         private RecyclerView recyclerView2;
         private ImageView imageView;
+        private LinearLayout linearLayout1, linearLayout2;
 
-        public DiagnosisViewHolder(@NonNull View itemView) {
+        public DiagnosisViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
             txtDiagnosis = itemView.findViewById(R.id.title);
             recyclerView2 = itemView.findViewById(R.id.recyclerView);
             imageView = itemView.findViewById(R.id.accordion);
+            linearLayout1 = itemView.findViewById(R.id.clickable);
+            linearLayout2 = itemView.findViewById(R.id.summary);
+
+            linearLayout1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onClick(position);
+                            if (linearLayout2.getVisibility() == View.GONE){
+                                linearLayout2.setVisibility(View.VISIBLE);
+                                imageView.setImageResource(R.drawable.ic_sub);
+                            }else{
+                                linearLayout2.setVisibility(View.GONE);
+                                imageView.setImageResource(R.drawable.ic_add);
+                            }
+                        }
+                    }
+                }
+            });
+
+            linearLayout2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onClick2(position);
+                            linearLayout2.setVisibility(View.GONE);
+                            imageView.setImageResource(R.drawable.ic_add);
+                        }
+                    }
+                }
+            });
         }
     }
 }

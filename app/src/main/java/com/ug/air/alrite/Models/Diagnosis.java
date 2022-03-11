@@ -4,15 +4,15 @@ import java.util.List;
 
 public class Diagnosis {
 
-    private Integer diagnosis;
+    private String diagnosis;
     private List<Assessment> assessmentList;
 
-    public Diagnosis(Integer diagnosis, List<Assessment> assessmentList) {
+    public Diagnosis(String diagnosis, List<Assessment> assessmentList) {
         this.diagnosis = diagnosis;
         this.assessmentList = assessmentList;
     }
 
-    public Integer getDiagnosis() {
+    public String getDiagnosis() {
         return diagnosis;
     }
 

@@ -78,4 +78,14 @@
     <string name="wheez_ill8">Follow up in 3 days, earlier if getting worse</string>
     <string name="wheez_ill9">Refer for asthma assessment </string>
 
+    <string name="muac">Give the child Ready-to-Use Therapeutic Food (RUTF)</string>
+    <string name="muac1">If able to finish RUTF, Give oral antibiotics for 5 days</string>
+    <string name="muac2">Give ready-to-use therapeutic food for a child aged 6 months or more</string>
+    <string name="muac3">Counsel the mother on how to feed the child</string>
+    <string name="muac4">Follow up in 7 days</string>
+    <string name="muac5">If unable to finish RUTF or breastfeeding problems, give the first dose of the appropriate antibiotic, and refer URGENTLY to the hospital</string>
+
+    <string name="muac6">Assess the child\'s feeding and counsel the mother on the feeding recommendations</string>
+    <string name="muac7">If feeding problem, follow up in 7 days. Otherwise, follow-up in 30 days</string>
+
 </resources>

@@ -186,7 +186,7 @@ public class Oxygen extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
         assessments = new ArrayList<>();
-        assessmentAdapter = new AssessmentAdapter(assessments, getActivity());
+        assessmentAdapter = new AssessmentAdapter(assessments);
 
         List<Integer> messages = Arrays.asList(R.string.first_dose, R.string.first_dose_IM,
                 R.string.IM_dosing_under1, R.string.give_diazepam_if,

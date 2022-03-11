@@ -68,7 +68,6 @@
                             android:id="@+id/initials"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="MM"
                             android:textSize="20sp"
                             android:textColor="@color/white"
                             android:layout_gravity="center"
@@ -90,14 +89,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-                            android:text="Age: 2years"
                             android:textSize="14sp"
                             android:id="@+id/patient_age"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Sex: Female"
                             android:textSize="14sp"
                             android:textColor="@color/black"
                             android:id="@+id/patient_sex"
@@ -125,22 +122,23 @@
                         <LinearLayout
                             android:id="@+id/clickable"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="30dp"
                             android:weightSum="1"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_weight=".8"
                                 android:textColor="@color/black"
                                 android:textStyle="bold"
+                                android:gravity="center_vertical"
                                 android:text="Summary"/>
 
                             <ImageView
                                 android:id="@+id/accordion"
                                 android:layout_width="0dp"
-                                android:layout_height="20dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight=".2"
                                 android:src="@drawable/ic_add"/>
 
@@ -163,6 +161,8 @@
                             <androidx.recyclerview.widget.RecyclerView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_marginTop="5dp"
+                                tools:listitem="@layout/summary"
                                 android:id="@+id/recyclerView1"/>
 
                         </LinearLayout>
@@ -191,13 +191,14 @@
                         <LinearLayout
                             android:id="@+id/clickable2"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="30dp"
                             android:weightSum="1"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
                                 android:layout_weight=".8"
                                 android:textColor="@color/black"
                                 android:textStyle="bold"
@@ -206,7 +207,7 @@
                             <ImageView
                                 android:id="@+id/accordion2"
                                 android:layout_width="0dp"
-                                android:layout_height="20dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight=".2"
                                 android:src="@drawable/ic_add"/>
 
@@ -217,7 +218,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="350dp"
                             android:orientation="vertical"
-                            android:visibility="visible"
+                            android:visibility="gone"
                             android:layout_marginTop="5dp">
 
                             <View
