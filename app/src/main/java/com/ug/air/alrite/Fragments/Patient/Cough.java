@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ug.air.alrite.Activities.Dashboard;
+import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
@@ -54,6 +55,7 @@ public class Cough extends Fragment {
     private static final int YES = 0;
     private static final int NO = 1;
     public static final String CHOICE2 = "choice2";
+    public static final String NODIAGNOSIS = "noDiagnosis";
     public static final String SHARED_PREFS = "sharedPrefs";
     Dialog dialog;
     RecyclerView recyclerView;
@@ -174,6 +176,7 @@ public class Cough extends Fragment {
         linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.green_main));
         txtDiagnosis.setText(R.string.no_signs);
         diagnosis = txtDiagnosis.getText().toString();
+        diagnosis = diagnosis.replace("Diagnosis: ", "");
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -193,7 +196,10 @@ public class Cough extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveForm();
+                dialog.dismiss();
+                editor.putString(NODIAGNOSIS, diagnosis);
+                editor.apply();
+                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
             }
         });
 
@@ -202,35 +208,4 @@ public class Cough extends Fragment {
         dialog.show();
     }
 
-    private void saveForm() {
-        editor.putString(DIAGNOSIS, diagnosis);
-
-        Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
-        String formattedDate = df.format(currentTime);
-
-        String uniqueID = UUID.randomUUID().toString();
-
-        editor.putString(DATE, formattedDate);
-        editor.putString(UUIDS, uniqueID);
-        editor.apply();
-
-        uniqueID = formattedDate + "_" + uniqueID;
-        sharedPreferences1 = requireActivity().getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
-        editor1 = sharedPreferences1.edit();
-        Map<String, ?> all = sharedPreferences.getAll();
-        for (Map.Entry<String, ?> x : all.entrySet()) {
-            if (x.getValue().getClass().equals(String.class))  editor1.putString(x.getKey(),  (String)x.getValue());
-            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
-        }
-        editor1.commit();
-        editor.clear();
-        editor.commit();
-        dialog.dismiss();
-        startActivity(new Intent(getActivity(), Dashboard.class));
-//        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-//        fr.replace(R.id.fragment_container, new Fever());
-//        fr.addToBackStack(null);
-//        fr.commit();
-    }
 }

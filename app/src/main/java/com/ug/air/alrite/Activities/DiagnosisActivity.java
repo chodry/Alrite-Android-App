@@ -2,6 +2,8 @@ package com.ug.air.alrite.Activities;
 
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
+import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
+import static com.ug.air.alrite.Fragments.Patient.Cough.NODIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.FTouch.TOUCH;
 import static com.ug.air.alrite.Fragments.Patient.Initials.CIN;
 import static com.ug.air.alrite.Fragments.Patient.Initials.PIN;
@@ -30,6 +32,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ug.air.alrite.Adapters.DiagnosisAdapter;
 import com.ug.air.alrite.Adapters.SummaryAdapter;
@@ -157,11 +160,13 @@ public class DiagnosisActivity extends AppCompatActivity {
         String mDiagnosis = sharedPreferences.getString(MDIAGNOSIS, "");
         String tDiagnosis = sharedPreferences.getString(TDIAGNOSIS, "");
         String oxDiagnosis = sharedPreferences.getString(OXDIAGNOSIS, "");
+        String noDiagnosis = sharedPreferences.getString(NODIAGNOSIS, "");
 
         addToList2(aDiagnosis);
         addToList2(mDiagnosis);
         addToList2(tDiagnosis);
         addToList2(oxDiagnosis);
+        addToList2(noDiagnosis);
 
         for (int i=0; i < messages.size(); i++) {
             Diagnosis diagnosis = new Diagnosis(messages.get(i), buildSubItemList(messages.get(i)));
@@ -192,10 +197,12 @@ public class DiagnosisActivity extends AppCompatActivity {
         String feb = sharedPreferences.getString(TOUCH, "");
         String ox = sharedPreferences.getString(OXY, "");
         String wheez = sharedPreferences.getString(CHOICE8, "");
+        String cough = sharedPreferences.getString(CHOICE2, "");
         addToList("Parent's initials", pin);
         addToList("Child's weight", weight);
         addToList("MUAC value", muac);
         addToList("Symptoms", assess);
+        addToList("Child Coughing", cough);
         addToList("Temperature", temp);
         addToList("Febrile to touch", feb);
         addToList("Oxgyen Saturation", ox);
@@ -238,6 +245,9 @@ public class DiagnosisActivity extends AppCompatActivity {
         else if (s.equals("Very severe febrile illness")){
             messageList = Arrays.asList(R.string.febril1, R.string.febril2);
         }
+        else if (s.equals("No signs of Pneumonia or Wheezing illness")){
+            messageList = Arrays.asList(R.string.selected, R.string.alrite, R.string.no_anti, R.string.other_illness);
+        }
     }
 
     private void saveForm() {
@@ -264,5 +274,10 @@ public class DiagnosisActivity extends AppCompatActivity {
         editor.clear();
         editor.commit();
         startActivity(new Intent(DiagnosisActivity.this, Dashboard.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Please click the EXIT button", Toast.LENGTH_SHORT).show();
     }
 }
