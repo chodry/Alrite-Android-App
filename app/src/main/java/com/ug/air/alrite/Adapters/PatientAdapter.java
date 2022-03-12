@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -60,9 +62,11 @@ public class PatientAdapter extends RecyclerView.Adapter {
         if (getItemViewType(position) == 0){
             Patient patient = (Patient) items.get(position).getObject();
             PatientHolder holder1 = (PatientHolder) holder;
-            holder1.name.setText(patient.getName());
-            holder1.number.setText(patient.getNumber());
             holder1.initials.setText(patient.getInitial());
+            holder1.initial2.setText(patient.getParent());
+            holder1.age.setText(patient.getAge());
+            holder1.sex.setText(patient.getSex());
+            holder1.date.setText(patient.getDate());
         }else {
             History history = (History) items.get(position).getObject();
             HistoryHolder holder1 = (HistoryHolder) holder;
@@ -80,14 +84,18 @@ public class PatientAdapter extends RecyclerView.Adapter {
 
     public class PatientHolder extends RecyclerView.ViewHolder {
 
-        TextView name, number, initials;
+        TextView initials, initial2, age, sex, date;
+        ImageView imageView;
 
         public PatientHolder(@NonNull View itemView) {
             super(itemView);
 
-            name = itemView.findViewById(R.id.patient_name);
-            number = itemView.findViewById(R.id.patient_no);
             initials = itemView.findViewById(R.id.initials);
+            initial2 = itemView.findViewById(R.id.patient_parent);
+            age = itemView.findViewById(R.id.patient_age);
+            sex = itemView.findViewById(R.id.patient_sex);
+            date = itemView.findViewById(R.id.date);
+            imageView = itemView.findViewById(R.id.ready);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

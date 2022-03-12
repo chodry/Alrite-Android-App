@@ -242,7 +242,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         String coughD = sharedPreferences.getString(DAY1, "");
         String fastbreathing = sharedPreferences.getString(FASTBREATHING, "");
         String stidor = sharedPreferences.getString(CHOICE6, "");
-        Boolean steth = sharedPreferences.getBoolean(CHECKSTETHO, false);
+//        Boolean steth = sharedPreferences.getBoolean(CHECKSTETHO, false);
         String nasal = sharedPreferences.getString(CHOICEGN, "");
         String chest = sharedPreferences.getString(CHOICE7, "");
         String bronch = sharedPreferences.getString(BRONCHODILATOR, "");
@@ -269,7 +269,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         addToList("Respiratory Rate", fastbreathing);
         addToList("Child has Stridor", stidor);
         addToList("Child Wheezing", wheez);
-        addToList("Stethoscope was used", String.valueOf(steth));
+//        addToList("Stethoscope was used", String.valueOf(steth));
         addToList("Child has grunting or nasal flaring", nasal);
         addToList("Child has chest indrawing", chest);
         addToList("Bronchodilator", bronch);

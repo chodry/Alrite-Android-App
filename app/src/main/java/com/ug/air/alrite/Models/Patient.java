@@ -2,31 +2,37 @@ package com.ug.air.alrite.Models;
 
 public class Patient {
 
-    private String name;
-    private String number;
+    private String age;
+    private String sex;
     private String initial;
-    private String fileName;
+    private String parent;
+    private String date;
 
-    public Patient(String name, String number, String initial, String fileName) {
-        this.name = name;
-        this.number = number;
+    public Patient(String age, String sex, String initial, String parent, String date) {
+        this.age = age;
+        this.sex = sex;
         this.initial = initial;
-        this.fileName = fileName;
+        this.parent = parent;
+        this.date = date;
     }
 
-    public String getName() {
-        return name;
+    public String getAge() {
+        return age;
     }
 
-    public String getNumber() {
-        return number;
+    public String getSex() {
+        return sex;
     }
 
     public String getInitial() {
         return initial;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getParent() {
+        return parent;
+    }
+
+    public String getDate() {
+        return date;
     }
 }

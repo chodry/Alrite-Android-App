@@ -81,7 +81,12 @@
 
                 </LinearLayout>
 
-
+                <ImageView
+                    android:id="@+id/ready"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_weight=".1"
+                    android:src="@drawable/circle2"/>
 
 
             </LinearLayout>
@@ -89,6 +94,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/date"
             android:layout_marginTop="5dp"
             android:layout_marginStart="5dp"
             android:layout_width="match_parent"
