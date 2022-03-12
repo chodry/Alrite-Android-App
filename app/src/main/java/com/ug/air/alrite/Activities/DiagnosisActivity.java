@@ -1,7 +1,9 @@
 package com.ug.air.alrite.Activities;
 
+import static com.ug.air.alrite.Fragments.Patient.Allergies.CHOICEY2;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
+import static com.ug.air.alrite.Fragments.Patient.Breathless.S5;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.BDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.REASON;
@@ -10,12 +12,16 @@ import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.CIDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
 import static com.ug.air.alrite.Fragments.Patient.Cough.NODIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.CoughD.DAY1;
+import static com.ug.air.alrite.Fragments.Patient.Eczema.CHOICEX2;
 import static com.ug.air.alrite.Fragments.Patient.FTouch.TOUCH;
 import static com.ug.air.alrite.Fragments.Patient.HIVCare.CHOICEHC;
 import static com.ug.air.alrite.Fragments.Patient.HIVStatus.CHOICE3;
 import static com.ug.air.alrite.Fragments.Patient.HIVStatus.HDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Initials.CIN;
 import static com.ug.air.alrite.Fragments.Patient.Initials.PIN;
+import static com.ug.air.alrite.Fragments.Patient.Kerosene.ADIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Kerosene.CHOICET2;
+import static com.ug.air.alrite.Fragments.Patient.Kerosene.TUDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Nasal.CHOICEGN;
 import static com.ug.air.alrite.Fragments.Patient.Nasal.GNDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Oxygen.OXDIAGNOSIS;
@@ -26,10 +32,13 @@ import static com.ug.air.alrite.Fragments.Patient.Sex.CHOICE;
 import static com.ug.air.alrite.Fragments.Patient.Sex.KILO;
 import static com.ug.air.alrite.Fragments.Patient.Sex.MDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Sex.MUAC;
+import static com.ug.air.alrite.Fragments.Patient.Smoke.CHOICET1;
 import static com.ug.air.alrite.Fragments.Patient.Stridor.CHOICE6;
 import static com.ug.air.alrite.Fragments.Patient.Stridor.STDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Temperature.TDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Temperature.TEMP;
+import static com.ug.air.alrite.Fragments.Patient.WheezD.CHOICEX;
+import static com.ug.air.alrite.Fragments.Patient.WheezY.DAY2;
 import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHECKSTETHO;
 import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHOICE8;
 
@@ -182,6 +191,8 @@ public class DiagnosisActivity extends AppCompatActivity {
         String gnDiagnosis = sharedPreferences.getString(GNDIAGNOSIS, "");
         String ciDiagnosis = sharedPreferences.getString(CIDIAGNOSIS, "");
         String wDiagnosis = sharedPreferences.getString(BDIAGNOSIS, "");
+        String asDiagnosis = sharedPreferences.getString(ADIAGNOSIS, "");
+        String tuDiagnosis = sharedPreferences.getString(TUDIAGNOSIS, "");
 
         addToList2(aDiagnosis);
         addToList2(mDiagnosis);
@@ -193,6 +204,8 @@ public class DiagnosisActivity extends AppCompatActivity {
         addToList2(gnDiagnosis);
         addToList2(ciDiagnosis);
         addToList2(wDiagnosis);
+        addToList2(asDiagnosis);
+        addToList2(tuDiagnosis);
 
         for (int i=0; i < messages.size(); i++) {
             Diagnosis diagnosis = new Diagnosis(messages.get(i), buildSubItemList(messages.get(i)));
@@ -234,6 +247,14 @@ public class DiagnosisActivity extends AppCompatActivity {
         String chest = sharedPreferences.getString(CHOICE7, "");
         String bronch = sharedPreferences.getString(BRONCHODILATOR, "");
         String reason = sharedPreferences.getString(REASON, "");
+        String wheezD = sharedPreferences.getString(CHOICEX, "");
+        String wheezY = sharedPreferences.getString(DAY2, "");
+        String breathless = sharedPreferences.getString(S5, "");
+        String eczema = sharedPreferences.getString(CHOICEX2, "");
+        String allergies = sharedPreferences.getString(CHOICEY2, "");
+        String smoke = sharedPreferences.getString(CHOICET1, "");
+        String kerosene = sharedPreferences.getString(CHOICET2, "");
+
         addToList("Parent's initials", pin);
         addToList("Child's weight", weight);
         addToList("MUAC value", muac);
@@ -253,6 +274,13 @@ public class DiagnosisActivity extends AppCompatActivity {
         addToList("Child has chest indrawing", chest);
         addToList("Bronchodilator", bronch);
         addToList("Reason", reason);
+        addToList("Child has breathing difficulty", wheezD);
+        addToList("Episodes in the past year", wheezY);
+        addToList("Child his breathless", breathless);
+        addToList("Child has Eczema", eczema);
+        addToList("Child's family has Allergies", allergies);
+        addToList("Any family member smoking tobacco", smoke);
+        addToList("Any family member using kerosene", kerosene);
 
         return summaryList;
     }
@@ -313,6 +341,12 @@ public class DiagnosisActivity extends AppCompatActivity {
                 messageList = Arrays.asList(R.string.wheez_ill1, R.string.wheez_ill2, R.string.wheez_ill7,
                         R.string.wheez_ill8, R.string.wheez_ill9);
             }
+        }
+        else if (s.equals("Asthma Risk")){
+            messageList = Arrays.asList(R.string.asthma1, R.string.asthma2, R.string.asthma3);
+        }
+        else if (s.equals("Tuberculosis risk")){
+            messageList = Arrays.asList(R.string.tuber1, R.string.tuber2);
         }
     }
 

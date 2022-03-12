@@ -107,6 +107,9 @@ public class Oxygen extends Fragment {
         btSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                editor.remove(OXDIAGNOSIS);
+                editor.remove(OXY);
+                editor.apply();
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.fragment_container, new RRCounter());
                 fr.addToBackStack(null);

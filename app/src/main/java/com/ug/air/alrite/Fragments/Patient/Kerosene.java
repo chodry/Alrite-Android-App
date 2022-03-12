@@ -67,6 +67,7 @@ public class Kerosene extends Fragment {
     public static final String CHOICET2 = "choiceT2";
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String ADIAGNOSIS = "aDiagnosis";
+    public static final String TUDIAGNOSIS = "tuDiagnosis";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
     RecyclerView recyclerView;
@@ -202,7 +203,10 @@ public class Kerosene extends Fragment {
             if (co > 14 || (hiv.equals("Known HIV") && dif.equals("Yes"))){
                 showDialog2();
             }else {
-                saveForm();
+                editor.remove(ADIAGNOSIS);
+                editor.remove(TUDIAGNOSIS);
+                editor.apply();
+                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
             }
 
         }
@@ -213,7 +217,7 @@ public class Kerosene extends Fragment {
         dialog.setContentView(R.layout.assessment_layout);
         dialog.setCancelable(true);
         Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1300);
 
         linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
         txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
@@ -224,6 +228,7 @@ public class Kerosene extends Fragment {
         linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.moderateDiagnosisColor));
         txtDiagnosis.setText(R.string.asthma);
         diagnosis = txtDiagnosis.getText().toString();
+        diagnosis = diagnosis.replace("Diagnosis: ", "");
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -243,6 +248,7 @@ public class Kerosene extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editor.putString(ADIAGNOSIS, diagnosis);
                 String cough = sharedPreferences.getString(DAY1, "");
                 long co = Long.parseLong(cough);
                 String hiv = sharedPreferences.getString(CHOICE3, "");
@@ -250,8 +256,10 @@ public class Kerosene extends Fragment {
                 if (co > 14 || (hiv.equals("Known HIV") && dif.equals("Yes"))){
                     showDialog2();
                 }else {
-                    saveForm();
+                    editor.remove(TUDIAGNOSIS);
+                    startActivity(new Intent(getActivity(), DiagnosisActivity.class));
                 }
+                editor.apply();
                 dialog.dismiss();
             }
         });
@@ -277,6 +285,7 @@ public class Kerosene extends Fragment {
         linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.moderateDiagnosisColor));
         txtDiagnosis.setText(R.string.tuber);
         diagnosis = txtDiagnosis.getText().toString();
+        diagnosis = diagnosis.replace("Diagnosis: ", "");
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -284,7 +293,7 @@ public class Kerosene extends Fragment {
         assessments = new ArrayList<>();
         assessmentAdapter = new AssessmentAdapter(assessments);
 
-        List<Integer> messages = Arrays.asList(R.string.tuber1, R.string.tuber);
+        List<Integer> messages = Arrays.asList(R.string.tuber1, R.string.tuber2);
         for (int i = 0; i < messages.size(); i++){
             Assessment assessment = new Assessment(messages.get(i));
             assessments.add(assessment);
@@ -296,8 +305,10 @@ public class Kerosene extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveForm();
+                editor.putString(TUDIAGNOSIS, diagnosis);
+                editor.apply();
                 dialog2.dismiss();
+                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
             }
         });
 
@@ -306,31 +317,5 @@ public class Kerosene extends Fragment {
         dialog2.show();
     }
 
-    private void saveForm() {
-        editor.putString(ADIAGNOSIS, diagnosis);
-
-        Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
-        String formattedDate = df.format(currentTime);
-
-        String uniqueID = UUID.randomUUID().toString();
-
-        editor.putString(DATE, formattedDate);
-        editor.putString(UUIDS, uniqueID);
-        editor.apply();
-
-        uniqueID = formattedDate + "_" + uniqueID;
-        sharedPreferences1 = requireActivity().getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
-        editor1 = sharedPreferences1.edit();
-        Map<String, ?> all = sharedPreferences.getAll();
-        for (Map.Entry<String, ?> x : all.entrySet()) {
-            if (x.getValue().getClass().equals(String.class))  editor1.putString(x.getKey(),  (String)x.getValue());
-            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
-        }
-        editor1.commit();
-        editor.clear();
-        editor.commit();
-        startActivity(new Intent(getActivity(), DiagnosisActivity.class));
-    }
 
 }

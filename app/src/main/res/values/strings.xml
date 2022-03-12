@@ -34,7 +34,7 @@
 
     <string name="tuber">Diagnosis: Tuberculosis risk</string>
     <string name="tuber1">Ask about potential TB exposures</string>
-    <string name="tuber2">TRefer to assess and treat for potential TB. This will include TB testing and chest x-ray</string>
+    <string name="tuber2">Refer to assess and treat for potential TB. This will include TB testing and chest x-ray</string>
 
     <string name="low_oxygen">Start oxygen therapy if oxygen is available at the health facility</string>
 
