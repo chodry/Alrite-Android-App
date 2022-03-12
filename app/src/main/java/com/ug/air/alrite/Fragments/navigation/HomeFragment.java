@@ -34,15 +34,21 @@ public class HomeFragment extends Fragment {
         view.findViewById(R.id.btn_patients).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), PatientActivity.class);
-//                startActivity(intent);
+                Bundle bundle = new Bundle();
+                Intent intent = new Intent(getActivity(), PatientActivity.class);
+                bundle.putInt("Fragment", 2);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
         view.findViewById(R.id.btn_assessment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
                 Intent intent = new Intent(getActivity(), PatientActivity.class);
+                bundle.putInt("Fragment", 1);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

@@ -94,7 +94,6 @@ public class Wheezing extends Fragment {
         sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        assess = sharedPreferences.getString(S4, "");
         loadData();
         updateViews();
 
@@ -134,7 +133,7 @@ public class Wheezing extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                assess = sharedPreferences.getString(S4, "");
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 if (!assess.equals("None of these")){
                     fr.replace(R.id.fragment_container, new Oxygen());
@@ -187,7 +186,7 @@ public class Wheezing extends Fragment {
         }else {
             radioButton1.setChecked(false);
             radioButton2.setChecked(false);
-            radioButton3.setChecked(true);
+            radioButton3.setChecked(false);
         }
 
         checkBox.setChecked(check1);

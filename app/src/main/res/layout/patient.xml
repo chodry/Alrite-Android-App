@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="8dp"
@@ -22,50 +22,80 @@
         android:gravity="center_vertical">
 
         <LinearLayout
-            android:id="@+id/pt"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:orientation="vertical"
-            android:background="@drawable/image_layout">
-
-            <TextView
-                android:id="@+id/initials"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="MM"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:layout_gravity="center"
-                android:gravity="center_vertical"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/pt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="16dp"
-            android:layout_gravity="center_vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Kisakye John Bosco"
-                android:textSize="14sp"
-                android:id="@+id/patient_name"/>
+            <LinearLayout
+                android:id="@+id/pt"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:orientation="vertical"
+                android:background="@drawable/image_layout">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/initials"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="MM"
+                    android:textSize="27sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/pt"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PI-00000023"
-                android:textSize="14sp"
-                android:id="@+id/patient_no"
-                android:layout_marginTop="4dp"/>
+                android:orientation="horizontal"
+                android:layout_marginLeft="16dp"
+                android:weightSum="1"
+                android:layout_gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".9">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="Age: 2.4 years"
+                        android:id="@+id/patient_age"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gender: Male"
+                        android:textColor="@color/black"
+                        android:id="@+id/patient_sex"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Parent/Guardian: PH"
+                        android:id="@+id/patient_parent"/>
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
         </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:text="Date:12/23/3004"/>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

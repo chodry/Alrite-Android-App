@@ -139,7 +139,7 @@ public class Fragment2v2 extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Fragment2v1());
+                fr.replace(R.id.fragment_container, new ActivePatients());
                 fr.commit();
             }
         });

@@ -66,7 +66,7 @@ public class Fragment1 extends Fragment {
             public void onClick(View v) {
                 if (value.equals("Yes")) {
                     FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                    fr.replace(R.id.fragment_container, new Fragment2v1());
+                    fr.replace(R.id.fragment_container, new ActivePatients());
                     fr.addToBackStack(null);
                     fr.commit();
 
