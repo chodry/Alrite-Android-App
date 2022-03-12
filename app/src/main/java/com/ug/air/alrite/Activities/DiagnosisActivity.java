@@ -2,20 +2,35 @@ package com.ug.air.alrite.Activities;
 
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.BDIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.REASON;
+import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.CHOICE7;
+import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.CIDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
 import static com.ug.air.alrite.Fragments.Patient.Cough.NODIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.CoughD.DAY1;
 import static com.ug.air.alrite.Fragments.Patient.FTouch.TOUCH;
+import static com.ug.air.alrite.Fragments.Patient.HIVCare.CHOICEHC;
+import static com.ug.air.alrite.Fragments.Patient.HIVStatus.CHOICE3;
+import static com.ug.air.alrite.Fragments.Patient.HIVStatus.HDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Initials.CIN;
 import static com.ug.air.alrite.Fragments.Patient.Initials.PIN;
+import static com.ug.air.alrite.Fragments.Patient.Nasal.CHOICEGN;
+import static com.ug.air.alrite.Fragments.Patient.Nasal.GNDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Oxygen.OXDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Oxygen.OXY;
+import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 import static com.ug.air.alrite.Fragments.Patient.Sex.CHOICE;
 import static com.ug.air.alrite.Fragments.Patient.Sex.KILO;
 import static com.ug.air.alrite.Fragments.Patient.Sex.MDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Sex.MUAC;
+import static com.ug.air.alrite.Fragments.Patient.Stridor.CHOICE6;
+import static com.ug.air.alrite.Fragments.Patient.Stridor.STDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Temperature.TDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Temperature.TEMP;
+import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHECKSTETHO;
 import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHOICE8;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +60,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -161,12 +177,22 @@ public class DiagnosisActivity extends AppCompatActivity {
         String tDiagnosis = sharedPreferences.getString(TDIAGNOSIS, "");
         String oxDiagnosis = sharedPreferences.getString(OXDIAGNOSIS, "");
         String noDiagnosis = sharedPreferences.getString(NODIAGNOSIS, "");
+        String hDiagnosis = sharedPreferences.getString(HDIAGNOSIS, "");
+        String stDiagnosis = sharedPreferences.getString(STDIAGNOSIS, "");
+        String gnDiagnosis = sharedPreferences.getString(GNDIAGNOSIS, "");
+        String ciDiagnosis = sharedPreferences.getString(CIDIAGNOSIS, "");
+        String wDiagnosis = sharedPreferences.getString(BDIAGNOSIS, "");
 
         addToList2(aDiagnosis);
         addToList2(mDiagnosis);
         addToList2(tDiagnosis);
         addToList2(oxDiagnosis);
         addToList2(noDiagnosis);
+        addToList2(hDiagnosis);
+        addToList2(stDiagnosis);
+        addToList2(gnDiagnosis);
+        addToList2(ciDiagnosis);
+        addToList2(wDiagnosis);
 
         for (int i=0; i < messages.size(); i++) {
             Diagnosis diagnosis = new Diagnosis(messages.get(i), buildSubItemList(messages.get(i)));
@@ -198,15 +224,35 @@ public class DiagnosisActivity extends AppCompatActivity {
         String ox = sharedPreferences.getString(OXY, "");
         String wheez = sharedPreferences.getString(CHOICE8, "");
         String cough = sharedPreferences.getString(CHOICE2, "");
+        String hiv = sharedPreferences.getString(CHOICE3, "");
+        String care = sharedPreferences.getString(CHOICEHC, "");
+        String coughD = sharedPreferences.getString(DAY1, "");
+        String fastbreathing = sharedPreferences.getString(FASTBREATHING, "");
+        String stidor = sharedPreferences.getString(CHOICE6, "");
+        Boolean steth = sharedPreferences.getBoolean(CHECKSTETHO, false);
+        String nasal = sharedPreferences.getString(CHOICEGN, "");
+        String chest = sharedPreferences.getString(CHOICE7, "");
+        String bronch = sharedPreferences.getString(BRONCHODILATOR, "");
+        String reason = sharedPreferences.getString(REASON, "");
         addToList("Parent's initials", pin);
         addToList("Child's weight", weight);
         addToList("MUAC value", muac);
         addToList("Symptoms", assess);
         addToList("Child Coughing", cough);
+        addToList("Days coughing", coughD);
         addToList("Temperature", temp);
         addToList("Febrile to touch", feb);
+        addToList("HIV Status", hiv);
+        addToList("Child in HIV Care", care);
         addToList("Oxgyen Saturation", ox);
+        addToList("Respiratory Rate", fastbreathing);
+        addToList("Child has Stridor", stidor);
         addToList("Child Wheezing", wheez);
+        addToList("Stethoscope was used", String.valueOf(steth));
+        addToList("Child has grunting or nasal flaring", nasal);
+        addToList("Child has chest indrawing", chest);
+        addToList("Bronchodilator", bronch);
+        addToList("Reason", reason);
 
         return summaryList;
     }
@@ -247,6 +293,26 @@ public class DiagnosisActivity extends AppCompatActivity {
         }
         else if (s.equals("No signs of Pneumonia or Wheezing illness")){
             messageList = Arrays.asList(R.string.selected, R.string.alrite, R.string.no_anti, R.string.other_illness);
+        }
+        else if (s.equals("HIV risk")){
+            messageList = Collections.singletonList(R.string.hiv);
+        }
+        else if (s.equals("Pneumonia")){
+            messageList = Arrays.asList(R.string.pneumonia1, R.string.pneumonia2, R.string.pneumonia3);
+        }
+        else if (s.equals("Cough/Cold/No Pneumonia")){
+            messageList = Arrays.asList(R.string.cold1, R.string.cold2, R.string.cold3, R.string.cold4);
+        }
+        else if (s.equals("Wheezing")){
+            String age = sharedPreferences.getString(AGE, "");
+            float ag = Float.parseFloat(age);
+            if (ag < 2){
+                messageList = Arrays.asList(R.string.wheez_ill1, R.string.wheez_ill2, R.string.wheez_ill3,
+                        R.string.wheez_ill4, R.string.wheez_ill5, R.string.wheez_ill6);
+            }else {
+                messageList = Arrays.asList(R.string.wheez_ill1, R.string.wheez_ill2, R.string.wheez_ill7,
+                        R.string.wheez_ill8, R.string.wheez_ill9);
+            }
         }
     }
 

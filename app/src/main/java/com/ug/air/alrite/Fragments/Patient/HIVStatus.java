@@ -31,8 +31,9 @@ public class HIVStatus extends Fragment {
     private static final int NO = 1;
     private static final int NOT = 2;
     public static final String CHOICE3 = "choice3";
+    public static final String HDIAGNOSIS = "hDiagnosis";
     public static final String SHARED_PREFS = "sharedPrefs";
-    String cough, hist;
+    String cough, hist, diagnosis;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
@@ -107,6 +108,9 @@ public class HIVStatus extends Fragment {
 
         FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
         if (!value4.equals("None of these")) {
+            diagnosis = "HIV risk";
+            editor.putString(HDIAGNOSIS, diagnosis);
+            editor.apply();
             fr.replace(R.id.fragment_container, new HIVCare());
 
         }else {
@@ -139,6 +143,7 @@ public class HIVStatus extends Fragment {
 
     private void deleteSharedPreferences() {
         editor.remove(CHOICEHC);
+        editor.remove(HDIAGNOSIS);
         editor.apply();
     }
 

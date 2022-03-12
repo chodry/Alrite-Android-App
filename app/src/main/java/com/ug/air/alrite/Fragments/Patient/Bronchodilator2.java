@@ -158,6 +158,8 @@ public class Bronchodilator2 extends Fragment {
         if (cough.equals("Yes") && wheezing.equals("Wheezing")){
             showDialog2();
         }else {
+            editor.remove(BDIAGNOSIS);
+            editor.apply();
             if (day >= 10){
                 showDialog();
             }else {
@@ -242,16 +244,16 @@ public class Bronchodilator2 extends Fragment {
         }
         recyclerView.setAdapter(assessmentAdapter);
 
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1300);
 
         diagnosis = txtDiagnosis.getText().toString();
+        diagnosis = diagnosis.replace("Diagnosis: ", "");
 
         btnSave.setVisibility(View.GONE);
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
                 editor.putString(BDIAGNOSIS, diagnosis);
                 editor.apply();
                 dialog.dismiss();

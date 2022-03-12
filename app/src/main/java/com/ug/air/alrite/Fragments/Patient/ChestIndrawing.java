@@ -232,6 +232,8 @@ public class ChestIndrawing extends Fragment {
                 fr.addToBackStack(null);
                 fr.commit();
             }else {
+                editor.remove(CIDIAGNOSIS);
+                editor.apply();
                 startActivity(new Intent(getActivity(), DiagnosisActivity.class));
             }
         }
@@ -262,15 +264,16 @@ public class ChestIndrawing extends Fragment {
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.moderateDiagnosisColor));
             txtDiagnosis.setText(R.string.pneumonia);
             messages = Arrays.asList(R.string.pneumonia1, R.string.pneumonia2, R.string.pneumonia3);
-            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1300);
         }else {
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));
             txtDiagnosis.setText(R.string.cold);
             messages = Arrays.asList(R.string.cold1, R.string.cold2, R.string.cold3, R.string.cold4);
-            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1300);
         }
 
         diagnosis = txtDiagnosis.getText().toString();
+        diagnosis = diagnosis.replace("Diagnosis: ", "");
 
         for (int i = 0; i < messages.size(); i++){
             Assessment assessment = new Assessment(messages.get(i));
@@ -281,7 +284,10 @@ public class ChestIndrawing extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveForm();
+                editor.putString(CIDIAGNOSIS, diagnosis);
+                editor.apply();
+                dialog.dismiss();
+                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
             }
         });
 
@@ -309,31 +315,4 @@ public class ChestIndrawing extends Fragment {
         dialog.show();
     }
 
-    private void saveForm() {
-        Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
-        String formattedDate = df.format(currentTime);
-
-        String uniqueID = UUID.randomUUID().toString();
-
-        editor.putString(CIDIAGNOSIS, diagnosis);
-        editor.putString(DATE, formattedDate);
-        editor.putString(UUIDS, uniqueID);
-        editor.apply();
-
-        uniqueID = formattedDate + "_" + uniqueID;
-
-        sharedPreferences1 = requireActivity().getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
-        editor1 = sharedPreferences1.edit();
-        Map<String, ?> all = sharedPreferences.getAll();
-        for (Map.Entry<String, ?> x : all.entrySet()) {
-            if (x.getValue().getClass().equals(String.class))  editor1.putString(x.getKey(),  (String)x.getValue());
-            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
-        }
-        editor1.commit();
-        editor.clear();
-        editor.commit();
-        dialog.dismiss();
-        startActivity(new Intent(getActivity(), DiagnosisActivity.class));
-    }
 }

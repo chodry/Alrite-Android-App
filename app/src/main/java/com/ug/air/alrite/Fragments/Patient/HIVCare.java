@@ -31,7 +31,7 @@ public class HIVCare extends Fragment {
     private static final int NO = 1;
     public static final String CHOICEHC = "choiceHc";
     public static final String SHARED_PREFS = "sharedPrefs";
-    String cough, hist;
+    String cough, hist, diagnosis;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
