@@ -1,6 +1,7 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
+import static com.ug.air.alrite.Fragments.Patient.RRCounter.SECOND;
 import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHOICE8;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
@@ -59,7 +60,7 @@ public class ChestIndrawing extends Fragment {
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2, radioButton3;
     String value8 = "none";
-    String diagnosis, wheezing;
+    String diagnosis, wheezing, second;
     long day;
     TextView txtDisease, txtDefinition, txtOk, txtDiagnosis;
     LinearLayout linearLayoutDisease;
@@ -73,6 +74,7 @@ public class ChestIndrawing extends Fragment {
     private static final int NO = 0;
     private static final int NOT = 2;
     public static final String CHOICE7 = "choice7";
+    public static final String CHOICE72 = "choice72";
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String CIDIAGNOSIS = "ciDiagnosis";
     SharedPreferences sharedPreferences, sharedPreferences1;
@@ -96,8 +98,13 @@ public class ChestIndrawing extends Fragment {
         sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        loadData();
-        updateViews();
+        second = sharedPreferences.getString(SECOND, "");
+
+        if (second.isEmpty()){
+            loadData();
+            updateViews();
+        }
+
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -136,7 +143,11 @@ public class ChestIndrawing extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Nasal());
+                if (second.isEmpty()){
+                    fr.replace(R.id.fragment_container, new Nasal());
+                }else {
+                    fr.replace(R.id.fragment_container, new Wheezing());
+                }
                 fr.commit();
             }
         });
@@ -152,11 +163,19 @@ public class ChestIndrawing extends Fragment {
     }
 
     private void saveData() {
+        if (second.isEmpty()){
+            editor.putString(CHOICE7, value8);
+            editor.apply();
 
-        editor.putString(CHOICE7, value8);
-        editor.apply();
-
-        makeAssessment2();
+            makeAssessment();
+        }else {
+            editor.putString(CHOICE72, value8);
+            editor.apply();
+            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+            fr.replace(R.id.fragment_container, new Bronchodilator3());
+            fr.addToBackStack(null);
+            fr.commit();
+        }
 
     }
 
@@ -214,7 +233,7 @@ public class ChestIndrawing extends Fragment {
         dialog.show();
     }
 
-    private void makeAssessment2(){
+    private void makeAssessment(){
         String cough = sharedPreferences.getString(CHOICE2, "");
         String fastBreathing = sharedPreferences.getString(FASTBREATHING, "");
         wheezing = sharedPreferences.getString(CHOICE8, "");

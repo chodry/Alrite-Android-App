@@ -3,6 +3,7 @@ package com.ug.air.alrite.Fragments.Patient;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
+import static com.ug.air.alrite.Fragments.Patient.RRCounter.SECOND;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -62,7 +63,7 @@ public class Wheezing extends Fragment {
     LinearLayout linearLayout_instruction;
     VideoView videoView;
     Dialog dialog;
-    String diagnosis, s, assess;
+    String diagnosis, s, assess, second;
     RecyclerView recyclerView;
     Boolean check1;
     ArrayList<Assessment> assessments;
@@ -72,6 +73,7 @@ public class Wheezing extends Fragment {
     private static final int NOT = 2;
     public static final String CHECKSTETHO = "checkStetho";
     public static final String CHOICE8 = "choice8";
+    public static final String CHOICE82 = "choice82";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
@@ -95,9 +97,12 @@ public class Wheezing extends Fragment {
         editor = sharedPreferences.edit();
 
         assess = sharedPreferences.getString(S4, "");
+        second = sharedPreferences.getString(SECOND, "");
 
-        loadData();
-        updateViews();
+        if (second.isEmpty()){
+            loadData();
+            updateViews();
+        }
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -136,12 +141,17 @@ public class Wheezing extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                if (!assess.equals("None of these")){
-                    fr.replace(R.id.fragment_container, new Oxygen());
+                if (second.isEmpty()){
+                    if (!assess.equals("None of these")){
+                        fr.replace(R.id.fragment_container, new Oxygen());
+                    }else {
+                        fr.replace(R.id.fragment_container, new Stridor());
+                    }
                 }else {
-                    fr.replace(R.id.fragment_container, new Stridor());
+                    fr.replace(R.id.fragment_container, new RRCounter());
                 }
                 fr.commit();
+
             }
         });
 
@@ -157,14 +167,25 @@ public class Wheezing extends Fragment {
 
     private void saveData() {
 
-        editor.putString(CHOICE8, value9);
-        editor.putBoolean(CHECKSTETHO, checkBox.isChecked());
-        editor.apply();
-        if (!assess.equals("None of these")){
-            startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+        if (second.isEmpty()){
+            editor.putString(CHOICE8, value9);
+            editor.putBoolean(CHECKSTETHO, checkBox.isChecked());
+            editor.apply();
+            if (!assess.equals("None of these")){
+                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+            }else {
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new Nasal());
+                fr.addToBackStack(null);
+                fr.commit();
+            }
         }else {
+            editor.putString(CHOICE82, value9);
+            editor.putBoolean(CHECKSTETHO, checkBox.isChecked());
+            editor.apply();
+
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Nasal());
+            fr.replace(R.id.fragment_container, new ChestIndrawing());
             fr.addToBackStack(null);
             fr.commit();
         }

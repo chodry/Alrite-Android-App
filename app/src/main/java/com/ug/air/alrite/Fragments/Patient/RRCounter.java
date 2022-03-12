@@ -25,6 +25,8 @@ import com.ug.air.alrite.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 
@@ -33,6 +35,7 @@ public class RRCounter extends Fragment {
     View view;
     Button next, back, reset, manual, btnRate, btnReset, btnContinue;
     EditText etRate;
+    Bundle bundle;
     LinearLayout tap;
     TextView txtElapse, txtRate, txtBreathe, txtMsg;
     Dialog dialog, dialog1;
@@ -45,11 +48,14 @@ public class RRCounter extends Fragment {
     private CountDownTimer timer;
     private boolean completed;
     public static final String SHARED_PREFS = "sharedPrefs";
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor;
     public static final String FASTBREATHING = "fastBreathing";
+    public static final String FASTBREATHING2 = "fastBreathing2";
+    public static final String SECOND = "second";
     public static final String RATE = "rate";
-    String age, rate, rating;
+    public static final String RATE2 = "rate2";
+    String age, rate, rating, check;
     float ag = 0;
     int score = 0;
 
@@ -66,7 +72,29 @@ public class RRCounter extends Fragment {
         txtElapse = view.findViewById(R.id.elapsedTime);
         tap = view.findViewById(R.id.Circle);
 
-        sharedPreferences = this.requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        bundle = this.getArguments();
+        if (bundle != null){
+            String fileName = bundle.getString("fileName");
+            bronchodilator(fileName);
+        } else {
+            sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+            String second = sharedPreferences.getString(SECOND, "");
+            if (second.isEmpty()){
+                check = "new data";
+                loadData();
+                updateViews();
+            }else{
+                bronchodilator(second);
+//                reset.setVisibility(View.GONE);
+//                manual.setVisibility(View.GONE);
+//                tap.setVisibility(View.GONE);
+//                txtElapse.setText("Respiratory Rate was already captured, click NEXT to continue");
+//                next.setVisibility(View.VISIBLE);
+            }
+
+        }
+
         editor = sharedPreferences.edit();
         age = sharedPreferences.getString(AGE, "");
         ag = Float.parseFloat(age);
@@ -76,9 +104,6 @@ public class RRCounter extends Fragment {
         durations = new ArrayList<>();
         newTimer();
         lastBreath=-1;
-
-        loadData();
-        updateViews();
 
         tap.setOnClickListener(view -> {
             view.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.circle_animation));
@@ -109,7 +134,11 @@ public class RRCounter extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Oxygen());
+                if(check.equals("bronchodilator")){
+                    fr.replace(R.id.fragment_container, new ActivePatients());
+                }else {
+                    fr.replace(R.id.fragment_container, new Oxygen());
+                }
                 fr.commit();
             }
         });
@@ -124,6 +153,20 @@ public class RRCounter extends Fragment {
         });
 
         return view;
+    }
+
+    public void bronchodilator(String fileName){
+        sharedPreferences1 = requireActivity().getSharedPreferences(fileName, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        Map<String, ?> all = sharedPreferences1.getAll();
+        for (Map.Entry<String, ?> x : all.entrySet()) {
+            if (x.getValue().getClass().equals(String.class))  editor.putString(x.getKey(),  (String)x.getValue());
+        }
+        editor.commit();
+        check = "bronchodilator";
+        editor.putString(SECOND, fileName);
+        editor.apply();
     }
 
     public void breathTaken() {
@@ -399,14 +442,27 @@ public class RRCounter extends Fragment {
 
     private void saveData() {
 
-        editor.putString(FASTBREATHING, rating);
-        editor.putString(RATE, rate);
-        editor.apply();
+        if (check.equals("bronchodilator")){
+            editor.putString(FASTBREATHING2, rating);
+            editor.putString(RATE2, rate);
+            editor.apply();
 
-        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Stridor());
-        fr.addToBackStack(null);
-        fr.commit();
+            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+            fr.replace(R.id.fragment_container, new Wheezing());
+            fr.addToBackStack(null);
+            fr.commit();
+
+        }else{
+            editor.putString(FASTBREATHING, rating);
+            editor.putString(RATE, rate);
+            editor.apply();
+
+            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+            fr.replace(R.id.fragment_container, new Stridor());
+            fr.addToBackStack(null);
+            fr.commit();
+        }
+
     }
 
     private void loadData() {

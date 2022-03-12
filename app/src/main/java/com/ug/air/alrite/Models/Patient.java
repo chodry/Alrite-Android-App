@@ -7,13 +7,15 @@ public class Patient {
     private String initial;
     private String parent;
     private String date;
+    private String filename;
 
-    public Patient(String age, String sex, String initial, String parent, String date) {
+    public Patient(String age, String sex, String initial, String parent, String date, String filename) {
         this.age = age;
         this.sex = sex;
         this.initial = initial;
         this.parent = parent;
         this.date = date;
+        this.filename = filename;
     }
 
     public String getAge() {
@@ -34,5 +36,9 @@ public class Patient {
 
     public String getDate() {
         return date;
+    }
+
+    public String getFilename() {
+        return filename;
     }
 }

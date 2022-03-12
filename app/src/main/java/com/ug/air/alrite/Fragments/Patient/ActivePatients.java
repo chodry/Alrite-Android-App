@@ -87,16 +87,16 @@ public class ActivePatients extends Fragment {
         patientAdapter.setOnItemClickListener(new PatientAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-//                Patient patient = (Patient) items.get(position).getObject();
-//                String name = patient.getFileName();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("fileName", name);
-//                Fragment2v2 fragment2v2 = new Fragment2v2();
-//                fragment2v2.setArguments(bundle);
-//                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-//                fr.replace(R.id.fragment_container, fragment2v2);
-//                fr.addToBackStack(null);
-//                fr.commit();
+                Patient patient = (Patient) items.get(position).getObject();
+                String name = patient.getFilename();
+                Bundle bundle = new Bundle();
+                bundle.putString("fileName", name);
+                RRCounter rrCounter = new RRCounter();
+                rrCounter.setArguments(bundle);
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, rrCounter);
+                fr.addToBackStack(null);
+                fr.commit();
             }
         });
 
@@ -132,7 +132,7 @@ public class ActivePatients extends Fragment {
                             Date date = df.parse(dat);
                             SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
                             String formattedDate = df1.format(date);
-                            Patient patient = new Patient("Age: " + age + " years", "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate);
+                            Patient patient = new Patient("Age: " + age + " years", "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, fileName);
                             items.add(new Item(0, patient));
 //                            patientAdapter.notifyDataSetChanged();
                         } catch (ParseException e) {
@@ -183,7 +183,7 @@ public class ActivePatients extends Fragment {
                                     Date date = df.parse(dat);
                                     SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
                                     String formattedDate = df1.format(date);
-                                    Patient patient = new Patient("Age: " + age + " years", "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate);
+                                    Patient patient = new Patient("Age: " + age + " years", "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names);
                                     items.add(new Item(0, patient));
                                 } catch (ParseException e) {
                                     e.printStackTrace();
