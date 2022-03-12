@@ -100,4 +100,8 @@
 
     <string name="hiv">needs more clarity</string>
 
+    <string name="bronc1">Diagnosis: Severe Disease</string>
+    <string name="bronc2">Give 2 additional treatments of salbutamol 4-10 puffs each treatment</string>
+    <string name="bronc3">consider referral for worsening clinical signs and symptoms</string>
+
 </resources>
