@@ -66,13 +66,20 @@
     <string name="wheez">A high-pitched whistling sound associated with labored breathing</string>
     <string name="chest_in">The lower ribs on both sides of the chest are pulled in when the child breathes in, even when the child is not crying.</string>
 
-    <string name="wheez_ill">Diagnosis: Wheezing</string>
+    <string name="wheez_ill">Diagnosis: Wheezing (not clear bronchodilator response)</string>
     <string name="wheez_ill1">Soothe the throat and relieve the cough with a safe remedy</string>
     <string name="wheez_ill2">Suction nasal secretions as needed</string>
     <string name="wheez_ill3">Encourage safe feeding practices</string>
     <string name="wheez_ill4">No clear recommendation for inhaled bronchodilators at this time</string>
     <string name="wheez_ill5">Counsel caregiver to monitor the child’s breathing and feeding closely</string>
     <string name="wheez_ill6">Follow up in 2 days, earlier if getting worse</string>
+
+    <string name="wheez1">Diagnosis: Wheezing illness (bronchodilator response)</string>
+    <string name="wheez2">Give inhaled salbutamol , 4-6 puffs every 4-6 hours for 5 days. </string>
+    <string name="wheez3">Inhaled salbutamol is preferred to oral salbutamol</string>
+    <string name="wheez4">Use with spacer [INSERT link to spacer making/teaching]</string>
+    <string name="wheez5">Follow up in 3 days, earlier if worsening</string>
+    <string name="wheez6">Consider referral for asthma assessment and management</string>
 
     <string name="wheez_ill7">Trial salbutamol inhaler 4 puffs every 4-6 hours for 3 days</string>
     <string name="wheez_ill8">Follow up in 3 days, earlier if getting worse</string>
@@ -103,5 +110,7 @@
     <string name="bronc1">Diagnosis: Severe Disease</string>
     <string name="bronc2">Give 2 additional treatments of salbutamol 4-10 puffs each treatment</string>
     <string name="bronc3">consider referral for worsening clinical signs and symptoms</string>
+
+    <string name="bronchodi">An inhaled medication that relaxes constricted air passages to make breathing easier</string>
 
 </resources>

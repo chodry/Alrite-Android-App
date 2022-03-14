@@ -3,6 +3,8 @@ package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Activities.DiagnosisActivity.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.BRONC;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.FINAL;
 import static com.ug.air.alrite.Fragments.Patient.Initials.CIN;
 import static com.ug.air.alrite.Fragments.Patient.Initials.PIN;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
@@ -170,7 +172,8 @@ public class ActivePatients extends Fragment {
                             String names = name.replace(".xml", "");
                             sharedPreferences = requireActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
                             String bron = sharedPreferences.getString(BRONCHODILATOR, "");
-                            if (bron.equals("Bronchodialtor Given")){
+                            String fin = sharedPreferences.getString(BRONC, "");
+                            if (bron.equals("Bronchodialtor Given") && fin.isEmpty()){
                                 file.add(names);
                                 cin = sharedPreferences.getString(CIN, "");
                                 pin = sharedPreferences.getString(PIN, "");

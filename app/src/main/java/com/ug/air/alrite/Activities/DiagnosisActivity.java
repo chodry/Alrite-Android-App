@@ -7,7 +7,10 @@ import static com.ug.air.alrite.Fragments.Patient.Breathless.S5;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.BDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.REASON;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.B3DIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.BRONC;
 import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.CHOICE7;
+import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.CHOICE72;
 import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.CIDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
 import static com.ug.air.alrite.Fragments.Patient.Cough.NODIAGNOSIS;
@@ -27,6 +30,8 @@ import static com.ug.air.alrite.Fragments.Patient.Nasal.GNDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Oxygen.OXDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Oxygen.OXY;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING;
+import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING2;
+import static com.ug.air.alrite.Fragments.Patient.RRCounter.SECOND;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 import static com.ug.air.alrite.Fragments.Patient.Sex.CHOICE;
 import static com.ug.air.alrite.Fragments.Patient.Sex.KILO;
@@ -41,6 +46,7 @@ import static com.ug.air.alrite.Fragments.Patient.WheezD.CHOICEX;
 import static com.ug.air.alrite.Fragments.Patient.WheezY.DAY2;
 import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHECKSTETHO;
 import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHOICE8;
+import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHOICE82;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -60,11 +66,13 @@ import android.widget.Toast;
 
 import com.ug.air.alrite.Adapters.DiagnosisAdapter;
 import com.ug.air.alrite.Adapters.SummaryAdapter;
+import com.ug.air.alrite.BuildConfig;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.Models.Diagnosis;
 import com.ug.air.alrite.Models.Summary;
 import com.ug.air.alrite.R;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -193,6 +201,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         String wDiagnosis = sharedPreferences.getString(BDIAGNOSIS, "");
         String asDiagnosis = sharedPreferences.getString(ADIAGNOSIS, "");
         String tuDiagnosis = sharedPreferences.getString(TUDIAGNOSIS, "");
+        String b3Diagnosis = sharedPreferences.getString(B3DIAGNOSIS, "");
 
         addToList2(aDiagnosis);
         addToList2(mDiagnosis);
@@ -206,6 +215,8 @@ public class DiagnosisActivity extends AppCompatActivity {
         addToList2(wDiagnosis);
         addToList2(asDiagnosis);
         addToList2(tuDiagnosis);
+        addToList2(tuDiagnosis);
+        addToList2(b3Diagnosis);
 
         for (int i=0; i < messages.size(); i++) {
             Diagnosis diagnosis = new Diagnosis(messages.get(i), buildSubItemList(messages.get(i)));
@@ -236,6 +247,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         String feb = sharedPreferences.getString(TOUCH, "");
         String ox = sharedPreferences.getString(OXY, "");
         String wheez = sharedPreferences.getString(CHOICE8, "");
+        String wheez2 = sharedPreferences.getString(CHOICE82, "");
         String cough = sharedPreferences.getString(CHOICE2, "");
         String hiv = sharedPreferences.getString(CHOICE3, "");
         String care = sharedPreferences.getString(CHOICEHC, "");
@@ -245,6 +257,7 @@ public class DiagnosisActivity extends AppCompatActivity {
 //        Boolean steth = sharedPreferences.getBoolean(CHECKSTETHO, false);
         String nasal = sharedPreferences.getString(CHOICEGN, "");
         String chest = sharedPreferences.getString(CHOICE7, "");
+        String chest2 = sharedPreferences.getString(CHOICE72, "");
         String bronch = sharedPreferences.getString(BRONCHODILATOR, "");
         String reason = sharedPreferences.getString(REASON, "");
         String wheezD = sharedPreferences.getString(CHOICEX, "");
@@ -254,6 +267,8 @@ public class DiagnosisActivity extends AppCompatActivity {
         String allergies = sharedPreferences.getString(CHOICEY2, "");
         String smoke = sharedPreferences.getString(CHOICET1, "");
         String kerosene = sharedPreferences.getString(CHOICET2, "");
+        String fastbreathing2 = sharedPreferences.getString(FASTBREATHING2, "");
+        String better = sharedPreferences.getString(BRONC, "");
 
         addToList("Parent's initials", pin);
         addToList("Child's weight", weight);
@@ -274,6 +289,10 @@ public class DiagnosisActivity extends AppCompatActivity {
         addToList("Child has chest indrawing", chest);
         addToList("Bronchodilator", bronch);
         addToList("Reason", reason);
+        addToList("Respiratory Rate (After bronchodilator)", fastbreathing2);
+        addToList("Child Wheezing", wheez2);
+        addToList("Child has chest indrawing", chest2);
+        addToList("Child's breathing after bronchodilator", better);
         addToList("Child has breathing difficulty", wheezD);
         addToList("Episodes in the past year", wheezY);
         addToList("Child his breathless", breathless);
@@ -331,7 +350,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         else if (s.equals("Cough/Cold/No Pneumonia")){
             messageList = Arrays.asList(R.string.cold1, R.string.cold2, R.string.cold3, R.string.cold4);
         }
-        else if (s.equals("Wheezing")){
+        else if (s.equals("Wheezing  (not clear bronchodilator response)")){
             String age = sharedPreferences.getString(AGE, "");
             float ag = Float.parseFloat(age);
             if (ag < 2){
@@ -347,6 +366,9 @@ public class DiagnosisActivity extends AppCompatActivity {
         }
         else if (s.equals("Tuberculosis risk")){
             messageList = Arrays.asList(R.string.tuber1, R.string.tuber2);
+        }
+        else if (s.equals("Diagnosis: Wheezing illness (bronchodilator response)")){
+            messageList = Arrays.asList(R.string.wheez2, R.string.wheez3, R.string.wheez4, R.string.wheez5, R.string.wheez6);
         }
     }
 
@@ -371,8 +393,20 @@ public class DiagnosisActivity extends AppCompatActivity {
             else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
         }
         editor1.commit();
+//        editor.clear();
+//        editor.commit();
+
+        String filename = sharedPreferences1.getString(SECOND, "");
+        if (!filename.isEmpty()){
+            filename = filename + ".xml";
+            File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs/" + filename);
+            if (src.exists()){
+                src.delete();
+            }
+        }
         editor.clear();
         editor.commit();
+
         startActivity(new Intent(DiagnosisActivity.this, Dashboard.class));
     }
 

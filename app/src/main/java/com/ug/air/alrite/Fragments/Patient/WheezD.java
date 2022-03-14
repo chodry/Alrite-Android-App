@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.BDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.FTouch.TOUCH;
 import static com.ug.air.alrite.Fragments.Patient.WheezY.DAY2;
 
@@ -95,9 +96,15 @@ public class WheezD extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String bronchodilator = sharedPreferences.getString(BDIAGNOSIS, "");
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Bronchodilator2());
+                if (bronchodilator.isEmpty()){
+                    fr.replace(R.id.fragment_container, new Bronchodilator3());
+                }else{
+                    fr.replace(R.id.fragment_container, new Bronchodilator2());
+                }
                 fr.commit();
+
             }
         });
 

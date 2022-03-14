@@ -87,29 +87,12 @@ public class Sex extends Fragment {
         etMonths.addTextChangedListener(textWatcher3);
         etMuac.addTextChangedListener(textWatcher4);
 
-        bundle = this.getArguments();
-        if (bundle != null){
-            fileName = bundle.getString("fileName");
-            String names = fileName.replace(".xml", "");
-            sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(names, Context.MODE_PRIVATE);
-            sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-            editor = sharedPreferences1.edit();
-            Map<String, ?> all = sharedPreferences.getAll();
-            for (Map.Entry<String, ?> x : all.entrySet()) {
-                if (x.getValue().getClass().equals(String.class))  editor.putString(x.getKey(),  (String)x.getValue());
-            }
 
-            editor.commit();
+        sharedPreferences1 = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit()
 
-            loadData();
-            updateViews();
-
-        }else {
-            sharedPreferences1 = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-
-            loadData();
-            updateViews();
-        }
+        loadData();
+        updateViews();
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -259,8 +242,6 @@ public class Sex extends Fragment {
             diagnosis = "none";
         }
 
-        editor = sharedPreferences1.edit();
-
         editor.putString(AGE, age);
         editor.putString(MUAC, muac);
         editor.putString(KILO, weight);
@@ -270,14 +251,13 @@ public class Sex extends Fragment {
         }
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
         fr.replace(R.id.fragment_container, new Assess());
         fr.addToBackStack(null);
         fr.commit();
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         age = sharedPreferences.getString(AGE, "");
         muac = sharedPreferences.getString(MUAC, "");
         weight = sharedPreferences.getString(KILO, "");

@@ -29,6 +29,8 @@ public class Initials extends Fragment {
    public static final String CIN = "cin";
    public static final String PIN = "pin";
    public static final String SHARED_PREFS = "sharedPrefs";
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +42,9 @@ public class Initials extends Fragment {
         etPin = view.findViewById(R.id.pin);
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
+
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         loadData();
         updateViews();
@@ -62,6 +67,9 @@ public class Initials extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editor.remove(CIN);
+                editor.remove(PIN);
+                editor.apply();
                 startActivity(new Intent(getActivity(), Dashboard.class));
             }
         });
@@ -70,21 +78,18 @@ public class Initials extends Fragment {
     }
 
     private void saveData() {
-        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString(CIN, cin);
         editor.putString(PIN, pin);
         editor.apply();
 
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
         fr.replace(R.id.fragment_container, new Sex());
         fr.addToBackStack(null);
         fr.commit();
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         pin = sharedPreferences.getString(PIN, "");
         cin = sharedPreferences.getString(CIN, "");
     }

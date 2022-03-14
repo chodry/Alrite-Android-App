@@ -319,38 +319,6 @@ public class RRCounter extends Fragment {
                 }
                 fastBreathing = false;
             }
-//            if (birthday>-1) {
-//                if (birthday <2) {
-//                    if(value>=50 && value<60){
-//                        fastBreathing = true;
-//                        score = 2;
-//                        return;
-//                    }
-//
-//                    if (value >=60) {
-//                        fastBreathing = true;
-//                        score = 3;
-//                        return;
-//                    }
-//                }
-//                else {
-//                    if (value >= 40 && value <45) {
-//                        fastBreathing = true;
-//                        score = 2;
-//                        return;
-//                    }
-//                    if (value >= 45) {
-//                        fastBreathing = true;
-//                        score = 3;
-//                        return;
-//                    }
-//                }
-//
-//                fastBreathing = false;
-//                Toast.makeText(getActivity(), "" + fastBreathing, Toast.LENGTH_SHORT).show();
-//            } else {
-//                //TODO
-//            }
         } else {
             //TODO
         }

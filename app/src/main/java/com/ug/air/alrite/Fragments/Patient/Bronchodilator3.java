@@ -1,6 +1,8 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
+import static com.ug.air.alrite.Fragments.Patient.CoughD.DAY1;
+import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHOICE8;
 import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHOICE82;
 
@@ -52,6 +54,7 @@ public class Bronchodilator3 extends Fragment {
     VideoView videoView;
     Dialog dialog;
     int val;
+    long day;
     String diagnosis, s, assess, second;
     RecyclerView recyclerView;
     ArrayList<Assessment> assessments;
@@ -60,6 +63,7 @@ public class Bronchodilator3 extends Fragment {
     private static final int NO = 1;
     private static final int NOT = 2;
     public static final String BRONC = "bron";
+    public static final String FINAL = "final";
     public static final String B3DIAGNOSIS = "b3Diagnosis";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
@@ -133,6 +137,8 @@ public class Bronchodilator3 extends Fragment {
 
         String cough = sharedPreferences.getString(CHOICE2, "");
         String wheezing = sharedPreferences.getString(CHOICE82, "");
+        String days = sharedPreferences.getString(DAY1, "");
+        day = Long.parseLong(days);
 //        respiratory score decreasing
 
 
@@ -148,7 +154,12 @@ public class Bronchodilator3 extends Fragment {
         }else {
             editor.remove(B3DIAGNOSIS);
             editor.apply();
-            startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+            if (day >= 10){
+                showDialog2();
+            }else {
+                finalValue();
+                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+            }
         }
 
     }
@@ -178,11 +189,95 @@ public class Bronchodilator3 extends Fragment {
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
             txtDiagnosis.setText(R.string.bronc1);
             messages = Arrays.asList(R.string.bronc1, R.string.bronc1);
-            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1300);
         }else if (value == 2){
-
+            linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));
+            txtDiagnosis.setText(R.string.wheez1);
+            messages = Arrays.asList(R.string.wheez2, R.string.wheez3, R.string.wheez4, R.string.wheez5, R.string.wheez6);
         }else if (value == 3){
-
+            linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));
+            txtDiagnosis.setText(R.string.wheez_ill);
+            String age = sharedPreferences.getString(AGE, "");
+            float ag = Float.parseFloat(age);
+            if (ag < 2){
+                messages = Arrays.asList(R.string.wheez_ill1, R.string.wheez_ill2, R.string.wheez_ill3,
+                        R.string.wheez_ill4, R.string.wheez_ill5, R.string.wheez_ill6);
+            }else {
+                messages = Arrays.asList(R.string.wheez_ill1, R.string.wheez_ill2, R.string.wheez_ill7,
+                        R.string.wheez_ill8, R.string.wheez_ill9);
+            }
         }
+
+        for (int i = 0; i < messages.size(); i++){
+            Assessment assessment = new Assessment(messages.get(i));
+            assessments.add(assessment);
+        }
+        recyclerView.setAdapter(assessmentAdapter);
+
+        diagnosis = txtDiagnosis.getText().toString();
+        diagnosis = diagnosis.replace("Diagnosis: ", "");
+
+        btnSave.setVisibility(View.GONE);
+
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor.putString(B3DIAGNOSIS, diagnosis);
+                editor.apply();
+                dialog.dismiss();
+                if (day >= 10){
+                    showDialog2();
+                }else {
+                    finalValue();
+                    startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+                }
+            }
+        });
+
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1300);
+        dialog.show();
+    }
+
+    private void showDialog2() {
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.assess);
+        dialog.setCancelable(true);
+
+        TextView txtMessage = dialog.findViewById(R.id.message);
+        btnSave = dialog.findViewById(R.id.ContinueButton);
+        Button btnCancel= dialog.findViewById(R.id.cancel);
+
+        btnCancel.setVisibility(View.VISIBLE);
+
+        txtMessage.setText("Would you like to complete the Asthma Assessment");
+        btnSave.setText("YES");
+
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                finalValue();
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new WheezD());
+                fr.addToBackStack(null);
+                fr.commit();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                finalValue();
+                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void finalValue(){
+        editor.putString(FINAL, "final value");
+        editor.apply();
     }
 }

@@ -133,6 +133,8 @@ public class Cough extends Fragment {
         editor.apply();
 
         if (value3.equals("No")){
+            editor.remove(NODIAGNOSIS);
+            editor.apply();
             showDialog();
         }else{
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
