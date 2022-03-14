@@ -201,6 +201,8 @@ public class Kerosene extends Fragment {
             String hiv = sharedPreferences.getString(CHOICE3, "");
             String dif = sharedPreferences.getString(CHOICEX, "");
             if (co > 14 || (hiv.equals("Known HIV") && dif.equals("Yes"))){
+                editor.remove(ADIAGNOSIS);
+                editor.apply();
                 showDialog2();
             }else {
                 editor.remove(ADIAGNOSIS);

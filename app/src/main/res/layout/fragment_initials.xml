@@ -62,7 +62,7 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_input_bg"
                     android:gravity="center"
-                    android:maxLength="5"
+                    android:maxLength="3"
                     android:inputType="textCapCharacters"
                     android:saveEnabled="false" />
 
@@ -82,7 +82,7 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_input_bg"
                     android:gravity="center"
-                    android:maxLength="5"
+                    android:maxLength="3"
                     android:inputType="textCapCharacters"
                     android:saveEnabled="false" />
 

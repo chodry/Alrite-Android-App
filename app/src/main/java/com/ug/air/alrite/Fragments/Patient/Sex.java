@@ -88,8 +88,8 @@ public class Sex extends Fragment {
         etMuac.addTextChangedListener(textWatcher4);
 
 
-        sharedPreferences1 = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit()
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         loadData();
         updateViews();
@@ -232,23 +232,26 @@ public class Sex extends Fragment {
     };
 
     private void saveData() {
+        if (!muac.isEmpty()){
+            float mw = Float.parseFloat(muac);
+            if (mw < 11.5){
+                diagnosis = "Severe Acute malnutrition";
+            }else if (mw >= 11.5 && mw <= 12.4){
+                diagnosis = "Moderate acute malnutrition";
+            }else {
+                diagnosis = "none";
+            }
 
-        float mw = Float.parseFloat(muac);
-        if (mw < 11.5){
-            diagnosis = "Severe Acute malnutrition";
-        }else if (mw >= 11.5 && mw <= 12.4){
-            diagnosis = "Moderate acute malnutrition";
-        }else {
-            diagnosis = "none";
+            if (!diagnosis.equals("none")){
+                editor.putString(MDIAGNOSIS, diagnosis);
+            }
         }
 
         editor.putString(AGE, age);
         editor.putString(MUAC, muac);
         editor.putString(KILO, weight);
         editor.putString(CHOICE, value2);
-        if (!diagnosis.equals("none")){
-            editor.putString(MDIAGNOSIS, diagnosis);
-        }
+
         editor.apply();
 
         FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();

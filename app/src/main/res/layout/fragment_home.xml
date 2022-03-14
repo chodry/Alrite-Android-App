@@ -41,6 +41,7 @@
                 android:text="Diagnose Quickly, Breath Easy. Check your child's health with us. It is fast and easy to use. "
                 android:textSize="16sp"
                 android:textColor="@color/white"
+                android:layout_marginBottom="8dp"
                 android:gravity="center_horizontal"/>
 
 <!--            <Button-->
@@ -97,6 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Assessment"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/green_dark"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -137,6 +139,7 @@
                     android:layout_height="wrap_content"
                     android:text="Active Patients"
                     android:textColor="@color/green_dark"
+                    android:layout_marginTop="10dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"/>
@@ -185,6 +188,7 @@
                     android:layout_height="wrap_content"
                     android:text="Clinic Setting"
                     android:textColor="@color/green_dark"
+                    android:layout_marginTop="10dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"/>
@@ -224,6 +228,7 @@
                     android:layout_height="wrap_content"
                     android:text="Learn"
                     android:textColor="@color/green_dark"
+                    android:layout_marginTop="10dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"/>
