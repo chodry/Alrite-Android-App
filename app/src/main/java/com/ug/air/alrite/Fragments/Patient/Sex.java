@@ -188,16 +188,8 @@ public class Sex extends Fragment {
             years = etYears.getText().toString();
             if (!years.isEmpty()){
                 int yr = Integer.parseInt(years);
-                if (yr > 5){
-                    etYears.setError("The maximum number of years should be 5");
-                    etMonths.setText("");
-                    etMonths.setEnabled(true);
-                }else if (yr == 5) {
-                    etMonths.setText("0");
-                    etMonths.setEnabled(false);
-                }else {
-                    etMonths.setText("");
-                    etMonths.setEnabled(true);
+                if (yr > 4){
+                    etYears.setError("The maximum number of years should be 4");
                 }
             }
         }

@@ -53,12 +53,17 @@
 
     <!--   END Diagnosis: Severe Pneumonia OR very Severe Disease END -->
 
+    <!--   Diagnosis: No signs of Pneumonia or Wheezing illness -->
+
+    <string name="no_signs">Diagnosis: No signs of Pneumonia or Wheezing illness</string>
+
     <string name="selected">You have selected that this child does NOT have a cough or difficulty breathing</string>
     <string name="alrite">ALRITE is to help diagnose children with a cough or difficulty breathing</string>
     <string name="no_anti">No antibiotics or a bronchodilator needed for breathing difficulty</string>
     <string name="other_illness">Assess for other illness</string>
 
-    <string name="no_signs">Diagnosis: No signs of Pneumonia or Wheezing illness</string>
+    <!--   END Diagnosis: No signs of Pneumonia or Wheezing illness END -->
+
     <string name="asthma">Diagnosis: Asthma Risk</string>
 
     <string name="asthma1">Give inhaled salbutamol , 4-6 puffs every 4-6 hours for 5 days</string>
@@ -69,10 +74,19 @@
     <string name="tuber1">Ask about potential TB exposures</string>
     <string name="tuber2">Refer to assess and treat for potential TB. This will include TB testing and chest x-ray</string>
 
+
+    <!--  Diagnosis: Pneumonia -->
+
     <string name="pneumonia">Diagnosis: Pneumonia</string>
-    <string name="pneumonia1">Give oral amoxicillin twice daily for 5 days</string>
-    <string name="pneumonia2">Soothe the throat and relieve the cough with a safe remedy</string>
-    <string name="pneumonia3">Follow up in 3 days, earlier if worsening</string>
+
+    <string name="amoxicillin2">Give oral AMOXICILLIN 250 mg (1 tablet or 5 ml of 250mg/5ml syrup) twice daily for 5 days</string>
+    <string name="amoxicillin12">Give oral AMOXICILLIN 500 mg (2 tablets or 10ml of 250mg/5ml syrup) twice daily for 5 days</string>
+    <string name="amoxicillin3">Give oral AMOXICILLIN 750mg (3 tablets or 15 ml of 250mg/5ml syrup) twice daily for 5 days</string>
+    <string name="pneumonia1">Soothe the throat and relieve the cough with a safe remedy</string>
+    <string name="pneumonia2">Follow up in 3 days, earlier if worsening</string>
+
+    <!--   END Diagnosis: Pneumonia -->
+
 
     <string name="cold">Diagnosis: Cough/Cold/No Pneumonia</string>
     <string name="cold1">No signs of Pneumonia or Wheezing illness</string>
@@ -103,15 +117,17 @@
     <string name="wheez_ill6">Follow up in 2 days, earlier if getting worse</string>
 
     <string name="wheez1">Diagnosis: Wheezing illness (bronchodilator response)</string>
-    <string name="wheez2">Give inhaled salbutamol , 4-6 puffs every 4-6 hours for 5 days. </string>
+    <string name="wheez2">Give inhaled salbutamol , 4–6 puffs every 4–6 hours for 5 days. </string>
     <string name="wheez3">Inhaled salbutamol is preferred to oral salbutamol</string>
     <string name="wheez4">Use with spacer [INSERT link to spacer making/teaching]</string>
     <string name="wheez5">Follow up in 3 days, earlier if worsening</string>
     <string name="wheez6">Consider referral for asthma assessment and management</string>
 
-    <string name="wheez_ill7">Trial salbutamol inhaler 4 puffs every 4-6 hours for 3 days</string>
+    <string name="wheez_ill7">Trial salbutamol inhaler 2–4 puffs every 4–6 hours for 3 days</string>
+    <string name="wheez_ill71">Inhaled salbutamol is preferred to oral salbutamol</string>
+    <string name="wheez_ill72">A spacer is a way of delivering the bronchodilator drugs effectively into the lungs. No child under 5 years should be given an inhaler without a spacer. A spacer works as well as a nebuliser if correctly used. </string>
     <string name="wheez_ill8">Follow up in 3 days, earlier if getting worse</string>
-    <string name="wheez_ill9">Refer for asthma assessment </string>
+    <string name="wheez_ill9">Refer for Asthma assessment</string>
 
     <string name="muac">Give the child Ready-to-Use Therapeutic Food (RUTF)</string>
     <string name="muac1">If able to finish RUTF, Give oral antibiotics for 5 days</string>

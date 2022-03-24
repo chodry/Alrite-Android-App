@@ -3,6 +3,7 @@ package com.ug.air.alrite.Fragments.Patient;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.FTouch.TOUCH;
 import static com.ug.air.alrite.Fragments.Patient.HIVCare.CHOICEHC;
+import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -56,6 +57,7 @@ public class Oxygen extends Fragment {
     ArrayList<Assessment> assessments;
     AssessmentAdapter assessmentAdapter;
     String diagnosis;
+    List<Integer> messages;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -192,10 +194,77 @@ public class Oxygen extends Fragment {
         assessments = new ArrayList<>();
         assessmentAdapter = new AssessmentAdapter(assessments);
 
-        List<Integer> messages = Arrays.asList(R.string.first_dose, R.string.first_dose_IM,
-                R.string.IM_dosing_under1, R.string.give_diazepam_if,
-                R.string.low_oxygen, R.string.quick, R.string.quick2, R.string.quick3,
-                R.string.refer_urgently);
+        String age = sharedPreferences.getString(AGE, "");
+        String s = sharedPreferences.getString(S4, "");
+        float ag = Float.parseFloat(age);
+        if (ag >= 0.2 && ag < 0.4){
+            if (s.contains("Convulsions")){
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2,
+                        R.string.ampicilin0, R.string.gentamicin2, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam2, R.string.convulsions1,
+                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
+                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }else{
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2,
+                        R.string.ampicilin0, R.string.gentamicin2, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam2, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }
+        }else if (ag >= 0.4 && ag < 1.0){
+            if (s.contains("Convulsions")){
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4,
+                        R.string.ampicilin0, R.string.gentamicin4, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam4, R.string.convulsions1,
+                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
+                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }else{
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4,
+                        R.string.ampicilin0, R.string.gentamicin4, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam4, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }
+        }else if (ag >= 1.0 && ag < 3.0){
+            if (s.contains("Convulsions")){
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12,
+                        R.string.ampicilin0, R.string.gentamicin12, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam12, R.string.convulsions1,
+                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
+                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }else{
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12,
+                        R.string.ampicilin0, R.string.gentamicin12, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam12, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }
+
+        }else if (ag >= 3.0){
+            if (s.contains("Convulsions")){
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3,
+                        R.string.ampicilin0, R.string.gentamicin3, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam3, R.string.convulsions1,
+                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
+                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }else{
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3,
+                        R.string.ampicilin0, R.string.gentamicin3, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam3, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }
+
+        }
+
         for (int i = 0; i < messages.size(); i++){
             Assessment assessment = new Assessment(messages.get(i));
             assessments.add(assessment);
@@ -231,6 +300,8 @@ public class Oxygen extends Fragment {
         btnContinue2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                editor.remove(OXDIAGNOSIS);
+                editor.apply();
                 dialog2.dismiss();
                 nextInterface();
             }

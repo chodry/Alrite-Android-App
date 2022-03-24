@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:buttonTint="@color/black"
-                        android:text="Noisy breathing"
+                        android:text="Other abnormal breath sounds"
                         android:textSize="18sp" />
 
                     <RadioButton
@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:buttonTint="@color/black"
-                        android:text="Normal breathing"
+                        android:text="Normal breath sounds"
                         android:textSize="18sp" />
 
 

@@ -235,7 +235,7 @@ public class Bronchodilator2 extends Fragment {
                     R.string.wheez_ill4, R.string.wheez_ill5, R.string.wheez_ill6);
         }else {
             messages = Arrays.asList(R.string.wheez_ill1, R.string.wheez_ill2, R.string.wheez_ill7,
-                    R.string.wheez_ill8, R.string.wheez_ill9);
+                    R.string.wheez_ill71, R.string.wheez_ill72, R.string.wheez_ill8, R.string.wheez_ill9);
         }
 
         for (int i = 0; i < messages.size(); i++){

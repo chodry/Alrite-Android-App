@@ -115,10 +115,10 @@ public class Wheezing extends Fragment {
                         value9 = "Wheezing";
                         break;
                     case NO:
-                        value9 = "Noisy breathing";
+                        value9 = "Other abnormal breath sounds";
                         break;
                     case NOT:
-                        value9 = "Normal breathing";
+                        value9 = "Normal breath sounds";
                         break;
                     default:
                         break;

@@ -1,7 +1,11 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
+import static com.ug.air.alrite.Fragments.Patient.Nasal.GNDIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Oxygen.OXDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.SECOND;
+import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
+import static com.ug.air.alrite.Fragments.Patient.Stridor.STDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHOICE8;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
@@ -235,15 +239,25 @@ public class ChestIndrawing extends Fragment {
 
     private void makeAssessment(){
         String cough = sharedPreferences.getString(CHOICE2, "");
+        String oxDiagnosis = sharedPreferences.getString(OXDIAGNOSIS, "");
+        String stDiagnosis = sharedPreferences.getString(STDIAGNOSIS, "");
+        String gnDiagnosis = sharedPreferences.getString(GNDIAGNOSIS, "");
         String fastBreathing = sharedPreferences.getString(FASTBREATHING, "");
         wheezing = sharedPreferences.getString(CHOICE8, "");
         String days = sharedPreferences.getString(DAY1, "");
         day = Long.parseLong(days);
-        if ((cough.equals("Yes") && fastBreathing.equals("Fast Breathing")) ||
-                (cough.equals("Yes") && (value8.equals("Mild") || value8.equals("Moderate/Severe")))){
+        boolean b = oxDiagnosis.isEmpty() && stDiagnosis.isEmpty() && gnDiagnosis.isEmpty();
+        if (b && ((cough.equals("Yes") && fastBreathing.equals("Fast Breathing")) ||
+                (cough.equals("Yes") && (value8.equals("Mild") || value8.equals("Moderate/Severe"))))){
+
             showDialog2("pneumonia");
-        }else if (cough.equals("Yes") && fastBreathing.equals("Normal Breathing") && value8.equals("No") && (wheezing.equals("Normal breathing") || wheezing.equals("Noisy breathing"))){
+
+
+        }else if (b && (cough.equals("Yes") && fastBreathing.equals("Normal Breathing") &&
+                value8.equals("No") && (wheezing.equals("Other abnormal breath sounds") || wheezing.equals("Normal breath sounds")))){
+
             showDialog2("cold");
+
         } else {
             if (wheezing.equals("Wheezing")  || day >= 10){
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
@@ -282,7 +296,17 @@ public class ChestIndrawing extends Fragment {
         if (disease.equals("pneumonia")){
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.moderateDiagnosisColor));
             txtDiagnosis.setText(R.string.pneumonia);
-            messages = Arrays.asList(R.string.pneumonia1, R.string.pneumonia2, R.string.pneumonia3);
+
+            String age = sharedPreferences.getString(AGE, "");
+            float ag = Float.parseFloat(age);
+            if (ag >= 0.2 && ag < 1.0){
+                messages = Arrays.asList(R.string.amoxicillin2, R.string.pneumonia1, R.string.pneumonia2);
+            }else if (ag >= 1.0 && ag < 3.0){
+                messages = Arrays.asList(R.string.amoxicillin12, R.string.pneumonia1, R.string.pneumonia2);
+            }else if (ag >= 3.0 && ag < 5.0){
+                messages = Arrays.asList(R.string.amoxicillin3, R.string.pneumonia1, R.string.pneumonia2);
+            }
+
             dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1300);
         }else {
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));

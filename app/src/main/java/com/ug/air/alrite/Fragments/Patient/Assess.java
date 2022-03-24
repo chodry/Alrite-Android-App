@@ -213,12 +213,12 @@ public class Assess extends Fragment {
         if (s.isEmpty()){
             Toast.makeText(getActivity(), "Choose at least one option", Toast.LENGTH_SHORT).show();
         }else {
-            saveData(s);
+            saveData();
         }
 
     }
 
-    private void saveData(String s) {
+    private void saveData() {
 
         editor.putBoolean(CHECK1, drink.isChecked());
         editor.putBoolean(CHECK2, vomit.isChecked());
@@ -288,37 +288,71 @@ public class Assess extends Fragment {
         String age = sharedPreferences.getString(AGE, "");
         float ag = Float.parseFloat(age);
         if (ag >= 0.2 && ag < 0.4){
-            messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2,
-                    R.string.ampicilin0, R.string.gentamicin2, R.string.gentamicin0,
-                    R.string.convulsions, R.string.diazepam2, R.string.convulsions1,
-                    R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                    R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                    R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                    R.string.other8, R.string.refer_urgently);
+            if (s.contains("Convulsions")){
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2,
+                        R.string.ampicilin0, R.string.gentamicin2, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam2, R.string.convulsions1,
+                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
+                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }else{
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2,
+                        R.string.ampicilin0, R.string.gentamicin2, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam2, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }
         }else if (ag >= 0.4 && ag < 1.0){
-            messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4,
-                    R.string.ampicilin0, R.string.gentamicin4, R.string.gentamicin0,
-                    R.string.convulsions, R.string.diazepam4, R.string.convulsions1,
-                    R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                    R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                    R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                    R.string.other8, R.string.refer_urgently);
+            if (s.contains("Convulsions")){
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4,
+                        R.string.ampicilin0, R.string.gentamicin4, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam4, R.string.convulsions1,
+                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
+                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }else{
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4,
+                        R.string.ampicilin0, R.string.gentamicin4, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam4, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }
         }else if (ag >= 1.0 && ag < 3.0){
-            messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12,
-                    R.string.ampicilin0, R.string.gentamicin12, R.string.gentamicin0,
-                    R.string.convulsions, R.string.diazepam12, R.string.convulsions1,
-                    R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                    R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                    R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                    R.string.other8, R.string.refer_urgently);
+            if (s.contains("Convulsions")){
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12,
+                        R.string.ampicilin0, R.string.gentamicin12, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam12, R.string.convulsions1,
+                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
+                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }else{
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12,
+                        R.string.ampicilin0, R.string.gentamicin12, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam12, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }
+
         }else if (ag >= 3.0){
-            messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3,
-                    R.string.ampicilin0, R.string.gentamicin3, R.string.gentamicin0,
-                    R.string.convulsions, R.string.diazepam3, R.string.convulsions1,
-                    R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                    R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                    R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                    R.string.other8, R.string.refer_urgently);
+            if (s.contains("Convulsions")){
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3,
+                        R.string.ampicilin0, R.string.gentamicin3, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam3, R.string.convulsions1,
+                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
+                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }else{
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3,
+                        R.string.ampicilin0, R.string.gentamicin3, R.string.gentamicin0,
+                        R.string.convulsions, R.string.diazepam3, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                        R.string.other8, R.string.refer_urgently);
+            }
+
         }
 
         for (int i = 0; i < messages.size(); i++){
