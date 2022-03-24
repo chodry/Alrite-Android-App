@@ -129,12 +129,14 @@ public class ActivePatients extends Fragment {
                         age = sharedPreferences.getString(AGE, "");
                         gender = sharedPreferences.getString(CHOICE, "");
                         dat = sharedPreferences.getString(DATE, "");
+                        String[] split = age.split("\\.");
+                        String ag = split[0] + " years and " + split[1] + " months";
                         try {
                             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
                             Date date = df.parse(dat);
                             SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
                             String formattedDate = df1.format(date);
-                            Patient patient = new Patient("Age: " + age + " years", "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, fileName);
+                            Patient patient = new Patient("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, fileName);
                             items.add(new Item(0, patient));
 //                            patientAdapter.notifyDataSetChanged();
                         } catch (ParseException e) {
@@ -181,12 +183,14 @@ public class ActivePatients extends Fragment {
                                 gender = sharedPreferences.getString(CHOICE, "");
                                 dat = sharedPreferences.getString(DATE, "");
                                 types.add(cin);
+                                String[] split = age.split("\\.");
+                                String ag = split[0] + " years and " + split[1] + " months";
                                 try {
                                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
                                     Date date = df.parse(dat);
                                     SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
                                     String formattedDate = df1.format(date);
-                                    Patient patient = new Patient("Age: " + age + " years", "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names);
+                                    Patient patient = new Patient("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names);
                                     items.add(new Item(0, patient));
                                 } catch (ParseException e) {
                                     e.printStackTrace();

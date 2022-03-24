@@ -5,6 +5,8 @@ import static com.ug.air.alrite.Fragments.Patient.Nasal.CHOICEGN;
 import static com.ug.air.alrite.Fragments.Patient.Nasal.GNDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Oxygen.OXDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING2;
+import static com.ug.air.alrite.Fragments.Patient.RRCounter.RATE;
+import static com.ug.air.alrite.Fragments.Patient.RRCounter.RATE2;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.SECOND;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 import static com.ug.air.alrite.Fragments.Patient.Stridor.STDIAGNOSIS;
@@ -371,11 +373,12 @@ public class ChestIndrawing extends Fragment {
     private void calculatePoints() {
         String age = sharedPreferences.getString(AGE, "");
         String granting = sharedPreferences.getString(CHOICEGN, "");
+        String rate = sharedPreferences.getString(RATE, "");
 
         float ag = Float.parseFloat(age);
 
         if (second.isEmpty()){
-            int fast = Integer.parseInt(fastBreathing);
+            float fast = Float.parseFloat(rate);
             int point = 0;
 
             if (((ag < 0.2 && fast < 60) || ((ag >= 0.2 && ag < 1.0) && fast < 50) || ((ag >= 1.0 && ag < 5.0) && fast < 40)) && value8.equals("No") && wheezing.equals("Normal breath sounds")){
@@ -399,8 +402,8 @@ public class ChestIndrawing extends Fragment {
             }
         }else {
             String wheez = sharedPreferences.getString(CHOICE82, "");
-            String fas = sharedPreferences.getString(FASTBREATHING2, "");
-            int fast2 = Integer.parseInt(fas);
+            String rate1 = sharedPreferences.getString(RATE2, "");
+            float fast2 = Float.parseFloat(rate1);
             int point2 = 0;
 
             if (((ag < 0.2 && fast2 < 60) || ((ag >= 0.2 && ag < 1.0) && fast2 < 50) || ((ag >= 1.0 && ag < 5.0) && fast2 < 40)) && value8.equals("No") && wheez.equals("Normal breath sounds")){

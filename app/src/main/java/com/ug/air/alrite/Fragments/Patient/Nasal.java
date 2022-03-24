@@ -224,7 +224,7 @@ public class Nasal extends Fragment {
             }else{
                 messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2,
                         R.string.ampicilin0, R.string.gentamicin2, R.string.gentamicin0,
-                        R.string.convulsions, R.string.diazepam2, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other1, R.string.other2, R.string.other3,
                         R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                         R.string.other8, R.string.refer_urgently);
             }
@@ -240,7 +240,7 @@ public class Nasal extends Fragment {
             }else{
                 messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4,
                         R.string.ampicilin0, R.string.gentamicin4, R.string.gentamicin0,
-                        R.string.convulsions, R.string.diazepam4, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other1, R.string.other2, R.string.other3,
                         R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                         R.string.other8, R.string.refer_urgently);
             }
@@ -256,7 +256,7 @@ public class Nasal extends Fragment {
             }else{
                 messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12,
                         R.string.ampicilin0, R.string.gentamicin12, R.string.gentamicin0,
-                        R.string.convulsions, R.string.diazepam12, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other1, R.string.other2, R.string.other3,
                         R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                         R.string.other8, R.string.refer_urgently);
             }
@@ -273,7 +273,7 @@ public class Nasal extends Fragment {
             }else{
                 messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3,
                         R.string.ampicilin0, R.string.gentamicin3, R.string.gentamicin0,
-                        R.string.convulsions, R.string.diazepam3, R.string.other1, R.string.other2, R.string.other3,
+                        R.string.other1, R.string.other2, R.string.other3,
                         R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                         R.string.other8, R.string.refer_urgently);
             }

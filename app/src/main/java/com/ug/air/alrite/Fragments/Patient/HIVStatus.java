@@ -131,9 +131,9 @@ public class HIVStatus extends Fragment {
     }
 
     private void updateViews() {
-        if (value4.equals("Known HIV")){
+        if (value4.equals("HIV-Infected")){
             radioButton1.setChecked(true);
-        }else if (value4.equals("Exposed to HIV")){
+        }else if (value4.equals("HIV-Exposed")){
             radioButton2.setChecked(true);
         }else if (value4.equals("None of these")){
             radioButton3.setChecked(true);
