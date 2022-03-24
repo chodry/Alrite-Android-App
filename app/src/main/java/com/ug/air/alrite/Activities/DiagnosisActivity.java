@@ -408,7 +408,21 @@ public class DiagnosisActivity extends AppCompatActivity {
             }
         }
         else if (s.equals("Very severe febrile illness")){
-            messageList = Arrays.asList(R.string.febril1, R.string.febril2);
+//            messageList = Arrays.asList(R.string.febril1, R.string.febril2);
+            if (ag >= 0.2 && ag < 0.4 ){
+                messageList = Arrays.asList(R.string.febril, R.string.artesunate2, R.string.iartesunate2, R.string.quinine2, R.string.paracetamol2, R.string.refer_urgently);
+            }else if (ag >= 0.4 && ag < 1.0 ){
+                messageList = Arrays.asList(R.string.febril, R.string.artesunate4, R.string.iartesunate4, R.string.quinine4, R.string.paracetamol2, R.string.refer_urgently);
+            }else if (ag >= 1.0 && ag < 3.0 ){
+                if (ag >= 1.0 && ag < 2.0 ){
+                    messageList = Arrays.asList(R.string.febril, R.string.artesunate4, R.string.iartesunate12, R.string.quinine12, R.string.paracetamol2, R.string.refer_urgently);
+                }else if (ag >= 2.0 && ag < 3.0 ){
+                    messageList = Arrays.asList(R.string.febril, R.string.artesunate5, R.string.iartesunate12, R.string.quinine24, R.string.paracetamol2, R.string.refer_urgently);
+                }
+
+            }else if (ag >= 3.0 && ag < 5.0 ){
+                messageList = Arrays.asList(R.string.febril, R.string.artesunate5, R.string.iartesunate3, R.string.quinine3, R.string.paracetamol3, R.string.refer_urgently);
+            }
         }
         else if (s.equals("No signs of Pneumonia or Wheezing illness")){
             messageList = Arrays.asList(R.string.selected, R.string.alrite, R.string.no_anti, R.string.other_illness);

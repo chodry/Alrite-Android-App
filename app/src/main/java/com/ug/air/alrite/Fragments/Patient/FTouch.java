@@ -1,6 +1,7 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
+import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 import static com.ug.air.alrite.Fragments.Patient.Temperature.TDIAGNOSIS;
 
 import android.app.Dialog;
@@ -51,6 +52,7 @@ public class FTouch extends Fragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     Dialog dialog;
+    List<Integer> messages;
     RecyclerView recyclerView;
     LinearLayout linearLayout_instruction;
     TextView txtDiagnosis;
@@ -177,7 +179,24 @@ public class FTouch extends Fragment {
         assessments = new ArrayList<>();
         assessmentAdapter = new AssessmentAdapter(assessments);
 
-        List<Integer> messages = Arrays.asList(R.string.febril1, R.string.febril2, R.string.refer_urgently);
+        String age = sharedPreferences.getString(AGE, "");
+        float ag = Float.parseFloat(age);
+
+        if (ag >= 0.2 && ag < 0.4 ){
+            messages = Arrays.asList(R.string.febril, R.string.artesunate2, R.string.iartesunate2, R.string.quinine2, R.string.paracetamol2, R.string.refer_urgently);
+        }else if (ag >= 0.4 && ag < 1.0 ){
+            messages = Arrays.asList(R.string.febril, R.string.artesunate4, R.string.iartesunate4, R.string.quinine4, R.string.paracetamol2, R.string.refer_urgently);
+        }else if (ag >= 1.0 && ag < 3.0 ){
+            if (ag >= 1.0 && ag < 2.0 ){
+                messages = Arrays.asList(R.string.febril, R.string.artesunate4, R.string.iartesunate12, R.string.quinine12, R.string.paracetamol2, R.string.refer_urgently);
+            }else if (ag >= 2.0 && ag < 3.0 ){
+                messages = Arrays.asList(R.string.febril, R.string.artesunate5, R.string.iartesunate12, R.string.quinine24, R.string.paracetamol2, R.string.refer_urgently);
+            }
+
+        }else if (ag >= 3.0 && ag < 5.0 ){
+            messages = Arrays.asList(R.string.febril, R.string.artesunate5, R.string.iartesunate3, R.string.quinine3, R.string.paracetamol3, R.string.refer_urgently);
+        }
+
         for (int i = 0; i < messages.size(); i++){
             Assessment assessment = new Assessment(messages.get(i));
             assessments.add(assessment);
