@@ -124,27 +124,47 @@
     <string name="wheez6">Consider referral for asthma assessment and management</string>
 
     <string name="wheez_ill7">Trial salbutamol inhaler 2–4 puffs every 4–6 hours for 3 days</string>
+
+    <string name="wheez_ill00">In the clinic: Give 4–6 puffs SALBUTAMOL via metered dose inhaler OR 2.5–5mg via nebulized solution. Repeat up to 3 times every 15 minutes</string>
+    <string name="wheez_ill01">Send the child home with inhaled SALBUTAMOL by metered dose inhaler , 2–4 puffs every 4–6 hours for 5 days, then as needed.</string>
+
     <string name="wheez_ill71">Inhaled salbutamol is preferred to oral salbutamol</string>
     <string name="wheez_ill72">A spacer is a way of delivering the bronchodilator drugs effectively into the lungs. No child under 5 years should be given an inhaler without a spacer. A spacer works as well as a nebuliser if correctly used. </string>
+
     <string name="wheez_ill8">Follow up in 3 days, earlier if getting worse</string>
     <string name="wheez_ill9">Refer for Asthma assessment</string>
 
     <string name="muac">Give the child Ready-to-Use Therapeutic Food (RUTF)</string>
-    <string name="muac1">If able to finish RUTF, Give oral antibiotics for 5 days</string>
-    <string name="muac2">Give ready-to-use therapeutic food for a child aged 6 months or more</string>
-    <string name="muac3">Counsel the mother on how to feed the child</string>
-    <string name="muac4">Follow up in 7 days</string>
-    <string name="muac5">If unable to finish RUTF or breastfeeding problems, give the first dose of the appropriate antibiotic, and refer URGENTLY to the hospital</string>
+    <string name="muac1">If unable to finish RUTF or breastfeeding problems, give the first dose of the appropriate antibiotic, and refer URGENTLY to the hospital</string>
+    <string name="muac2">If able to finish RUTF, Give oral antibiotics for 5 days</string>
+    <string name="muac3">Give ready-to-use therapeutic food for a child aged 6 months or more</string>
+    <string name="muac4">Counsel the mother on how to feed the child</string>
+    <string name="muac5">Follow up in 7 days</string>
 
     <string name="muac6">Assess the child\'s feeding and counsel the mother on the feeding recommendations</string>
     <string name="muac7">If feeding problem, follow up in 7 days. Otherwise, follow-up in 30 days</string>
 
     <string name="febril">Diagnosis: Very severe febrile illness</string>
-    <string name="febril1">Give first dose of artesunate or quinine [INSERT DOSES] for severe malaria</string>
-    <string name="febril2">Give one dose of paracetamol [INSERT DOSE] for high fever 38.5C or above</string>
+
+    <string name="febril1">Give first dose of artesunate or quinine for severe malaria</string>
+    <string name="artesunate2">For the ARTESUNATE suppository: Give 50mg (1 pediatric suppository)</string>
+    <string name="artesunate4">For the ARTESUNATE suppository: Give 100mg (2 pediatric suppositories)</string>
+    <string name="artesunate5">For the ARTESUNATE suppository: Give 150mg (3 pediatric suppositories)</string>
+    <string name="iartesunate2">For Intramuscular ARTESUNATE: Give 10mg (0.5 ml)</string>
+    <string name="iartesunate4">For Intramuscular ARTESUNATE: Give 20mg (1ml)</string>
+    <string name="iartesunate12">For Intramuscular ARTESUNATE:: Give 30mg (1.5ml)</string>
+    <string name="iartesunate3">For Intramuscular ARTESUNATE: Give 40mg (2ml)</string>
+    <string name="quinine2">For QUININE: Give 0.4ml (150mg/ml) OR 0.2ml (300mg/ml)</string>
+    <string name="quinine4">For QUININE: Give 0.6ml (150mg/ml) OR 0.3ml (300mg/ml)</string>
+    <string name="quinine12">For QUININE: Give 0.8ml (150mg/ml) OR 0.4ml (300mg/ml)</string>
+    <string name="quinine24">For QUININE: Give 1ml (150mg/ml) OR 0.5ml (300mg/ml)</string>
+    <string name="quinine3">For QUININE: Give 1.2ml (150mg/ml) OR 0.6ml (300mg/ml)</string>
+
+
 
     <string name="febril3">Consider testing for malaria if risk high and no other cause of fever identified</string>
-    <string name="febril4">Give paracetamol [INSERT DOSE AND FREQUENCY] to relieve fever</string>
+    <string name="paracetamol2">Give PARACETAMOL 100mg (1 pediatric tablet) or 125mg (¼ of adult tablet) every 6 hours to relieve high fever</string>
+    <string name="paracetamol3">Give PARACETAMOL 250mg (1.5 pediatric tablet or ½ adult tablet) every 6 hours to relieve high fever</string>
     <string name="febril5">Encourage the child to take oral liquids</string>
     <string name="febril6">Monitor for signs of dehydration and new or worsening symptoms</string>
     <string name="febril7">Follow up in 5–7 days if no improvement, earlier of worsening symptoms</string>
@@ -163,5 +183,7 @@
     <string name="bronc3">consider referral for worsening clinical signs and symptoms</string>
 
     <string name="bronchodi">An inhaled medication that relaxes constricted air passages to make breathing easier</string>
+
+
 
 </resources>

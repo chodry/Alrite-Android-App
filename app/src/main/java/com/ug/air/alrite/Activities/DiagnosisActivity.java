@@ -101,6 +101,8 @@ public class DiagnosisActivity extends AppCompatActivity {
     SharedPreferences.Editor editor, editor1;
     public static final String DATE = "date";
     public static final String UUIDS = "uuid";
+    String age;
+    float ag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +126,8 @@ public class DiagnosisActivity extends AppCompatActivity {
         editor = sharedPreferences.edit();
 
         String initials = sharedPreferences.getString(CIN, "");
-        String age = sharedPreferences.getString(AGE, "");
+        age = sharedPreferences.getString(AGE, "");
+        ag = Float.parseFloat(age);
         String gender = sharedPreferences.getString(CHOICE, "");
         txtInitials.setText(initials);
         txtAge.setText("Age: " + age + " years");
@@ -319,9 +322,7 @@ public class DiagnosisActivity extends AppCompatActivity {
 
     private void createList(String s) {
         if (s.equals("Severe Pneumonia OR very Severe Disease")){
-            String age = sharedPreferences.getString(AGE, "");
             String st = sharedPreferences.getString(S4, "");
-            float ag = Float.parseFloat(age);
             if (ag >= 0.2 && ag < 0.4){
                 if (st.contains("Convulsions")){
                     messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin2,
@@ -394,13 +395,17 @@ public class DiagnosisActivity extends AppCompatActivity {
             messageList = Arrays.asList(R.string.muac, R.string.muac1,
                     R.string.muac2, R.string.muac3, R.string.muac4, R.string.muac5);
         }
-
         else if (s.equals("Moderate acute malnutrition")){
             messageList = Arrays.asList(R.string.muac6, R.string.muac7);
         }
         else if (s.equals("Fever without danger signs")){
-            messageList = Arrays.asList(R.string.febril3, R.string.febril4, R.string.febril5,
-                    R.string.febril6, R.string.febril7);
+            if (ag <= 0.2 && ag < 3.0){
+                messageList = Arrays.asList(R.string.febril3, R.string.paracetamol2, R.string.febril5,
+                        R.string.febril6, R.string.febril7);
+            }else  if (ag <= 3.0 && ag < 5.0){
+                messageList = Arrays.asList(R.string.febril3, R.string.paracetamol3, R.string.febril5,
+                        R.string.febril6, R.string.febril7);
+            }
         }
         else if (s.equals("Very severe febrile illness")){
             messageList = Arrays.asList(R.string.febril1, R.string.febril2);
@@ -411,8 +416,6 @@ public class DiagnosisActivity extends AppCompatActivity {
         else if (s.contains("HIV-Infected")){
             String care = sharedPreferences.getString(CHOICEHC, "");
             String chest = sharedPreferences.getString(CHOICE7, "");
-            String age = sharedPreferences.getString(AGE, "");
-            float ag = Float.parseFloat(age);
             if (ag >= 0.2 && ag < 1.0){
                 if (ag < 0.6){
                     if (care.equals("Yes")){
@@ -481,9 +484,6 @@ public class DiagnosisActivity extends AppCompatActivity {
         else if (s.contains("HIV-Exposed")){
             String care = sharedPreferences.getString(CHOICEHC, "");
             String chest = sharedPreferences.getString(CHOICE7, "");
-            String age = sharedPreferences.getString(AGE, "");
-
-            float ag = Float.parseFloat(age);
             if (ag >= 0.2 && ag < 1.0){
                 if (ag < 0.6){
                     if (care.equals("Yes")){
@@ -550,14 +550,17 @@ public class DiagnosisActivity extends AppCompatActivity {
 
         }
         else if (s.equals("Pneumonia")){
-            messageList = Arrays.asList(R.string.pneumonia1, R.string.pneumonia2, R.string.pneumonia3);
-        }
+            if (ag >= 0.2 && ag < 1.0){
+                messageList = Arrays.asList(R.string.amoxicillin2, R.string.pneumonia1, R.string.pneumonia2);
+            }else if (ag >= 1.0 && ag < 3.0){
+                messageList = Arrays.asList(R.string.amoxicillin12, R.string.pneumonia1, R.string.pneumonia2);
+            }else if (ag >= 3.0 && ag < 5.0){
+                messageList = Arrays.asList(R.string.amoxicillin3, R.string.pneumonia1, R.string.pneumonia2);
+            }        }
         else if (s.equals("Cough/Cold/No Pneumonia")){
             messageList = Arrays.asList(R.string.cold1, R.string.cold2, R.string.cold3, R.string.cold4);
         }
         else if (s.equals("Wheezing  (not clear bronchodilator response)")){
-            String age = sharedPreferences.getString(AGE, "");
-            float ag = Float.parseFloat(age);
             if (ag < 2){
                 messageList = Arrays.asList(R.string.wheez_ill1, R.string.wheez_ill2, R.string.wheez_ill3,
                         R.string.wheez_ill4, R.string.wheez_ill5, R.string.wheez_ill6);
@@ -567,13 +570,14 @@ public class DiagnosisActivity extends AppCompatActivity {
             }
         }
         else if (s.equals("Asthma Risk")){
-            messageList = Arrays.asList(R.string.asthma1, R.string.asthma2, R.string.asthma3);
+            messageList = Arrays.asList(R.string.asthma1, R.string.wheez3, R.string.asthma2, R.string.asthma3);
         }
         else if (s.equals("Tuberculosis risk")){
             messageList = Arrays.asList(R.string.tuber1, R.string.tuber2);
         }
         else if (s.equals("Diagnosis: Wheezing illness (bronchodilator response)")){
-            messageList = Arrays.asList(R.string.wheez2, R.string.wheez3, R.string.wheez4, R.string.wheez5, R.string.wheez6);
+            messageList = Arrays.asList(R.string.wheez_ill00, R.string.wheez_ill01, R.string.wheez_ill71,
+                    R.string.wheez_ill72, R.string.wheez_ill8, R.string.wheez_ill9);
         }
     }
 

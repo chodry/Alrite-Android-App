@@ -192,7 +192,8 @@ public class Bronchodilator3 extends Fragment {
         }else if (value == 2){
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));
             txtDiagnosis.setText(R.string.wheez1);
-            messages = Arrays.asList(R.string.wheez2, R.string.wheez3, R.string.wheez4, R.string.wheez5, R.string.wheez6);
+            messages = Arrays.asList(R.string.wheez_ill00, R.string.wheez_ill01, R.string.wheez_ill71,
+                    R.string.wheez_ill72, R.string.wheez_ill8, R.string.wheez_ill9);
         }else if (value == 3){
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));
             txtDiagnosis.setText(R.string.wheez_ill);
@@ -203,7 +204,7 @@ public class Bronchodilator3 extends Fragment {
                         R.string.wheez_ill4, R.string.wheez_ill5, R.string.wheez_ill6);
             }else {
                 messages = Arrays.asList(R.string.wheez_ill1, R.string.wheez_ill2, R.string.wheez_ill7,
-                        R.string.wheez_ill8, R.string.wheez_ill9);
+                        R.string.wheez_ill71, R.string.wheez_ill72, R.string.wheez_ill8, R.string.wheez_ill9);
             }
         }
 
