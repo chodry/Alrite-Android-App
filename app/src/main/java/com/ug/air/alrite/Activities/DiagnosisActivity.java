@@ -129,10 +129,11 @@ public class DiagnosisActivity extends AppCompatActivity {
 
         String initials = sharedPreferences.getString(CIN, "");
         age = sharedPreferences.getString(AGE, "");
+        String[] split = age.split("\\.");
         ag = Float.parseFloat(age);
         String gender = sharedPreferences.getString(CHOICE, "");
         txtInitials.setText(initials);
-        txtAge.setText("Age: " + age + " years");
+        txtAge.setText("Age: " + split[0] + " years and " + split[1] + " months");
         txtGender.setText("Gender: " + gender);
 
         linearLayout1.setOnClickListener(new View.OnClickListener() {

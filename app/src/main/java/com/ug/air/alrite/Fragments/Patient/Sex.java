@@ -116,7 +116,7 @@ public class Sex extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.fragment_container, new Initials());
                 fr.commit();
             }
