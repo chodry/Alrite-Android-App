@@ -58,10 +58,10 @@ public class HIVStatus extends Fragment {
 
                 switch (index) {
                     case YES:
-                        value4 = "Known HIV";
+                        value4 = "HIV-Infected";
                         break;
                     case NO:
-                        value4 = "Exposed to HIV";
+                        value4 = "HIV-Exposed";
                         break;
                     case NOT:
                         value4 = "None of these";
@@ -107,12 +107,16 @@ public class HIVStatus extends Fragment {
         editor.apply();
 
         FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-        if (!value4.equals("None of these")) {
-            diagnosis = "HIV risk";
+        if (value4.equals("HIV-Infected")){
+            diagnosis = "HIV-Infected";
             editor.putString(HDIAGNOSIS, diagnosis);
             editor.apply();
             fr.replace(R.id.fragment_container, new HIVCare());
-
+        }else if (value4.equals("HIV-Exposed")){
+            diagnosis = "HIV-Exposed";
+            editor.putString(HDIAGNOSIS, diagnosis);
+            editor.apply();
+            fr.replace(R.id.fragment_container, new HIVCare());
         }else {
             deleteSharedPreferences();
             fr.replace(R.id.fragment_container, new Temperature());

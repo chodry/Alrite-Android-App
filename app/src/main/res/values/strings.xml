@@ -66,8 +66,8 @@
 
     <string name="asthma">Diagnosis: Asthma Risk</string>
 
-    <string name="asthma1">Give inhaled salbutamol , 4-6 puffs every 4-6 hours for 5 days</string>
-    <string name="asthma2">Use with spacer</string>
+    <string name="asthma1">Give inhaled salbutamol , 2–4 puffs every 4–6 hours for 5 days</string>
+    <string name="asthma2">A spacer is a way of delivering the bronchodilator drugs effectively into the lungs. No child under 5 years should be given an inhaler without a spacer. A spacer works as well as a nebuliser if correctly used</string>
     <string name="asthma3">Counsel caregiver to reduce exposure to smoke and strong-smelling odors, including tobacco smoke and biofuels (charcoal, kerosene, waste products)</string>
 
     <string name="tuber">Diagnosis: Tuberculosis risk</string>
@@ -149,10 +149,17 @@
     <string name="febril6">Monitor for signs of dehydration and new or worsening symptoms</string>
     <string name="febril7">Follow up in 5–7 days if no improvement, earlier of worsening symptoms</string>
 
-    <string name="hiv">needs more clarity</string>
+    <string name="hiv1">Refer to HIV care</string>
+    <string name="hiv2">Remind family to continue with HIV care</string>
+    <string name="amoxicillin2v">Give first dose of oral AMOXICILLIN 250 mg (1 tablet or 5 ml of 250mg/5ml syrup)</string>
+    <string name="amoxicillin12v">Give first dose of oral AMOXICILLIN 500 mg (2 tablets or 10ml of 250mg/5ml syrup)</string>
+    <string name="amoxicillin3v">Give first dose of oral AMOXICILLIN 750mg (3 tablets or 15 ml of 250mg/5ml syrup)</string>
+    <string name="hiv3">Ensure the child is taking COTRIMAZOLE prophylaxis and antiretroviral therapy</string>
+    <string name="cotrimoxazole6">Give COTRIMAZOLE 40/200mg/5ml syrup or 20/100mg pediatric tablet or 80/400mg adult tablet, 20/100 mg (2.5ml or 1 pediatric tab) once daily</string>
+    <string name="cotrimoxazole5">Give COTRIMAZOLE 40/200mg/5ml syrup or 20/100mg pediatric tablet or 80/400mg adult tablet, 40/200mg (5ml, 2 pediatric tabs, or ½ adult tab) once daily</string>
 
     <string name="bronc1">Diagnosis: Severe Disease</string>
-    <string name="bronc2">Give 2 additional treatments of salbutamol 4-10 puffs each treatment</string>
+    <string name="bronc2">Give 2 additional treatments of salbutamol 4–10 puffs each treatment</string>
     <string name="bronc3">consider referral for worsening clinical signs and symptoms</string>
 
     <string name="bronchodi">An inhaled medication that relaxes constricted air passages to make breathing easier</string>

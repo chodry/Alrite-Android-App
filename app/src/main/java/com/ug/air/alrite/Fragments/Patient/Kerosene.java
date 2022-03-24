@@ -238,7 +238,7 @@ public class Kerosene extends Fragment {
         assessments = new ArrayList<>();
         assessmentAdapter = new AssessmentAdapter(assessments);
 
-        List<Integer> messages = Arrays.asList(R.string.asthma1, R.string.asthma2, R.string.asthma3);
+        List<Integer> messages = Arrays.asList(R.string.asthma1, R.string.wheez3, R.string.asthma2, R.string.asthma3);
         for (int i = 0; i < messages.size(); i++){
             Assessment assessment = new Assessment(messages.get(i));
             assessments.add(assessment);

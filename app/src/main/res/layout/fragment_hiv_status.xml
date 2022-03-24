@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/black"
-                        android:text="Known HIV"
+                        android:text="HIV-Infected"
                         android:id="@+id/yes"
                         android:textSize="18sp" />
 
@@ -73,7 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/black"
-                        android:text="Exposed to HIV"
+                        android:text="HIV-Exposed"
                         android:id="@+id/no"
                         android:textSize="18sp" />
 
