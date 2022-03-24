@@ -286,15 +286,16 @@ public class Nasal extends Fragment {
         }
         recyclerView.setAdapter(assessmentAdapter);
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editor.putString(GNDIAGNOSIS, diagnosis);
-                editor.apply();
-                dialog.dismiss();
-                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
-            }
-        });
+//        btnSave.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                editor.putString(GNDIAGNOSIS, diagnosis);
+//                editor.apply();
+//                dialog.dismiss();
+//                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+//            }
+//        });
+        btnSave.setVisibility(View.GONE);
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override

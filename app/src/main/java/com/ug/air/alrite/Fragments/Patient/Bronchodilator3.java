@@ -1,5 +1,7 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT;
+import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT2;
 import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
 import static com.ug.air.alrite.Fragments.Patient.CoughD.DAY1;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
@@ -138,27 +140,53 @@ public class Bronchodilator3 extends Fragment {
         String cough = sharedPreferences.getString(CHOICE2, "");
         String wheezing = sharedPreferences.getString(CHOICE82, "");
         String days = sharedPreferences.getString(DAY1, "");
+        String point1 = sharedPreferences.getString(POINT, "");
+        String point2 = sharedPreferences.getString(POINT2, "");
         day = Long.parseLong(days);
 //        respiratory score decreasing
 
+        if (!point1.isEmpty() && !point2.isEmpty()){
+            int p1 = Integer.parseInt(point1);
+            int p2 = Integer.parseInt(point2);
 
-        if (value9.equals("Worse")){
-            val = 1;
-            showDialog(val);
-        }else if (cough.equals("Yes") && value9.equals("Better")){
-            val = 2;
-            showDialog(val);
-        }else if (cough.equals("Yes") && wheezing.equals("Wheezing") && value9.equals("Same/ No change")){
-            val = 3;
-            showDialog(val);
-        }else {
-            editor.remove(B3DIAGNOSIS);
-            editor.apply();
-            if (day >= 10){
-                showDialog2();
+            if (value9.equals("Worse")){
+                val = 1;
+                showDialog(val);
+            }else if (cough.equals("Yes") && (p2 < p1 || value9.equals("Better"))){
+                val = 2;
+                showDialog(val);
+            }else if (cough.equals("Yes") && wheezing.equals("Wheezing") && (p2 >= p1 || value9.equals("Same/ No change"))){
+                val = 3;
+                showDialog(val);
             }else {
-                finalValue();
-                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+                editor.remove(B3DIAGNOSIS);
+                editor.apply();
+                if (day >= 10){
+                    showDialog2();
+                }else {
+                    finalValue();
+                    startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+                }
+            }
+        }else {
+            if (value9.equals("Worse")){
+                val = 1;
+                showDialog(val);
+            }else if (cough.equals("Yes") && value9.equals("Better")){
+                val = 2;
+                showDialog(val);
+            }else if (cough.equals("Yes") && wheezing.equals("Wheezing") && value9.equals("Same/ No change")){
+                val = 3;
+                showDialog(val);
+            }else {
+                editor.remove(B3DIAGNOSIS);
+                editor.apply();
+                if (day >= 10){
+                    showDialog2();
+                }else {
+                    finalValue();
+                    startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+                }
             }
         }
 

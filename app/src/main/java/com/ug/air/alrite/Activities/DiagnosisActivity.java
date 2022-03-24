@@ -12,6 +12,8 @@ import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.BRONC;
 import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.CHOICE7;
 import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.CHOICE72;
 import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.CIDIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT;
+import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT2;
 import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
 import static com.ug.air.alrite.Fragments.Patient.Cough.NODIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.CoughD.DAY1;
@@ -272,6 +274,8 @@ public class DiagnosisActivity extends AppCompatActivity {
         String kerosene = sharedPreferences.getString(CHOICET2, "");
         String fastbreathing2 = sharedPreferences.getString(FASTBREATHING2, "");
         String better = sharedPreferences.getString(BRONC, "");
+        String point1 = sharedPreferences.getString(POINT, "");
+        String point2 = sharedPreferences.getString(POINT2, "");
 
         addToList("Parent's initials", pin);
         addToList("Child's weight", weight);
@@ -290,12 +294,14 @@ public class DiagnosisActivity extends AppCompatActivity {
 //        addToList("Stethoscope was used", String.valueOf(steth));
         addToList("Child has grunting or nasal flaring", nasal);
         addToList("Child has chest indrawing", chest);
+        addToList("Respiratory score", point1);
         addToList("Bronchodilator", bronch);
         addToList("Reason", reason);
         addToList("Respiratory Rate (After bronchodilator)", fastbreathing2);
         addToList("Child Wheezing", wheez2);
         addToList("Child has chest indrawing", chest2);
         addToList("Child's breathing after bronchodilator", better);
+        addToList("Respiratory score", point2);
         addToList("Child has breathing difficulty", wheezD);
         addToList("Episodes in the past year", wheezY);
         addToList("Child his breathless", breathless);

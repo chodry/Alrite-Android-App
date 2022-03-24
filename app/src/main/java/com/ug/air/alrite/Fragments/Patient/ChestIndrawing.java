@@ -1,8 +1,10 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
+import static com.ug.air.alrite.Fragments.Patient.Nasal.CHOICEGN;
 import static com.ug.air.alrite.Fragments.Patient.Nasal.GNDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Oxygen.OXDIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING2;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.SECOND;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 import static com.ug.air.alrite.Fragments.Patient.Stridor.STDIAGNOSIS;
@@ -12,6 +14,7 @@ import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.CoughD.DAY1;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING;
+import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHOICE82;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -78,11 +81,14 @@ public class ChestIndrawing extends Fragment {
     private static final int NO = 0;
     private static final int NOT = 2;
     public static final String CHOICE7 = "choice7";
+    public static final String POINT = "point";
+    public static final String POINT2 = "point2";
     public static final String CHOICE72 = "choice72";
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String CIDIAGNOSIS = "ciDiagnosis";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
+    String fastBreathing;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -173,6 +179,7 @@ public class ChestIndrawing extends Fragment {
 
             makeAssessment();
         }else {
+            calculatePoints();
             editor.putString(CHOICE72, value8);
             editor.apply();
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
@@ -242,7 +249,7 @@ public class ChestIndrawing extends Fragment {
         String oxDiagnosis = sharedPreferences.getString(OXDIAGNOSIS, "");
         String stDiagnosis = sharedPreferences.getString(STDIAGNOSIS, "");
         String gnDiagnosis = sharedPreferences.getString(GNDIAGNOSIS, "");
-        String fastBreathing = sharedPreferences.getString(FASTBREATHING, "");
+        fastBreathing = sharedPreferences.getString(FASTBREATHING, "");
         wheezing = sharedPreferences.getString(CHOICE8, "");
         String days = sharedPreferences.getString(DAY1, "");
         day = Long.parseLong(days);
@@ -260,11 +267,13 @@ public class ChestIndrawing extends Fragment {
 
         } else {
             if (wheezing.equals("Wheezing")  || day >= 10){
+                calculatePoints();
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.fragment_container, new Bronchodilator());
                 fr.addToBackStack(null);
                 fr.commit();
             }else {
+                calculatePoints();
                 editor.remove(CIDIAGNOSIS);
                 editor.apply();
                 startActivity(new Intent(getActivity(), DiagnosisActivity.class));
@@ -307,14 +316,13 @@ public class ChestIndrawing extends Fragment {
                 messages = Arrays.asList(R.string.amoxicillin3, R.string.pneumonia1, R.string.pneumonia2);
             }
 
-            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1300);
         }else {
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));
             txtDiagnosis.setText(R.string.cold);
             messages = Arrays.asList(R.string.cold1, R.string.cold2, R.string.cold3, R.string.cold4);
-            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1300);
         }
 
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1300);
         diagnosis = txtDiagnosis.getText().toString();
         diagnosis = diagnosis.replace("Diagnosis: ", "");
 
@@ -330,6 +338,7 @@ public class ChestIndrawing extends Fragment {
                 editor.putString(CIDIAGNOSIS, diagnosis);
                 editor.apply();
                 dialog.dismiss();
+                calculatePoints();
                 startActivity(new Intent(getActivity(), DiagnosisActivity.class));
             }
         });
@@ -346,6 +355,7 @@ public class ChestIndrawing extends Fragment {
                 editor.putString(CIDIAGNOSIS, diagnosis);
                 editor.apply();
                 dialog.dismiss();
+                calculatePoints();
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.fragment_container, new Bronchodilator());
                 fr.addToBackStack(null);
@@ -358,4 +368,62 @@ public class ChestIndrawing extends Fragment {
         dialog.show();
     }
 
+    private void calculatePoints() {
+        String age = sharedPreferences.getString(AGE, "");
+        String granting = sharedPreferences.getString(CHOICEGN, "");
+
+        float ag = Float.parseFloat(age);
+
+        if (second.isEmpty()){
+            int fast = Integer.parseInt(fastBreathing);
+            int point = 0;
+
+            if (((ag < 0.2 && fast < 60) || ((ag >= 0.2 && ag < 1.0) && fast < 50) || ((ag >= 1.0 && ag < 5.0) && fast < 40)) && value8.equals("No") && wheezing.equals("Normal breath sounds")){
+                point = 0;
+                String pot = String.valueOf(point);
+                editor.putString(POINT, pot);
+            }else if (((ag < 0.2 && (fast >= 60 && fast < 70)) || ((ag >= 0.2 && ag < 1.0) && (fast >= 50 && fast < 60)) || ((ag >= 1.0 && ag < 5.0) && (fast >= 40 && fast < 50))) && value8.equals("Mild")){
+                point = 1;
+                String pot = String.valueOf(point);
+                editor.putString(POINT, pot);
+            }else if (((ag < 0.2 && (fast >= 70 && fast < 80)) || ((ag >= 0.2 && ag < 1.0) && (fast >= 60 && fast < 70)) || ((ag >= 1.0 && ag < 5.0) && (fast >= 50 && fast < 60))) && value8.equals("Moderate/Severe") && wheezing.equals("Other abnormal breath sounds")){
+                point = 2;
+                String pot = String.valueOf(point);
+                editor.putString(POINT, pot);
+            }else if (((ag < 0.2 && fast > 80) || ((ag >= 0.2 && ag < 1.0) && fast > 70) || ((ag >= 1.0 && ag < 5.0) && fast > 60)) && !value8.equals("No") && wheezing.equals("Wheezing") && granting.equals("Yes")){
+                point = 3;
+                String pot = String.valueOf(point);
+                editor.putString(POINT, pot);
+            }else {
+                editor.remove(POINT);
+            }
+        }else {
+            String wheez = sharedPreferences.getString(CHOICE82, "");
+            String fas = sharedPreferences.getString(FASTBREATHING2, "");
+            int fast2 = Integer.parseInt(fas);
+            int point2 = 0;
+
+            if (((ag < 0.2 && fast2 < 60) || ((ag >= 0.2 && ag < 1.0) && fast2 < 50) || ((ag >= 1.0 && ag < 5.0) && fast2 < 40)) && value8.equals("No") && wheez.equals("Normal breath sounds")){
+                point2 = 0;
+                String pot2 = String.valueOf(point2);
+                editor.putString(POINT2, pot2);
+            }else if (((ag < 0.2 && (fast2 >= 60 && fast2 < 70)) || ((ag >= 0.2 && ag < 1.0) && (fast2 >= 50 && fast2 < 60)) || ((ag >= 1.0 && ag < 5.0) && (fast2 >= 40 && fast2 < 50))) && value8.equals("Mild")){
+                point2 = 1;
+                String pot2 = String.valueOf(point2);
+                editor.putString(POINT2, pot2);
+            }else if (((ag < 0.2 && (fast2 >= 70 && fast2 < 80)) || ((ag >= 0.2 && ag < 1.0) && (fast2 >= 60 && fast2 < 70)) || ((ag >= 1.0 && ag < 5.0) && (fast2 >= 50 && fast2 < 60))) && value8.equals("Moderate/Severe") && wheez.equals("Other abnormal breath sounds")){
+                point2 = 2;
+                String pot2 = String.valueOf(point2);
+                editor.putString(POINT2, pot2);
+            }else if (((ag < 0.2 && fast2 > 80) || ((ag >= 0.2 && ag < 1.0) && fast2 > 70) || ((ag >= 1.0 && ag < 5.0) && fast2 > 60)) && !value8.equals("No") && wheez.equals("Wheezing") && granting.equals("Yes")){
+                point2 = 3;
+                String pot2 = String.valueOf(point2);
+                editor.putString(POINT2, pot2);
+            }else {
+                editor.remove(POINT2);
+            }
+        }
+        editor.apply();
+
+    }
 }
