@@ -9,21 +9,54 @@
         <item>Months</item>
     </string-array>
 
-    <string name="first_dose">Give first dose of appropriate antibiotic- intramuscular injection Ampicillin/Gentamicin recommended, oral Amoxicillin otherwise</string>
-    <string name="first_dose_IM">Dilute 500mg vial Ampicillin or 2ml vial Gentamicin with 2.1 ml sterile water</string>
-    <string name="IM_dosing_under1">Inject 2ml Ampicillin or 1.1 ml Gentamicin into upper arm, thigh, or bottom with sterile needle</string>
-    <string name="give_diazepam_if">If convulsing, treat with anticonvulsant like Diazepam</string>
-    <string name="refer_urgently">Refer URGENTLY to hospital</string>
+    <!--   Diagnosis: Severe Pneumonia OR very Severe Disease -->
     <string name="severe">Diagnosis: Severe Pneumonia OR very Severe Disease</string>
+    <string name="first_dose">Give first dose of antibiotic-intramuscular injection, Ampicillin and Gentamicin. Oral Amoxicillin otherwise.</string>
+
+    <!--    ampicillin-->
+    <string name="ampicilin2">For AMPICILLIN: Dilute 500mg vial with 1ml sterile water (500mg/1ml)</string>
+    <string name="ampicilin4">For AMPICILLIN: Dilute 500mg vial with 2ml sterile water (500mg/2ml)</string>
+    <string name="ampicilin12">For AMPICILLIN: Dilute 500mg vial with 3ml sterile water (500mg/3ml)</string>
+    <string name="ampicilin3">For AMPICILLIN: Dilute 500mg vial with 5ml sterile water (500mg/5ml)</string>
+    <string name="ampicilin0">Give ONE TIME via intramuscular injection. If referral is not possible or delayed, repeat AMPICILLIN every 6 hours.</string>
+
+    <!--    GENTAMICIN-->
+    <string name="gentamicin2">For GENTAMICIN: Dilute 40mg vial with 0.5–1ml sterile water</string>
+    <string name="gentamicin4">For GENTAMICIN: Dilute 40mg vial with 1.1–1.8ml sterile water</string>
+    <string name="gentamicin12">For GENTAMICIN: Dilute 40mg vial with 1.9–2.7ml sterile water</string>
+    <string name="gentamicin3">For GENTAMICIN: Dilute 40mg vial with 2.8–3.5ml sterile water</string>
+    <string name="gentamicin0">Give ONE TIME via intramuscular injection. If referral is not possible or delayed, repeat gentamicin once daily.</string>
+
+    <!--    DIAZEPAM-->
+    <string name="convulsions">For Convulsions: Treat with DIAZEPAM</string>
+    <string name="diazepam2">For DIAZEPAM: Dilute 10mg vial with 0.5ml sterile water</string>
+    <string name="diazepam4">For DIAZEPAM: Dilute 10mg vial with 1ml sterile water</string>
+    <string name="diazepam12">For DIAZEPAM: Dilute 10mg vial with 1.5ml sterile water</string>
+    <string name="diazepam3">For DIAZEPAM: Dilute 10mg vial with 2ml sterile water</string>
+    <string name="convulsions1">Turn the child to his/her side and clear the airway. Avoid putting things in the mouth.</string>
+    <string name="convulsions2">Give DIAZEPAM injection solution per rectum using a small syringe without a needle (like a tuberculin syringe) or using a catheter.</string>
+    <string name="convulsions3">Check for low blood sugar, then treat or prevent.</string>
+    <string name="convulsions4">Give oxygen if available and REFER URGENTLY</string>
+    <string name="convulsions5">If convulsions have not stopped after 10 minutes repeat diazepam dose</string>
+
+    <!--    Other instructions-->
+    <string name="other1">If wheezing now, give salbutamol 4–6 puffs with spacer or 1 nebulization (2.5–5mg) if available while awaiting referral. Do not delay referral.</string>
+    <string name="other2">If oxygen level is greater than 90%, start oxygen therapy if available while awaiting referral. Do not delay referral.</string>
+    <string name="other3">Quickly complete the assessment</string>
+    <string name="other4">Treat to prevent low blood sugar</string>
+    <string name="other5">Ask the mother to breastfeed the child</string>
+    <string name="other6">If the child is unable to breastfeed, give 50ml expressed breast milk, a breast-milk substitute, or sugar water (4 teaspoons sugar [20g] in 200ml clean water)</string>
+    <string name="other7">If unable to swallow, give 50ml milk or sugar water by nasogastric tube OR 1 teaspoon sugar moistened with 1–2 drops of water sublingually, repeating every 20 minutes while awaiting referral</string>
+    <string name="other8">Keep the child warm</string>
+
+    <string name="refer_urgently">Refer URGENTLY to hospital</string>
+
+    <!--   END Diagnosis: Severe Pneumonia OR very Severe Disease END -->
 
     <string name="selected">You have selected that this child does NOT have a cough or difficulty breathing</string>
     <string name="alrite">ALRITE is to help diagnose children with a cough or difficulty breathing</string>
     <string name="no_anti">No antibiotics or a bronchodilator needed for breathing difficulty</string>
     <string name="other_illness">Assess for other illness</string>
-
-    <string name="quick">Quickly complete the assessment</string>
-    <string name="quick2">Treat to prevent low blood sugar</string>
-    <string name="quick3">Keep the child warm</string>
 
     <string name="no_signs">Diagnosis: No signs of Pneumonia or Wheezing illness</string>
     <string name="asthma">Diagnosis: Asthma Risk</string>
@@ -36,15 +69,10 @@
     <string name="tuber1">Ask about potential TB exposures</string>
     <string name="tuber2">Refer to assess and treat for potential TB. This will include TB testing and chest x-ray</string>
 
-    <string name="low_oxygen">Start oxygen therapy if oxygen is available at the health facility</string>
-
     <string name="pneumonia">Diagnosis: Pneumonia</string>
     <string name="pneumonia1">Give oral amoxicillin twice daily for 5 days</string>
     <string name="pneumonia2">Soothe the throat and relieve the cough with a safe remedy</string>
     <string name="pneumonia3">Follow up in 3 days, earlier if worsening</string>
-
-    <string name="wheezing1">Diagnosis: Pneumonia and Wheezing illness</string>
-    <string name="wheezing2">I need the instructions for this diagnosis</string>
 
     <string name="cold">Diagnosis: Cough/Cold/No Pneumonia</string>
     <string name="cold1">No signs of Pneumonia or Wheezing illness</string>
