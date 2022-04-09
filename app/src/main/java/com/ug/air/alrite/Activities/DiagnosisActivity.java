@@ -635,6 +635,6 @@ public class DiagnosisActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this, "Please click the EXIT button", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Please click the Save button", Toast.LENGTH_SHORT).show();
     }
 }

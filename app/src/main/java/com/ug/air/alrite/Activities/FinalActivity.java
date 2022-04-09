@@ -3,6 +3,7 @@ package com.ug.air.alrite.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -163,5 +164,12 @@ public class FinalActivity extends AppCompatActivity {
         editor.putString(S6, s2);
         editor.apply();
         editor.commit();
+        startActivity(new Intent(FinalActivity.this, Dashboard.class));
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Please click the Save and Exit button", Toast.LENGTH_SHORT).show();
     }
 }
