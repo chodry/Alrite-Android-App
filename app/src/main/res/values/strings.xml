@@ -14,25 +14,23 @@
     <string name="first_dose">Give first dose of antibiotic-intramuscular injection, Ampicillin and Gentamicin. Oral Amoxicillin otherwise.</string>
 
     <!--    ampicillin-->
-    <string name="ampicilin2">For AMPICILLIN: Dilute 500mg vial with 1ml sterile water (500mg/1ml)</string>
-    <string name="ampicilin4">For AMPICILLIN: Dilute 500mg vial with 2ml sterile water (500mg/2ml)</string>
-    <string name="ampicilin12">For AMPICILLIN: Dilute 500mg vial with 3ml sterile water (500mg/3ml)</string>
-    <string name="ampicilin3">For AMPICILLIN: Dilute 500mg vial with 5ml sterile water (500mg/5ml)</string>
-    <string name="ampicilin0">Give ONE TIME via intramuscular injection. If referral is not possible or delayed, repeat AMPICILLIN every 6 hours.</string>
+    <string name="ampicilin2">For AMPICILLIN: Dilute 500mg vial with 2.1 ml sterile water (500mg/2.5ml). Give 1ml ONE TIME via intramuscular injection. If referral is not possible or delayed, repeat the same dose of AMPICILLIN every 6 hours.</string>
+    <string name="ampicilin4">For AMPICILLIN: Dilute 500mg vial with 2.1 ml sterile water (500mg/2.5ml). Give 2ml ONE TIME via intramuscular injection. If referral is not possible or delayed, repeat the same dose of AMPICILLIN every 6 hours.</string>
+    <string name="ampicilin12">For AMPICILLIN: Dilute 500mg vial with 2.1 ml sterile water (500mg/2.5ml). Give 3ml ONE TIME via intramuscular injection. If referral is not possible or delayed, repeat the same dose of AMPICILLIN every 6 hours.</string>
+    <string name="ampicilin3">For AMPICILLIN: Dilute 500mg vial with 2.1 ml sterile water (500mg/2.5ml). Give 5ml ONE TIME via intramuscular injection. If referral is not possible or delayed, repeat the same dose of AMPICILLIN every 6 hours.</string>
 
     <!--    GENTAMICIN-->
-    <string name="gentamicin2">For GENTAMICIN: Dilute 40mg vial with 0.5–1ml sterile water</string>
-    <string name="gentamicin4">For GENTAMICIN: Dilute 40mg vial with 1.1–1.8ml sterile water</string>
-    <string name="gentamicin12">For GENTAMICIN: Dilute 40mg vial with 1.9–2.7ml sterile water</string>
-    <string name="gentamicin3">For GENTAMICIN: Dilute 40mg vial with 2.8–3.5ml sterile water</string>
-    <string name="gentamicin0">Give ONE TIME via intramuscular injection. If referral is not possible or delayed, repeat gentamicin once daily.</string>
+    <string name="gentamicin2">For GENTAMICIN: (2ml/40mg/ml vial). Give 0.5–1 ml ONE TIME via intramuscular injection. If referral is not possible or delayed, repeat gentamicin once daily.</string>
+    <string name="gentamicin4">For GENTAMICIN: (2ml/40mg/ml vial). Give 1.1–1.8 ml ONE TIME via intramuscular injection. If referral is not possible or delayed, repeat gentamicin once daily.</string>
+    <string name="gentamicin12">For GENTAMICIN: (2ml/40mg/ml vial). Give 1.9–2.7 ml ONE TIME via intramuscular injection. If referral is not possible or delayed, repeat gentamicin once daily.</string>
+    <string name="gentamicin3">For GENTAMICIN: (2ml/40mg/ml vial). Give 2.8–3.5 ml ONE TIME via intramuscular injection. If referral is not possible or delayed, repeat gentamicin once daily.</string>
 
     <!--    DIAZEPAM-->
     <string name="convulsions">For Convulsions: Treat with DIAZEPAM</string>
-    <string name="diazepam2">For DIAZEPAM: Dilute 10mg vial with 0.5ml sterile water</string>
-    <string name="diazepam4">For DIAZEPAM: Dilute 10mg vial with 1ml sterile water</string>
-    <string name="diazepam12">For DIAZEPAM: Dilute 10mg vial with 1.5ml sterile water</string>
-    <string name="diazepam3">For DIAZEPAM: Dilute 10mg vial with 2ml sterile water</string>
+    <string name="diazepam2">For DIAZEPAM: (10mg/2ml). Give 0.5 ml DIAZEPAM injection solution per rectum using a small syringe without a needle (like a tuberculin syringe) or using a catheter.</string>
+    <string name="diazepam4">For DIAZEPAM: (10mg/2ml). Give 1.0 ml DIAZEPAM injection solution per rectum using a small syringe without a needle (like a tuberculin syringe) or using a catheter.</string>
+    <string name="diazepam12">For DIAZEPAM: (10mg/2ml). Give 1.5 ml DIAZEPAM injection solution per rectum using a small syringe without a needle (like a tuberculin syringe) or using a catheter.</string>
+    <string name="diazepam3">For DIAZEPAM: (10mg/2ml). Give 2.0 ml DIAZEPAM injection solution per rectum using a small syringe without a needle (like a tuberculin syringe) or using a catheter.</string>
     <string name="convulsions1">Turn the child to his/her side and clear the airway. Avoid putting things in the mouth.</string>
     <string name="convulsions2">Give DIAZEPAM injection solution per rectum using a small syringe without a needle (like a tuberculin syringe) or using a catheter.</string>
     <string name="convulsions3">Check for low blood sugar, then treat or prevent.</string>
@@ -79,9 +77,9 @@
 
     <string name="pneumonia">Diagnosis: Pneumonia</string>
 
-    <string name="amoxicillin2">Give oral AMOXICILLIN 250 mg (1 tablet or 5 ml of 250mg/5ml syrup) twice daily for 5 days</string>
-    <string name="amoxicillin12">Give oral AMOXICILLIN 500 mg (2 tablets or 10ml of 250mg/5ml syrup) twice daily for 5 days</string>
-    <string name="amoxicillin3">Give oral AMOXICILLIN 750mg (3 tablets or 15 ml of 250mg/5ml syrup) twice daily for 5 days</string>
+    <string name="amoxicillin2">Give oral AMOXICILLIN 250 mg (1 tablet or 5 ml of 250mg/5ml syrup)</string>
+    <string name="amoxicillin12">Give oral AMOXICILLIN 500 mg (2 tablets or 10ml of 250mg/5ml syrup)</string>
+    <string name="amoxicillin3">Give oral AMOXICILLIN 750mg (3 tablets or 15 ml of 250mg/5ml syrup)</string>
     <string name="pneumonia1">Soothe the throat and relieve the cough with a safe remedy</string>
     <string name="pneumonia2">Follow up in 3 days, earlier if worsening</string>
 
@@ -147,24 +145,23 @@
     <string name="febril">Diagnosis: Very severe febrile illness</string>
 
     <string name="febril1">Give first dose of artesunate or quinine for severe malaria</string>
-    <string name="artesunate2">For the ARTESUNATE suppository: Give 50mg (1 pediatric suppository)</string>
-    <string name="artesunate4">For the ARTESUNATE suppository: Give 100mg (2 pediatric suppositories)</string>
-    <string name="artesunate5">For the ARTESUNATE suppository: Give 150mg (3 pediatric suppositories)</string>
-    <string name="iartesunate2">For Intramuscular ARTESUNATE: Give 10mg (0.5 ml)</string>
-    <string name="iartesunate4">For Intramuscular ARTESUNATE: Give 20mg (1ml)</string>
-    <string name="iartesunate12">For Intramuscular ARTESUNATE: Give 30mg (1.5ml)</string>
-    <string name="iartesunate3">For Intramuscular ARTESUNATE: Give 40mg (2ml)</string>
-    <string name="quinine2">For QUININE: Give 0.4ml (150mg/ml) OR 0.2ml (300mg/ml)</string>
-    <string name="quinine4">For QUININE: Give 0.6ml (150mg/ml) OR 0.3ml (300mg/ml)</string>
-    <string name="quinine12">For QUININE: Give 0.8ml (150mg/ml) OR 0.4ml (300mg/ml)</string>
-    <string name="quinine24">For QUININE: Give 1ml (150mg/ml) OR 0.5ml (300mg/ml)</string>
-    <string name="quinine3">For QUININE: Give 1.2ml (150mg/ml) OR 0.6ml (300mg/ml)</string>
-
+    <string name="artesunate2">For the ARTESUNATE suppository: Dosage form: 50mg pediatric or 200mg adult, Give 50mg (1 pediatric suppository).</string>
+    <string name="artesunate4">For the ARTESUNATE suppository: Dosage form: 50mg pediatric or 200mg adult, Give 100mg (2 pediatric suppositories).</string>
+    <string name="artesunate5">For the ARTESUNATE suppository: Dosage form: 50mg pediatric or 200mg adult, Give 150mg (3 pediatric suppositories) OR 200mg (1 adult suppository).</string>
+    <string name="iartesunate2">For Intramuscular ARTESUNATE: Dosage form: 60mg vial (20mg/ml), Give 10mg (0.5 ml).</string>
+    <string name="iartesunate4">For Intramuscular ARTESUNATE: Dosage form: 60mg vial (20mg/ml), Give 20mg (1ml).</string>
+    <string name="iartesunate12">For Intramuscular ARTESUNATE: Dosage form: 60mg vial (20mg/ml), Give 30mg (1.5ml).</string>
+    <string name="iartesunate3">For Intramuscular ARTESUNATE: Dosage form: 60mg vial (20mg/ml), Give 40mg (2ml).</string>
+    <string name="quinine2">For Intramuscular QUININE: Dosage forms: 150mg/ml OR 300mg/ml, Give 0.4ml of 150mg/ml dose form OR 0.2ml of 300mg/ml dose form</string>
+    <string name="quinine4">For Intramuscular QUININE: Dosage forms: 150mg/ml OR 300mg/ml, Give 0.6ml of 150mg/ml dose form OR 0.3ml of 300mg/ml dose form</string>
+    <string name="quinine12">For Intramuscular QUININE: Dosage forms: 150mg/ml OR 300mg/ml, Give 0.8ml of 150mg/ml dose form OR 0.4ml of 300mg/ml dose form</string>
+    <string name="quinine24">For Intramuscular QUININE: Dosage forms: 150mg/ml OR 300mg/ml, Give 1ml of 150mg/ml dose form OR 0.5ml of 300mg/ml dose form</string>
+    <string name="quinine3">For Intramuscular QUININE: Dosage forms: 150mg/ml OR 300mg/ml, Give 1.2ml of 150mg/ml dose form OR 0.6ml of 300mg/ml dose form</string>
 
 
     <string name="febril3">Consider testing for malaria if risk high and no other cause of fever identified</string>
-    <string name="paracetamol2">Give PARACETAMOL 100mg (1 pediatric tablet) or 125mg (¼ of adult tablet) every 6 hours to relieve high fever</string>
-    <string name="paracetamol3">Give PARACETAMOL 250mg (1.5 pediatric tablet or ½ adult tablet) every 6 hours to relieve high fever</string>
+    <string name="paracetamol2">Give PARACETAMOL (Dose forms: 100mg pediatric tablet or 500mg adult tablet) 100mg (1 pediatric tablet) or 125mg (¼ of adult tablet) every 6 hours to relieve high fever</string>
+    <string name="paracetamol3">Give PARACETAMOL (Dose forms: 100mg pediatric tablet or 500mg adult tablet) 250mg (1.5 pediatric tablet or ½ adult tablet) every 6 hours to relieve high fever</string>
     <string name="febril5">Encourage the child to take oral liquids</string>
     <string name="febril6">Monitor for signs of dehydration and new or worsening symptoms</string>
     <string name="febril7">Follow up in 5–7 days if no improvement, earlier of worsening symptoms</string>
@@ -175,15 +172,32 @@
     <string name="amoxicillin12v">Give first dose of oral AMOXICILLIN 500 mg (2 tablets or 10ml of 250mg/5ml syrup)</string>
     <string name="amoxicillin3v">Give first dose of oral AMOXICILLIN 750mg (3 tablets or 15 ml of 250mg/5ml syrup)</string>
     <string name="hiv3">Ensure the child is taking COTRIMAZOLE prophylaxis and antiretroviral therapy</string>
-    <string name="cotrimoxazole6">Give COTRIMAZOLE 40/200mg/5ml syrup or 20/100mg pediatric tablet or 80/400mg adult tablet, 20/100 mg (2.5ml or 1 pediatric tab) once daily</string>
-    <string name="cotrimoxazole5">Give COTRIMAZOLE 40/200mg/5ml syrup or 20/100mg pediatric tablet or 80/400mg adult tablet, 40/200mg (5ml, 2 pediatric tabs, or ½ adult tab) once daily</string>
+    <string name="cotrimoxazole6">Give COTRIMAZOLE 20/100 mg (2.5 ml syrup or ONE 20/100mg pediatric tab) once daily</string>
+    <string name="cotrimoxazole5">Give COTRIMAZOLE 40/200mg (5 ml syrup, TWO 20/100mg pediatric tabs, or ONE HALF  80/400mg adult tab) once daily</string>
 
     <string name="bronc1">Diagnosis: Severe Disease</string>
     <string name="bronc2">Give 2 additional treatments of salbutamol 4–10 puffs each treatment</string>
     <string name="bronc3">consider referral for worsening clinical signs and symptoms</string>
 
     <string name="bronchodi">An inhaled medication that relaxes constricted air passages to make breathing easier</string>
-
-
+    
+    
+    <string name="spacer1">A spacer is a way of delivering the bronchodilator drugs effectively into the lungs. No child under 5 years should be given an inhaler without a spacer. A spacer works as well as a nebuliser if correctly used.</string>
+    <string name="spacer2">Spacers can be made in the following way</string>
+    <string name="spacer3">ONE: Use a 500ml drink bottle or similar</string>
+    <string name="spacer4">Cut a hole in the bottle base in the same shape as the mouthpiece of the inhaler.</string>
+    <string name="spacer5">This can be done using a sharp knife.</string>
+    <string name="spacer6">Cut the bottle between the upper quarter and the lower ¾ and disregard the upper quarter of the bottle.</string>
+    <string name="spacer7">Cut a small V in the border of the large open part of the bottle to fit to the child\'s nose and be used as a mask.</string>
+    <string name="spacer8">Flame the edge of the cut bottle with a candle or a lighter to soften it.</string>
+    <string name="spacer9">In a small baby, a mask can be made by making a similar hole in a plastic (not polystyrene) cup. Alternatively commercial spacers can be used if available.</string>
+    <string name="spacer10">TWO: To use an inhaler with a spacer</string>
+    <string name="spacer11">Remove the inhaler cap. Shake the inhaler well.</string>
+    <string name="spacer12">Insert mouthpiece of the inhaler through the hole in the bottle or plastic cup.</string>
+    <string name="spacer13">The child should put the opening of the bottle into his mouth and breath in and out through the mouth. A carer then presses down the inhaler and sprays into the bottle while the child continues to breath normally.</string>
+    <string name="spacer14">Wait for three to four breaths and repeat.</string>
+    <string name="spacer15">For younger children, place the cup over the child\'s mouth and use as a spacer in the same way.</string>
+    <string name="spacer16">If a spacer is being used for the first time, it should be primed by 4–5 extra puffs from the inhaler.</string>
+    <string name="spacer17">If a spacer is being used for the first time, it should be primed by 4–5 extra puffs from the inhaler before giving it to the child.</string>
 
 </resources>

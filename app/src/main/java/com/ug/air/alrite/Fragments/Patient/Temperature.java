@@ -6,8 +6,11 @@ import static com.ug.air.alrite.Fragments.Patient.Fragment7v4.CHOICE3Y2;
 import static com.ug.air.alrite.Fragments.Patient.HIVCare.CHOICEHC;
 import static com.ug.air.alrite.Fragments.Patient.HIVStatus.CHOICE3;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ug.air.alrite.R;
@@ -31,13 +35,15 @@ public class Temperature extends Fragment {
 
     View view;
     EditText etDay;
-    Button back, next, btnSkip;
+    Button back, next, btnSkip, btnSave;
     String temp, diagnosis;
     public static final String TEMP = "temp";
     public static final String TDIAGNOSIS = "tDiagnosis";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    Dialog dialog;
+    TextView txtMessage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,7 +125,7 @@ public class Temperature extends Fragment {
                 btnSkip.setEnabled(false);
                 if (dy < 33.0){
                     etDay.setError("The minimum temperature is 33.0");
-                }else if (dy > 42.0){
+                }else if (dy > 41.0){
                     etDay.setError("The maximum temperature is 42.0");
                 }
             }else {
@@ -137,20 +143,27 @@ public class Temperature extends Fragment {
         deleteSharedPreferences();
 
         String assess = sharedPreferences.getString(S4, "");
+        editor.putString(TEMP, temp);
+        editor.apply();
         float tp = Float.parseFloat(temp);
         if (tp >= 38.5 && assess.contains("None of these")){
             diagnosis = "Fever without danger signs";
             editor.putString(TDIAGNOSIS, diagnosis);
+            editor.apply();
+            showDialog();
+        }else if (tp >= 38.5){
+            editor.remove(TDIAGNOSIS);
+            editor.apply();
+            showDialog();
+        }else {
+            editor.remove(TDIAGNOSIS);
+            editor.apply();
+            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+            fr.replace(R.id.fragment_container, new Oxygen());
+            fr.addToBackStack(null);
+            fr.commit();
         }
 
-        editor.putString(TEMP, temp);
-        editor.apply();
-
-
-        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Oxygen());
-        fr.addToBackStack(null);
-        fr.commit();
     }
 
     private void loadData() {
@@ -170,5 +183,31 @@ public class Temperature extends Fragment {
         editor.remove(TOUCH);
         editor.remove(TDIAGNOSIS);
         editor.apply();
+    }
+
+    private void showDialog() {
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.assess);
+        dialog.setCancelable(true);
+
+        txtMessage = dialog.findViewById(R.id.message);
+        btnSave = dialog.findViewById(R.id.ContinueButton);
+
+        txtMessage.setText("The Child has a fever");
+        txtMessage.setTextColor(Color.parseColor("#FF0000"));
+        txtMessage.setTypeface(Typeface.DEFAULT_BOLD);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new Oxygen());
+                fr.addToBackStack(null);
+                fr.commit();
+            }
+        });
+
+        dialog.show();
     }
 }

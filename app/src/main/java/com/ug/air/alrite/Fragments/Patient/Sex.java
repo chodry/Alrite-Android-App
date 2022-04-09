@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -29,6 +30,7 @@ public class Sex extends Fragment {
     View view;
     EditText etYears, etKilo1, etKilo2, etMonths, etMuac;
     Button back, next;
+    LinearLayout linearLayout;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2;
     String age, weight, text, kg1, fileName, months, years, muac, diagnosis;
@@ -61,6 +63,7 @@ public class Sex extends Fragment {
         etMonths = view.findViewById(R.id.months);
         etKilo1 = view.findViewById(R.id.kg1);
         etMuac = view.findViewById(R.id.muac);
+        linearLayout = view.findViewById(R.id.linearMUAC);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -210,8 +213,8 @@ public class Sex extends Fragment {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             months = etMonths.getText().toString();
             if (!months.isEmpty()){
-                int yr = Integer.parseInt(months);
-                if (yr > 11){
+                int mt = Integer.parseInt(months);
+                if (mt > 11){
                     etMonths.setError("The maximum number of months should be 11");
                 }
             }

@@ -7,6 +7,7 @@ import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -29,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
@@ -131,7 +133,7 @@ public class Oxygen extends Fragment {
             if (!oxy.isEmpty()){
                 long dy = Long.parseLong(oxy);
                 if (dy < 50){
-                    etDay.setError("The minimum accepted value is 80");
+                    etDay.setError("The minimum accepted value is 50");
                 }else if (dy > 100){
                     etDay.setError("The maximum accepted value is 100");
                 }
@@ -196,48 +198,42 @@ public class Oxygen extends Fragment {
         float ag = Float.parseFloat(age);
         if (ag >= 0.2 && ag < 0.4){
             if (s.contains("Convulsions")){
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2,
-                        R.string.ampicilin0, R.string.gentamicin2, R.string.gentamicin0,
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2, R.string.gentamicin2,
                         R.string.convulsions, R.string.diazepam2, R.string.convulsions1,
                         R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
                         R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
                         R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                         R.string.other8, R.string.refer_urgently);
             }else{
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2,
-                        R.string.ampicilin0, R.string.gentamicin2, R.string.gentamicin0,
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2, R.string.gentamicin2,
                         R.string.other1, R.string.other2, R.string.other3,
                         R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                         R.string.other8, R.string.refer_urgently);
             }
         }else if (ag >= 0.4 && ag < 1.0){
             if (s.contains("Convulsions")){
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4,
-                        R.string.ampicilin0, R.string.gentamicin4, R.string.gentamicin0,
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4, R.string.gentamicin4,
                         R.string.convulsions, R.string.diazepam4, R.string.convulsions1,
                         R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
                         R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
                         R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                         R.string.other8, R.string.refer_urgently);
             }else{
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4,
-                        R.string.ampicilin0, R.string.gentamicin4, R.string.gentamicin0,
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4, R.string.gentamicin4,
                         R.string.other1, R.string.other2, R.string.other3,
                         R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                         R.string.other8, R.string.refer_urgently);
             }
         }else if (ag >= 1.0 && ag < 3.0){
             if (s.contains("Convulsions")){
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12,
-                        R.string.ampicilin0, R.string.gentamicin12, R.string.gentamicin0,
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12, R.string.gentamicin12,
                         R.string.convulsions, R.string.diazepam12, R.string.convulsions1,
                         R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
                         R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
                         R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                         R.string.other8, R.string.refer_urgently);
             }else{
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12,
-                        R.string.ampicilin0, R.string.gentamicin12, R.string.gentamicin0,
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12, R.string.gentamicin12,
                         R.string.other1, R.string.other2, R.string.other3,
                         R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                         R.string.other8, R.string.refer_urgently);
@@ -245,16 +241,14 @@ public class Oxygen extends Fragment {
 
         }else if (ag >= 3.0){
             if (s.contains("Convulsions")){
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3,
-                        R.string.ampicilin0, R.string.gentamicin3, R.string.gentamicin0,
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3, R.string.gentamicin3,
                         R.string.convulsions, R.string.diazepam3, R.string.convulsions1,
                         R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
                         R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
                         R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                         R.string.other8, R.string.refer_urgently);
             }else{
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3,
-                        R.string.ampicilin0, R.string.gentamicin3, R.string.gentamicin0,
+                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3, R.string.gentamicin3,
                         R.string.other1, R.string.other2, R.string.other3,
                         R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                         R.string.other8, R.string.refer_urgently);
@@ -268,7 +262,16 @@ public class Oxygen extends Fragment {
         }
         recyclerView.setAdapter(assessmentAdapter);
 
-        btnSave.setVisibility(View.GONE);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor.putString(OXDIAGNOSIS, diagnosis);
+                editor.apply();
+                dialog.dismiss();
+                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+            }
+        });
+
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

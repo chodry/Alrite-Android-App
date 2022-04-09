@@ -69,7 +69,7 @@
                         android:layout_weight=".5"
                         android:background="@drawable/text_input_bg"
                         android:gravity="center"
-                        android:hint="33.0 - 42.0"
+                        android:hint="33.0 - 41.0"
                         android:inputType="numberDecimal"
                         android:maxLength="4" />
 

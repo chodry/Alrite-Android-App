@@ -13,6 +13,7 @@ import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -31,6 +32,8 @@ import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Bronchodilator extends Fragment {
 
@@ -137,7 +140,21 @@ public class Bronchodilator extends Fragment {
         recyclerView = dialog.findViewById(R.id.recyclerView2);
         CardView inst = dialog.findViewById(R.id.inst);
 
-        inst.setVisibility(View.GONE);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        assessments = new ArrayList<>();
+        assessmentAdapter = new AssessmentAdapter(assessments);
+
+        List<Integer> messages = Arrays.asList(R.string.spacer1, R.string.spacer2, R.string.spacer3,
+                R.string.spacer4, R.string.spacer5, R.string.spacer6, R.string.spacer7, R.string.spacer8,
+                R.string.spacer9, R.string.spacer10, R.string.spacer11, R.string.spacer12, R.string.spacer13,
+                R.string.spacer14, R.string.spacer15, R.string.spacer16, R.string.spacer17);
+
+        for (int i = 0; i < messages.size(); i++){
+            Assessment assessment = new Assessment(messages.get(i));
+            assessments.add(assessment);
+        }
+        recyclerView.setAdapter(assessmentAdapter);
 
         txtDisease.setText("Bronchodilator");
         txtDefinition.setText(R.string.bronchodi);

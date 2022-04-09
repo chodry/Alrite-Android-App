@@ -116,7 +116,7 @@
                         android:background="@drawable/text_input_bg"
                         android:gravity="center"
                         android:hint="Months"
-                        android:maxLength="1"
+                        android:maxLength="2"
                         android:inputType="number"
                         android:paddingLeft="10dp"
                         android:saveEnabled="false" />
@@ -163,50 +163,58 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="What is the child's MUAC?"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
                 <LinearLayout
+                    android:id="@+id/linearMUAC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <EditText
-                        android:id="@+id/muac"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_weight=".5"
-                        android:background="@drawable/text_input_bg"
-                        android:gravity="center"
-                        android:hint="9.0 - 40.0"
-                        android:inputType="numberDecimal"
-                        android:maxLength="4" />
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_marginBottom="7dp"
-                        android:layout_weight=".5"
-                        android:text="cm"
+                        android:layout_marginTop="15dp"
+                        android:text="What is the child's MUAC?"
+                        android:textColor="@color/black"
                         android:textSize="18sp" />
 
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="This field for MUAC is optional"
-                    android:textSize="12sp"
-                    android:layout_marginBottom="10dp"/>
+                        <EditText
+                            android:id="@+id/muac"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="10dp"
+                            android:layout_weight=".5"
+                            android:background="@drawable/text_input_bg"
+                            android:gravity="center"
+                            android:hint="9.0 - 40.0"
+                            android:inputType="numberDecimal"
+                            android:maxLength="4" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginBottom="7dp"
+                            android:layout_weight=".5"
+                            android:text="cm"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="This field for MUAC is optional"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="10dp"/>
+
+                </LinearLayout>
 
 
             </LinearLayout>

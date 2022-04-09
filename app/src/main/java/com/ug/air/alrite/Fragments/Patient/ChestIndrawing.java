@@ -1,6 +1,7 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
+import static com.ug.air.alrite.Fragments.Patient.HIVStatus.HDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Nasal.CHOICEGN;
 import static com.ug.air.alrite.Fragments.Patient.Nasal.GNDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Oxygen.OXDIAGNOSIS;
@@ -251,6 +252,7 @@ public class ChestIndrawing extends Fragment {
         String oxDiagnosis = sharedPreferences.getString(OXDIAGNOSIS, "");
         String stDiagnosis = sharedPreferences.getString(STDIAGNOSIS, "");
         String gnDiagnosis = sharedPreferences.getString(GNDIAGNOSIS, "");
+        String hDiagnosis = sharedPreferences.getString(HDIAGNOSIS, "");
         fastBreathing = sharedPreferences.getString(FASTBREATHING, "");
         wheezing = sharedPreferences.getString(CHOICE8, "");
         String days = sharedPreferences.getString(DAY1, "");
@@ -258,9 +260,9 @@ public class ChestIndrawing extends Fragment {
         boolean b = oxDiagnosis.isEmpty() && stDiagnosis.isEmpty() && gnDiagnosis.isEmpty();
         if (b && ((cough.equals("Yes") && fastBreathing.equals("Fast Breathing")) ||
                 (cough.equals("Yes") && (value8.equals("Mild") || value8.equals("Moderate/Severe"))))){
-
-            showDialog2("pneumonia");
-
+            if (hDiagnosis.isEmpty()){
+                showDialog2("pneumonia");
+            }
 
         }else if (b && (cough.equals("Yes") && fastBreathing.equals("Normal Breathing") &&
                 value8.equals("No") && (wheezing.equals("Other abnormal breath sounds") || wheezing.equals("Normal breath sounds")))){

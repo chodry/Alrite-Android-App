@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_background"
+    tools:context=".Activities.FinalActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/green_main"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="Clinician's Diagnosis and Treatment"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/summary1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/btnExit"
+            android:fadeScrollbars="true"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="What was the child’s final primary diagnosis?"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
+
+                <CheckBox
+                    android:id="@+id/severe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Severe pneumonia or very severe disease"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/pneumonia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Pneumonia"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/wheezing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Wheezing illness"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cough"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Cough/Cold/No pneumonia"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/malaria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Malaria"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Other"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/otherText"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/text_input_bg"
+                    android:gravity="top"
+                    android:hint="Please provide any other diagnosis"
+                    android:inputType="textMultiLine"
+                    android:padding="10dp"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="What was the child’s final treatment plan?"
+                    android:textColor="@color/black" />
+
+                <CheckBox
+                    android:id="@+id/referral"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Referral"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/antibiotics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Antibiotics"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/inhaled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Inhaled salbutamol"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/oral"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Oral salbutamol"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/antimalarials"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Antimalarials"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/steroids"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Systemic steroids"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/supportive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Supportive care"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/other2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Other"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/otherText2"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/text_input_bg"
+                    android:gravity="top"
+                    android:hint="Please provide any other treatment"
+                    android:inputType="textMultiLine"
+                    android:padding="10dp"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnExit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/bg_button"
+            android:text="save and exit"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -66,6 +66,7 @@
         <entry key="app/src/main/res/drawable/ic_add_circle_black_24dp.xml" value="0.2215" />
         <entry key="app/src/main/res/drawable/ic_baseline_maximize_24.xml" value="0.2215" />
         <entry key="app/src/main/res/layout/activity_diagnosis.xml" value="0.3609375" />
+        <entry key="app/src/main/res/layout/activity_final.xml" value="0.3609375" />
         <entry key="app/src/main/res/layout/activity_patient.xml" value="0.3609375" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/assess.xml" value="0.33559782608695654" />
@@ -109,6 +110,7 @@
         <entry key="app/src/main/res/layout/fragment_nasal.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_oxygen.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_rr_counter.xml" value="0.33559782608695654" />
+        <entry key="app/src/main/res/layout/fragment_sex.xml" value="0.3609375" />
         <entry key="app/src/main/res/layout/fragment_stridor.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_temperature.xml" value="0.33559782608695654" />
         <entry key="app/src/main/res/layout/fragment_touch.xml" value="0.33559782608695654" />

@@ -103,7 +103,7 @@ public class DiagnosisActivity extends AppCompatActivity {
     SharedPreferences.Editor editor, editor1;
     public static final String DATE = "date";
     public static final String UUIDS = "uuid";
-    String age;
+    String age, uniqueID;
     float ag;
 
     @Override
@@ -332,48 +332,42 @@ public class DiagnosisActivity extends AppCompatActivity {
             String st = sharedPreferences.getString(S4, "");
             if (ag >= 0.2 && ag < 0.4){
                 if (st.contains("Convulsions")){
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin2,
-                            R.string.ampicilin0, R.string.gentamicin2, R.string.gentamicin0,
+                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin2, R.string.gentamicin2,
                             R.string.convulsions, R.string.diazepam2, R.string.convulsions1,
                             R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
                             R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
                             R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                             R.string.other8, R.string.refer_urgently);
                 }else{
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin2,
-                            R.string.ampicilin0, R.string.gentamicin2, R.string.gentamicin0,
+                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin2, R.string.gentamicin2,
                             R.string.other1, R.string.other2, R.string.other3,
                             R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                             R.string.other8, R.string.refer_urgently);
                 }
             }else if (ag >= 0.4 && ag < 1.0){
                 if (st.contains("Convulsions")){
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin4,
-                            R.string.ampicilin0, R.string.gentamicin4, R.string.gentamicin0,
+                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin4, R.string.gentamicin4,
                             R.string.convulsions, R.string.diazepam4, R.string.convulsions1,
                             R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
                             R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
                             R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                             R.string.other8, R.string.refer_urgently);
                 }else{
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin4,
-                            R.string.ampicilin0, R.string.gentamicin4, R.string.gentamicin0,
+                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin4, R.string.gentamicin4,
                             R.string.other1, R.string.other2, R.string.other3,
                             R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                             R.string.other8, R.string.refer_urgently);
                 }
             }else if (ag >= 1.0 && ag < 3.0){
                 if (st.contains("Convulsions")){
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin12,
-                            R.string.ampicilin0, R.string.gentamicin12, R.string.gentamicin0,
+                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin12, R.string.gentamicin12,
                             R.string.convulsions, R.string.diazepam12, R.string.convulsions1,
                             R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
                             R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
                             R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                             R.string.other8, R.string.refer_urgently);
                 }else{
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin12,
-                            R.string.ampicilin0, R.string.gentamicin12, R.string.gentamicin0,
+                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin12, R.string.gentamicin12,
                             R.string.other1, R.string.other2, R.string.other3,
                             R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                             R.string.other8, R.string.refer_urgently);
@@ -381,16 +375,14 @@ public class DiagnosisActivity extends AppCompatActivity {
 
             }else if (ag >= 3.0){
                 if (st.contains("Convulsions")){
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin3,
-                            R.string.ampicilin0, R.string.gentamicin3, R.string.gentamicin0,
+                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin3, R.string.gentamicin3,
                             R.string.convulsions, R.string.diazepam3, R.string.convulsions1,
                             R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
                             R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
                             R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                             R.string.other8, R.string.refer_urgently);
                 }else{
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin3,
-                            R.string.ampicilin0, R.string.gentamicin3, R.string.gentamicin0,
+                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin3, R.string.gentamicin3,
                             R.string.other1, R.string.other2, R.string.other3,
                             R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                             R.string.other8, R.string.refer_urgently);
@@ -415,7 +407,6 @@ public class DiagnosisActivity extends AppCompatActivity {
             }
         }
         else if (s.equals("Very severe febrile illness")){
-//            messageList = Arrays.asList(R.string.febril1, R.string.febril2);
             if (ag >= 0.2 && ag < 0.4 ){
                 messageList = Arrays.asList(R.string.febril, R.string.artesunate2, R.string.iartesunate2, R.string.quinine2, R.string.paracetamol2, R.string.refer_urgently);
             }else if (ag >= 0.4 && ag < 1.0 ){
@@ -608,7 +599,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
         String formattedDate = df.format(currentTime);
 
-        String uniqueID = UUID.randomUUID().toString();
+        uniqueID = UUID.randomUUID().toString();
 
         editor.putString(DATE, formattedDate);
         editor.putString(UUIDS, uniqueID);
@@ -637,7 +628,9 @@ public class DiagnosisActivity extends AppCompatActivity {
         editor.clear();
         editor.commit();
 
-        startActivity(new Intent(DiagnosisActivity.this, Dashboard.class));
+        Intent intent = new Intent(DiagnosisActivity.this, FinalActivity.class);
+        intent.putExtra("filename", uniqueID);
+        startActivity(intent);
     }
 
     @Override
