@@ -106,7 +106,7 @@ public class Sex extends Fragment {
                 muac = etMuac.getText().toString();
 //                kg2 = etKilo2.getText().toString();
 
-                if (value2.equals("none") || years.isEmpty() || kg1.isEmpty() || months.isEmpty()){
+                if (value2.equals("none") || years.isEmpty() || months.isEmpty()){
                     Toast.makeText(getActivity(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                 }else{
                     age = years + "." + months;
@@ -228,7 +228,17 @@ public class Sex extends Fragment {
 
     private void saveData() {
         if (!muac.isEmpty()){
+
+            editor.putString(MUAC, muac);
+        }
+
+        if(!weight.isEmpty()){
+            editor.putString(KILO, weight);
+        }
+
+        if (!muac.isEmpty() && !weight.isEmpty()){
             float mw = Float.parseFloat(muac);
+            float we = Float.parseFloat(weight);
             if (mw < 11.5){
                 diagnosis = "Severe Acute malnutrition";
             }else if (mw >= 11.5 && mw <= 12.4){
@@ -243,10 +253,7 @@ public class Sex extends Fragment {
         }
 
         editor.putString(AGE, age);
-        editor.putString(MUAC, muac);
-        editor.putString(KILO, weight);
         editor.putString(CHOICE, value2);
-
         editor.apply();
 
         FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();

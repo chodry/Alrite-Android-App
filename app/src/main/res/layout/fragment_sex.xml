@@ -163,6 +163,13 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This field is optional"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="10dp"/>
+
                 <LinearLayout
                     android:id="@+id/linearMUAC"
                     android:layout_width="match_parent"
@@ -210,7 +217,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="This field for MUAC is optional"
+                        android:text="This field is optional"
                         android:textSize="12sp"
                         android:layout_marginBottom="10dp"/>
 
