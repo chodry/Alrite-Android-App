@@ -152,7 +152,7 @@ public class Bronchodilator3 extends Fragment {
             if (value9.equals("Worse")){
                 val = 1;
                 showDialog(val);
-            }else if (cough.equals("Yes") && (p2 < p1 || value9.equals("Better"))){
+            }else if (cough.equals("Yes") && ((p2 < p1) || value9.equals("Better"))){
                 val = 2;
                 showDialog(val);
             }else if (cough.equals("Yes") && wheezing.equals("Wheezing") && (p2 >= p1 || value9.equals("Same/ No change"))){

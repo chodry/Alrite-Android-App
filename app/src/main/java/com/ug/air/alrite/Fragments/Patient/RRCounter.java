@@ -1,5 +1,7 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT;
+import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT2;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 
 import android.app.Dialog;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Calculations.Instructions;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -413,6 +416,14 @@ public class RRCounter extends Fragment {
         if (check.equals("bronchodilator")){
             editor.putString(FASTBREATHING2, rating);
             editor.putString(RATE2, rate);
+
+            String age = sharedPreferences.getString(AGE, "");
+            Float ag = Float.parseFloat(age);
+
+            Instructions instructions = new Instructions();
+            int point = instructions.GetPointsFromRR(value, ag);
+            String pot = String.valueOf(point);
+            editor.putString(POINT2, pot);
             editor.apply();
 
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
@@ -423,6 +434,15 @@ public class RRCounter extends Fragment {
         }else{
             editor.putString(FASTBREATHING, rating);
             editor.putString(RATE, rate);
+            editor.apply();
+
+            String age = sharedPreferences.getString(AGE, "");
+            Float ag = Float.parseFloat(age);
+
+            Instructions instructions = new Instructions();
+            int point = instructions.GetPointsFromRR(value, ag);
+            String pot = String.valueOf(point);
+            editor.putString(POINT, pot);
             editor.apply();
 
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();

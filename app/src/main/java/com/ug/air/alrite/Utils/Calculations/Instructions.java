@@ -167,7 +167,54 @@ public class Instructions {
 
     }
 
-    public void GetPointsFromRR(float rate, float age){
+    public int GetPointsFromRR(double rate, float age){
+        int point = 0;
+
+        if ((rate < 60 && age < 0.2) || (rate < 50 && (age >= 0.2 && age < 1.0)) || (rate < 40 && (age >= 1.0 && age < 5.0))){
+            point = 0;
+        }else if (((rate >= 60 && rate < 70) && age < 0.2) || ((rate >= 50 && rate < 60) && (age >= 0.2 && age < 1.0)) || ((rate >= 40 && rate < 50) && (age >= 1.0 && age < 5.0))){
+            point = 1;
+        }else if (((rate >= 70 && rate < 80) && age < 0.2) || ((rate >= 60 && rate < 70) && (age >= 0.2 && age < 1.0)) || ((rate >= 50 && rate < 60) && (age >= 1.0 && age < 5.0))){
+            point = 2;
+        }else if ((rate >= 80 && age < 0.2) || (rate >= 70 && (age >= 0.2 && age < 1.0)) || (rate >= 60 && (age >= 1.0 && age < 5.0))){
+            point = 3;
+        }
+
+        return point;
+    }
+
+    public int GetWheezing(String wheez, int pt){
+        int point = 0;
+
+        if (wheez.equals("Normal breath sounds")){
+            point = 0;
+        }else if (wheez.equals("Other abnormal breath sounds")){
+            point = 2;
+        }else if (wheez.equals("Wheezing")){
+            point = 3;
+        }
+
+        point = point + pt;
+
+        return point;
+    }
+
+    public int GetChestIndrawing(String chest, String grunt, int pt){
+        int point = 0;
+
+        if (chest.equals("No")){
+            point = 0;
+        }else if (chest.equals("Mild") && grunt.equals("No")){
+            point = 1;
+        }else if (chest.equals("Moderate/Severe") && grunt.equals("No")){
+            point = 2;
+        }else if ((chest.equals("Moderate/Severe") || chest.equals("Mild")) && grunt.equals("Yes")){
+            point = 3;
+        }
+
+        point = point + pt;
+
+        return point;
 
     }
 

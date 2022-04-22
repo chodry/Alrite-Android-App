@@ -3,7 +3,10 @@ package com.ug.air.alrite.Fragments.Patient;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
+import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT;
+import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT2;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.SECOND;
+import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -38,6 +41,7 @@ import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Calculations.Instructions;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -174,6 +178,14 @@ public class Wheezing extends Fragment {
             if (!assess.equals("None of these")){
                 startActivity(new Intent(getActivity(), DiagnosisActivity.class));
             }else {
+                String pt = sharedPreferences.getString(POINT, "");
+                int point = Integer.parseInt(pt);
+
+                Instructions instructions = new Instructions();
+                int pot = instructions.GetWheezing(value9, point);
+                editor.putString(POINT, String.valueOf(pot));
+                editor.apply();
+
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.fragment_container, new Nasal());
                 fr.addToBackStack(null);
@@ -182,6 +194,14 @@ public class Wheezing extends Fragment {
         }else {
             editor.putString(CHOICE82, value9);
             editor.putBoolean(CHECKSTETHO, checkBox.isChecked());
+            editor.apply();
+
+            String pt = sharedPreferences.getString(POINT2, "");
+            int point = Integer.parseInt(pt);
+
+            Instructions instructions = new Instructions();
+            int pot = instructions.GetWheezing(value9, point);
+            editor.putString(POINT2, String.valueOf(pot));
             editor.apply();
 
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();

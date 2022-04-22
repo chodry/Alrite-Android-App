@@ -360,62 +360,19 @@ public class ChestIndrawing extends Fragment {
     }
 
     private void calculatePoints() {
-        String age = sharedPreferences.getString(AGE, "");
         String granting = sharedPreferences.getString(CHOICEGN, "");
-        String rate = sharedPreferences.getString(RATE, "");
-
-        float ag = Float.parseFloat(age);
 
         if (second.isEmpty()){
-            float fast = Float.parseFloat(rate);
-            int point = 0;
-
-            if (((ag < 0.2 && fast < 60) || ((ag >= 0.2 && ag < 1.0) && fast < 50) || ((ag >= 1.0 && ag < 5.0) && fast < 40)) && value8.equals("No") && wheezing.equals("Normal breath sounds")){
-                point = 0;
-                String pot = String.valueOf(point);
-                editor.putString(POINT, pot);
-            }else if (((ag < 0.2 && (fast >= 60 && fast < 70)) || ((ag >= 0.2 && ag < 1.0) && (fast >= 50 && fast < 60)) || ((ag >= 1.0 && ag < 5.0) && (fast >= 40 && fast < 50))) && value8.equals("Mild")){
-                point = 1;
-                String pot = String.valueOf(point);
-                editor.putString(POINT, pot);
-            }else if (((ag < 0.2 && (fast >= 70 && fast < 80)) || ((ag >= 0.2 && ag < 1.0) && (fast >= 60 && fast < 70)) || ((ag >= 1.0 && ag < 5.0) && (fast >= 50 && fast < 60))) && value8.equals("Moderate/Severe") && wheezing.equals("Other abnormal breath sounds")){
-                point = 2;
-                String pot = String.valueOf(point);
-                editor.putString(POINT, pot);
-            }else if (((ag < 0.2 && fast > 80) || ((ag >= 0.2 && ag < 1.0) && fast > 70) || ((ag >= 1.0 && ag < 5.0) && fast > 60)) && !value8.equals("No") && wheezing.equals("Wheezing") && granting.equals("Yes")){
-                point = 3;
-                String pot = String.valueOf(point);
-                editor.putString(POINT, pot);
-            }else {
-                editor.remove(POINT);
-            }
+            String pt = sharedPreferences.getString(POINT, "");
+            Instructions instructions = new Instructions();
+            int points = instructions.GetChestIndrawing(value8, granting, Integer.parseInt(pt));
+            editor.putString(POINT, String.valueOf(points));
         }else {
-            String wheez = sharedPreferences.getString(CHOICE82, "");
-            String rate1 = sharedPreferences.getString(RATE2, "");
-            float fast2 = Float.parseFloat(rate1);
-            int point2 = 0;
-
-            if (((ag < 0.2 && fast2 < 60) || ((ag >= 0.2 && ag < 1.0) && fast2 < 50) || ((ag >= 1.0 && ag < 5.0) && fast2 < 40)) && value8.equals("No") && wheez.equals("Normal breath sounds")){
-                point2 = 0;
-                String pot2 = String.valueOf(point2);
-                editor.putString(POINT2, pot2);
-            }else if (((ag < 0.2 && (fast2 >= 60 && fast2 < 70)) || ((ag >= 0.2 && ag < 1.0) && (fast2 >= 50 && fast2 < 60)) || ((ag >= 1.0 && ag < 5.0) && (fast2 >= 40 && fast2 < 50))) && value8.equals("Mild")){
-                point2 = 1;
-                String pot2 = String.valueOf(point2);
-                editor.putString(POINT2, pot2);
-            }else if (((ag < 0.2 && (fast2 >= 70 && fast2 < 80)) || ((ag >= 0.2 && ag < 1.0) && (fast2 >= 60 && fast2 < 70)) || ((ag >= 1.0 && ag < 5.0) && (fast2 >= 50 && fast2 < 60))) && value8.equals("Moderate/Severe") && wheez.equals("Other abnormal breath sounds")){
-                point2 = 2;
-                String pot2 = String.valueOf(point2);
-                editor.putString(POINT2, pot2);
-            }else if (((ag < 0.2 && fast2 > 80) || ((ag >= 0.2 && ag < 1.0) && fast2 > 70) || ((ag >= 1.0 && ag < 5.0) && fast2 > 60)) && !value8.equals("No") && wheez.equals("Wheezing") && granting.equals("Yes")){
-                point2 = 3;
-                String pot2 = String.valueOf(point2);
-                editor.putString(POINT2, pot2);
-            }else {
-                editor.remove(POINT2);
-            }
+            String pt = sharedPreferences.getString(POINT2, "");
+            Instructions instructions = new Instructions();
+            int points = instructions.GetChestIndrawing(value8, granting, Integer.parseInt(pt));
+            editor.putString(POINT2, String.valueOf(points));
         }
         editor.apply();
-
     }
 }
