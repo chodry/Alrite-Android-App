@@ -164,6 +164,8 @@ public class CoughD extends Fragment {
         txtMessage = dialog.findViewById(R.id.message);
         btnSave = dialog.findViewById(R.id.ContinueButton);
 
+        btnSave.setText("Continue");
+
         if (dt >= 14){
             txtMessage.setText("Children with prolonged cough (>= 14 days) should be assessed for both Asthma and Tuberculosis");
         }else {

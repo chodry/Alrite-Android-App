@@ -112,6 +112,8 @@ public class Bronchodilator extends Fragment {
         txtMessage = dialog.findViewById(R.id.message);
         btnSave = dialog.findViewById(R.id.ContinueButton);
 
+        btnSave.setText("Continue");
+
         txtMessage.setText("Please wait for 15 minutes to reassess the patient");
         btnSave.setText("OK");
 

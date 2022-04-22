@@ -1,6 +1,8 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -18,10 +20,18 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.ItemFactory;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -33,8 +43,9 @@ public class Sex extends Fragment {
     LinearLayout linearLayout;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2;
-    String age, weight, text, kg1, fileName, months, years, muac, diagnosis;
+    String age, weight, text, kg1, fileName, months, years, muac, diagnosis, score, message;
     Spinner spinner;
+    Dialog dialog;
     String value2 = "none";
     private static final int YES = 0;
     private static final int NO = 1;
@@ -227,39 +238,29 @@ public class Sex extends Fragment {
     };
 
     private void saveData() {
-        if (!muac.isEmpty()){
-
-            editor.putString(MUAC, muac);
-        }
-
+        diagnosis = "";
         if(!weight.isEmpty()){
             editor.putString(KILO, weight);
-        }
-
-        if (!muac.isEmpty() && !weight.isEmpty()){
-            float mw = Float.parseFloat(muac);
+            editor.apply();
             float we = Float.parseFloat(weight);
-            if (mw < 11.5){
-                diagnosis = "Severe Acute malnutrition";
-            }else if (mw >= 11.5 && mw <= 12.4){
-                diagnosis = "Moderate acute malnutrition";
-            }else {
-                diagnosis = "none";
-            }
+            ItemFactory itemFactory = new ItemFactory();
+            try {
+                if (value2.equals("Male")){
+                    score = itemFactory.GetMaleItem(Objects.requireNonNull(getActivity()), age, we);
+                }else{
+                    score = itemFactory.GetFemaleItem(Objects.requireNonNull(getActivity()), age, we);
+                }
+                makeDecisions();
 
-            if (!diagnosis.equals("none")){
-                editor.putString(MDIAGNOSIS, diagnosis);
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        }else{
+            moveToNext();
         }
 
-        editor.putString(AGE, age);
-        editor.putString(CHOICE, value2);
-        editor.apply();
-
-        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Assess());
-        fr.addToBackStack(null);
-        fr.commit();
     }
 
     private void loadData() {
@@ -291,5 +292,91 @@ public class Sex extends Fragment {
             etYears.setText(separated[0]);
             etMonths.setText(separated[1]);
         }
+    }
+
+    private void makeDecisions() {
+        if (score.equals("acceptable")){
+            moveToNext();
+        }else if (score.equals("above 2")){
+            message = "This child’s weight is greater than 2 SD, above average. Are you sure you entered the right weight?";
+            diagnosis = "none";
+            showDialog(message);
+        }else if (score.equals("below 2")){
+            message = "This child’s weight is less than 2 SD, below average. The child may have Moderate Acute Malnutrition.. Are you sure you entered the right weight?";
+            diagnosis = "Moderate acute malnutrition";
+            showDialog(message);
+        }else {
+            message = "This child’s weight is less than 3 SD, below average. The child may have Severe Acute Malnutrition.. Are you sure you entered the right weight?";
+            diagnosis = "Severe acute malnutrition";
+            showDialog(message);
+        }
+    }
+
+    private void showDialog(String message) {
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.assess);
+        dialog.setCancelable(true);
+
+        TextView txtMessage = dialog.findViewById(R.id.message);
+        Button btnSave = dialog.findViewById(R.id.ContinueButton);
+        Button btnNo = dialog.findViewById(R.id.cancel);
+
+        btnSave.setText("Yes");
+        btnNo.setVisibility(View.VISIBLE);
+
+        txtMessage.setText(message);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                if (!diagnosis.equals("none")){
+                    editor.putString(MDIAGNOSIS, diagnosis);
+                    editor.apply();
+                }
+                moveToNext();
+            }
+        });
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                etKilo1.setText("");
+                etKilo1.requestFocus();
+                Toast.makeText(getActivity(), "Please check your scale and enter the weight again", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void moveToNext() {
+        if (!muac.isEmpty()){
+            editor.putString(MUAC, muac);
+            if (diagnosis.isEmpty() || diagnosis.equals("none")){
+                float mw = Float.parseFloat(muac);
+                if (mw < 11.5){
+                    diagnosis = "Severe Acute malnutrition";
+                }else if (mw >= 11.5 && mw <= 12.4){
+                    diagnosis = "Moderate acute malnutrition";
+                }else {
+                    diagnosis = "none";
+                }
+
+                if (!diagnosis.equals("none")){
+                    editor.putString(MDIAGNOSIS, diagnosis);
+                }
+            }
+        }
+
+        editor.putString(AGE, age);
+        editor.putString(CHOICE, value2);
+        editor.apply();
+
+        FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+        fr.replace(R.id.fragment_container, new Assess());
+        fr.addToBackStack(null);
+        fr.commit();
     }
 }
