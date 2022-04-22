@@ -5,16 +5,13 @@ import static com.ug.air.alrite.Fragments.Patient.HIVStatus.HDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Nasal.CHOICEGN;
 import static com.ug.air.alrite.Fragments.Patient.Nasal.GNDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Oxygen.OXDIAGNOSIS;
-import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING2;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.RATE;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.RATE2;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.SECOND;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
+import static com.ug.air.alrite.Fragments.Patient.Sex.KILO;
 import static com.ug.air.alrite.Fragments.Patient.Stridor.STDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHOICE8;
-import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
-import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
-import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.CoughD.DAY1;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING;
 import static com.ug.air.alrite.Fragments.Patient.Wheezing.CHOICE82;
@@ -46,22 +43,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.ug.air.alrite.Activities.Dashboard;
 import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Calculations.Instructions;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
 
 public class ChestIndrawing extends Fragment {
 
@@ -304,21 +294,18 @@ public class ChestIndrawing extends Fragment {
         assessments = new ArrayList<>();
         assessmentAdapter = new AssessmentAdapter(assessments);
 
-        List<Integer> messages = new ArrayList<>();
+        List messages = new ArrayList<>();
 
         if (disease.equals("pneumonia")){
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.moderateDiagnosisColor));
             txtDiagnosis.setText(R.string.pneumonia);
 
             String age = sharedPreferences.getString(AGE, "");
+            String weight = sharedPreferences.getString(KILO, "");
             float ag = Float.parseFloat(age);
-            if (ag >= 0.2 && ag < 1.0){
-                messages = Arrays.asList(R.string.amoxicillin2, R.string.pneumonia1, R.string.pneumonia2);
-            }else if (ag >= 1.0 && ag < 3.0){
-                messages = Arrays.asList(R.string.amoxicillin12, R.string.pneumonia1, R.string.pneumonia2);
-            }else if (ag >= 3.0 && ag < 5.0){
-                messages = Arrays.asList(R.string.amoxicillin3, R.string.pneumonia1, R.string.pneumonia2);
-            }
+
+            Instructions instructions = new Instructions();
+            messages = instructions.GetPneumoniaInstructions(ag, weight);
 
         }else {
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));
@@ -331,7 +318,7 @@ public class ChestIndrawing extends Fragment {
         diagnosis = diagnosis.replace("Diagnosis: ", "");
 
         for (int i = 0; i < messages.size(); i++){
-            Assessment assessment = new Assessment(messages.get(i));
+            Assessment assessment = new Assessment((Integer) messages.get(i));
             assessments.add(assessment);
         }
         recyclerView.setAdapter(assessmentAdapter);

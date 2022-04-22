@@ -1,15 +1,15 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
-import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
+import static com.ug.air.alrite.Fragments.Patient.Sex.KILO;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -31,21 +32,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.ug.air.alrite.Activities.Dashboard;
 import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Calculations.Instructions;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.UUID;
 
 public class Nasal extends Fragment {
 
@@ -63,7 +57,7 @@ public class Nasal extends Fragment {
     ArrayList<Assessment> assessments;
     AssessmentAdapter assessmentAdapter;
     CardView inst;
-    List<Integer> messages;
+    List messages;
     String diagnosis;
     private static final int YES = 0;
     private static final int NO = 1;
@@ -142,7 +136,7 @@ public class Nasal extends Fragment {
         btnGrunting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog();
+                showDialog2();
             }
         });
 
@@ -211,69 +205,15 @@ public class Nasal extends Fragment {
 
         String age = sharedPreferences.getString(AGE, "");
         String s = sharedPreferences.getString(S4, "");
+        String weight = sharedPreferences.getString(KILO, "");
         float ag = Float.parseFloat(age);
-        if (ag >= 0.2 && ag < 0.4){
-            if (s.contains("Convulsions")){
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2, R.string.gentamicin2,
-                        R.string.convulsions, R.string.diazepam2, R.string.convulsions1,
-                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }else{
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2, R.string.gentamicin2,
-                        R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }
-        }else if (ag >= 0.4 && ag < 1.0){
-            if (s.contains("Convulsions")){
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4, R.string.gentamicin4,
-                        R.string.convulsions, R.string.diazepam4, R.string.convulsions1,
-                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }else{
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4, R.string.gentamicin4,
-                        R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }
-        }else if (ag >= 1.0 && ag < 3.0){
-            if (s.contains("Convulsions")){
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12, R.string.gentamicin12,
-                        R.string.convulsions, R.string.diazepam12, R.string.convulsions1,
-                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }else{
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12, R.string.gentamicin12,
-                        R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }
 
-        }else if (ag >= 3.0){
-            if (s.contains("Convulsions")){
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3, R.string.gentamicin3,
-                        R.string.convulsions, R.string.diazepam3, R.string.convulsions1,
-                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }else{
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3, R.string.gentamicin3,
-                        R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }
+        Instructions instructions = new Instructions();
+        messages = instructions.GetInstructions(ag, weight, s);
 
-        }
 
         for (int i = 0; i < messages.size(); i++){
-            Assessment assessment = new Assessment(messages.get(i));
+            Assessment assessment = new Assessment((Integer) messages.get(i));
             assessments.add(assessment);
         }
         recyclerView.setAdapter(assessmentAdapter);
@@ -308,5 +248,72 @@ public class Nasal extends Fragment {
     }
 
     private void showDialog() {
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.learn_popup);
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        txtDefinition = dialog.findViewById(R.id.definition);
+        txtDisease = dialog.findViewById(R.id.diseaseName);
+        txtOk = dialog.findViewById(R.id.ok);
+        linearLayoutDisease = dialog.findViewById(R.id.disease);
+        videoView = dialog.findViewById(R.id.video_view);
+        inst = dialog.findViewById(R.id.inst);
+
+        inst.setVisibility(View.GONE);
+
+        txtDisease.setText("Nasal flaring");
+        txtDefinition.setText("Nasal flaring occurs when the nostrils widen while breathing. It is often a sign of trouble breathing. It may be an indication of breathing difficulty, or even respiratory distress in infants");
+        linearLayoutDisease.setBackgroundColor(getResources().getColor(R.color.green_dark));
+
+        String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.stridor_glossary_video;
+        Uri uri = Uri.parse(videoPath);
+        videoView.setVideoURI(uri);
+        videoView.start();
+
+        txtOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                videoView.stopPlayback();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void showDialog2() {
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.learn_popup);
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        txtDefinition = dialog.findViewById(R.id.definition);
+        txtDisease = dialog.findViewById(R.id.diseaseName);
+        txtOk = dialog.findViewById(R.id.ok);
+        linearLayoutDisease = dialog.findViewById(R.id.disease);
+        videoView = dialog.findViewById(R.id.video_view);
+        inst = dialog.findViewById(R.id.inst);
+
+        inst.setVisibility(View.GONE);
+
+        txtDisease.setText("Grunting");
+        txtDefinition.setText("Grunting is a normal sound for your baby to make during sleep, along with gurgles, squeaks, and snores");
+        linearLayoutDisease.setBackgroundColor(getResources().getColor(R.color.green_dark));
+
+        String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.stridor_glossary_video;
+        Uri uri = Uri.parse(videoPath);
+        videoView.setVideoURI(uri);
+        videoView.start();
+
+        txtOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                videoView.stopPlayback();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }

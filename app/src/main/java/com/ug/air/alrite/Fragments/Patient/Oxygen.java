@@ -2,8 +2,8 @@ package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.FTouch.TOUCH;
-import static com.ug.air.alrite.Fragments.Patient.HIVCare.CHOICEHC;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
+import static com.ug.air.alrite.Fragments.Patient.Sex.KILO;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -34,9 +34,9 @@ import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Calculations.Instructions;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -59,7 +59,7 @@ public class Oxygen extends Fragment {
     ArrayList<Assessment> assessments;
     AssessmentAdapter assessmentAdapter;
     String diagnosis;
-    List<Integer> messages;
+    List messages;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -147,18 +147,61 @@ public class Oxygen extends Fragment {
     };
 
     private void saveData() {
-
+        diagnosis = "";
         editor.putString(OXY, oxy);
         editor.apply();
 
         percent = Integer.parseInt(oxy);
         if (percent >= 92){
+            editor.remove(OXDIAGNOSIS);
+            editor.apply();
             nextInterface();
         }else if (percent > 89 && percent < 92){
+            editor.remove(OXDIAGNOSIS);
+            editor.apply();
             showDialog2();
-        } else {
+        }else if (percent >= 85 && percent < 90){
             showDialog();
+        }else {
+            editor.remove(OXDIAGNOSIS);
+            editor.apply();
+            showDialog3();
         }
+    }
+
+    private void showDialog3() {
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.assess);
+        dialog.setCancelable(true);
+
+        TextView txtMessage = dialog.findViewById(R.id.message);
+        Button btnSave = dialog.findViewById(R.id.ContinueButton);
+        Button btnNo = dialog.findViewById(R.id.cancel);
+
+        btnSave.setText("Yes");
+        btnNo.setVisibility(View.VISIBLE);
+
+        txtMessage.setText("The oxgyen saturation is below normal. Are you sure you entered the right value?");
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                showDialog();
+            }
+        });
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                etDay.setText("");
+                etDay.requestFocus();
+                Toast.makeText(getActivity(), "Please check your pulse oximeter and enter the value again", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        dialog.show();
     }
 
     private void loadData() {
@@ -195,69 +238,14 @@ public class Oxygen extends Fragment {
 
         String age = sharedPreferences.getString(AGE, "");
         String s = sharedPreferences.getString(S4, "");
+        String weight = sharedPreferences.getString(KILO, "");
         float ag = Float.parseFloat(age);
-        if (ag >= 0.2 && ag < 0.4){
-            if (s.contains("Convulsions")){
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2, R.string.gentamicin2,
-                        R.string.convulsions, R.string.diazepam2, R.string.convulsions1,
-                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }else{
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2, R.string.gentamicin2,
-                        R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }
-        }else if (ag >= 0.4 && ag < 1.0){
-            if (s.contains("Convulsions")){
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4, R.string.gentamicin4,
-                        R.string.convulsions, R.string.diazepam4, R.string.convulsions1,
-                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }else{
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4, R.string.gentamicin4,
-                        R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }
-        }else if (ag >= 1.0 && ag < 3.0){
-            if (s.contains("Convulsions")){
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12, R.string.gentamicin12,
-                        R.string.convulsions, R.string.diazepam12, R.string.convulsions1,
-                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }else{
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12, R.string.gentamicin12,
-                        R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }
 
-        }else if (ag >= 3.0){
-            if (s.contains("Convulsions")){
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3, R.string.gentamicin3,
-                        R.string.convulsions, R.string.diazepam3, R.string.convulsions1,
-                        R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                        R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }else{
-                messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3, R.string.gentamicin3,
-                        R.string.other1, R.string.other2, R.string.other3,
-                        R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                        R.string.other8, R.string.refer_urgently);
-            }
-
-        }
+        Instructions instructions = new Instructions();
+        messages = instructions.GetInstructions(ag, weight, s);
 
         for (int i = 0; i < messages.size(); i++){
-            Assessment assessment = new Assessment(messages.get(i));
+            Assessment assessment = new Assessment((Integer) messages.get(i));
             assessments.add(assessment);
         }
         recyclerView.setAdapter(assessmentAdapter);

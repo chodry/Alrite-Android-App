@@ -2,7 +2,6 @@ package com.ug.air.alrite.Fragments.Patient;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -23,16 +22,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.R;
-import com.ug.air.alrite.Utils.ItemFactory;
+import com.ug.air.alrite.Utils.XML.ItemFactory;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 
@@ -258,6 +253,7 @@ public class Sex extends Fragment {
                 e.printStackTrace();
             }
         }else{
+            editor.remove(KILO);
             moveToNext();
         }
 

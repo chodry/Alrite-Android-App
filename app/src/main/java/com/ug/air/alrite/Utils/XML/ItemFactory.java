@@ -1,9 +1,6 @@
-package com.ug.air.alrite.Utils;
+package com.ug.air.alrite.Utils.XML;
 
 import android.content.Context;
-
-import com.ug.air.alrite.Fragments.Patient.Sex;
-import com.ug.air.alrite.Models.Assessment;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

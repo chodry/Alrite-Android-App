@@ -195,6 +195,8 @@ public class Temperature extends Fragment {
         txtMessage = dialog.findViewById(R.id.message);
         btnSave = dialog.findViewById(R.id.ContinueButton);
 
+        btnSave.setText("Continue");
+
         txtMessage.setText("The Child has a fever");
         txtMessage.setTextColor(Color.parseColor("#FF0000"));
         txtMessage.setTypeface(Typeface.DEFAULT_BOLD);
