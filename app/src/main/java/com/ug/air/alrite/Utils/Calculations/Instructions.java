@@ -167,6 +167,188 @@ public class Instructions {
 
     }
 
+    public List GetFebrilInstructions(int ag, String weight) {
+
+        List<Integer> messages = new ArrayList<>();
+
+        if (!weight.isEmpty()) {
+            float we = Float.parseFloat(weight);
+            if (we >= 4.0 && we < 6.0){
+                messages = Arrays.asList(R.string.febril1, R.string.artesunate2, R.string.iartesunate2, R.string.quinine2, R.string.paracetamol2, R.string.refer_urgently);
+            }else if (we >= 6.0 && we < 14.0){
+                if (we < 10){
+                    messages = Arrays.asList(R.string.febril1, R.string.artesunate4, R.string.iartesunate4, R.string.quinine4, R.string.paracetamol2, R.string.refer_urgently);
+                }else if (we >= 10 && we < 12){
+                    messages = Arrays.asList(R.string.febril1, R.string.artesunate4, R.string.iartesunate12, R.string.quinine12, R.string.paracetamol2, R.string.refer_urgently);
+                }else if (we >= 12 && we < 14){
+                    messages = Arrays.asList(R.string.febril1, R.string.artesunate5, R.string.iartesunate12, R.string.quinine24, R.string.paracetamol2, R.string.refer_urgently);
+                }
+            }else if (we >= 14.0){
+                messages = Arrays.asList(R.string.febril1, R.string.artesunate4, R.string.iartesunate3, R.string.quinine3, R.string.paracetamol3, R.string.refer_urgently);
+            }
+        }else {
+            if (ag >= 2 && ag < 4 ){
+                messages = Arrays.asList(R.string.febril1, R.string.artesunate2, R.string.iartesunate2, R.string.quinine2, R.string.paracetamol2, R.string.refer_urgently);
+            }else if (ag >= 4 && ag < 12){
+                messages = Arrays.asList(R.string.febril1, R.string.artesunate4, R.string.iartesunate4, R.string.quinine4, R.string.paracetamol2, R.string.refer_urgently);
+            }else if (ag >= 12 && ag < 36 ){
+                if (ag < 24 ){
+                    messages = Arrays.asList(R.string.febril1, R.string.artesunate4, R.string.iartesunate12, R.string.quinine12, R.string.paracetamol2, R.string.refer_urgently);
+                }else {
+                    messages = Arrays.asList(R.string.febril1, R.string.artesunate5, R.string.iartesunate12, R.string.quinine24, R.string.paracetamol2, R.string.refer_urgently);
+                }
+            }else if (ag >= 36  ){
+                messages = Arrays.asList(R.string.febril1, R.string.artesunate5, R.string.iartesunate3, R.string.quinine3, R.string.paracetamol3, R.string.refer_urgently);
+            }
+        }
+
+        return messages;
+
+    }
+
+    public List GetHIVInfected(String care, String chest, int ag, String weight){
+
+        List<Integer> messages = new ArrayList<>();
+
+        if (ag >= 2 && ag < 12){
+            if (ag < 6){
+                if (care.equals("Yes")){
+                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                        messages = Arrays.asList(R.string.hiv2, R.string.amoxicillin2v, R.string.hiv3, R.string.cotrimoxazole6);
+                    }else{
+                        messages = Arrays.asList(R.string.hiv2, R.string.hiv3, R.string.cotrimoxazole6);
+                    }
+
+                }else  if (care.equals("No")){
+                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                        messages = Arrays.asList(R.string.hiv1, R.string.amoxicillin2v, R.string.hiv3, R.string.cotrimoxazole6);
+                    }else{
+                        messages = Arrays.asList(R.string.hiv1, R.string.hiv3, R.string.cotrimoxazole6);
+                    }
+                }
+            }else {
+                if (care.equals("Yes")){
+                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                        messages = Arrays.asList(R.string.hiv2, R.string.amoxicillin2v, R.string.hiv3, R.string.cotrimoxazole5);
+                    }else{
+                        messages = Arrays.asList(R.string.hiv2, R.string.hiv3, R.string.cotrimoxazole5);
+                    }
+
+                }else  if (care.equals("No")){
+                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                        messages = Arrays.asList(R.string.hiv1, R.string.amoxicillin2v, R.string.hiv3, R.string.cotrimoxazole5);
+                    }else{
+                        messages = Arrays.asList(R.string.hiv1, R.string.hiv3, R.string.cotrimoxazole5);
+                    }
+                }
+            }
+        }else if (ag >= 12 && ag < 36){
+            if (care.equals("Yes")){
+                if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                    messages = Arrays.asList(R.string.hiv2, R.string.amoxicillin12v, R.string.hiv3, R.string.cotrimoxazole5);
+                }else{
+                    messages = Arrays.asList(R.string.hiv2, R.string.hiv3, R.string.cotrimoxazole5);
+                }
+
+            }else  if (care.equals("No")){
+                if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                    messages = Arrays.asList(R.string.hiv1, R.string.amoxicillin12v, R.string.hiv3, R.string.cotrimoxazole5);
+                }else{
+                    messages = Arrays.asList(R.string.hiv1, R.string.hiv3, R.string.cotrimoxazole5);
+                }
+            }
+        }else if (ag >= 36 && ag < 60){
+            if (care.equals("Yes")){
+                if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                    messages = Arrays.asList(R.string.hiv2, R.string.amoxicillin3v, R.string.hiv3, R.string.cotrimoxazole5);
+                }else{
+                    messages = Arrays.asList(R.string.hiv2, R.string.hiv3, R.string.cotrimoxazole5);
+                }
+
+            }else  if (care.equals("No")){
+                if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                    messages = Arrays.asList(R.string.hiv1, R.string.amoxicillin3v, R.string.hiv3, R.string.cotrimoxazole5);
+                }else{
+                    messages = Arrays.asList(R.string.hiv1, R.string.hiv3, R.string.cotrimoxazole5);
+                }
+            }
+        }
+        
+        return messages;
+    }
+
+    public List GetHIVExposed(String care, String chest, int ag, String weight){
+
+        List<Integer> messages = new ArrayList<>();
+
+        if (ag >= 2 && ag < 12){
+            if (ag < 06){
+                if (care.equals("Yes")){
+                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                        messages = Arrays.asList(R.string.hiv2, R.string.amoxicillin2v);
+                    }else{
+                        messages = Arrays.asList(R.string.hiv2, R.string.hiv3);
+                    }
+
+                }else  if (care.equals("No")){
+                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                        messages = Arrays.asList(R.string.hiv1, R.string.amoxicillin2v);
+                    }else{
+                        messages = Arrays.asList(R.string.hiv1, R.string.hiv3);
+                    }
+                }
+            }else {
+                if (care.equals("Yes")){
+                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                        messages = Arrays.asList(R.string.hiv2, R.string.amoxicillin2v);
+                    }else{
+                        messages = Arrays.asList(R.string.hiv2);
+                    }
+
+                }else  if (care.equals("No")){
+                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                        messages = Arrays.asList(R.string.hiv1, R.string.amoxicillin2v);
+                    }else{
+                        messages = Arrays.asList(R.string.hiv1);
+                    }
+                }
+            }
+        }else if (ag >= 12 && ag < 36){
+            if (care.equals("Yes")){
+                if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                    messages = Arrays.asList(R.string.hiv2, R.string.amoxicillin12v, R.string.hiv3, R.string.cotrimoxazole5);
+                }else{
+                    messages = Arrays.asList(R.string.hiv2, R.string.hiv3, R.string.cotrimoxazole5);
+                }
+
+            }else  if (care.equals("No")){
+                if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                    messages = Arrays.asList(R.string.hiv1, R.string.amoxicillin12v);
+                }else{
+                    messages = Arrays.asList(R.string.hiv1);
+                }
+            }
+        }else if (ag >= 36 && ag < 60){
+            if (care.equals("Yes")){
+                if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                    messages = Arrays.asList(R.string.hiv2, R.string.amoxicillin3v, R.string.hiv3, R.string.cotrimoxazole5);
+                }else{
+                    messages = Arrays.asList(R.string.hiv2, R.string.hiv3, R.string.cotrimoxazole5);
+                }
+
+            }else  if (care.equals("No")){
+                if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
+                    messages = Arrays.asList(R.string.hiv1, R.string.amoxicillin3v);
+                }else{
+                    messages = Arrays.asList(R.string.hiv1);
+                }
+            }
+        }
+
+
+        return messages;
+    }
+
     public int GetPointsFromRR(double rate, int age){
         int point = 0;
 

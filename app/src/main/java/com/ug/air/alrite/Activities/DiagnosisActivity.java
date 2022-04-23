@@ -347,29 +347,29 @@ public class DiagnosisActivity extends AppCompatActivity {
             messageList = Arrays.asList(R.string.muac6, R.string.muac7);
         }
         else if (s.equals("Fever without danger signs")){
-            if (ag <= 0.2 && ag < 3.0){
-                messageList = Arrays.asList(R.string.febril3, R.string.paracetamol2, R.string.febril5,
-                        R.string.febril6, R.string.febril7);
-            }else  if (ag <= 3.0 && ag < 5.0){
-                messageList = Arrays.asList(R.string.febril3, R.string.paracetamol3, R.string.febril5,
-                        R.string.febril6, R.string.febril7);
+            if (!weight.isEmpty()) {
+                float we = Float.parseFloat(weight);
+                if (we >= 4.0 && we < 14.0) {
+                    messageList = Arrays.asList(R.string.febril3, R.string.paracetamol2, R.string.febril5,
+                            R.string.febril6, R.string.febril7);
+                }else if (we >= 14.0) {
+                    messageList = Arrays.asList(R.string.febril3, R.string.paracetamol3, R.string.febril5,
+                            R.string.febril6, R.string.febril7);
+                }
+            } else {
+                if (ag >= 2 && ag < 36){
+                    messageList = Arrays.asList(R.string.febril3, R.string.paracetamol2, R.string.febril5,
+                            R.string.febril6, R.string.febril7);
+                }else  if (ag >= 36 && ag < 60){
+                    messageList = Arrays.asList(R.string.febril3, R.string.paracetamol3, R.string.febril5,
+                            R.string.febril6, R.string.febril7);
+                }
             }
+
         }
         else if (s.equals("Very severe febrile illness")){
-            if (ag >= 0.2 && ag < 0.4 ){
-                messageList = Arrays.asList(R.string.febril, R.string.artesunate2, R.string.iartesunate2, R.string.quinine2, R.string.paracetamol2, R.string.refer_urgently);
-            }else if (ag >= 0.4 && ag < 1.0 ){
-                messageList = Arrays.asList(R.string.febril, R.string.artesunate4, R.string.iartesunate4, R.string.quinine4, R.string.paracetamol2, R.string.refer_urgently);
-            }else if (ag >= 1.0 && ag < 3.0 ){
-                if (ag >= 1.0 && ag < 2.0 ){
-                    messageList = Arrays.asList(R.string.febril, R.string.artesunate4, R.string.iartesunate12, R.string.quinine12, R.string.paracetamol2, R.string.refer_urgently);
-                }else if (ag >= 2.0 && ag < 3.0 ){
-                    messageList = Arrays.asList(R.string.febril, R.string.artesunate5, R.string.iartesunate12, R.string.quinine24, R.string.paracetamol2, R.string.refer_urgently);
-                }
-
-            }else if (ag >= 3.0 && ag < 5.0 ){
-                messageList = Arrays.asList(R.string.febril, R.string.artesunate5, R.string.iartesunate3, R.string.quinine3, R.string.paracetamol3, R.string.refer_urgently);
-            }
+            Instructions instructions = new Instructions();
+            messageList = instructions.GetFebrilInstructions(ag, weight);
         }
         else if (s.equals("No signs of Pneumonia or Wheezing illness")){
             messageList = Arrays.asList(R.string.selected, R.string.alrite, R.string.no_anti, R.string.other_illness);
@@ -377,137 +377,17 @@ public class DiagnosisActivity extends AppCompatActivity {
         else if (s.contains("HIV-Infected")){
             String care = sharedPreferences.getString(CHOICEHC, "");
             String chest = sharedPreferences.getString(CHOICE7, "");
-            if (ag >= 0.2 && ag < 1.0){
-                if (ag < 0.6){
-                    if (care.equals("Yes")){
-                        if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                            messageList = Arrays.asList(R.string.hiv2, R.string.amoxicillin2v, R.string.hiv3, R.string.cotrimoxazole6);
-                        }else{
-                            messageList = Arrays.asList(R.string.hiv2, R.string.hiv3, R.string.cotrimoxazole6);
-                        }
 
-                    }else  if (care.equals("No")){
-                        if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                            messageList = Arrays.asList(R.string.hiv1, R.string.amoxicillin2v, R.string.hiv3, R.string.cotrimoxazole6);
-                        }else{
-                            messageList = Arrays.asList(R.string.hiv1, R.string.hiv3, R.string.cotrimoxazole6);
-                        }
-                    }
-                }else {
-                    if (care.equals("Yes")){
-                        if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                            messageList = Arrays.asList(R.string.hiv2, R.string.amoxicillin2v, R.string.hiv3, R.string.cotrimoxazole5);
-                        }else{
-                            messageList = Arrays.asList(R.string.hiv2, R.string.hiv3, R.string.cotrimoxazole5);
-                        }
-
-                    }else  if (care.equals("No")){
-                        if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                            messageList = Arrays.asList(R.string.hiv1, R.string.amoxicillin2v, R.string.hiv3, R.string.cotrimoxazole5);
-                        }else{
-                            messageList = Arrays.asList(R.string.hiv1, R.string.hiv3, R.string.cotrimoxazole5);
-                        }
-                    }
-                }
-            }else if (ag >= 1.0 && ag < 3.0){
-                if (care.equals("Yes")){
-                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                        messageList = Arrays.asList(R.string.hiv2, R.string.amoxicillin12v, R.string.hiv3, R.string.cotrimoxazole5);
-                    }else{
-                        messageList = Arrays.asList(R.string.hiv2, R.string.hiv3, R.string.cotrimoxazole5);
-                    }
-
-                }else  if (care.equals("No")){
-                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                        messageList = Arrays.asList(R.string.hiv1, R.string.amoxicillin12v, R.string.hiv3, R.string.cotrimoxazole5);
-                    }else{
-                        messageList = Arrays.asList(R.string.hiv1, R.string.hiv3, R.string.cotrimoxazole5);
-                    }
-                }
-            }else if (ag >= 3.0 && ag < 5.0){
-                if (care.equals("Yes")){
-                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                        messageList = Arrays.asList(R.string.hiv2, R.string.amoxicillin3v, R.string.hiv3, R.string.cotrimoxazole5);
-                    }else{
-                        messageList = Arrays.asList(R.string.hiv2, R.string.hiv3, R.string.cotrimoxazole5);
-                    }
-
-                }else  if (care.equals("No")){
-                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                        messageList = Arrays.asList(R.string.hiv1, R.string.amoxicillin3v, R.string.hiv3, R.string.cotrimoxazole5);
-                    }else{
-                        messageList = Arrays.asList(R.string.hiv1, R.string.hiv3, R.string.cotrimoxazole5);
-                    }
-                }
-            }
+            Instructions instructions = new Instructions();
+            messageList = instructions.GetHIVInfected(care, chest, ag, weight);
 
         }
         else if (s.contains("HIV-Exposed")){
             String care = sharedPreferences.getString(CHOICEHC, "");
             String chest = sharedPreferences.getString(CHOICE7, "");
-            if (ag >= 0.2 && ag < 1.0){
-                if (ag < 0.6){
-                    if (care.equals("Yes")){
-                        if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                            messageList = Arrays.asList(R.string.hiv2, R.string.amoxicillin2v);
-                        }else{
-                            messageList = Arrays.asList(R.string.hiv2, R.string.hiv3);
-                        }
 
-                    }else  if (care.equals("No")){
-                        if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                            messageList = Arrays.asList(R.string.hiv1, R.string.amoxicillin2v);
-                        }else{
-                            messageList = Arrays.asList(R.string.hiv1, R.string.hiv3);
-                        }
-                    }
-                }else {
-                    if (care.equals("Yes")){
-                        if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                            messageList = Arrays.asList(R.string.hiv2, R.string.amoxicillin2v);
-                        }else{
-                            messageList = Arrays.asList(R.string.hiv2);
-                        }
-
-                    }else  if (care.equals("No")){
-                        if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                            messageList = Arrays.asList(R.string.hiv1, R.string.amoxicillin2v);
-                        }else{
-                            messageList = Arrays.asList(R.string.hiv1);
-                        }
-                    }
-                }
-            }else if (ag >= 1.0 && ag < 3.0){
-                if (care.equals("Yes")){
-                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                        messageList = Arrays.asList(R.string.hiv2, R.string.amoxicillin12v, R.string.hiv3, R.string.cotrimoxazole5);
-                    }else{
-                        messageList = Arrays.asList(R.string.hiv2, R.string.hiv3, R.string.cotrimoxazole5);
-                    }
-
-                }else  if (care.equals("No")){
-                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                        messageList = Arrays.asList(R.string.hiv1, R.string.amoxicillin12v);
-                    }else{
-                        messageList = Arrays.asList(R.string.hiv1);
-                    }
-                }
-            }else if (ag >= 3.0 && ag < 5.0){
-                if (care.equals("Yes")){
-                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                        messageList = Arrays.asList(R.string.hiv2, R.string.amoxicillin3v, R.string.hiv3, R.string.cotrimoxazole5);
-                    }else{
-                        messageList = Arrays.asList(R.string.hiv2, R.string.hiv3, R.string.cotrimoxazole5);
-                    }
-
-                }else  if (care.equals("No")){
-                    if (chest.equals("Mild") || chest.equals("Moderate/Severe")){
-                        messageList = Arrays.asList(R.string.hiv1, R.string.amoxicillin3v);
-                    }else{
-                        messageList = Arrays.asList(R.string.hiv1);
-                    }
-                }
-            }
+            Instructions instructions = new Instructions();
+            messageList = instructions.GetHIVExposed(care, chest, ag, weight);
 
         }
         else if (s.equals("Pneumonia")){
@@ -518,7 +398,7 @@ public class DiagnosisActivity extends AppCompatActivity {
             messageList = Arrays.asList(R.string.cold1, R.string.cold2, R.string.cold3, R.string.cold4);
         }
         else if (s.equals("Wheezing  (not clear bronchodilator response)")){
-            if (ag < 2){
+            if (ag < 24){
                 messageList = Arrays.asList(R.string.wheez_ill1, R.string.wheez_ill2, R.string.wheez_ill3,
                         R.string.wheez_ill4, R.string.wheez_ill5, R.string.wheez_ill6);
             }else {
