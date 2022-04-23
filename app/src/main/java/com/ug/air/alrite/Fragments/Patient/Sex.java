@@ -147,9 +147,14 @@ public class Sex extends Fragment {
                 float k1 = Float.parseFloat(kg1);
                 if (k1 > 30.0){
                     etKilo1.setError("The maximum kilograms for a child has to be 30.0kgs");
+                    next.setEnabled(false);
                 }else if (k1 < 0.5){
                     etKilo1.setError("The minimum kilograms for a child has to be 0.5kgs");
+                    next.setEnabled(false);
+                }else {
+                    next.setEnabled(true);
                 }
+
             }
 
         }
@@ -173,8 +178,12 @@ public class Sex extends Fragment {
                 float k1 = Float.parseFloat(muac);
                 if (k1 > 40.0){
                     etMuac.setError("The maximum value for MUAC has to be 40.0cm");
+                    next.setEnabled(false);
                 }else if (k1 < 9.0){
                     etMuac.setError("The minimum value for MUAC has to be 9.0cm");
+                    next.setEnabled(false);
+                }else {
+                    next.setEnabled(true);
                 }
             }
 
@@ -199,6 +208,9 @@ public class Sex extends Fragment {
                 int yr = Integer.parseInt(years);
                 if (yr > 4){
                     etYears.setError("The maximum number of years should be 4");
+                    next.setEnabled(false);
+                }else {
+                    next.setEnabled(true);
                 }
             }
         }
@@ -222,6 +234,9 @@ public class Sex extends Fragment {
                 int mt = Integer.parseInt(months);
                 if (mt > 11){
                     etMonths.setError("The maximum number of months should be 11");
+                    next.setEnabled(false);
+                }else {
+                    next.setEnabled(true);
                 }
             }
         }

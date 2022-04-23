@@ -48,7 +48,7 @@
     <positive2>10.5</positive2>
   </item>
   <item>
-    <age>0.1</age>
+    <age>0.10</age>
     <negative3>5.9</negative3>
     <negative2>6.7</negative2>
     <positive2>10.9</positive2>
@@ -120,7 +120,7 @@
     <positive2>14.0</positive2>
   </item>
   <item>
-    <age>1.1</age>
+    <age>1.10</age>
     <negative3>7.8</negative3>
     <negative2>8.7</negative2>
     <positive2>14.3</positive2>
@@ -192,7 +192,7 @@
     <positive2>17.3</positive2>
   </item>
   <item>
-    <age>2.1</age>
+    <age>2.10</age>
     <negative3>9.4</negative3>
     <negative2>10.5</negative2>
     <positive2>17.6</positive2>
@@ -264,7 +264,7 @@
     <positive2>20.7</positive2>
   </item>
   <item>
-    <age>3.1</age>
+    <age>3.10</age>
     <negative3>10.7</negative3>
     <negative2>12.1</negative2>
     <positive2>20.9</positive2>
@@ -336,7 +336,7 @@
     <positive2>24.1</positive2>
   </item>
   <item>
-    <age>4.1</age>
+    <age>4.10</age>
     <negative3>11.9</negative3>
     <negative2>13.5</negative2>
     <positive2>24.4</positive2>
