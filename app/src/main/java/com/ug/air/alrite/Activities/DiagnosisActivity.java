@@ -35,6 +35,7 @@ import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING2;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.SECOND;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
+import static com.ug.air.alrite.Fragments.Patient.Sex.AGE2;
 import static com.ug.air.alrite.Fragments.Patient.Sex.CHOICE;
 import static com.ug.air.alrite.Fragments.Patient.Sex.KILO;
 import static com.ug.air.alrite.Fragments.Patient.Sex.MDIAGNOSIS;
@@ -73,6 +74,7 @@ import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.Models.Diagnosis;
 import com.ug.air.alrite.Models.Summary;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Calculations.Instructions;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -97,13 +99,13 @@ public class DiagnosisActivity extends AppCompatActivity {
     SummaryAdapter summaryAdapter;
     List<Summary> summaryList;
     List<String> messages = new ArrayList<>();;
-    List<Integer> messageList = new ArrayList<>();;
+    List messageList = new ArrayList<>();;
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
     public static final String DATE = "date";
     public static final String UUIDS = "uuid";
-    String age, uniqueID;
+    String age, uniqueID, age2;
     float ag;
 
     @Override
@@ -128,9 +130,10 @@ public class DiagnosisActivity extends AppCompatActivity {
         editor = sharedPreferences.edit();
 
         String initials = sharedPreferences.getString(CIN, "");
-        age = sharedPreferences.getString(AGE, "");
-        String[] split = age.split("\\.");
-        ag = Float.parseFloat(age);
+        age2 = sharedPreferences.getString(AGE, "");
+        age = sharedPreferences.getString(AGE2, "");
+        String[] split = age2.split("\\.");
+        ag = Float.parseFloat(age2);
         String gender = sharedPreferences.getString(CHOICE, "");
         txtInitials.setText(initials);
         txtAge.setText("Age: " + split[0] + " years and " + split[1] + " months");
@@ -237,7 +240,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         createList(s);
 
         for (int i=0; i < messageList.size(); i++) {
-            Assessment assessment = new Assessment(messageList.get(i));
+            Assessment assessment = new Assessment((Integer) messageList.get(i));
             assessmentList.add(assessment);
         }
         return assessmentList;
@@ -328,67 +331,13 @@ public class DiagnosisActivity extends AppCompatActivity {
     }
 
     private void createList(String s) {
+        String weight = sharedPreferences.getString(KILO, "");
+        int ag = Integer.parseInt(age2);
+
         if (s.equals("Severe Pneumonia OR very Severe Disease")){
             String st = sharedPreferences.getString(S4, "");
-            if (ag >= 0.2 && ag < 0.4){
-                if (st.contains("Convulsions")){
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin2, R.string.gentamicin2,
-                            R.string.convulsions, R.string.diazepam2, R.string.convulsions1,
-                            R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                            R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                            R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                            R.string.other8, R.string.refer_urgently);
-                }else{
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin2, R.string.gentamicin2,
-                            R.string.other1, R.string.other2, R.string.other3,
-                            R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                            R.string.other8, R.string.refer_urgently);
-                }
-            }else if (ag >= 0.4 && ag < 1.0){
-                if (st.contains("Convulsions")){
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin4, R.string.gentamicin4,
-                            R.string.convulsions, R.string.diazepam4, R.string.convulsions1,
-                            R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                            R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                            R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                            R.string.other8, R.string.refer_urgently);
-                }else{
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin4, R.string.gentamicin4,
-                            R.string.other1, R.string.other2, R.string.other3,
-                            R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                            R.string.other8, R.string.refer_urgently);
-                }
-            }else if (ag >= 1.0 && ag < 3.0){
-                if (st.contains("Convulsions")){
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin12, R.string.gentamicin12,
-                            R.string.convulsions, R.string.diazepam12, R.string.convulsions1,
-                            R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                            R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                            R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                            R.string.other8, R.string.refer_urgently);
-                }else{
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin12, R.string.gentamicin12,
-                            R.string.other1, R.string.other2, R.string.other3,
-                            R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                            R.string.other8, R.string.refer_urgently);
-                }
-
-            }else if (ag >= 3.0){
-                if (st.contains("Convulsions")){
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin3, R.string.gentamicin3,
-                            R.string.convulsions, R.string.diazepam3, R.string.convulsions1,
-                            R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
-                            R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
-                            R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                            R.string.other8, R.string.refer_urgently);
-                }else{
-                    messageList = Arrays.asList(R.string.first_dose, R.string.ampicilin3, R.string.gentamicin3,
-                            R.string.other1, R.string.other2, R.string.other3,
-                            R.string.other4, R.string.other5, R.string.other6, R.string.other7,
-                            R.string.other8, R.string.refer_urgently);
-                }
-
-            }
+            Instructions instructions = new Instructions();
+            messageList = instructions.GetInstructions(ag, weight, st);
         }
         else if (s.equals("Severe Acute malnutrition")){
             messageList = Arrays.asList(R.string.muac, R.string.muac1,
@@ -562,13 +511,9 @@ public class DiagnosisActivity extends AppCompatActivity {
 
         }
         else if (s.equals("Pneumonia")){
-            if (ag >= 0.2 && ag < 1.0){
-                messageList = Arrays.asList(R.string.amoxicillin2, R.string.pneumonia1, R.string.pneumonia2);
-            }else if (ag >= 1.0 && ag < 3.0){
-                messageList = Arrays.asList(R.string.amoxicillin12, R.string.pneumonia1, R.string.pneumonia2);
-            }else if (ag >= 3.0 && ag < 5.0){
-                messageList = Arrays.asList(R.string.amoxicillin3, R.string.pneumonia1, R.string.pneumonia2);
-            }        }
+            Instructions instructions = new Instructions();
+            messageList = instructions.GetPneumoniaInstructions(ag, weight);
+        }
         else if (s.equals("Cough/Cold/No Pneumonia")){
             messageList = Arrays.asList(R.string.cold1, R.string.cold2, R.string.cold3, R.string.cold4);
         }

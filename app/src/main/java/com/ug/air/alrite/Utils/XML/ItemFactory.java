@@ -2,6 +2,7 @@ package com.ug.air.alrite.Utils.XML;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -29,7 +30,7 @@ public class ItemFactory {
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
         parser.setInput(inputStream, null);
         parser.nextTag();
-        elements = readFeed(parser, age);
+        elements = readFeed(context, parser, age);
         String negative3 = elements.get(0);
         String negative2 = elements.get(1);
         String positive2 = elements.get(2);
@@ -66,7 +67,7 @@ public class ItemFactory {
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
         parser.setInput(inputStream, null);
         parser.nextTag();
-        elements = readFeed(parser, age);
+        elements = readFeed(context, parser, age);
         String negative3 = elements.get(0);
         String negative2 = elements.get(1);
         String positive2 = elements.get(2);
@@ -92,7 +93,7 @@ public class ItemFactory {
 
     }
 
-    private List readFeed(XmlPullParser parser, String year) throws IOException, XmlPullParserException {
+    private List readFeed(Context context, XmlPullParser parser, String year) throws IOException, XmlPullParserException {
         ArrayList<Item> items = new ArrayList<>();
 
         parser.require(XmlPullParser.START_TAG, ns, "root");
@@ -120,7 +121,7 @@ public class ItemFactory {
             }
         }
 
-        Log.d("my changes", "readFeed: " + values);
+//        Toast.makeText(context, ""+values, Toast.LENGTH_LONG).show();
 
         return values;
     }

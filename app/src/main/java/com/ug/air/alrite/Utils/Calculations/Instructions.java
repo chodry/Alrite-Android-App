@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Instructions {
 
-    public List GetInstructions(float ag, String weight, String s){
+    public List GetInstructions(int ag, String weight, String s){
 
         List<Integer> messages = new ArrayList<>();
 
@@ -75,7 +75,7 @@ public class Instructions {
             }
 
         }else {
-            if (ag >= 0.2 && ag < 0.4){
+            if (ag >= 2 && ag < 4){
                 if (s.contains("Convulsions")){
                     messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2, R.string.gentamicin2,
                             R.string.convulsions, R.string.diazepam2, R.string.convulsions1,
@@ -89,7 +89,7 @@ public class Instructions {
                             R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                             R.string.other8, R.string.refer_urgently);
                 }
-            }else if (ag >= 0.4 && ag < 1.0){
+            }else if (ag >= 4 && ag < 12){
                 if (s.contains("Convulsions")){
                     messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4, R.string.gentamicin4,
                             R.string.convulsions, R.string.diazepam4, R.string.convulsions1,
@@ -103,7 +103,7 @@ public class Instructions {
                             R.string.other4, R.string.other5, R.string.other6, R.string.other7,
                             R.string.other8, R.string.refer_urgently);
                 }
-            }else if (ag >= 1.0 && ag < 3.0){
+            }else if (ag >= 12 && ag < 36){
                 if (s.contains("Convulsions")){
                     messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12, R.string.gentamicin12,
                             R.string.convulsions, R.string.diazepam12, R.string.convulsions1,
@@ -118,7 +118,7 @@ public class Instructions {
                             R.string.other8, R.string.refer_urgently);
                 }
 
-            }else if (ag >= 3.0){
+            }else if (ag >= 36){
                 if (s.contains("Convulsions")){
                     messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3, R.string.gentamicin3,
                             R.string.convulsions, R.string.diazepam3, R.string.convulsions1,
@@ -140,7 +140,7 @@ public class Instructions {
 
     }
 
-    public List GetPneumoniaInstructions(float ag, String weight) {
+    public List GetPneumoniaInstructions(int ag, String weight) {
 
         List<Integer> messages = new ArrayList<>();
 
@@ -154,11 +154,11 @@ public class Instructions {
                 messages = Arrays.asList(R.string.amoxicillin3, R.string.pneumonia1, R.string.pneumonia2);
             }
         }else {
-            if (ag >= 0.2 && ag < 1.0){
+            if (ag >= 2 && ag < 12){
                 messages = Arrays.asList(R.string.amoxicillin2, R.string.pneumonia1, R.string.pneumonia2);
-            }else if (ag >= 1.0 && ag < 3.0){
+            }else if (ag >= 12 && ag < 36){
                 messages = Arrays.asList(R.string.amoxicillin12, R.string.pneumonia1, R.string.pneumonia2);
-            }else if (ag >= 3.0 && ag < 5.0){
+            }else if (ag >= 36 && ag < 60){
                 messages = Arrays.asList(R.string.amoxicillin3, R.string.pneumonia1, R.string.pneumonia2);
             }
         }
@@ -167,16 +167,16 @@ public class Instructions {
 
     }
 
-    public int GetPointsFromRR(double rate, float age){
+    public int GetPointsFromRR(double rate, int age){
         int point = 0;
 
-        if ((rate < 60 && age < 0.2) || (rate < 50 && (age >= 0.2 && age < 1.0)) || (rate < 40 && (age >= 1.0 && age < 5.0))){
+        if ((rate < 60 && age < 2) || (rate < 50 && (age >= 2 && age < 12)) || (rate < 40 && (age >= 12 && age < 60))){
             point = 0;
-        }else if (((rate >= 60 && rate < 70) && age < 0.2) || ((rate >= 50 && rate < 60) && (age >= 0.2 && age < 1.0)) || ((rate >= 40 && rate < 50) && (age >= 1.0 && age < 5.0))){
+        }else if (((rate >= 60 && rate < 70) && age < 2) || ((rate >= 50 && rate < 60) && (age >= 2 && age < 12)) || ((rate >= 40 && rate < 50) && (age >= 12 && age < 60))){
             point = 1;
-        }else if (((rate >= 70 && rate < 80) && age < 0.2) || ((rate >= 60 && rate < 70) && (age >= 0.2 && age < 1.0)) || ((rate >= 50 && rate < 60) && (age >= 1.0 && age < 5.0))){
+        }else if (((rate >= 70 && rate < 80) && age < 2) || ((rate >= 60 && rate < 70) && (age >= 2 && age < 12)) || ((rate >= 50 && rate < 60) && (age >= 12 && age < 60))){
             point = 2;
-        }else if ((rate >= 80 && age < 0.2) || (rate >= 70 && (age >= 0.2 && age < 1.0)) || (rate >= 60 && (age >= 1.0 && age < 5.0))){
+        }else if ((rate >= 80 && age < 2) || (rate >= 70 && (age >= 2 && age < 12)) || (rate >= 60 && (age >= 12 && age < 60))){
             point = 3;
         }
 

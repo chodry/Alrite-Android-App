@@ -38,7 +38,7 @@ public class Sex extends Fragment {
     LinearLayout linearLayout;
     RadioGroup radioGroup;
     RadioButton radioButton1, radioButton2;
-    String age, weight, text, kg1, fileName, months, years, muac, diagnosis, score, message;
+    String age, age2, weight, text, kg1, fileName, months, years, muac, diagnosis, score, message;
     Spinner spinner;
     Dialog dialog;
     String value2 = "none";
@@ -46,6 +46,7 @@ public class Sex extends Fragment {
     private static final int NO = 1;
     public static final String MDIAGNOSIS = "mDiagnosis";
     public static final String AGE = "age";
+    public static final String AGE2 = "age2";
     public static final String KILO = "kilo";
     public static final String MUAC = "MUAC";
     public static final String CHOICE = "choice";
@@ -115,7 +116,10 @@ public class Sex extends Fragment {
                 if (value2.equals("none") || years.isEmpty() || months.isEmpty()){
                     Toast.makeText(getActivity(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                 }else{
-                    age = years + "." + months;
+                    int year = Integer.parseInt(years);
+                    int ag = (year*12) + Integer.parseInt(months);
+                    age = String.valueOf(ag);
+                    age2 = years + "." + months;
                     weight = kg1;
                     saveData();
                 }
@@ -276,6 +280,7 @@ public class Sex extends Fragment {
 
     private void loadData() {
         age = sharedPreferences.getString(AGE, "");
+        age2 = sharedPreferences.getString(AGE2, "");
         muac = sharedPreferences.getString(MUAC, "");
         weight = sharedPreferences.getString(KILO, "");
         value2 = sharedPreferences.getString(CHOICE, "");
@@ -298,8 +303,8 @@ public class Sex extends Fragment {
             etMuac.setText(muac);
         }
 
-        if (!age.isEmpty()) {
-            String[] separated = age.split("\\.");
+        if (!age2.isEmpty()) {
+            String[] separated = age2.split("\\.");
             etYears.setText(separated[0]);
             etMonths.setText(separated[1]);
         }
@@ -382,6 +387,7 @@ public class Sex extends Fragment {
         }
 
         editor.putString(AGE, age);
+        editor.putString(AGE2, age2);
         editor.putString(CHOICE, value2);
         editor.apply();
 

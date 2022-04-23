@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -418,7 +419,7 @@ public class RRCounter extends Fragment {
             editor.putString(RATE2, rate);
 
             String age = sharedPreferences.getString(AGE, "");
-            Float ag = Float.parseFloat(age);
+            int ag = Integer.parseInt(age);
 
             Instructions instructions = new Instructions();
             int point = instructions.GetPointsFromRR(value, ag);
@@ -437,7 +438,7 @@ public class RRCounter extends Fragment {
             editor.apply();
 
             String age = sharedPreferences.getString(AGE, "");
-            Float ag = Float.parseFloat(age);
+            int ag = Integer.parseInt(age);
 
             Instructions instructions = new Instructions();
             int point = instructions.GetPointsFromRR(value, ag);

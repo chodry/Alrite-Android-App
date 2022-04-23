@@ -280,7 +280,7 @@ public class Assess extends Fragment {
 
         String age = sharedPreferences.getString(AGE, "");
         String weight = sharedPreferences.getString(KILO, "");
-        float ag = Float.parseFloat(age);
+        int ag = Integer.parseInt(age);
 
         Instructions instructions = new Instructions();
         messages = instructions.GetInstructions(ag, weight, s);
