@@ -256,9 +256,9 @@ public class Sex extends Fragment {
             ItemFactory itemFactory = new ItemFactory();
             try {
                 if (value2.equals("Male")){
-                    score = itemFactory.GetMaleItem(Objects.requireNonNull(getActivity()), age, we);
+                    score = itemFactory.GetMaleItem(requireActivity(), age, we);
                 }else{
-                    score = itemFactory.GetFemaleItem(Objects.requireNonNull(getActivity()), age, we);
+                    score = itemFactory.GetFemaleItem(requireActivity(), age, we);
                 }
                 makeDecisions();
 

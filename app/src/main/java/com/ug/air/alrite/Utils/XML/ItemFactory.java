@@ -1,6 +1,7 @@
 package com.ug.air.alrite.Utils.XML;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -108,12 +109,18 @@ public class ItemFactory {
             }
         }
 
+        if (year.endsWith("10")){
+            year = year + "1";
+        }
+
         for(Item item : items){
             String age = item.age;
             if (age.equals(year)){
                 values = Arrays.asList(item.negative3, item.negative2, item.positive2);
             }
         }
+
+        Log.d("my changes", "readFeed: " + values);
 
         return values;
     }

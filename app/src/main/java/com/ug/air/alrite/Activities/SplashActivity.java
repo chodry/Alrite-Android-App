@@ -29,12 +29,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         logo = findViewById(R.id.logo);
 
-        String va = "4.20";
-        float vl = Float.parseFloat(va);
-        String vu = String.valueOf(vl);
-
-        Log.d("My message", "onCreate: " + va + "_" + vl + "_" + vu);
-
     }
 
     @Override
