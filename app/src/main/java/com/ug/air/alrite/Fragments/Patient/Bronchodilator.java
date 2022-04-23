@@ -121,6 +121,7 @@ public class Bronchodilator extends Fragment {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                startBackGroundTask();
                 startActivity(new Intent(getActivity(), DiagnosisActivity.class));
             }
         });
@@ -176,5 +177,8 @@ public class Bronchodilator extends Fragment {
         });
 
         dialog.show();
+    }
+
+    private void startBackGroundTask() {
     }
 }
