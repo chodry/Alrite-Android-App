@@ -1,13 +1,10 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-
 import static com.ug.air.alrite.Activities.DiagnosisActivity.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.BRONC;
-import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.FINAL;
 import static com.ug.air.alrite.Fragments.Patient.Initials.CIN;
 import static com.ug.air.alrite.Fragments.Patient.Initials.PIN;
-import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE2;
 import static com.ug.air.alrite.Fragments.Patient.Sex.CHOICE;
 
@@ -15,8 +12,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,15 +24,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.ug.air.alrite.Activities.Dashboard;
-import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.PatientAdapter;
 import com.ug.air.alrite.BuildConfig;
+import com.ug.air.alrite.Models.History;
 import com.ug.air.alrite.Models.Item;
 import com.ug.air.alrite.Models.Patient;
 import com.ug.air.alrite.R;
@@ -41,11 +36,10 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.Objects;
 
-public class ActivePatients extends Fragment {
+
+public class OtherPatients extends Fragment {
 
     View view;
     RecyclerView recyclerView;
@@ -61,7 +55,7 @@ public class ActivePatients extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_active_patients, container, false);
+        view = inflater.inflate(R.layout.fragment_other_patients, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerView3);
         etSearch = view.findViewById(R.id.search);
@@ -81,84 +75,12 @@ public class ActivePatients extends Fragment {
         files = new ArrayList<String>();
 
         accessSharedFile();
-//
-        etSearch.addTextChangedListener(textWatcher);
 
         patientAdapter = new PatientAdapter(getActivity(), items);
         recyclerView.setAdapter(patientAdapter);
 
-        patientAdapter.setOnItemClickListener(new PatientAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Patient patient = (Patient) items.get(position).getObject();
-                String name = patient.getFilename();
-                Bundle bundle = new Bundle();
-                bundle.putString("fileName", name);
-                RRCounter rrCounter = new RRCounter();
-                rrCounter.setArguments(bundle);
-                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, rrCounter);
-                fr.addToBackStack(null);
-                fr.commit();
-            }
-        });
-
-
         return view;
     }
-
-
-    TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            search = etSearch.getText().toString();
-            if (!search.isEmpty()) {
-                items.clear();
-                for(String type : types){
-                    String ty = type.toLowerCase();
-                    if (ty.contains(search)){
-                        int index = types.indexOf(type);
-                        String fileName = file.get(index);
-                        sharedPreferences = requireActivity().getSharedPreferences(fileName, Context.MODE_PRIVATE);
-                        cin = sharedPreferences.getString(CIN, "");
-                        pin = sharedPreferences.getString(PIN, "");
-                        age = sharedPreferences.getString(AGE2, "");
-                        gender = sharedPreferences.getString(CHOICE, "");
-                        dat = sharedPreferences.getString(DATE, "");
-                        String[] split = age.split("\\.");
-                        String ag = split[0] + " years and " + split[1] + " months";
-                        try {
-                            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-                            Date date = df.parse(dat);
-                            SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
-                            String formattedDate = df1.format(date);
-                            Patient patient = new Patient("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, fileName);
-                            items.add(new Item(0, patient));
-//                            patientAdapter.notifyDataSetChanged();
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                    }
-//                    patientAdapter.notifyDataSetChanged();
-                }
-                patientAdapter.notifyDataSetChanged();
-            }else {
-                items.clear();
-                accessSharedFile();
-                patientAdapter.notifyDataSetChanged();
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    };
 
     private void accessSharedFile() {
         File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs");
@@ -176,7 +98,7 @@ public class ActivePatients extends Fragment {
                             sharedPreferences = requireActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
                             String bron = sharedPreferences.getString(BRONCHODILATOR, "");
                             String fin = sharedPreferences.getString(BRONC, "");
-                            if (bron.equals("Bronchodialtor Given") && fin.isEmpty()){
+                            if (!bron.equals("Bronchodialtor Given") && fin.isEmpty()){
                                 file.add(names);
                                 cin = sharedPreferences.getString(CIN, "");
                                 pin = sharedPreferences.getString(PIN, "");
@@ -191,8 +113,8 @@ public class ActivePatients extends Fragment {
                                     Date date = df.parse(dat);
                                     SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
                                     String formattedDate = df1.format(date);
-                                    Patient patient = new Patient("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names);
-                                    items.add(new Item(0, patient));
+                                    History history = new History("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names);
+                                    items.add(new Item(1, history));
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
@@ -207,5 +129,4 @@ public class ActivePatients extends Fragment {
             }
         }
     }
-
 }

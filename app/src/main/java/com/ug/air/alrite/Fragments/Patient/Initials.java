@@ -32,6 +32,7 @@ public class Initials extends Fragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -98,4 +99,5 @@ public class Initials extends Fragment {
         etPin.setText(pin);
         etCin.setText(cin);
     }
+
 }

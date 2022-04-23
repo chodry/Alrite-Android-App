@@ -2,6 +2,7 @@ package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
+import static com.ug.air.alrite.Fragments.Patient.Sex.KILO;
 import static com.ug.air.alrite.Fragments.Patient.Temperature.TDIAGNOSIS;
 
 import android.app.Dialog;
@@ -32,6 +33,7 @@ import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Calculations.Instructions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,7 +54,7 @@ public class FTouch extends Fragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     Dialog dialog;
-    List<Integer> messages;
+    List messages;
     RecyclerView recyclerView;
     LinearLayout linearLayout_instruction;
     TextView txtDiagnosis;
@@ -180,25 +182,14 @@ public class FTouch extends Fragment {
         assessmentAdapter = new AssessmentAdapter(assessments);
 
         String age = sharedPreferences.getString(AGE, "");
-        float ag = Float.parseFloat(age);
+        String weight = sharedPreferences.getString(KILO, "");
+        int ag = Integer.parseInt(age);
 
-        if (ag >= 0.2 && ag < 0.4 ){
-            messages = Arrays.asList(R.string.febril, R.string.artesunate2, R.string.iartesunate2, R.string.quinine2, R.string.paracetamol2, R.string.refer_urgently);
-        }else if (ag >= 0.4 && ag < 1.0 ){
-            messages = Arrays.asList(R.string.febril, R.string.artesunate4, R.string.iartesunate4, R.string.quinine4, R.string.paracetamol2, R.string.refer_urgently);
-        }else if (ag >= 1.0 && ag < 3.0 ){
-            if (ag >= 1.0 && ag < 2.0 ){
-                messages = Arrays.asList(R.string.febril, R.string.artesunate4, R.string.iartesunate12, R.string.quinine12, R.string.paracetamol2, R.string.refer_urgently);
-            }else if (ag >= 2.0 && ag < 3.0 ){
-                messages = Arrays.asList(R.string.febril, R.string.artesunate5, R.string.iartesunate12, R.string.quinine24, R.string.paracetamol2, R.string.refer_urgently);
-            }
-
-        }else if (ag >= 3.0 && ag < 5.0 ){
-            messages = Arrays.asList(R.string.febril, R.string.artesunate5, R.string.iartesunate3, R.string.quinine3, R.string.paracetamol3, R.string.refer_urgently);
-        }
+        Instructions instructions = new Instructions();
+        messages = instructions.GetFebrilInstructions(ag, weight);
 
         for (int i = 0; i < messages.size(); i++){
-            Assessment assessment = new Assessment(messages.get(i));
+            Assessment assessment = new Assessment((Integer) messages.get(i));
             assessments.add(assessment);
         }
         recyclerView.setAdapter(assessmentAdapter);

@@ -134,8 +134,12 @@ public class Oxygen extends Fragment {
                 long dy = Long.parseLong(oxy);
                 if (dy < 50){
                     etDay.setError("The minimum accepted value is 50");
+                    next.setEnabled(false);
                 }else if (dy > 100){
                     etDay.setError("The maximum accepted value is 100");
+                    next.setEnabled(false);
+                }else {
+                    next.setEnabled(true);
                 }
             }
         }

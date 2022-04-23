@@ -132,7 +132,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         String initials = sharedPreferences.getString(CIN, "");
         age2 = sharedPreferences.getString(AGE, "");
         age = sharedPreferences.getString(AGE2, "");
-        String[] split = age2.split("\\.");
+        String[] split = age.split("\\.");
         ag = Float.parseFloat(age2);
         String gender = sharedPreferences.getString(CHOICE, "");
         txtInitials.setText(initials);

@@ -263,13 +263,14 @@ public class Nasal extends Fragment {
         inst.setVisibility(View.GONE);
 
         txtDisease.setText("Nasal flaring");
-        txtDefinition.setText("Nasal flaring occurs when the nostrils widen while breathing. It is often a sign of trouble breathing. It may be an indication of breathing difficulty, or even respiratory distress in infants");
+        txtDefinition.setText("Nasal flaring occurs when a child is in respiratory distress. The child’s nostrils (nasal openings) expand when breathing in.");
         linearLayoutDisease.setBackgroundColor(getResources().getColor(R.color.green_dark));
 
-        String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.stridor_glossary_video;
-        Uri uri = Uri.parse(videoPath);
-        videoView.setVideoURI(uri);
-        videoView.start();
+        videoView.setVisibility(View.GONE);
+//        String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.stridor_glossary_video;
+//        Uri uri = Uri.parse(videoPath);
+//        videoView.setVideoURI(uri);
+//        videoView.start();
 
         txtOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -298,13 +299,14 @@ public class Nasal extends Fragment {
         inst.setVisibility(View.GONE);
 
         txtDisease.setText("Grunting");
-        txtDefinition.setText("Grunting is a normal sound for your baby to make during sleep, along with gurgles, squeaks, and snores");
+        txtDefinition.setText("Grunting can be a serious sign of respiratory distress. Grunting as a sign of respiratory distress occurs when a child makes a grunting noise while exhaling for more than a few breaths. Grunting is often seen with chest indrawing, nasal flaring, and other signs of breathing difficulty and distress. Grunting may be normal, such as when a child is having a bowel movement or when feeding, but when normal, should not last many minutes or longer");
         linearLayoutDisease.setBackgroundColor(getResources().getColor(R.color.green_dark));
 
-        String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.stridor_glossary_video;
-        Uri uri = Uri.parse(videoPath);
-        videoView.setVideoURI(uri);
-        videoView.start();
+        videoView.setVisibility(View.GONE);
+//        String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.stridor_glossary_video;
+//        Uri uri = Uri.parse(videoPath);
+//        videoView.setVideoURI(uri);
+//        videoView.start();
 
         txtOk.setOnClickListener(new View.OnClickListener() {
             @Override

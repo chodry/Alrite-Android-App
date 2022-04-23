@@ -1,21 +1,34 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
+import com.ug.air.alrite.Adapters.AssessmentAdapter;
+import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
+
+import java.util.ArrayList;
 
 
 public class Eczema extends Fragment {
@@ -23,8 +36,17 @@ public class Eczema extends Fragment {
     View view;
     Button back, next, btnEczema;
     RadioGroup radioGroup;
+    TextView txtDisease, txtDefinition, txtOk,txtDiagnosis;
+    LinearLayout linearLayoutDisease, linearLayout_instruction;
     RadioButton radioButton1, radioButton2, radioButton3;
     String value5 = "none";
+    VideoView videoView;
+    MediaPlayer mediaPlayer;
+    Dialog dialog, dialog1;
+    RecyclerView recyclerView;
+    ArrayList<Assessment> assessments;
+    AssessmentAdapter assessmentAdapter;
+    CardView inst;
     private static final int YES = 0;
     private static final int NO = 1;
     private static final int NOT = 2;
@@ -95,7 +117,7 @@ public class Eczema extends Fragment {
         btnEczema.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                showDialog();
             }
         });
 
@@ -121,7 +143,6 @@ public class Eczema extends Fragment {
         value5 = sharedPreferences.getString(CHOICEX2, "");
     }
 
-
     private void updateViews() {
         if (value5.equals("Yes")){
             radioButton1.setChecked(true);
@@ -135,6 +156,42 @@ public class Eczema extends Fragment {
             radioButton3.setChecked(false);
         }
 
+    }
+
+    private void showDialog() {
+        Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.learn_popup);
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        TextView txtDefinition = dialog.findViewById(R.id.definition);
+        txtDisease = dialog.findViewById(R.id.diseaseName);
+        txtOk = dialog.findViewById(R.id.ok);
+        linearLayoutDisease = dialog.findViewById(R.id.disease);
+        videoView = dialog.findViewById(R.id.video_view);
+        inst = dialog.findViewById(R.id.inst);
+
+        inst.setVisibility(View.GONE);
+
+        txtDisease.setText("Eczema");
+        txtDefinition.setText("Eczema is a skin condition that causes itchy, red, dry, bumpy rash. In infants <1 year, the rash tends to appear on cheeks and head and sometimes knees, elbows, and trunk. In older children, the rash appears in the bends of the elbows, behind the knees, wrists, ankles or neck. It is not caused by an infection but may become infected. Skin allergies are involved in some eczema, and it is more common in children with asthma or other allergies.");
+        linearLayoutDisease.setBackgroundColor(getResources().getColor(R.color.green_dark));
+
+        videoView.setVisibility(View.GONE);
+//        String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.stridor_glossary_video;
+//        Uri uri = Uri.parse(videoPath);
+//        videoView.setVideoURI(uri);
+//        videoView.start();
+
+        txtOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                videoView.stopPlayback();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
 }

@@ -127,11 +127,14 @@ public class Temperature extends Fragment {
                 btnSkip.setEnabled(false);
                 if (dy < 33.0){
                     etDay.setError("The minimum temperature is 33.0");
+                    next.setEnabled(false);
                 }else if (dy > 41.0){
                     etDay.setError("The maximum temperature is 42.0");
+                    next.setEnabled(false);
                 }
             }else {
                 btnSkip.setEnabled(true);
+                next.setEnabled(true);
             }
         }
 

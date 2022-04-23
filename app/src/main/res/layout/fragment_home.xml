@@ -180,13 +180,13 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/ic_clinic_setting"
+                    android:src="@drawable/documents"
                     app:tint="@color/green_dark"
                     android:padding="8dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Clinic Setting"
+                    android:text="Other Patients"
                     android:textColor="@color/green_dark"
                     android:layout_marginTop="10dp"
                     android:textSize="16sp"

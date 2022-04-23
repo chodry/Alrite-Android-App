@@ -117,6 +117,9 @@ public class CoughD extends Fragment {
                 long dy = Long.parseLong(day1);
                 if (dy == 0){
                    etDay.setError("The number of days should not be 0");
+                   next.setEnabled(false);
+                }else {
+                    next.setEnabled(true);
                 }
             }
         }

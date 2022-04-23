@@ -70,8 +70,11 @@ public class PatientAdapter extends RecyclerView.Adapter {
         }else {
             History history = (History) items.get(position).getObject();
             HistoryHolder holder1 = (HistoryHolder) holder;
-            holder1.title.setText(history.getDiagnosis());
-            holder1.subtitle.setText(history.getDate());
+            holder1.initials.setText(history.getInitial());
+            holder1.initial2.setText(history.getParent());
+            holder1.age.setText(history.getAge());
+            holder1.sex.setText(history.getSex());
+            holder1.date.setText(history.getDate());
         }
 
 
@@ -111,13 +114,17 @@ public class PatientAdapter extends RecyclerView.Adapter {
 
     public class HistoryHolder extends RecyclerView.ViewHolder {
 
-        TextView title, subtitle;
+        TextView initials, initial2, age, sex, date;
 
         public HistoryHolder(@NonNull View itemView) {
             super(itemView);
 
-            title = itemView.findViewById(R.id.diagnosis);
-            subtitle = itemView.findViewById(R.id.date);
+            initials = itemView.findViewById(R.id.initials);
+            initial2 = itemView.findViewById(R.id.patient_parent);
+            age = itemView.findViewById(R.id.patient_age);
+            sex = itemView.findViewById(R.id.patient_sex);
+            date = itemView.findViewById(R.id.date);
+
         }
     }
 }
