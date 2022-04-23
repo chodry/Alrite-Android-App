@@ -412,9 +412,11 @@ public class DiagnosisActivity extends AppCompatActivity {
         else if (s.equals("Tuberculosis risk")){
             messageList = Arrays.asList(R.string.tuber1, R.string.tuber2);
         }
-        else if (s.equals("Diagnosis: Wheezing illness (bronchodilator response)")){
+        else if (s.equals("Wheezing illness (bronchodilator response)")){
             messageList = Arrays.asList(R.string.wheez_ill00, R.string.wheez_ill01, R.string.wheez_ill71,
                     R.string.wheez_ill72, R.string.wheez_ill8, R.string.wheez_ill9);
+        }else if (s.equals("Severe Disease")){
+            messageList = Collections.singletonList(R.string.bronc1x);
         }
     }
 

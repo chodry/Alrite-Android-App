@@ -39,6 +39,7 @@ import com.ug.air.alrite.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -216,7 +217,7 @@ public class Bronchodilator3 extends Fragment {
         if (value == 1){
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
             txtDiagnosis.setText(R.string.bronc1);
-            messages = Arrays.asList(R.string.bronc1, R.string.bronc1);
+            messages = Collections.singletonList(R.string.bronc1x);
         }else if (value == 2){
             linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));
             txtDiagnosis.setText(R.string.wheez1);

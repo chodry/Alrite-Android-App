@@ -98,7 +98,7 @@ public class OtherPatients extends Fragment {
                             sharedPreferences = requireActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
                             String bron = sharedPreferences.getString(BRONCHODILATOR, "");
                             String fin = sharedPreferences.getString(BRONC, "");
-                            if (!bron.equals("Bronchodialtor Given") && fin.isEmpty()){
+                            if (bron.isEmpty() || bron.equals("Bronchodialtor Not Given") || !fin.isEmpty()){
                                 file.add(names);
                                 cin = sharedPreferences.getString(CIN, "");
                                 pin = sharedPreferences.getString(PIN, "");
