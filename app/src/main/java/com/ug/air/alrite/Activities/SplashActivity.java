@@ -1,8 +1,11 @@
 package com.ug.air.alrite.Activities;
 
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.REASSESS;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -11,12 +14,20 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.widget.LinearLayout;
 
+import com.ug.air.alrite.BuildConfig;
 import com.ug.air.alrite.R;
+
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity {
 
     Intent i = null;
     LinearLayout logo;
+    File[] contents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +39,29 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
         logo = findViewById(R.id.logo);
+
+//        String dat = "2022-04-29_13:30:21";
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
+//
+//        try {
+//            Date date = format.parse(dat);
+//            String time = simpleDateFormat.format(date);
+//            Date date1 = simpleDateFormat.parse(time);
+//            Date cur = new Date();
+//            String tim = simpleDateFormat.format(cur);
+//            Date date2 = simpleDateFormat.parse(tim);
+//
+//            long difference = date2.getTime() - date1.getTime();
+//            int days = (int) (difference / (1000*60*60*24));
+//            int hours = (int) ((difference - (1000*60*60*24*days)) / (1000*60*60));
+//            int min = (int) (difference - (1000*60*60*24*days) - (1000*60*60*hours)) / (1000*60);
+//            min = (min < 0 ? -min : min);
+//            Log.d("======= Minutes"," :: "+min);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+
 
     }
 

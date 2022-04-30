@@ -15,6 +15,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.Data;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,28 +31,42 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Worker.NotifyWorker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class Bronchodilator extends Fragment {
 
     View view;
     Button btnBron, btnGiven, btnNot, btnSave;
     Dialog dialog;
-    String bronchodilator;
+    String bronchodilator, uniqueID, filename;
     TextView txtMessage;
     public static final String BRONCHODILATOR = "bronchodilator";
+    public static final String REASSESS = "reassess";
+//    public static final String BACKGROUND = "background";
     public static final String SHARED_PREFS = "sharedPrefs";
-    SharedPreferences sharedPreferences, sharedPreferences1;
-    SharedPreferences.Editor editor, editor1;
+//    public static final String SHARED_PREFS2 = "background";
+    SharedPreferences sharedPreferences, sharedPreferences2;
+    SharedPreferences.Editor editor, editor2;
+    public static final String DATE = "date";
+    public static final String FILENAME = "filename";
+    public static final String UUIDS = "uuid";
     TextView txtDisease, txtDefinition, txtOk, txtDiagnosis;
     LinearLayout linearLayoutDisease;
     LinearLayout linearLayout_instruction;
@@ -68,6 +89,8 @@ public class Bronchodilator extends Fragment {
 
         sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+//        sharedPreferences2 = requireActivity().getSharedPreferences(SHARED_PREFS2, Context.MODE_PRIVATE);
+//        editor2 = sharedPreferences2.edit();
 
         btnBron.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,8 +144,8 @@ public class Bronchodilator extends Fragment {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                editor.putBoolean(REASSESS, false);
                 startBackGroundTask();
-                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
             }
         });
 
@@ -180,5 +203,32 @@ public class Bronchodilator extends Fragment {
     }
 
     private void startBackGroundTask() {
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+        String formattedDate = df.format(currentTime);
+
+        uniqueID = UUID.randomUUID().toString();
+
+        editor.putString(DATE, formattedDate);
+        editor.putString(UUIDS, uniqueID);
+
+        filename = formattedDate + "_" + uniqueID;
+        editor.putString(FILENAME, filename);
+        editor.apply();
+
+        Data inputData = new Data.Builder()
+                .putString("filename", filename)
+                .build();
+
+        WorkRequest notifyWorkRequest = new OneTimeWorkRequest
+                .Builder(NotifyWorker.class)
+                .setInputData(inputData)
+                .setInitialDelay(2, TimeUnit.MINUTES)
+                .addTag(filename)
+                .build();
+
+        WorkManager.getInstance(getActivity()).enqueueUniqueWork(filename, ExistingWorkPolicy.REPLACE, (OneTimeWorkRequest) notifyWorkRequest);
+
+        startActivity(new Intent(getActivity(), DiagnosisActivity.class));
     }
 }

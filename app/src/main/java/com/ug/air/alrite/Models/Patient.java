@@ -8,14 +8,16 @@ public class Patient {
     private String parent;
     private String date;
     private String filename;
+    private boolean reassess;
 
-    public Patient(String age, String sex, String initial, String parent, String date, String filename) {
+    public Patient(String age, String sex, String initial, String parent, String date, String filename, boolean reassess) {
         this.age = age;
         this.sex = sex;
         this.initial = initial;
         this.parent = parent;
         this.date = date;
         this.filename = filename;
+        this.reassess = reassess;
     }
 
     public String getAge() {
@@ -40,5 +42,9 @@ public class Patient {
 
     public String getFilename() {
         return filename;
+    }
+
+    public boolean isReassess() {
+        return reassess;
     }
 }

@@ -1,8 +1,9 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 
-import static com.ug.air.alrite.Activities.DiagnosisActivity.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.REASSESS;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.BRONC;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.FINAL;
 import static com.ug.air.alrite.Fragments.Patient.Initials.CIN;
@@ -92,14 +93,19 @@ public class ActivePatients extends Fragment {
             public void onItemClick(int position) {
                 Patient patient = (Patient) items.get(position).getObject();
                 String name = patient.getFilename();
-                Bundle bundle = new Bundle();
-                bundle.putString("fileName", name);
-                RRCounter rrCounter = new RRCounter();
-                rrCounter.setArguments(bundle);
-                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, rrCounter);
-                fr.addToBackStack(null);
-                fr.commit();
+                boolean reassess = patient.isReassess();
+                if (reassess){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fileName", name);
+                    RRCounter rrCounter = new RRCounter();
+                    rrCounter.setArguments(bundle);
+                    FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                    fr.replace(R.id.fragment_container, rrCounter);
+                    fr.addToBackStack(null);
+                    fr.commit(); 
+                }else {
+                    Toast.makeText(getActivity(), "Patient not ready for reassessment", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -130,6 +136,7 @@ public class ActivePatients extends Fragment {
                         age = sharedPreferences.getString(AGE2, "");
                         gender = sharedPreferences.getString(CHOICE, "");
                         dat = sharedPreferences.getString(DATE, "");
+                        boolean reassess = sharedPreferences.getBoolean(REASSESS, false);
                         String[] split = age.split("\\.");
                         String ag = split[0] + " years and " + split[1] + " months";
                         try {
@@ -137,7 +144,7 @@ public class ActivePatients extends Fragment {
                             Date date = df.parse(dat);
                             SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
                             String formattedDate = df1.format(date);
-                            Patient patient = new Patient("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, fileName);
+                            Patient patient = new Patient("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, fileName, reassess);
                             items.add(new Item(0, patient));
 //                            patientAdapter.notifyDataSetChanged();
                         } catch (ParseException e) {
@@ -183,6 +190,7 @@ public class ActivePatients extends Fragment {
                                 age = sharedPreferences.getString(AGE2, "");
                                 gender = sharedPreferences.getString(CHOICE, "");
                                 dat = sharedPreferences.getString(DATE, "");
+                                boolean reassess = sharedPreferences.getBoolean(REASSESS, false);
                                 types.add(cin);
                                 String[] split = age.split("\\.");
                                 String ag = split[0] + " years and " + split[1] + " months";
@@ -191,7 +199,7 @@ public class ActivePatients extends Fragment {
                                     Date date = df.parse(dat);
                                     SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
                                     String formattedDate = df1.format(date);
-                                    Patient patient = new Patient("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names);
+                                    Patient patient = new Patient("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names, reassess);
                                     items.add(new Item(0, patient));
                                 } catch (ParseException e) {
                                     e.printStackTrace();

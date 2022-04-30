@@ -1,6 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
-import static com.ug.air.alrite.Activities.DiagnosisActivity.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.BRONC;
 import static com.ug.air.alrite.Fragments.Patient.Initials.CIN;

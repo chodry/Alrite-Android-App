@@ -69,7 +69,7 @@
                         android:layout_weight=".5"
                         android:background="@drawable/text_input_bg"
                         android:gravity="center"
-                        android:hint="33.0 - 41.0"
+                        android:hint="33.0 - 42.0"
                         android:inputType="numberDecimal"
                         android:maxLength="4" />
 
@@ -79,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="In degrees celcius - range (33.0 - 44.0)"
+                    android:text="In degrees celcius - range (33.0 - 42.0)"
                     android:textSize="12sp" />
 
                 <LinearLayout
@@ -97,14 +97,14 @@
                         android:textSize="12sp" />
 
                     <Button
+                        android:id="@+id/skip"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:text="Skip"
-                        android:id="@+id/skip"
+                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="10dp"
-                        android:textColor="@color/color_background"
                         android:background="@drawable/bg_button"
-                        android:layout_marginTop="5dp"/>
+                        android:text="Skip"
+                        android:textColor="@color/color_background" />
 
                 </LinearLayout>
 

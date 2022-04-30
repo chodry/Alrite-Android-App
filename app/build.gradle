@@ -44,4 +44,11 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0-rc01'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.0-rc01'
+    def work_version = "2.7.1"
+    implementation "androidx.work:work-runtime:$work_version"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation "androidx.work:work-rxjava2:$work_version"
+    implementation "androidx.work:work-gcm:$work_version"
+    androidTestImplementation "androidx.work:work-testing:$work_version"
+    implementation "androidx.work:work-multiprocess:$work_version"
 }

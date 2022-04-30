@@ -67,6 +67,13 @@ public class PatientAdapter extends RecyclerView.Adapter {
             holder1.age.setText(patient.getAge());
             holder1.sex.setText(patient.getSex());
             holder1.date.setText(patient.getDate());
+
+            boolean reassess = patient.isReassess();
+            if (reassess){
+                holder1.imageView.setVisibility(View.VISIBLE);
+            }else{
+                holder1.imageView.setVisibility(View.GONE);
+            }
         }else {
             History history = (History) items.get(position).getObject();
             HistoryHolder holder1 = (HistoryHolder) holder;

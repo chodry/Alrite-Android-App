@@ -5,6 +5,9 @@ import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Breathless.S5;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.FILENAME;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.BDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.REASON;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.B3DIAGNOSIS;
@@ -60,6 +63,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -103,8 +107,6 @@ public class DiagnosisActivity extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
-    public static final String DATE = "date";
-    public static final String UUIDS = "uuid";
     String age, uniqueID, age2;
     float ag;
 
@@ -422,18 +424,28 @@ public class DiagnosisActivity extends AppCompatActivity {
 
     private void saveForm() {
 
-        Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
-        String formattedDate = df.format(currentTime);
+        String file = sharedPreferences.getString(FILENAME, "");
+        if (file.isEmpty()){
+            Date currentTime = Calendar.getInstance().getTime();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+            String formattedDate = df.format(currentTime);
 
-        uniqueID = UUID.randomUUID().toString();
+            uniqueID = UUID.randomUUID().toString();
 
-        editor.putString(DATE, formattedDate);
-        editor.putString(UUIDS, uniqueID);
-        editor.apply();
+            editor.putString(DATE, formattedDate);
+            editor.putString(UUIDS, uniqueID);
+            editor.apply();
 
-        uniqueID = formattedDate + "_" + uniqueID;
-        sharedPreferences1 = getSharedPreferences(uniqueID, Context.MODE_PRIVATE);
+            String filename = formattedDate + "_" + uniqueID;
+            doLogic(filename);
+        }else {
+            doLogic(file);
+        }
+
+    }
+
+    private void doLogic(String file) {
+        sharedPreferences1 = getSharedPreferences(file, Context.MODE_PRIVATE);
         editor1 = sharedPreferences1.edit();
         Map<String, ?> all = sharedPreferences.getAll();
         for (Map.Entry<String, ?> x : all.entrySet()) {
@@ -441,8 +453,6 @@ public class DiagnosisActivity extends AppCompatActivity {
             else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
         }
         editor1.commit();
-//        editor.clear();
-//        editor.commit();
 
         String filename = sharedPreferences1.getString(SECOND, "");
         if (!filename.isEmpty()){
@@ -452,11 +462,12 @@ public class DiagnosisActivity extends AppCompatActivity {
                 src.delete();
             }
         }
+
         editor.clear();
         editor.commit();
 
         Intent intent = new Intent(DiagnosisActivity.this, FinalActivity.class);
-        intent.putExtra("filename", uniqueID);
+        intent.putExtra("filename", file);
         startActivity(intent);
     }
 
