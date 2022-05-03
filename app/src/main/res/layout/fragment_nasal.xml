@@ -78,8 +78,7 @@
                         android:textColor="@color/color_background"
                         android:background="@drawable/bg_button"
                         android:textAllCaps="false"
-                        android:gravity="center"
-                        android:drawableRight="@drawable/ic_play"/>
+                        android:gravity="center"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -100,8 +99,7 @@
                         android:background="@drawable/bg_button"
                         android:textAllCaps="false"
                         android:paddingLeft="5dp"
-                        android:gravity="center"
-                        android:drawableRight="@drawable/ic_play"/>
+                        android:gravity="center"/>
 
                 </LinearLayout>
 

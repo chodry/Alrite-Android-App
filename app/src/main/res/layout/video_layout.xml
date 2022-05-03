@@ -18,6 +18,13 @@
         android:layout_width="match_parent"
         android:layout_height="200dp">
 
+        <ImageView
+            android:id="@+id/play"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_play"
+            android:translationZ="90dp"/>
+
         <VideoView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/video_view"
             android:layout_width="match_parent"

@@ -267,6 +267,8 @@ public class Nasal extends Fragment {
         linearLayoutDisease.setBackgroundColor(getResources().getColor(R.color.green_dark));
 
         videoView.setVisibility(View.GONE);
+        CardView cardView = dialog.findViewById(R.id.learn);
+        cardView.setVisibility(View.GONE);
 //        String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.stridor_glossary_video;
 //        Uri uri = Uri.parse(videoPath);
 //        videoView.setVideoURI(uri);
@@ -303,6 +305,8 @@ public class Nasal extends Fragment {
         linearLayoutDisease.setBackgroundColor(getResources().getColor(R.color.green_dark));
 
         videoView.setVisibility(View.GONE);
+        CardView cardView = dialog.findViewById(R.id.learn);
+        cardView.setVisibility(View.GONE);
 //        String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.stridor_glossary_video;
 //        Uri uri = Uri.parse(videoPath);
 //        videoView.setVideoURI(uri);

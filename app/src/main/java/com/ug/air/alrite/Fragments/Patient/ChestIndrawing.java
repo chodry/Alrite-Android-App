@@ -36,6 +36,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -224,7 +225,23 @@ public class ChestIndrawing extends Fragment {
         String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.chest_indrawing_glossary_video;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
-        videoView.start();
+
+        ImageView imPlay = dialog.findViewById(R.id.play);
+        imPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imPlay.setVisibility(View.GONE);
+                videoView.start();
+            }
+        });
+
+        videoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imPlay.setVisibility(View.VISIBLE);
+                videoView.pause();
+            }
+        });
 
         txtOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -251,113 +268,120 @@ public class ChestIndrawing extends Fragment {
         if (b && ((cough.equals("Yes") && fastBreathing.equals("Fast Breathing")) ||
                 (cough.equals("Yes") && (value8.equals("Mild") || value8.equals("Moderate/Severe"))))){
             if (hDiagnosis.isEmpty()){
-                showDialog2("pneumonia");
+//                showDialog2("pneumonia");
+                editor.putString(CIDIAGNOSIS, String.valueOf(R.string.pneumonia));
+                editor.apply();
             }
 
         }else if (b && (cough.equals("Yes") && fastBreathing.equals("Normal Breathing") &&
                 value8.equals("No") && (wheezing.equals("Other abnormal breath sounds") || wheezing.equals("Normal breath sounds")))){
 
-            showDialog2("cold");
+//            showDialog2("cold");
+            editor.putString(CIDIAGNOSIS, String.valueOf(R.string.cold));
+            editor.apply();
 
-        } else {
-            if (wheezing.equals("Wheezing")  || day >= 10){
-                calculatePoints();
-                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Bronchodilator());
-                fr.addToBackStack(null);
-                fr.commit();
-            }else {
-                calculatePoints();
-                editor.remove(CIDIAGNOSIS);
-                editor.apply();
-                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
-            }
+
+        }
+
+        calculatePoints();
+
+        if (wheezing.equals("Wheezing")  || day >= 10){
+            calculatePoints();
+            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+            fr.replace(R.id.fragment_container, new Bronchodilator());
+            fr.addToBackStack(null);
+            fr.commit();
+        }else {
+            calculatePoints();
+            editor.remove(CIDIAGNOSIS);
+            editor.apply();
+            startActivity(new Intent(getActivity(), DiagnosisActivity.class));
         }
     }
 
-    private void showDialog2(String disease) {
-        dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.assessment_layout);
-        dialog.setCancelable(true);
-//        Window window = dialog.getWindow();
-//        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-
-        linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
-        txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
-        recyclerView = dialog.findViewById(R.id.recyclerView1);
-        btnSave = dialog.findViewById(R.id.btnSave);
-        btnContinue = dialog.findViewById(R.id.btnContinue);
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-
-        assessments = new ArrayList<>();
-        assessmentAdapter = new AssessmentAdapter(assessments);
-
-        List messages = new ArrayList<>();
-
-        if (disease.equals("pneumonia")){
-            linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.moderateDiagnosisColor));
-            txtDiagnosis.setText(R.string.pneumonia);
-
-            String age = sharedPreferences.getString(AGE, "");
-            String weight = sharedPreferences.getString(KILO, "");
-            int ag = Integer.parseInt(age);
-
-            Instructions instructions = new Instructions();
-            messages = instructions.GetPneumoniaInstructions(ag, weight);
-
-        }else {
-            linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));
-            txtDiagnosis.setText(R.string.cold);
-            messages = Arrays.asList(R.string.cold1, R.string.cold2, R.string.cold3, R.string.cold4);
-        }
-
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1300);
-        diagnosis = txtDiagnosis.getText().toString();
-        diagnosis = diagnosis.replace("Diagnosis: ", "");
-
-        for (int i = 0; i < messages.size(); i++){
-            Assessment assessment = new Assessment((Integer) messages.get(i));
-            assessments.add(assessment);
-        }
-        recyclerView.setAdapter(assessmentAdapter);
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editor.putString(CIDIAGNOSIS, diagnosis);
-                editor.apply();
-                dialog.dismiss();
-                calculatePoints();
-                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
-            }
-        });
-
-        if (wheezing.equals("Wheezing") || day >= 10){
-            btnContinue.setVisibility(View.VISIBLE);
-        }else {
-            btnContinue.setVisibility(View.GONE);
-        }
-
-        btnContinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editor.putString(CIDIAGNOSIS, diagnosis);
-                editor.apply();
-                dialog.dismiss();
-                calculatePoints();
-                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Bronchodilator());
-                fr.addToBackStack(null);
-                fr.commit();
-            }
-        });
-
-//        dialog.getWindow().setLayout(650, 800);
-        dialog.getWindow().setGravity(Gravity.CENTER);
-        dialog.show();
-    }
+//    private void showDialog2(String disease) {
+//        dialog = new Dialog(getActivity());
+//        dialog.setContentView(R.layout.assessment_layout);
+//        dialog.setCancelable(true);
+////        Window window = dialog.getWindow();
+////        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+//
+//        linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
+//        txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
+//        recyclerView = dialog.findViewById(R.id.recyclerView1);
+//        btnSave = dialog.findViewById(R.id.btnSave);
+//        btnContinue = dialog.findViewById(R.id.btnContinue);
+//
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+//
+//        assessments = new ArrayList<>();
+//        assessmentAdapter = new AssessmentAdapter(assessments);
+//
+//        List messages = new ArrayList<>();
+//
+//        if (disease.equals("pneumonia")){
+//            linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.moderateDiagnosisColor));
+//            txtDiagnosis.setText(R.string.pneumonia);
+//
+//            String age = sharedPreferences.getString(AGE, "");
+//            String weight = sharedPreferences.getString(KILO, "");
+//            int ag = Integer.parseInt(age);
+//
+//            Instructions instructions = new Instructions();
+//            messages = instructions.GetPneumoniaInstructions(ag, weight);
+//
+//        }else {
+//            linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.mildDiagnosisColor));
+//            txtDiagnosis.setText(R.string.cold);
+//            messages = Arrays.asList(R.string.cold1, R.string.cold2, R.string.cold3, R.string.cold4);
+//        }
+//
+//        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1300);
+//        diagnosis = txtDiagnosis.getText().toString();
+//        diagnosis = diagnosis.replace("Diagnosis: ", "");
+//
+//        for (int i = 0; i < messages.size(); i++){
+//            Assessment assessment = new Assessment((Integer) messages.get(i));
+//            assessments.add(assessment);
+//        }
+//        recyclerView.setAdapter(assessmentAdapter);
+//
+//        btnSave.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                editor.putString(CIDIAGNOSIS, diagnosis);
+//                editor.apply();
+//                dialog.dismiss();
+//                calculatePoints();
+//                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+//            }
+//        });
+//
+//        if (wheezing.equals("Wheezing") || day >= 10){
+//            btnContinue.setVisibility(View.VISIBLE);
+//        }else {
+//            btnContinue.setVisibility(View.GONE);
+//        }
+//
+//        btnContinue.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                editor.putString(CIDIAGNOSIS, diagnosis);
+//                editor.apply();
+//                dialog.dismiss();
+//                calculatePoints();
+//                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+//                fr.replace(R.id.fragment_container, new Bronchodilator());
+//                fr.addToBackStack(null);
+//                fr.commit();
+//            }
+//        });
+//
+////        dialog.getWindow().setLayout(650, 800);
+//        dialog.getWindow().setGravity(Gravity.CENTER);
+//        dialog.show();
+//    }
 
     private void calculatePoints() {
         String granting = sharedPreferences.getString(CHOICEGN, "");

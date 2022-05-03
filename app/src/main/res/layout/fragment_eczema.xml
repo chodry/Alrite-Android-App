@@ -65,8 +65,7 @@
                     android:textColor="@color/color_background"
                     android:background="@drawable/bg_button"
                     android:textAllCaps="false"
-                    android:gravity="center"
-                    android:drawableRight="@drawable/ic_play"/>
+                    android:gravity="center"/>
 
                 <RadioGroup
                     android:layout_gravity="left"

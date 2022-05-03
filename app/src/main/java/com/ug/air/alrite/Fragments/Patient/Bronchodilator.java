@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -189,7 +190,23 @@ public class Bronchodilator extends Fragment {
         String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.bronchodilator_glossary_video;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
-        videoView.start();
+
+        ImageView imPlay = dialog.findViewById(R.id.play);
+        imPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imPlay.setVisibility(View.GONE);
+                videoView.start();
+            }
+        });
+
+        videoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imPlay.setVisibility(View.VISIBLE);
+                videoView.pause();
+            }
+        });
 
         txtOk.setOnClickListener(new View.OnClickListener() {
             @Override

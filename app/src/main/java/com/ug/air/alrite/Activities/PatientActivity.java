@@ -14,6 +14,7 @@ import com.ug.air.alrite.Fragments.Patient.ActivePatients;
 import com.ug.air.alrite.Fragments.Patient.HIVStatus;
 import com.ug.air.alrite.Fragments.Patient.Initials;
 import com.ug.air.alrite.Fragments.Patient.OtherPatients;
+import com.ug.air.alrite.Fragments.Patient.Wheezing;
 import com.ug.air.alrite.R;
 
 public class PatientActivity extends AppCompatActivity {

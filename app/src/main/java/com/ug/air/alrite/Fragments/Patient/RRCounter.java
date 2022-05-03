@@ -101,7 +101,7 @@ public class RRCounter extends Fragment {
 
         editor = sharedPreferences.edit();
         age = sharedPreferences.getString(AGE, "");
-        ag = Float.parseFloat(age);
+        ag = Integer.parseInt(age);
 
         numBreaths = 5;
         margin=13;
@@ -299,24 +299,24 @@ public class RRCounter extends Fragment {
 
     public void evalFastBreathing(float birthday){
         if(isCompleted()) {
-            if (birthday <= 0.2){
-                if (value > 60){
+            if (birthday < 2){
+                if (value >= 60){
                     fastBreathing = true;
                     score = R.string.breathing_info_under2;
                     return;
                 }
                 fastBreathing = false;
             }
-            if (birthday <= 1 && birthday > 0.2 ){
-                if (value > 50){
+            if (birthday >= 2 && birthday <= 12 ){
+                if (value >= 50){
                     fastBreathing = true;
                     score = R.string.breathing_info_under1;
                     return;
                 }
                 fastBreathing = false;
             }
-            if (birthday > 1){
-                if (value > 40){
+            if (birthday > 12){
+                if (value >= 40){
                     fastBreathing = true;
                     score = R.string.breathing_info_over1;
                     return;
