@@ -152,43 +152,38 @@ public class Bronchodilator3 extends Fragment {
 
             if (value9.equals("Worse")){
                 val = 1;
-                showDialog(val);
+                editor.remove(B3DIAGNOSIS);
             }else if (cough.equals("Yes") && ((p2 < p1) || value9.equals("Better"))){
                 val = 2;
-                showDialog(val);
+                editor.putString(B3DIAGNOSIS, String.valueOf(R.string.wheez1));
             }else if (cough.equals("Yes") && wheezing.equals("Wheezing") && (p2 >= p1 || value9.equals("Same/ No change"))){
                 val = 3;
-                showDialog(val);
+                editor.putString(B3DIAGNOSIS, String.valueOf(R.string.wheez_ill));
             }else {
                 editor.remove(B3DIAGNOSIS);
-                editor.apply();
-                if (day >= 10){
-                    showDialog2();
-                }else {
-                    finalValue();
-                    startActivity(new Intent(getActivity(), DiagnosisActivity.class));
-                }
             }
         }else {
             if (value9.equals("Worse")){
                 val = 1;
-                showDialog(val);
+                editor.remove(B3DIAGNOSIS);
             }else if (cough.equals("Yes") && value9.equals("Better")){
                 val = 2;
-                showDialog(val);
+                editor.putString(B3DIAGNOSIS, String.valueOf(R.string.wheez1));
             }else if (cough.equals("Yes") && wheezing.equals("Wheezing") && value9.equals("Same/ No change")){
                 val = 3;
-                showDialog(val);
+                editor.putString(B3DIAGNOSIS, String.valueOf(R.string.wheez_ill));
             }else {
                 editor.remove(B3DIAGNOSIS);
-                editor.apply();
-                if (day >= 10){
-                    showDialog2();
-                }else {
-                    finalValue();
-                    startActivity(new Intent(getActivity(), DiagnosisActivity.class));
-                }
+
             }
+        }
+        editor.apply();
+
+        if (day >= 10){
+            showDialog2();
+        }else {
+            finalValue();
+            startActivity(new Intent(getActivity(), DiagnosisActivity.class));
         }
 
     }
