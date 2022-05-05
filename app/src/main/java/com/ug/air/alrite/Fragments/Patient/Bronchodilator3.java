@@ -155,10 +155,10 @@ public class Bronchodilator3 extends Fragment {
                 editor.remove(B3DIAGNOSIS);
             }else if (cough.equals("Yes") && ((p2 < p1) || value9.equals("Better"))){
                 val = 2;
-                editor.putString(B3DIAGNOSIS, String.valueOf(R.string.wheez1));
+                editor.putString(B3DIAGNOSIS, "Wheezing illness (Bronchodilator response)");
             }else if (cough.equals("Yes") && wheezing.equals("Wheezing") && (p2 >= p1 || value9.equals("Same/ No change"))){
                 val = 3;
-                editor.putString(B3DIAGNOSIS, String.valueOf(R.string.wheez_ill));
+                editor.putString(B3DIAGNOSIS, "Wheezing (not claer Bronchodilator response)");
             }else {
                 editor.remove(B3DIAGNOSIS);
             }

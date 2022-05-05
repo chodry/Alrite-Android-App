@@ -160,20 +160,20 @@ public class Oxygen extends Fragment {
             editor.remove(OXDIAGNOSIS);
             editor.apply();
             nextInterface();
-        }else if (percent > 89 && percent < 92){
+        }else if (percent >= 90 && percent < 92){
             editor.remove(OXDIAGNOSIS);
             editor.apply();
             showDialog2();
         }else if (percent >= 85 && percent < 90){
-            showDialog();
+            showDialog3("The oxgyen saturation is below normal. Are you sure you entered the right value?");
         }else {
             editor.remove(OXDIAGNOSIS);
             editor.apply();
-            showDialog3();
+            showDialog3("The child's oxygen levels are abnormally low, Are you sure you entered the right value?");
         }
     }
 
-    private void showDialog3() {
+    private void showDialog3(String msg) {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.assess);
         dialog.setCancelable(true);
@@ -185,7 +185,7 @@ public class Oxygen extends Fragment {
         btnSave.setText("Yes");
         btnNo.setVisibility(View.VISIBLE);
 
-        txtMessage.setText("The oxgyen saturation is below normal. Are you sure you entered the right value?");
+        txtMessage.setText(msg);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override

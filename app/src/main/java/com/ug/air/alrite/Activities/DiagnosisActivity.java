@@ -107,7 +107,7 @@ public class DiagnosisActivity extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
-    String age, uniqueID, age2;
+    String age, uniqueID, age2, folder;
     float ag;
 
     @Override
@@ -128,7 +128,14 @@ public class DiagnosisActivity extends AppCompatActivity {
         btnExit = findViewById(R.id.btnExit);
         recyclerView2 = findViewById(R.id.recyclerView2);
 
-        sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        Intent intent = getIntent();
+        if (intent.hasExtra("filename")){
+            folder = intent.getExtras().getString("filename");
+            sharedPreferences = getSharedPreferences(folder, Context.MODE_PRIVATE);
+            btnExit.setVisibility(View.GONE);
+        }else{
+            sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        }
         editor = sharedPreferences.edit();
 
         String initials = sharedPreferences.getString(CIN, "");
@@ -341,7 +348,7 @@ public class DiagnosisActivity extends AppCompatActivity {
             Instructions instructions = new Instructions();
             messageList = instructions.GetInstructions(ag, weight, st);
         }
-        else if (s.equals("Severe Acute malnutrition")){
+        else if (s.equals("Severe acute malnutrition")){
             messageList = Arrays.asList(R.string.muac, R.string.muac1,
                     R.string.muac2, R.string.muac3, R.string.muac4, R.string.muac5);
         }
@@ -466,13 +473,32 @@ public class DiagnosisActivity extends AppCompatActivity {
         editor.clear();
         editor.commit();
 
-        Intent intent = new Intent(DiagnosisActivity.this, FinalActivity.class);
-        intent.putExtra("filename", file);
+        String bron = sharedPreferences1.getString(BRONCHODILATOR, "");
+        String fin = sharedPreferences1.getString(BRONC, "");
+        Intent intent;
+        if (bron.equals("Bronchodialtor Given") && fin.isEmpty()){
+            intent = new Intent(DiagnosisActivity.this, Dashboard.class);
+        }else{
+            intent = new Intent(DiagnosisActivity.this, FinalActivity.class);
+            intent.putExtra("filename", file);
+        }
+
         startActivity(intent);
+
     }
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this, "Please click the Save button", Toast.LENGTH_SHORT).show();
+        Intent intent = getIntent();
+        if (intent.hasExtra("filename")){
+            Bundle bundle = new Bundle();
+            Intent intent2 = new Intent(this, PatientActivity.class);
+            bundle.putInt("Fragment", 3);
+            intent2.putExtras(bundle);
+            startActivity(intent2);
+        }else{
+            Toast.makeText(this, "Please click the Save button", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

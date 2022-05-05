@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ug.air.alrite.Activities.Dashboard;
+import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.PatientAdapter;
 import com.ug.air.alrite.BuildConfig;
 import com.ug.air.alrite.Models.History;
@@ -78,6 +79,17 @@ public class OtherPatients extends Fragment {
 
         patientAdapter = new PatientAdapter(getActivity(), items);
         recyclerView.setAdapter(patientAdapter);
+
+        patientAdapter.setOnItemClickListener(new PatientAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                History history = (History) items.get(position).getObject();
+                String name = history.getFilename();
+                Intent intent = new Intent(getActivity(), DiagnosisActivity.class);
+                intent.putExtra("filename", name);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

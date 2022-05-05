@@ -132,6 +132,16 @@ public class PatientAdapter extends RecyclerView.Adapter {
             sex = itemView.findViewById(R.id.patient_sex);
             date = itemView.findViewById(R.id.date);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION){
+                        listener.onItemClick(position);
+                    }
+                }
+            });
+
         }
     }
 }
