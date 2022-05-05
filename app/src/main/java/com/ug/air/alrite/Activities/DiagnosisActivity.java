@@ -406,7 +406,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         else if (s.equals("Cough/Cold/No Pneumonia")){
             messageList = Arrays.asList(R.string.cold1, R.string.cold2, R.string.cold3, R.string.cold4);
         }
-        else if (s.equals("Wheezing  (not clear bronchodilator response)")){
+        else if (s.equals("Wheezing (not clear Bronchodilator response)")){
             if (ag < 24){
                 messageList = Arrays.asList(R.string.wheez_ill1, R.string.wheez_ill2, R.string.wheez_ill3,
                         R.string.wheez_ill4, R.string.wheez_ill5, R.string.wheez_ill6);
@@ -418,10 +418,10 @@ public class DiagnosisActivity extends AppCompatActivity {
         else if (s.equals("Asthma Risk")){
             messageList = Arrays.asList(R.string.asthma1, R.string.wheez3, R.string.asthma2, R.string.asthma3);
         }
-        else if (s.equals("Tuberculosis risk")){
+        else if (s.equals("Tuberculosis Risk")){
             messageList = Arrays.asList(R.string.tuber1, R.string.tuber2);
         }
-        else if (s.equals("Wheezing illness (bronchodilator response)")){
+        else if (s.equals("Wheezing illness (Bronchodilator response)")){
             messageList = Arrays.asList(R.string.wheez_ill00, R.string.wheez_ill01, R.string.wheez_ill71,
                     R.string.wheez_ill72, R.string.wheez_ill8, R.string.wheez_ill9);
         }else if (s.equals("Severe Disease")){

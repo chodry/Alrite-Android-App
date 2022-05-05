@@ -206,7 +206,7 @@ public class ChestIndrawing extends Fragment {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.learn_popup);
         Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
         txtDefinition = dialog.findViewById(R.id.definition);
         txtDisease = dialog.findViewById(R.id.diseaseName);

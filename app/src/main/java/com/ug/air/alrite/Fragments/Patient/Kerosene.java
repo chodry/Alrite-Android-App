@@ -194,7 +194,19 @@ public class Kerosene extends Fragment {
         }
 
         if (total >= 2){
-            showDialog();
+            editor.putString(ADIAGNOSIS, "Asthma Risk");
+            String cough = sharedPreferences.getString(DAY1, "");
+            long co = Long.parseLong(cough);
+            String hiv = sharedPreferences.getString(CHOICE3, "");
+            String dif = sharedPreferences.getString(CHOICEX, "");
+            if (co > 14 || (hiv.equals("Known HIV") && dif.equals("Yes"))){
+                editor.putString(TUDIAGNOSIS, "Tuberculosis Risk");
+            }else {
+                editor.remove(TUDIAGNOSIS);
+            }
+            editor.apply();
+            startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+
         }else {
             String cough = sharedPreferences.getString(DAY1, "");
             long co = Long.parseLong(cough);
@@ -202,15 +214,13 @@ public class Kerosene extends Fragment {
             String dif = sharedPreferences.getString(CHOICEX, "");
             if (co > 14 || (hiv.equals("Known HIV") && dif.equals("Yes"))){
                 editor.remove(ADIAGNOSIS);
-                editor.apply();
-                showDialog2();
+                editor.putString(TUDIAGNOSIS, "Tuberculosis Risk");
             }else {
                 editor.remove(ADIAGNOSIS);
                 editor.remove(TUDIAGNOSIS);
-                editor.apply();
-                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
             }
-
+            editor.apply();
+            startActivity(new Intent(getActivity(), DiagnosisActivity.class));
         }
     }
 
@@ -219,7 +229,7 @@ public class Kerosene extends Fragment {
         dialog.setContentView(R.layout.assessment_layout);
         dialog.setCancelable(true);
         Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1300);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
         linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
         txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
@@ -256,7 +266,7 @@ public class Kerosene extends Fragment {
                 String hiv = sharedPreferences.getString(CHOICE3, "");
                 String dif = sharedPreferences.getString(CHOICEX, "");
                 if (co > 14 || (hiv.equals("Known HIV") && dif.equals("Yes"))){
-                    showDialog2();
+//                    showDialog2();
                 }else {
                     editor.remove(TUDIAGNOSIS);
                     startActivity(new Intent(getActivity(), DiagnosisActivity.class));
@@ -276,7 +286,7 @@ public class Kerosene extends Fragment {
         dialog2.setContentView(R.layout.assessment_layout);
         dialog2.setCancelable(true);
         Window window = dialog2.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
         linearLayout_instruction = dialog2.findViewById(R.id.diagnosis);
         txtDiagnosis = dialog2.findViewById(R.id.txtDiagnosis);
