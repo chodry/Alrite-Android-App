@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:gravity="center_horizontal"
-                        android:text="Does the child have "
+                        android:text="Does the child have Chest Indrawing?"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
@@ -72,8 +72,10 @@
                     android:id="@+id/chest"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Chest Indrawing?"
+                    android:text="Chest Indrawing"
                     android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:drawablePadding="5dp"
                     android:textColor="@color/color_background"
                     android:background="@drawable/bg_button"
                     android:textAllCaps="false"

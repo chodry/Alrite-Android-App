@@ -67,6 +67,8 @@
                         android:text="How to use a bronchodilator and spacer"
                         android:layout_marginTop="20dp"
                         android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:drawablePadding="5dp"
                         android:textColor="@color/color_background"
                         android:background="@drawable/bg_button"
                         android:textAllCaps="false"

@@ -66,6 +66,8 @@
                         android:layout_height="30dp"
                         android:text="Stridor"
                         android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:drawablePadding="5dp"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/color_background"
                         android:background="@drawable/bg_button"

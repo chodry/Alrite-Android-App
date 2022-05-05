@@ -206,7 +206,7 @@ public class ChestIndrawing extends Fragment {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.learn_popup);
         Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
         txtDefinition = dialog.findViewById(R.id.definition);
         txtDisease = dialog.findViewById(R.id.diseaseName);
@@ -269,7 +269,7 @@ public class ChestIndrawing extends Fragment {
                 (cough.equals("Yes") && (value8.equals("Mild") || value8.equals("Moderate/Severe"))))){
             if (hDiagnosis.isEmpty()){
 //                showDialog2("pneumonia");
-                editor.putString(CIDIAGNOSIS, String.valueOf(R.string.pneumonia));
+                editor.putString(CIDIAGNOSIS, "Pneumonia");
                 editor.apply();
             }
 
@@ -277,7 +277,7 @@ public class ChestIndrawing extends Fragment {
                 value8.equals("No") && (wheezing.equals("Other abnormal breath sounds") || wheezing.equals("Normal breath sounds")))){
 
 //            showDialog2("cold");
-            editor.putString(CIDIAGNOSIS, String.valueOf(R.string.cold));
+            editor.putString(CIDIAGNOSIS, "Cough/Cold/No Pneumonia");
             editor.apply();
 
 

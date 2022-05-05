@@ -242,7 +242,7 @@ public class Nasal extends Fragment {
             }
         });
 
-        dialog.getWindow().setLayout(700, 1300);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
     }
@@ -289,7 +289,7 @@ public class Nasal extends Fragment {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.learn_popup);
         Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
         txtDefinition = dialog.findViewById(R.id.definition);
         txtDisease = dialog.findViewById(R.id.diseaseName);
