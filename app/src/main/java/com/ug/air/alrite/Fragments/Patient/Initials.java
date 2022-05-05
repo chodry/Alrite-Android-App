@@ -68,9 +68,6 @@ public class Initials extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.remove(CIN);
-                editor.remove(PIN);
-                editor.apply();
                 startActivity(new Intent(getActivity(), Dashboard.class));
             }
         });
