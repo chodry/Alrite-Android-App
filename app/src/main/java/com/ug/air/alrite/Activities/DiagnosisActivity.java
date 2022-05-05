@@ -502,6 +502,7 @@ public class DiagnosisActivity extends AppCompatActivity {
             bundle.putInt("Fragment", 3);
             intent2.putExtras(bundle);
             startActivity(intent2);
+            finish();
         }else{
             Toast.makeText(this, "Please click the Save button", Toast.LENGTH_SHORT).show();
         }

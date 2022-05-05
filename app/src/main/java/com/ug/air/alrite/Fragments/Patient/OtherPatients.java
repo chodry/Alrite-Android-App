@@ -39,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Objects;
 
 
 public class OtherPatients extends Fragment {
@@ -89,6 +90,7 @@ public class OtherPatients extends Fragment {
                 Intent intent = new Intent(getActivity(), DiagnosisActivity.class);
                 intent.putExtra("filename", name);
                 startActivity(intent);
+                requireActivity().finish();
             }
         });
 
