@@ -162,7 +162,7 @@ public class FTouch extends Fragment {
         dialog.setContentView(R.layout.assessment_layout);
         dialog.setCancelable(true);
         Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, 1200);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
         linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
         txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
