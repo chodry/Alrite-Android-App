@@ -37,6 +37,7 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 
@@ -75,7 +76,7 @@ public class OtherPatients extends Fragment {
         items = new ArrayList<>();
         files = new ArrayList<String>();
 
-        accessSharedFile();
+        accessSharedFile2();
 
         patientAdapter = new PatientAdapter(getActivity(), items);
         recyclerView.setAdapter(patientAdapter);
@@ -94,50 +95,96 @@ public class OtherPatients extends Fragment {
         return view;
     }
 
-    private void accessSharedFile() {
+//    private void accessSharedFile() {
+//        File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs");
+//        if (src.exists()){
+//            File[] contents = src.listFiles();
+////        Toast.makeText(getActivity(), "" + contents, Toast.LENGTH_SHORT).show();
+//            if (contents.length != 0) {
+//                types = new ArrayList<String>();
+//                file = new ArrayList<String>();
+//                for (File f : contents) {
+//                    if (f.isFile()) {
+//                        String name = f.getName().toString();
+//                        if (!name.equals("sharedPrefs.xml")){
+//                            String names = name.replace(".xml", "");
+//                            sharedPreferences = requireActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
+//                            String bron = sharedPreferences.getString(BRONCHODILATOR, "");
+//                            String fin = sharedPreferences.getString(BRONC, "");
+//                            if (bron.isEmpty() || bron.equals("Bronchodialtor Not Given") || !fin.isEmpty()){
+//                                file.add(names);
+//                                cin = sharedPreferences.getString(CIN, "");
+//                                pin = sharedPreferences.getString(PIN, "");
+//                                age = sharedPreferences.getString(AGE2, "");
+//                                gender = sharedPreferences.getString(CHOICE, "");
+//                                dat = sharedPreferences.getString(DATE, "");
+//                                types.add(cin);
+//                                String[] split = age.split("\\.");
+//                                String ag = split[0] + " years and " + split[1] + " months";
+//                                try {
+//                                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+//                                    Date date = df.parse(dat);
+//                                    SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
+//                                    String formattedDate = df1.format(date);
+//                                    History history = new History("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names);
+//                                    items.add(new Item(1, history));
+//                                } catch (ParseException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//
+//            }else{
+//                Toast.makeText(getActivity(), "empty", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        }
+//    }
+
+    private void accessSharedFile2(){
         File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs");
-        if (src.exists()){
+        if (src.exists()) {
             File[] contents = src.listFiles();
 //        Toast.makeText(getActivity(), "" + contents, Toast.LENGTH_SHORT).show();
             if (contents.length != 0) {
-                types = new ArrayList<String>();
-                file = new ArrayList<String>();
                 for (File f : contents) {
                     if (f.isFile()) {
                         String name = f.getName().toString();
-                        if (!name.equals("sharedPrefs.xml")){
-                            String names = name.replace(".xml", "");
-                            sharedPreferences = requireActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
-                            String bron = sharedPreferences.getString(BRONCHODILATOR, "");
-                            String fin = sharedPreferences.getString(BRONC, "");
-                            if (bron.isEmpty() || bron.equals("Bronchodialtor Not Given") || !fin.isEmpty()){
-                                file.add(names);
-                                cin = sharedPreferences.getString(CIN, "");
-                                pin = sharedPreferences.getString(PIN, "");
-                                age = sharedPreferences.getString(AGE2, "");
-                                gender = sharedPreferences.getString(CHOICE, "");
-                                dat = sharedPreferences.getString(DATE, "");
-                                types.add(cin);
-                                String[] split = age.split("\\.");
-                                String ag = split[0] + " years and " + split[1] + " months";
-                                try {
-                                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-                                    Date date = df.parse(dat);
-                                    SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
-                                    String formattedDate = df1.format(date);
-                                    History history = new History("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names);
-                                    items.add(new Item(1, history));
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
+                        files.add(name);
+                    }
+                }
+                Collections.reverse(files);
+                for(String name : files){
+                    if (!name.equals("sharedPrefs.xml")){
+                        String names = name.replace(".xml", "");
+                        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
+                        String bron = sharedPreferences.getString(BRONCHODILATOR, "");
+                        String fin = sharedPreferences.getString(BRONC, "");
+                        if (bron.isEmpty() || bron.equals("Bronchodialtor Not Given") || !fin.isEmpty()){
+                            cin = sharedPreferences.getString(CIN, "");
+                            pin = sharedPreferences.getString(PIN, "");
+                            age = sharedPreferences.getString(AGE2, "");
+                            gender = sharedPreferences.getString(CHOICE, "");
+                            dat = sharedPreferences.getString(DATE, "");
+                            String[] split = age.split("\\.");
+                            String ag = split[0] + " years and " + split[1] + " months";
+                            try {
+                                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+                                Date date = df.parse(dat);
+                                SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
+                                String formattedDate = df1.format(date);
+                                History history = new History("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names);
+                                items.add(new Item(1, history));
+                            } catch (ParseException e) {
+                                e.printStackTrace();
                             }
                         }
                     }
                 }
-
-            }else{
+            }else {
                 Toast.makeText(getActivity(), "empty", Toast.LENGTH_SHORT).show();
-
             }
         }
     }
