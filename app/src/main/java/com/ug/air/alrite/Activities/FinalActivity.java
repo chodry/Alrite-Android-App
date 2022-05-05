@@ -21,8 +21,8 @@ public class FinalActivity extends AppCompatActivity {
     EditText etOther1, etOther2;
     Button btnSave;
     String s1, s2, diagnosis, treatment, filename;
-    public static final String S5 = "s5";
     public static final String S6 = "s6";
+    public static final String S7 = "s7";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
@@ -160,7 +160,7 @@ public class FinalActivity extends AppCompatActivity {
     }
 
     private void saveData() {
-        editor.putString(S5, s1);
+        editor.putString(S7, s1);
         editor.putString(S6, s2);
         editor.apply();
         editor.commit();
