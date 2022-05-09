@@ -199,7 +199,7 @@ public class Kerosene extends Fragment {
             long co = Long.parseLong(cough);
             String hiv = sharedPreferences.getString(CHOICE3, "");
             String dif = sharedPreferences.getString(CHOICEX, "");
-            if (co > 14 || (hiv.equals("Known HIV") && dif.equals("Yes"))){
+            if (co > 14 || (hiv.equals("HIV-Infected") && dif.equals("Yes"))){
                 editor.putString(TUDIAGNOSIS, "Tuberculosis Risk");
             }else {
                 editor.remove(TUDIAGNOSIS);
@@ -212,7 +212,7 @@ public class Kerosene extends Fragment {
             long co = Long.parseLong(cough);
             String hiv = sharedPreferences.getString(CHOICE3, "");
             String dif = sharedPreferences.getString(CHOICEX, "");
-            if (co > 14 || (hiv.equals("Known HIV") && dif.equals("Yes"))){
+            if (co > 14 || (hiv.equals("HIV-Infected") && dif.equals("Yes"))){
                 editor.remove(ADIAGNOSIS);
                 editor.putString(TUDIAGNOSIS, "Tuberculosis Risk");
             }else {
@@ -265,7 +265,7 @@ public class Kerosene extends Fragment {
                 long co = Long.parseLong(cough);
                 String hiv = sharedPreferences.getString(CHOICE3, "");
                 String dif = sharedPreferences.getString(CHOICEX, "");
-                if (co > 14 || (hiv.equals("Known HIV") && dif.equals("Yes"))){
+                if (co > 14 || (hiv.equals("HIV-Infected) && dif.equals("Yes"))){
 //                    showDialog2();
                 }else {
                     editor.remove(TUDIAGNOSIS);

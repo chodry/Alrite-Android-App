@@ -156,17 +156,18 @@ public class Bronchodilator2 extends Fragment {
         day = Long.parseLong(days);
 
         if (cough.equals("Yes") && wheezing.equals("Wheezing")){
-            showDialog2();
+//            showDialog2();
+            editor.putString(BDIAGNOSIS, diagnosis);
         }else {
             editor.remove(BDIAGNOSIS);
-            editor.apply();
-            if (day >= 10){
-                showDialog();
-            }else {
-                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
-            }
         }
+        editor.apply();
 
+        if (day >= 10){
+            showDialog();
+        }else {
+            startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+        }
     }
 
     private void showDialog() {
