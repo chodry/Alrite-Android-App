@@ -155,7 +155,6 @@ public class Kerosene extends Fragment {
         value5 = sharedPreferences.getString(CHOICET2, "");
     }
 
-
     private void updateViews() {
         if (value5.equals("Yes")){
             radioButton1.setChecked(true);
@@ -192,36 +191,31 @@ public class Kerosene extends Fragment {
         if (allergies.equals("Yes")){
             total = total + 1;
         }
+        
+        makeFinalAssement(total);
+        
+    }
 
+    private void makeFinalAssement(int total) {
+        String cough = sharedPreferences.getString(DAY1, "");
+        long co = Long.parseLong(cough);
+        String hiv = sharedPreferences.getString(CHOICE3, "");
+        String dif = sharedPreferences.getString(CHOICEX, "");
+        boolean yes = co > 14 || (hiv.equals("HIV-Infected") && dif.equals("Yes"));
         if (total >= 2){
             editor.putString(ADIAGNOSIS, "Asthma Risk");
-            String cough = sharedPreferences.getString(DAY1, "");
-            long co = Long.parseLong(cough);
-            String hiv = sharedPreferences.getString(CHOICE3, "");
-            String dif = sharedPreferences.getString(CHOICEX, "");
-            if (co > 14 || (hiv.equals("HIV-Infected") && dif.equals("Yes"))){
-                editor.putString(TUDIAGNOSIS, "Tuberculosis Risk");
-            }else {
-                editor.remove(TUDIAGNOSIS);
-            }
-            editor.apply();
-            startActivity(new Intent(getActivity(), DiagnosisActivity.class));
 
         }else {
-            String cough = sharedPreferences.getString(DAY1, "");
-            long co = Long.parseLong(cough);
-            String hiv = sharedPreferences.getString(CHOICE3, "");
-            String dif = sharedPreferences.getString(CHOICEX, "");
-            if (co > 14 || (hiv.equals("HIV-Infected") && dif.equals("Yes"))){
-                editor.remove(ADIAGNOSIS);
-                editor.putString(TUDIAGNOSIS, "Tuberculosis Risk");
-            }else {
-                editor.remove(ADIAGNOSIS);
-                editor.remove(TUDIAGNOSIS);
-            }
-            editor.apply();
-            startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+            editor.remove(ADIAGNOSIS);
         }
+        if (yes){
+            editor.putString(TUDIAGNOSIS, "Tuberculosis Risk");
+        }else {
+            editor.remove(TUDIAGNOSIS);
+        }
+
+        editor.apply();
+        startActivity(new Intent(getActivity(), DiagnosisActivity.class));
     }
 
     private void showDialog() {

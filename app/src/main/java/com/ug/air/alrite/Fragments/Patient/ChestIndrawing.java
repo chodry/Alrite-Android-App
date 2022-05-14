@@ -29,6 +29,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -264,23 +265,21 @@ public class ChestIndrawing extends Fragment {
         wheezing = sharedPreferences.getString(CHOICE8, "");
         String days = sharedPreferences.getString(DAY1, "");
         day = Long.parseLong(days);
-        boolean b = oxDiagnosis.isEmpty() && stDiagnosis.isEmpty() && gnDiagnosis.isEmpty();
-        if (b && ((cough.equals("Yes") && fastBreathing.equals("Fast Breathing")) ||
-                (cough.equals("Yes") && (value8.equals("Mild") || value8.equals("Moderate/Severe"))))){
-            if (hDiagnosis.isEmpty()){
-//                showDialog2("pneumonia");
-                editor.putString(CIDIAGNOSIS, "Pneumonia");
-                editor.apply();
-            }
+        boolean b = oxDiagnosis.isEmpty() && stDiagnosis.isEmpty() && gnDiagnosis.isEmpty() && hDiagnosis.isEmpty();
+        boolean b2 = oxDiagnosis.isEmpty() && stDiagnosis.isEmpty() && gnDiagnosis.isEmpty();
 
-        }else if (b && (cough.equals("Yes") && fastBreathing.equals("Normal Breathing") &&
+        if (b && (cough.equals("Yes") && fastBreathing.equals("Fast Breathing"))){
+            editor.putString(CIDIAGNOSIS, "Pneumonia");
+            editor.apply();
+        }else if (b && (cough.equals("Yes") && (value8.equals("Mild") || value8.equals("Moderate/Severe")))){
+            editor.putString(CIDIAGNOSIS, "Pneumonia");
+            editor.apply();
+        }else if(b2 && (cough.equals("Yes") && fastBreathing.equals("Normal Breathing") &&
                 value8.equals("No") && (wheezing.equals("Other abnormal breath sounds") || wheezing.equals("Normal breath sounds")))){
-
-//            showDialog2("cold");
             editor.putString(CIDIAGNOSIS, "Cough/Cold/No Pneumonia");
             editor.apply();
-
-
+        }else{
+            Log.d("TAG,", "nothing");
         }
 
         calculatePoints();
@@ -292,9 +291,6 @@ public class ChestIndrawing extends Fragment {
             fr.addToBackStack(null);
             fr.commit();
         }else {
-            calculatePoints();
-            editor.remove(CIDIAGNOSIS);
-            editor.apply();
             startActivity(new Intent(getActivity(), DiagnosisActivity.class));
         }
     }

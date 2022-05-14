@@ -235,7 +235,6 @@ public class DiagnosisActivity extends AppCompatActivity {
         addToList2(wDiagnosis);
         addToList2(asDiagnosis);
         addToList2(tuDiagnosis);
-        addToList2(tuDiagnosis);
         addToList2(b3Diagnosis);
 
         for (int i=0; i < messages.size(); i++) {
