@@ -60,19 +60,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Adapters.DiagnosisAdapter;
 import com.ug.air.alrite.Adapters.SummaryAdapter;
 import com.ug.air.alrite.BuildConfig;
@@ -97,7 +102,7 @@ import java.util.UUID;
 public class DiagnosisActivity extends AppCompatActivity {
 
     LinearLayout linearLayout1, linearLayout2, linearLayout3, linearLayout4;
-    Button btnExit;
+    Button btnExit, btnExit2, btnContinue;
     ImageView imageView1, imageView2;
     RecyclerView recyclerView1, recyclerView2;
     TextView txtInitials, txtAge, txtGender;
@@ -111,6 +116,13 @@ public class DiagnosisActivity extends AppCompatActivity {
     SharedPreferences.Editor editor, editor1;
     String age, uniqueID, age2, folder;
     float ag;
+    Dialog dialog;
+    RecyclerView recyclerView;
+    LinearLayout linearLayout_instruction;
+    TextView txtDiagnosis;
+    ArrayList<Assessment> assessments;
+    List messages2;
+    AssessmentAdapter assessmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,7 +201,10 @@ public class DiagnosisActivity extends AppCompatActivity {
         diagnosisAdapter.setOnItemClickListener(new DiagnosisAdapter.OnItemClickListener() {
             @Override
             public void onClick(int position) {
-
+                Diagnosis diagnosis = buildItemList().get(position);
+                String dia = diagnosis.getDiagnosis();
+                showInstructions(dia);
+//                Toast.makeText(DiagnosisActivity.this, dia, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -204,6 +219,52 @@ public class DiagnosisActivity extends AppCompatActivity {
                 saveForm();
             }
         });
+    }
+
+    private void showInstructions(String dia) {
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.assessment_layout);
+        dialog.setCancelable(true);
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+        linearLayout_instruction = dialog.findViewById(R.id.diagnosis);
+        txtDiagnosis = dialog.findViewById(R.id.txtDiagnosis);
+        recyclerView = dialog.findViewById(R.id.recyclerView1);
+        btnExit2 = dialog.findViewById(R.id.btnSave);
+        btnContinue = dialog.findViewById(R.id.btnContinue);
+
+        linearLayout_instruction.setBackgroundColor(getResources().getColor(R.color.severeDiagnosisColor));
+        txtDiagnosis.setText("Diagnosis: " + dia);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        List<Assessment> assessments = new ArrayList<>();
+        assessmentAdapter = new AssessmentAdapter(assessments);
+
+//        messages2 = createList(dia);
+        createList(dia);
+
+        for (int i = 0; i < messageList.size(); i++){
+            Assessment assessment = new Assessment((Integer) messageList.get(i));
+            assessments.add(assessment);
+        }
+        recyclerView.setAdapter(assessmentAdapter);
+
+        btnExit2.setVisibility(View.GONE);
+        btnContinue.setText("Close");
+
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.show();
+
     }
 
     private List<Diagnosis> buildItemList() {
@@ -432,6 +493,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         }else if (s.equals("Severe Disease")){
             messageList = Collections.singletonList(R.string.bronc1x);
         }
+
     }
 
     private void saveForm() {
