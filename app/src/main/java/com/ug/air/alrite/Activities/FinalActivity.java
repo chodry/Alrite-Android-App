@@ -48,11 +48,11 @@ public class FinalActivity extends AppCompatActivity {
         checkBox7 = findViewById(R.id.antibiotics);
         checkBox8 = findViewById(R.id.inhaled);
         checkBox9 = findViewById(R.id.oral);
-        checkBox10 = findViewById(R.id.antimalarials);
+//        checkBox10 = findViewById(R.id.antimalarials);
         checkBox11= findViewById(R.id.steroids);
         checkBox12= findViewById(R.id.supportive);
         checkBox13 = findViewById(R.id.other2);
-        checkBox14 = findViewById(R.id.malaria);
+//        checkBox14 = findViewById(R.id.malaria);
 
         checkBox5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -110,9 +110,9 @@ public class FinalActivity extends AppCompatActivity {
         if(checkBox4.isChecked()){
             s1 += "Cough/Cold/No pneumoni, ";
         }
-        if(checkBox14.isChecked()){
-            s1 += "Malaria, ";
-        }
+//        if(checkBox14.isChecked()){
+//            s1 += "Malaria, ";
+//        }
         if (!diagnosis.isEmpty()){
             s1 += diagnosis + ", ";
         }
@@ -139,9 +139,9 @@ public class FinalActivity extends AppCompatActivity {
         if(checkBox9.isChecked()){
             s2 += "Oral salbutamol, ";
         }
-        if(checkBox10.isChecked()){
-            s2 += "Antimalarials, ";
-        }
+//        if(checkBox10.isChecked()){
+//            s2 += "Antimalarials, ";
+//        }
         if(checkBox11.isChecked()){
             s2 += "Systemic steroids, ";
         }

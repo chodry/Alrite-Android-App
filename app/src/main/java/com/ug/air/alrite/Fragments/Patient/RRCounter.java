@@ -29,6 +29,7 @@ import com.ug.air.alrite.Utils.Calculations.Instructions;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -45,7 +46,7 @@ public class RRCounter extends Fragment {
     Dialog dialog, dialog1;
     private ArrayList<Long> durations;
     private long lastBreath;
-    private double value;
+    private double value = 0;
     private int numBreaths, margin, birthday;
     private String ifFastBreathing,ifNormalBreathing;
     private boolean fastBreathing;
@@ -61,7 +62,8 @@ public class RRCounter extends Fragment {
     public static final String RATE2 = "rate2";
     String age, rate, rating, check;
     float ag = 0;
-    int score = 0;
+    int score, taps = 0;
+    long duration;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -109,21 +111,49 @@ public class RRCounter extends Fragment {
         newTimer();
         lastBreath=-1;
 
+        duration = TimeUnit.MINUTES.toMillis(1);
+
+        CountDownTimer countDownTimer = new CountDownTimer(duration, 1000){
+            @Override
+            public void onTick(long l) {
+                String sDuration = String.format(Locale.ENGLISH, "%02d : %02d",
+                        TimeUnit.MILLISECONDS.toMinutes(l),
+                        TimeUnit.MILLISECONDS.toSeconds(l) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(l)));
+
+                txtElapse.setText(sDuration);
+            }
+
+            @Override
+            public void onFinish() {
+                evalFastBreathing(ag);
+                showDialog();
+            }
+        };
+
         tap.setOnClickListener(view -> {
             view.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.circle_animation));
-            ((TextView) view.findViewById(R.id.TapOnInhale)).setText(R.string.tap_on_inhale);
-            breathTaken();
-            if (validateDataCollection()) {
-                value = getBreathRate(numBreaths);
-                rate = String.valueOf(value);
-                completeMeasuring();
+//            ((TextView) view.findViewById(R.id.TapOnInhale)).setText(R.string.tap_on_inhale);
+//            breathTaken();
+//            if (validateDataCollection()) {
+//                value = getBreathRate(numBreaths);
+//                rate = String.valueOf(value);
+//                completeMeasuring();
+//            }
+            if (value == 0){
+                ((TextView) view.findViewById(R.id.TapOnInhale)).setText(R.string.tap_on_inhale);
+                countDownTimer.start();
             }
+            value += 1;
         });
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetRespRate();
+//                resetRespRate();
+                countDownTimer.cancel();
+                txtElapse.setText("01 : 00");
+                value = 0;
             }
         });
 
@@ -298,33 +328,58 @@ public class RRCounter extends Fragment {
     }
 
     public void evalFastBreathing(float birthday){
-        if(isCompleted()) {
-            if (birthday < 2){
-                if (value >= 60){
-                    fastBreathing = true;
-                    score = R.string.breathing_info_under2;
-                    return;
-                }
-                fastBreathing = false;
+//        if(isCompleted()) {
+//            if (birthday < 2){
+//                if (value >= 60){
+//                    fastBreathing = true;
+//                    score = R.string.breathing_info_under2;
+//                    return;
+//                }
+//                fastBreathing = false;
+//            }
+//            if (birthday >= 2 && birthday <= 12 ){
+//                if (value >= 50){
+//                    fastBreathing = true;
+//                    score = R.string.breathing_info_under1;
+//                    return;
+//                }
+//                fastBreathing = false;
+//            }
+//            if (birthday > 12){
+//                if (value >= 40){
+//                    fastBreathing = true;
+//                    score = R.string.breathing_info_over1;
+//                    return;
+//                }
+//                fastBreathing = false;
+//            }
+//        } else {
+//            //TODO
+//        }
+
+        if (birthday < 2){
+            if (value >= 60){
+                fastBreathing = true;
+                score = R.string.breathing_info_under2;
+                return;
             }
-            if (birthday >= 2 && birthday <= 12 ){
-                if (value >= 50){
-                    fastBreathing = true;
-                    score = R.string.breathing_info_under1;
-                    return;
-                }
-                fastBreathing = false;
+            fastBreathing = false;
+        }
+        if (birthday >= 2 && birthday <= 12 ){
+            if (value >= 50){
+                fastBreathing = true;
+                score = R.string.breathing_info_under1;
+                return;
             }
-            if (birthday > 12){
-                if (value >= 40){
-                    fastBreathing = true;
-                    score = R.string.breathing_info_over1;
-                    return;
-                }
-                fastBreathing = false;
+            fastBreathing = false;
+        }
+        if (birthday > 12){
+            if (value >= 40){
+                fastBreathing = true;
+                score = R.string.breathing_info_over1;
+                return;
             }
-        } else {
-            //TODO
+            fastBreathing = false;
         }
     }
 

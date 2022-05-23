@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,34 +8,40 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ug.air.alrite.R;
 
+import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 
 public class Fragment7v2 extends Fragment {
 
     View view;
-    Button back, next;
-    RadioGroup radioGroup;
-    RadioButton radioButton1, radioButton2, radioButton3;
-    String value4 = "none";
-    private static final int YES = 0;
-    private static final int NO = 1;
-    private static final int NOT = 2;
-    public static final String CHOICE3X = "choice3X";
-    public static final String SHARED_PREFS = "sharedPrefs";
-    String cough, hist;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    Button next, back, reset, manual, btnRate, btnReset, btnContinue;
+    EditText etRate;
+    LinearLayout tap;
+    TextView txtElapse, txtRate, txtBreathe, txtMsg;
+    Dialog dialog, dialog1;
+    private boolean fastBreathing;
+    String age, rate, rating, check;
+    float ag = 0;
+    int score = 0;
+    long duration;
+    long taps = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,96 +49,128 @@ public class Fragment7v2 extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_7v2, container, false);
 
-        next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
-        radioGroup = view.findViewById(R.id.radioGroup);
-        radioButton1 = view.findViewById(R.id.yes);
-        radioButton2 = view.findViewById(R.id.no);
-        radioButton3 = view.findViewById(R.id.not_sure);
+        next = view.findViewById(R.id.next);
+        reset = view.findViewById(R.id.reset);
+        manual = view.findViewById(R.id.manual);
+        txtElapse = view.findViewById(R.id.elapsedTime);
+        tap = view.findViewById(R.id.Circle);
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        duration = TimeUnit.MINUTES.toMillis(1);
+
+        CountDownTimer countDownTimer = new CountDownTimer(duration, 1000){
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                View radioButton = radioGroup.findViewById(checkedId);
-                int index = radioGroup.indexOfChild(radioButton);
+            public void onTick(long l) {
+                String sDuration = String.format(Locale.ENGLISH, "%02d : %02d",
+                        TimeUnit.MILLISECONDS.toMinutes(l),
+                        TimeUnit.MILLISECONDS.toSeconds(l) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(l)));
 
-                switch (index) {
-                    case YES:
-                        value4 = "Yes";
-                        break;
-                    case NO:
-                        value4 = "No";
-                        break;
-                    case NOT:
-                        value4 = "Not Sure";
-                        break;
-                    default:
-                        break;
-                }
+                txtElapse.setText(sDuration);
             }
+
+            @Override
+            public void onFinish() {
+                long ag = 24;
+                evalFastBreathing(ag);
+                showDialog();
+            }
+        };
+
+        tap.setOnClickListener(view -> {
+            view.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.circle_animation));
+            if (taps == 0){
+                ((TextView) view.findViewById(R.id.TapOnInhale)).setText(R.string.tap_on_inhale);
+                countDownTimer.start();
+            }
+            taps += 1;
+
         });
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-
-        loadData();
-        updateViews();
-
-        next.setOnClickListener(new View.OnClickListener() {
+        reset.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (value4.isEmpty()){
-                    Toast.makeText(getActivity(), "Please select one option", Toast.LENGTH_SHORT).show();
-                }else {
-                    saveData();
-                }
-            }
-        });
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new HIVCare());
-                fr.commit();
+            public void onClick(View view) {
+                countDownTimer.cancel();
+                txtElapse.setText("Elasped Time: ");
+                taps = 0;
             }
         });
 
         return view;
     }
 
-    private void saveData() {
-        editor.putString(CHOICE3X, value4);
-        editor.apply();
-
-        FragmentTransaction fr = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        fr.replace(R.id.fragment_container, new Fragment7v3());
-        fr.addToBackStack(null);
-        fr.commit();
-
+    public void evalFastBreathing(long birthday){
+        if (birthday < 2){
+            if (taps >= 60){
+                fastBreathing = true;
+                score = R.string.breathing_info_under2;
+                return;
+            }
+            fastBreathing = false;
+        }
+        if (birthday >= 2 && birthday <= 12 ){
+            if (taps >= 50){
+                fastBreathing = true;
+                score = R.string.breathing_info_under1;
+                return;
+            }
+            fastBreathing = false;
+        }
+        if (birthday > 12){
+                if (taps >= 40){
+                    fastBreathing = true;
+                    score = R.string.breathing_info_over1;
+                    return;
+                }
+                fastBreathing = false;
+        }
     }
 
-    private void loadData() {
-        value4 = sharedPreferences.getString(CHOICE3X, "");
-    }
+    private void showDialog() {
+        dialog1 = new Dialog(getActivity());
+        dialog1.setContentView(R.layout.respiratory_results_ayout);
 
-    private void updateViews() {
-        if (value4.equals("Yes")){
-            radioButton1.setChecked(true);
-        }else if (value4.equals("No")){
-            radioButton2.setChecked(true);
-        }else if (value4.equals("Not Sure")){
-            radioButton3.setChecked(true);
+        txtRate = dialog1.findViewById(R.id.RespRateNum);
+        txtMsg = dialog1.findViewById(R.id.breathingInfo);
+        txtBreathe = dialog1.findViewById(R.id.FastBreathing);
+        btnReset = dialog1.findViewById(R.id.ResetButton);
+        btnContinue = dialog1.findViewById(R.id.ContinueButton);
+
+        rate = String.valueOf(taps);
+        String[] separated = rate.split("\\.");
+        txtRate.setText(separated[0]);
+
+        if (fastBreathing){
+            rating = "Fast Breathing";
+            txtBreathe.setText(rating);
+            txtBreathe.setTextColor(getResources().getColor(R.color.red));
+            txtMsg.setText(score);
         }else {
-            radioButton1.setChecked(false);
-            radioButton2.setChecked(false);
-            radioButton3.setChecked(false);
+            rating = "Normal Breathing";
+            txtBreathe.setText(rating);
+            txtBreathe.setTextColor(getResources().getColor(R.color.green));
+            txtMsg.setVisibility(View.GONE);
         }
 
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog1.dismiss();
+                txtElapse.setText("Elasped Time: ");
+                taps = 0;
+//                resetRespRate();
+            }
+        });
+
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog1.dismiss();
+//                saveData();
+            }
+        });
+
+        dialog1.show();
+
     }
-
-    private void makeAssessment() {
-
-    }
-
 }

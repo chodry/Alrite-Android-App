@@ -357,7 +357,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         addToList("Parent's initials", pin);
         addToList("Child's weight", weight);
         addToList("MUAC value", muac);
-        addToList("Symptoms", assess);
+        addToList("Danger Signs", assess);
         addToList("Child Coughing", cough);
         addToList("Days coughing", coughD);
         addToList("Temperature", temp);

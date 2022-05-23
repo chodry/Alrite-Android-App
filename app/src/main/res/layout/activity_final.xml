@@ -86,13 +86,13 @@
                     android:text="Cough/Cold/No pneumonia"
                     android:textSize="14sp" />
 
-                <CheckBox
-                    android:id="@+id/malaria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Malaria"
-                    android:textSize="14sp" />
+<!--                <CheckBox-->
+<!--                    android:id="@+id/malaria"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:text="Malaria"-->
+<!--                    android:textSize="14sp" />-->
 
                 <CheckBox
                     android:id="@+id/other"
@@ -156,13 +156,13 @@
                     android:text="Oral salbutamol"
                     android:textSize="14sp" />
 
-                <CheckBox
-                    android:id="@+id/antimalarials"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Antimalarials"
-                    android:textSize="14sp" />
+<!--                <CheckBox-->
+<!--                    android:id="@+id/antimalarials"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:text="Antimalarials"-->
+<!--                    android:textSize="14sp" />-->
 
                 <CheckBox
                     android:id="@+id/steroids"
