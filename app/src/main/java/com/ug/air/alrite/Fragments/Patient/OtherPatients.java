@@ -64,12 +64,14 @@ public class OtherPatients extends Fragment {
         etSearch = view.findViewById(R.id.search);
         back = view.findViewById(R.id.back);
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), Dashboard.class));
-            }
-        });
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getActivity(), Dashboard.class));
+//            }
+//        });
+
+        back.setVisibility(View.GONE);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));

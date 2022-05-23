@@ -32,11 +32,11 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@id/buttons"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="10dp"
             android:fadeScrollbars="true"
             android:padding="10dp"
-            android:layout_above="@id/buttons"
             android:scrollbars="none">
 
             <LinearLayout
@@ -61,29 +61,38 @@
                     android:layout_marginTop="20dp">
 
                     <RadioButton
+                        android:id="@+id/yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/black"
                         android:text="HIV-Infected"
-                        android:id="@+id/yes"
                         android:textSize="18sp" />
 
                     <RadioButton
-                        android:layout_marginTop="10dp"
+                        android:id="@+id/no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:buttonTint="@color/black"
                         android:text="HIV-Exposed"
-                        android:id="@+id/no"
                         android:textSize="18sp" />
 
                     <RadioButton
-                        android:layout_marginTop="10dp"
+                        android:id="@+id/negative"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:buttonTint="@color/black"
-                        android:text="None of these"
-                        android:id="@+id/not_sure"
+                        android:text="HIV-Negative"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/unknown"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:buttonTint="@color/black"
+                        android:text="Unknown"
                         android:textSize="18sp" />
 
                 </RadioGroup>

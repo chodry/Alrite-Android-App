@@ -103,7 +103,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
                         android:textColor="@color/black"
-                        android:text="Give inhaled salbutamol 4-6 puffs one time"/>
+                        android:text="Give inhaled salbutamol 4-6 puffs"/>
 
 
                 </LinearLayout>
@@ -126,7 +126,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
                         android:textColor="@color/black"
-                        android:text="Use with spacer"/>
+                        android:text="Use a spacer"/>
 
 
                 </LinearLayout>

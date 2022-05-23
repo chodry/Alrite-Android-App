@@ -25,11 +25,12 @@ public class HIVStatus extends Fragment {
     View view;
     Button back, next;
     RadioGroup radioGroup;
-    RadioButton radioButton1, radioButton2, radioButton3;
+    RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
     String value4 = "none";
     private static final int YES = 0;
     private static final int NO = 1;
     private static final int NOT = 2;
+    private static final int SURE = 3;
     public static final String CHOICE3 = "choice3";
     public static final String HDIAGNOSIS = "hDiagnosis";
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -48,7 +49,8 @@ public class HIVStatus extends Fragment {
         radioGroup = view.findViewById(R.id.radioGroup);
         radioButton1 = view.findViewById(R.id.yes);
         radioButton2 = view.findViewById(R.id.no);
-        radioButton3 = view.findViewById(R.id.not_sure);
+        radioButton3 = view.findViewById(R.id.negative);
+        radioButton4 = view.findViewById(R.id.unknown);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -64,7 +66,10 @@ public class HIVStatus extends Fragment {
                         value4 = "HIV-Exposed";
                         break;
                     case NOT:
-                        value4 = "None of these";
+                        value4 = "HIV-Negative";
+                        break;
+                    case SURE:
+                        value4 = "Unknown";
                         break;
                     default:
                         break;
@@ -135,12 +140,15 @@ public class HIVStatus extends Fragment {
             radioButton1.setChecked(true);
         }else if (value4.equals("HIV-Exposed")){
             radioButton2.setChecked(true);
-        }else if (value4.equals("None of these")){
+        }else if (value4.equals("HIV-Negative")){
             radioButton3.setChecked(true);
+        }else if (value4.equals("Unknown")){
+            radioButton4.setChecked(true);
         }else {
             radioButton1.setChecked(false);
             radioButton2.setChecked(false);
             radioButton3.setChecked(false);
+            radioButton4.setChecked(false);
         }
 
     }
