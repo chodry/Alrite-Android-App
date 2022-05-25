@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT;
 import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT2;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
@@ -501,8 +502,16 @@ public class RRCounter extends Fragment {
             editor.putString(POINT, pot);
             editor.apply();
 
+            String assess = sharedPreferences.getString(S4, "");
+
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Stridor());
+            if (!assess.equals("None of these")){
+                fr.replace(R.id.fragment_container, new Wheezing());
+            }else {
+                fr.replace(R.id.fragment_container, new Stridor());
+            }
+//            FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+//            fr.replace(R.id.fragment_container, new Stridor());
             fr.addToBackStack(null);
             fr.commit();
         }

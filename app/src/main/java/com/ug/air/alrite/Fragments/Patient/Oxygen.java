@@ -304,14 +304,15 @@ public class Oxygen extends Fragment {
     }
 
     private void nextInterface(){
-        String assess = sharedPreferences.getString(S4, "");
-
+//        String assess = sharedPreferences.getString(S4, "");
+//
         FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-        if (!assess.equals("None of these")){
-            fr.replace(R.id.fragment_container, new Wheezing());
-        }else {
-            fr.replace(R.id.fragment_container, new RRCounter());
-        }
+//        if (!assess.equals("None of these")){
+//            fr.replace(R.id.fragment_container, new Wheezing());
+//        }else {
+//            fr.replace(R.id.fragment_container, new RRCounter());
+//        }
+        fr.replace(R.id.fragment_container, new RRCounter());
         fr.addToBackStack(null);
         fr.commit();
     }

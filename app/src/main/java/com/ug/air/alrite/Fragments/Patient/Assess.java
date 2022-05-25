@@ -309,7 +309,7 @@ public class Assess extends Fragment {
                 editor.apply();
                 dialog.dismiss();
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Temperature());
+                fr.replace(R.id.fragment_container, new Cough());
                 fr.addToBackStack(null);
                 fr.commit();
             }

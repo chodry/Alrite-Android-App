@@ -89,9 +89,10 @@ public class Temperature extends Fragment {
                 String care = sharedPreferences.getString(CHOICEHC, "");
 
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                if (!assess.equals("None of these")){
-                    fr.replace(R.id.fragment_container, new Assess());
-                }else if (care.isEmpty()){
+//                if (!assess.equals("None of these")){
+//                    fr.replace(R.id.fragment_container, new Assess());
+//                }else
+                if (care.isEmpty()){
                     fr.replace(R.id.fragment_container, new HIVStatus());
                 }else{
                     fr.replace(R.id.fragment_container, new HIVCare());

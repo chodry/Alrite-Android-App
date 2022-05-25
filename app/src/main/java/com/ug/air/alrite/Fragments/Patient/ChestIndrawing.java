@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
 import static com.ug.air.alrite.Fragments.Patient.HIVStatus.HDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Nasal.CHOICEGN;
@@ -171,8 +172,13 @@ public class ChestIndrawing extends Fragment {
         if (second.isEmpty()){
             editor.putString(CHOICE7, value8);
             editor.apply();
+            String assess = sharedPreferences.getString(S4, "");
 
-            makeAssessment();
+            if (!assess.equals("None of these")){
+                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+            }else {
+                makeAssessment();
+            }
         }else {
             calculatePoints();
             editor.putString(CHOICE72, value8);

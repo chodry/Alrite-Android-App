@@ -149,7 +149,7 @@ public class Wheezing extends Fragment {
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 if (second.isEmpty()){
                     if (!assess.equals("None of these")){
-                        fr.replace(R.id.fragment_container, new Oxygen());
+                        fr.replace(R.id.fragment_container, new RRCounter());
                     }else {
                         fr.replace(R.id.fragment_container, new Stridor());
                     }
@@ -178,7 +178,10 @@ public class Wheezing extends Fragment {
             editor.putBoolean(CHECKSTETHO, checkBox.isChecked());
             editor.apply();
             if (!assess.equals("None of these")){
-                startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new ChestIndrawing());
+                fr.addToBackStack(null);
+                fr.commit();
             }else {
                 String pt = sharedPreferences.getString(POINT, "");
                 int point = Integer.parseInt(pt);
