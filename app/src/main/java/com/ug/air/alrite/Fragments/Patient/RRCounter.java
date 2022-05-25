@@ -181,8 +181,14 @@ public class RRCounter extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String assess = sharedPreferences.getString(S4, "");
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new Stridor());
+                if (!assess.equals("None of these")){
+                    fr.replace(R.id.fragment_container, new Wheezing());
+                }else{
+                    fr.replace(R.id.fragment_container, new Stridor());
+                }
+                fr.addToBackStack(null);
                 fr.commit();
             }
         });

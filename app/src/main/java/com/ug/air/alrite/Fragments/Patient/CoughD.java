@@ -2,6 +2,7 @@ package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 
 import android.app.Dialog;
@@ -137,17 +138,25 @@ public class CoughD extends Fragment {
 
         int dt = Integer.parseInt(day1);
 
-        if (dt < 10) {
+        String assess = sharedPreferences.getString(S4, "");
+
+        if (!assess.equals("None of these")){
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new HIVStatus());
+            fr.replace(R.id.fragment_container, new Temperature());
             fr.addToBackStack(null);
             fr.commit();
-        }else if (dt >= 14){
-            showDialog(dt);
         }else {
-            showDialog(dt);
+            if (dt < 10) {
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container, new HIVStatus());
+                fr.addToBackStack(null);
+                fr.commit();
+            }else if (dt >= 14){
+                showDialog(dt);
+            }else {
+                showDialog(dt);
+            }
         }
-
 
     }
 

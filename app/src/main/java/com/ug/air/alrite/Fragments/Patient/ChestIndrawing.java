@@ -148,9 +148,16 @@ public class ChestIndrawing extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String assess = sharedPreferences.getString(S4, "");
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+
                 if (second.isEmpty()){
-                    fr.replace(R.id.fragment_container, new Nasal());
+                    if (!assess.equals("None of these")){
+                        fr.replace(R.id.fragment_container, new Wheezing());
+                    }else{
+                        fr.replace(R.id.fragment_container, new Nasal());
+                    }
+
                 }else {
                     fr.replace(R.id.fragment_container, new Wheezing());
                 }

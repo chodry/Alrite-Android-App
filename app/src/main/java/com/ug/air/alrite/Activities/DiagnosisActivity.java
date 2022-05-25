@@ -284,19 +284,24 @@ public class DiagnosisActivity extends AppCompatActivity {
         String tuDiagnosis = sharedPreferences.getString(TUDIAGNOSIS, "");
         String b3Diagnosis = sharedPreferences.getString(B3DIAGNOSIS, "");
 
-        addToList2(aDiagnosis);
+        if (!aDiagnosis.isEmpty() || !oxDiagnosis.isEmpty() || !stDiagnosis.isEmpty() || !gnDiagnosis.isEmpty()){
+            addToList2("Severe Pneumonia OR very Severe Disease");
+        }
+
+//        addToList2(aDiagnosis);
         addToList2(mDiagnosis);
         addToList2(tDiagnosis);
-        addToList2(oxDiagnosis);
+//        addToList2(oxDiagnosis);
         addToList2(noDiagnosis);
         addToList2(hDiagnosis);
-        addToList2(stDiagnosis);
-        addToList2(gnDiagnosis);
+//        addToList2(stDiagnosis);
+//        addToList2(gnDiagnosis);
         addToList2(ciDiagnosis);
         addToList2(wDiagnosis);
         addToList2(asDiagnosis);
         addToList2(tuDiagnosis);
         addToList2(b3Diagnosis);
+
 
         for (int i=0; i < messages.size(); i++) {
             Diagnosis diagnosis = new Diagnosis(messages.get(i), buildSubItemList(messages.get(i)));
