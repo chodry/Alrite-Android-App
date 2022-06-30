@@ -18,6 +18,10 @@ import android.widget.Toast;
 import com.ug.air.alrite.Activities.Dashboard;
 import com.ug.air.alrite.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Initials extends Fragment {
@@ -25,9 +29,10 @@ public class Initials extends Fragment {
    View view;
    EditText etCin, etPin;
    Button back, next;
-   String cin, pin;
+   String cin, pin, formattedDate;
    public static final String CIN = "cin";
    public static final String PIN = "pin";
+   public static final String INITIAL_DATE = "initial_date";
    public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -79,6 +84,13 @@ public class Initials extends Fragment {
 
         editor.putString(CIN, cin);
         editor.putString(PIN, pin);
+        if (formattedDate.isEmpty()){
+            Date currentTime = Calendar.getInstance().getTime();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+            String formattedDate = df.format(currentTime);
+
+            editor.putString(INITIAL_DATE, formattedDate);
+        }
         editor.apply();
 
         FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
@@ -90,6 +102,7 @@ public class Initials extends Fragment {
     private void loadData() {
         pin = sharedPreferences.getString(PIN, "");
         cin = sharedPreferences.getString(CIN, "");
+        formattedDate = sharedPreferences.getString(INITIAL_DATE, "");
     }
 
     private void updateViews() {

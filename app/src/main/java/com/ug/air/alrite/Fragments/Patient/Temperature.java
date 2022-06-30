@@ -218,8 +218,8 @@ public class Temperature extends Fragment {
             }
         });
 
-//        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-//        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
     }
 }

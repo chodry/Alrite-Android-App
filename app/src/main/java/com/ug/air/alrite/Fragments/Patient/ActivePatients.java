@@ -1,6 +1,7 @@
 package com.ug.air.alrite.Fragments.Patient;
 
 
+import static com.ug.air.alrite.Activities.PatientActivity.INCOMPLETE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.REASSESS;
@@ -185,7 +186,8 @@ public class ActivePatients extends Fragment {
                             sharedPreferences = requireActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
                             String bron = sharedPreferences.getString(BRONCHODILATOR, "");
                             String fin = sharedPreferences.getString(BRONC, "");
-                            if (bron.equals("Bronchodialtor Given") && fin.isEmpty()){
+                            String incomplete = sharedPreferences.getString(INCOMPLETE, "");
+                            if (incomplete.isEmpty() && (bron.equals("Bronchodialtor Given") && fin.isEmpty())){
                                 file.add(names);
                                 cin = sharedPreferences.getString(CIN, "");
                                 pin = sharedPreferences.getString(PIN, "");

@@ -62,8 +62,8 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_input_bg"
                     android:gravity="center"
-                    android:maxLength="3"
                     android:inputType="textCapCharacters"
+                    android:maxLength="3"
                     android:saveEnabled="false" />
 
                 <TextView
@@ -82,8 +82,8 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_input_bg"
                     android:gravity="center"
-                    android:maxLength="3"
                     android:inputType="textCapCharacters"
+                    android:maxLength="3"
                     android:saveEnabled="false" />
 
 

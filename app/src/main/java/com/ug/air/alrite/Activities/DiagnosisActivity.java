@@ -2,6 +2,7 @@ package com.ug.air.alrite.Activities;
 
 import static com.ug.air.alrite.Activities.FinalActivity.S6;
 import static com.ug.air.alrite.Activities.FinalActivity.S7;
+import static com.ug.air.alrite.Activities.PatientActivity.INCOMPLETE;
 import static com.ug.air.alrite.Fragments.Patient.Allergies.CHOICEY2;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
@@ -28,6 +29,7 @@ import static com.ug.air.alrite.Fragments.Patient.HIVCare.CHOICEHC;
 import static com.ug.air.alrite.Fragments.Patient.HIVStatus.CHOICE3;
 import static com.ug.air.alrite.Fragments.Patient.HIVStatus.HDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Initials.CIN;
+import static com.ug.air.alrite.Fragments.Patient.Initials.INITIAL_DATE;
 import static com.ug.air.alrite.Fragments.Patient.Initials.PIN;
 import static com.ug.air.alrite.Fragments.Patient.Kerosene.ADIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Kerosene.CHOICET2;
@@ -358,6 +360,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         String point2 = sharedPreferences.getString(POINT2, "");
         String diagnosis = sharedPreferences.getString(S7, "");
         String treatment = sharedPreferences.getString(S6, "");
+        String incomplete = sharedPreferences.getString(INCOMPLETE, "");
 
         addToList("Parent's initials", pin);
         addToList("Child's weight", weight);
@@ -393,6 +396,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         addToList("Any family member using kerosene", kerosene);
         addToList("Clinician's diagnosis", diagnosis);
         addToList("Clinician's treatment", treatment);
+        addToList("Assessment", incomplete);
 
         return summaryList;
     }

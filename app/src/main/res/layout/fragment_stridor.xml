@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:gravity="center_horizontal"
-                        android:text="Does the child have stidor?"
+                        android:text="Does the child have stridor?"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
