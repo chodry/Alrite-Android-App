@@ -1,6 +1,7 @@
 package com.ug.air.alrite.Fragments.navigation;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ug.air.alrite.Activities.PatientActivity;
+import com.ug.air.alrite.Database.DatabaseHelper;
 import com.ug.air.alrite.R;
 import com.ug.air.alrite.Worker.NotifyWorker2;
 
@@ -31,6 +33,8 @@ import java.util.concurrent.TimeUnit;
 public class HomeFragment extends Fragment {
 
     View view;
+    DatabaseHelper databaseHelper;
+    int period = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,7 +83,20 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        databaseHelper = new DatabaseHelper(getActivity());
+        Cursor res = databaseHelper.getData("1");
+        StringBuffer buffer = new StringBuffer();
+        while (res.moveToNext()){
+            period =  res.getInt(1);
+        }
+
+//        if (period == 1){
+//            getMinuteDifference();
+//            databaseHelper.updatePeriod("1", 2);
+//        }
+
         getMinuteDifference();
+
 
 //        view.findViewById(R.id.btn_start_assessment).setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -94,8 +111,8 @@ public class HomeFragment extends Fragment {
 
     private void getMinuteDifference() {
         Constraints constraints = new Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.CONNECTED)
-                .setRequiresBatteryNotLow(true)
+//                .setRequiredNetworkType(NetworkType.CONNECTED)
+//                .setRequiresBatteryNotLow(true)
                 .build();
 
         WorkRequest uploadWorkRequest = new PeriodicWorkRequest
@@ -105,21 +122,5 @@ public class HomeFragment extends Fragment {
 
         WorkManager.getInstance(getActivity()).enqueue(uploadWorkRequest);
 
-        try {
-            Date currentTime = Calendar.getInstance().getTime();
-            Log.d("Information: ", "getMinuteDifference: " + currentTime);
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
-            String date = "2022-06-30_09:23:34";
-            Date newDate = df.parse(date);
-            Log.d("Information: ", "getMinuteDifference: " + newDate);
-            long diff = currentTime.getTime() - newDate.getTime();//as given
-
-//            long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
-            long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
-            Log.d("Information: ", "getMinuteDifference: " + minutes);
-//            Toast.makeText(getActivity(), "minutes: " + minutes, Toast.LENGTH_SHORT).show();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 }

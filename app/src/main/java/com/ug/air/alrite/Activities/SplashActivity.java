@@ -15,6 +15,7 @@ import android.view.animation.AlphaAnimation;
 import android.widget.LinearLayout;
 
 import com.ug.air.alrite.BuildConfig;
+import com.ug.air.alrite.Database.DatabaseHelper;
 import com.ug.air.alrite.R;
 
 import java.io.File;
@@ -28,6 +29,7 @@ public class SplashActivity extends AppCompatActivity {
     Intent i = null;
     LinearLayout logo;
     File[] contents;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,28 +42,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         logo = findViewById(R.id.logo);
 
-//        String dat = "2022-04-29_13:30:21";
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
-//
-//        try {
-//            Date date = format.parse(dat);
-//            String time = simpleDateFormat.format(date);
-//            Date date1 = simpleDateFormat.parse(time);
-//            Date cur = new Date();
-//            String tim = simpleDateFormat.format(cur);
-//            Date date2 = simpleDateFormat.parse(tim);
-//
-//            long difference = date2.getTime() - date1.getTime();
-//            int days = (int) (difference / (1000*60*60*24));
-//            int hours = (int) ((difference - (1000*60*60*24*days)) / (1000*60*60));
-//            int min = (int) (difference - (1000*60*60*24*days) - (1000*60*60*hours)) / (1000*60);
-//            min = (min < 0 ? -min : min);
-//            Log.d("======= Minutes"," :: "+min);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-
+        databaseHelper = new DatabaseHelper(this);
 
     }
 
@@ -80,12 +61,18 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/databases/alrite.db");
+                if (src.exists()){
+                    i = new Intent(SplashActivity.this, Dashboard.class);
+                    startActivity(i);
+                    finish();
+                }else {
+                    databaseHelper.insertData(1);
+                    i = new Intent(SplashActivity.this, Dashboard.class);
+                    startActivity(i);
+                    finish();
+                }
 
-                i = new Intent(SplashActivity.this, Dashboard.class);
-
-                startActivity(i);
-
-                finish();
             }
         }, timeout);
     }
