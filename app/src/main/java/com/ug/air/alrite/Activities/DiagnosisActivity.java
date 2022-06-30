@@ -360,7 +360,6 @@ public class DiagnosisActivity extends AppCompatActivity {
         String point2 = sharedPreferences.getString(POINT2, "");
         String diagnosis = sharedPreferences.getString(S7, "");
         String treatment = sharedPreferences.getString(S6, "");
-        String incomplete = sharedPreferences.getString(INCOMPLETE, "");
 
         addToList("Parent's initials", pin);
         addToList("Child's weight", weight);
@@ -396,7 +395,6 @@ public class DiagnosisActivity extends AppCompatActivity {
         addToList("Any family member using kerosene", kerosene);
         addToList("Clinician's diagnosis", diagnosis);
         addToList("Clinician's treatment", treatment);
-        addToList("Assessment", incomplete);
 
         return summaryList;
     }

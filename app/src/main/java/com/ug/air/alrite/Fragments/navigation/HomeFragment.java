@@ -4,13 +4,28 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.work.Constraints;
+import androidx.work.NetworkType;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ug.air.alrite.Activities.PatientActivity;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Worker.NotifyWorker2;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 
 public class HomeFragment extends Fragment {
@@ -64,6 +79,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        getMinuteDifference();
+
 //        view.findViewById(R.id.btn_start_assessment).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -73,5 +90,36 @@ public class HomeFragment extends Fragment {
 //        });
 
         return view;
+    }
+
+    private void getMinuteDifference() {
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .setRequiresBatteryNotLow(true)
+                .build();
+
+        WorkRequest uploadWorkRequest = new PeriodicWorkRequest
+                .Builder(NotifyWorker2.class, 15, TimeUnit.MINUTES)
+                .setConstraints(constraints)
+                .build();
+
+        WorkManager.getInstance(getActivity()).enqueue(uploadWorkRequest);
+
+        try {
+            Date currentTime = Calendar.getInstance().getTime();
+            Log.d("Information: ", "getMinuteDifference: " + currentTime);
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+            String date = "2022-06-30_09:23:34";
+            Date newDate = df.parse(date);
+            Log.d("Information: ", "getMinuteDifference: " + newDate);
+            long diff = currentTime.getTime() - newDate.getTime();//as given
+
+//            long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+            Log.d("Information: ", "getMinuteDifference: " + minutes);
+//            Toast.makeText(getActivity(), "minutes: " + minutes, Toast.LENGTH_SHORT).show();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -8,9 +8,17 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.ug.air.alrite.R;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -36,6 +44,8 @@ public class Dashboard extends AppCompatActivity {
 
         NavController navController = androidx.navigation.Navigation.findNavController(this, R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
     }
 
     @Override
