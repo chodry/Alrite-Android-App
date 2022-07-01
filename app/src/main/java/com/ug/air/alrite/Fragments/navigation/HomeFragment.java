@@ -110,10 +110,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getMinuteDifference() {
-        Constraints constraints = new Constraints.Builder()
-//                .setRequiredNetworkType(NetworkType.CONNECTED)
-//                .setRequiresBatteryNotLow(true)
-                .build();
+        Constraints constraints = new Constraints.Builder().build();
 
         WorkRequest uploadWorkRequest = new PeriodicWorkRequest
                 .Builder(NotifyWorker2.class, 15, TimeUnit.MINUTES)

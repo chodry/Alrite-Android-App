@@ -67,14 +67,14 @@ public class NotifyWorker2 extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-//        readData();
-//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//            @Override
-//            public void onCompletion(MediaPlayer mp) {
-//                mediaPlayer.stop();
-//            }
-//        });
-        Log.d("Background Task", "Executed successfully");
+        readData();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.stop();
+            }
+        });
+//        Log.d("Background Task", "Executed successfully");
         return Result.success();
     }
 
@@ -101,6 +101,7 @@ public class NotifyWorker2 extends Worker {
                                     Date newDate = df.parse(date);
                                     long diff = currentTime.getTime() - newDate.getTime();
                                     long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+//                                    if (minutes >= 30 && minutes < 240){
                                     if (minutes >= 30 && minutes < 240){
                                         value = value + 1;
                                     }else if (minutes >= 240){
@@ -117,22 +118,22 @@ public class NotifyWorker2 extends Worker {
                     }
                 }
                 Log.d("Background Task", "Executed successfully");
-                audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-                switch (audioManager.getRingerMode()){
-                    case AudioManager.RINGER_MODE_NORMAL:
-                        mediaPlayer.start();
-                        break;
-                    case AudioManager.RINGER_MODE_SILENT:
-                        break;
-                    case AudioManager.RINGER_MODE_VIBRATE:
-                        vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
-                        break;
-                }
                 if (value > 0) {
                     if (value == 1){
                         s = "There is one patient ready for reassessment";
                     }else {
                         s = "There are " + value + " patients ready for reassessment";
+                    }
+                    audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+                    switch (audioManager.getRingerMode()){
+                        case AudioManager.RINGER_MODE_NORMAL:
+                            mediaPlayer.start();
+                            break;
+                        case AudioManager.RINGER_MODE_SILENT:
+                            break;
+                        case AudioManager.RINGER_MODE_VIBRATE:
+                            vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+                            break;
                     }
                     createForegroundInfo(s);
                 }
@@ -145,7 +146,7 @@ public class NotifyWorker2 extends Worker {
         // Build a notification using bytesRead and contentLength
 
         Context context = getApplicationContext();
-        String id = "alright_1";
+        String id = "alright_2";
         String title = "Other Patients Ready for Reassessment";
         String cancel = "Cancel";
         // This PendingIntent can be used to cancel the worker
@@ -170,7 +171,7 @@ public class NotifyWorker2 extends Worker {
                 .addAction(android.R.drawable.ic_delete, cancel, intent);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
-        notificationManagerCompat.notify(4, notification.build());
+        notificationManagerCompat.notify(8, notification.build());
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -179,7 +180,7 @@ public class NotifyWorker2 extends Worker {
         CharSequence name = "Worker Channel";
         String description = progress;
         int importance = NotificationManager.IMPORTANCE_DEFAULT;
-        NotificationChannel channel = new NotificationChannel("alright_1", name, importance);
+        NotificationChannel channel = new NotificationChannel("alright_2", name, importance);
         channel.setDescription(description);
         // Register the channel with the system; you can't change the importance
         // or other notification behaviors after this

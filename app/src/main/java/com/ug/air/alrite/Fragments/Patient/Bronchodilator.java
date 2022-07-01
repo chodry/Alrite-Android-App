@@ -240,7 +240,7 @@ public class Bronchodilator extends Fragment {
         WorkRequest notifyWorkRequest = new OneTimeWorkRequest
                 .Builder(NotifyWorker.class)
                 .setInputData(inputData)
-                .setInitialDelay(15, TimeUnit.MINUTES)
+                .setInitialDelay(2, TimeUnit.MINUTES)
                 .addTag(filename)
                 .build();
 
