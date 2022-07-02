@@ -68,13 +68,14 @@ public class NotifyWorker2 extends Worker {
     @Override
     public Result doWork() {
         readData();
+//        Log.d("Background Task", "Executed successfully");
+
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 mediaPlayer.stop();
             }
         });
-//        Log.d("Background Task", "Executed successfully");
         return Result.success();
     }
 
