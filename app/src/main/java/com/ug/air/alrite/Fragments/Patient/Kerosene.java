@@ -2,7 +2,6 @@ package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
-import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.CoughD.DAY1;
 import static com.ug.air.alrite.Fragments.Patient.HIVStatus.CHOICE3;
 import static com.ug.air.alrite.Fragments.Patient.WheezY.DAY2;
@@ -64,10 +63,10 @@ public class Kerosene extends Fragment {
     private static final int YES = 0;
     private static final int NO = 1;
     private static final int NOT = 2;
-    public static final String CHOICET2 = "choiceT2";
+    public static final String CHOICET2 = "use_kerosene";
     public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String ADIAGNOSIS = "aDiagnosis";
-    public static final String TUDIAGNOSIS = "tuDiagnosis";
+    public static final String ADIAGNOSIS = "diagnosis_10";
+    public static final String TUDIAGNOSIS = "diagnosis_11";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
     RecyclerView recyclerView;

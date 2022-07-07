@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Assess.FINAL_DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 import static com.ug.air.alrite.Fragments.Patient.Sex.KILO;
@@ -61,7 +62,7 @@ public class Nasal extends Fragment {
     String diagnosis;
     private static final int YES = 0;
     private static final int NO = 1;
-    public static final String CHOICEGN = "choiceGn";
+    public static final String CHOICEGN = "nasal_flaring";
     public static final String GNDIAGNOSIS = "gnDiagnosis";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
@@ -221,6 +222,7 @@ public class Nasal extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finalDiagnosis();
                 editor.putString(GNDIAGNOSIS, diagnosis);
                 editor.apply();
                 dialog.dismiss();
@@ -232,6 +234,7 @@ public class Nasal extends Fragment {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finalDiagnosis();
                 editor.putString(GNDIAGNOSIS, diagnosis);
                 editor.apply();
                 dialog.dismiss();
@@ -245,6 +248,11 @@ public class Nasal extends Fragment {
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
+    }
+
+    private void finalDiagnosis() {
+        editor.putString(FINAL_DIAGNOSIS, "Severe Pneumonia OR very Severe Disease");
+        editor.apply();
     }
 
     private void showDialog() {

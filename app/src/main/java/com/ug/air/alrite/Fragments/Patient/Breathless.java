@@ -36,7 +36,7 @@ public class Breathless extends Fragment {
     public static final String CHECK21 = "check21";
     public static final String CHECK31 = "check31";
     public static final String CHECK41 = "check41";
-    public static final String S5 = "s5";
+    public static final String S5 = "child_breathless";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
 

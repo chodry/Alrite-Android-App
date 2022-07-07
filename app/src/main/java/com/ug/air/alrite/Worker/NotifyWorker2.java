@@ -67,14 +67,14 @@ public class NotifyWorker2 extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        readData();
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                mediaPlayer.stop();
-            }
-        });
-//        Log.d("Background Task", "Executed successfully");
+//        readData();
+//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mp) {
+//                mediaPlayer.stop();
+//            }
+//        });
+        Log.d("Background Task 2", "Executed successfully");
         return Result.success();
     }
 
@@ -117,7 +117,7 @@ public class NotifyWorker2 extends Worker {
 
                     }
                 }
-                Log.d("Background Task", "Executed successfully");
+                Log.d("Background Task 2", "Executed successfully");
                 if (value > 0) {
                     if (value == 1){
                         s = "There is one patient ready for reassessment";
@@ -136,9 +136,13 @@ public class NotifyWorker2 extends Worker {
                             break;
                     }
                     createForegroundInfo(s);
+                }else {
+                    Log.d("Background Task 3", "Nothing to show");
                 }
 
             }
+        }else {
+            Log.d("Background Task 4", "Nothing is there");
         }
     }
 

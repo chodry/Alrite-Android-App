@@ -22,7 +22,7 @@ public class WheezY extends Fragment {
     EditText etDay;
     Button back, next;
     String day1;
-    public static final String DAY2 = "day2";
+    public static final String DAY2 = "breathing_difficulties_last_year";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;

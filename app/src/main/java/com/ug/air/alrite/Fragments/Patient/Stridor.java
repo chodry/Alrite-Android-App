@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Assess.FINAL_DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 import static com.ug.air.alrite.Fragments.Patient.Sex.KILO;
@@ -62,7 +63,7 @@ public class Stridor extends Fragment {
     String diagnosis;
     private static final int YES = 0;
     private static final int NO = 1;
-    public static final String CHOICE6 = "choice6";
+    public static final String CHOICE6 = "stridor";
     public static final String STDIAGNOSIS = "stDiagnosis";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
@@ -266,6 +267,7 @@ public class Stridor extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finalDiagnosis();
                 editor.putString(STDIAGNOSIS, diagnosis);
                 editor.apply();
                 dialog.dismiss();
@@ -277,6 +279,7 @@ public class Stridor extends Fragment {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finalDiagnosis();
                 editor.putString(STDIAGNOSIS, diagnosis);
                 editor.apply();
                 dialog.dismiss();
@@ -290,6 +293,11 @@ public class Stridor extends Fragment {
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
+    }
+
+    private void finalDiagnosis() {
+        editor.putString(FINAL_DIAGNOSIS, "Severe Pneumonia OR very Severe Disease");
+        editor.apply();
     }
 
 }

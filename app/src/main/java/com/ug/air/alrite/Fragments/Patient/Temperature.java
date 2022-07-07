@@ -39,8 +39,8 @@ public class Temperature extends Fragment {
     EditText etDay;
     Button back, next, btnSkip, btnSave;
     String temp, diagnosis;
-    public static final String TEMP = "temp";
-    public static final String TDIAGNOSIS = "tDiagnosis";
+    public static final String TEMP = "temperature";
+    public static final String TDIAGNOSIS = "diagnosis_4";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;

@@ -100,54 +100,6 @@ public class OtherPatients extends Fragment {
         return view;
     }
 
-//    private void accessSharedFile() {
-//        File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs");
-//        if (src.exists()){
-//            File[] contents = src.listFiles();
-////        Toast.makeText(getActivity(), "" + contents, Toast.LENGTH_SHORT).show();
-//            if (contents.length != 0) {
-//                types = new ArrayList<String>();
-//                file = new ArrayList<String>();
-//                for (File f : contents) {
-//                    if (f.isFile()) {
-//                        String name = f.getName().toString();
-//                        if (!name.equals("sharedPrefs.xml")){
-//                            String names = name.replace(".xml", "");
-//                            sharedPreferences = requireActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
-//                            String bron = sharedPreferences.getString(BRONCHODILATOR, "");
-//                            String fin = sharedPreferences.getString(BRONC, "");
-//                            if (bron.isEmpty() || bron.equals("Bronchodialtor Not Given") || !fin.isEmpty()){
-//                                file.add(names);
-//                                cin = sharedPreferences.getString(CIN, "");
-//                                pin = sharedPreferences.getString(PIN, "");
-//                                age = sharedPreferences.getString(AGE2, "");
-//                                gender = sharedPreferences.getString(CHOICE, "");
-//                                dat = sharedPreferences.getString(DATE, "");
-//                                types.add(cin);
-//                                String[] split = age.split("\\.");
-//                                String ag = split[0] + " years and " + split[1] + " months";
-//                                try {
-//                                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-//                                    Date date = df.parse(dat);
-//                                    SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
-//                                    String formattedDate = df1.format(date);
-//                                    History history = new History("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names);
-//                                    items.add(new Item(1, history));
-//                                } catch (ParseException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//
-//            }else{
-//                Toast.makeText(getActivity(), "empty", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        }
-//    }
-
     private void accessSharedFile2(){
         File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs");
         if (src.exists()) {
@@ -190,7 +142,7 @@ public class OtherPatients extends Fragment {
                     }
                 }
             }else {
-                Toast.makeText(getActivity(), "empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "There are no patients' records", Toast.LENGTH_SHORT).show();
             }
         }
     }

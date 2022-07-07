@@ -3,7 +3,6 @@ package com.ug.air.alrite.Fragments.Patient;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
-import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -55,8 +54,8 @@ public class Cough extends Fragment {
     String value3 = "none";
     private static final int YES = 0;
     private static final int NO = 1;
-    public static final String CHOICE2 = "choice2";
-    public static final String NODIAGNOSIS = "noDiagnosis";
+    public static final String CHOICE2 = "difficulty_breathing";
+    public static final String NODIAGNOSIS = "diagnosis_3";
     public static final String SHARED_PREFS = "sharedPrefs";
     Dialog dialog;
     RecyclerView recyclerView;

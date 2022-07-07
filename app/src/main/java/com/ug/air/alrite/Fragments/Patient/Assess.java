@@ -60,8 +60,8 @@ public class Assess extends Fragment {
     public static final String CHECK4 = "check4";
     public static final String CHECK5 = "check5";
     public static final String DATE = "date";
-    public static final String UUIDS = "uuid";
-    public static final String S4 = "s4";
+    public static final String S4 = "symptoms";
+    public static final String FINAL_DIAGNOSIS= "diagnosis_1";
     public static final String DIAGNOSIS = "diagnosis";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
@@ -294,6 +294,7 @@ public class Assess extends Fragment {
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finalDiagnosis();
                 editor.putString(DIAGNOSIS, diagnosis);
                 editor.apply();
                 dialog.dismiss();
@@ -305,6 +306,7 @@ public class Assess extends Fragment {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finalDiagnosis();
                 editor.putString(DIAGNOSIS, diagnosis);
                 editor.apply();
                 dialog.dismiss();
@@ -318,6 +320,11 @@ public class Assess extends Fragment {
 //        dialog.getWindow().setLayout(650, WindowManager.LayoutParams.MATCH_PARENT);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
+    }
+
+    private void finalDiagnosis() {
+        editor.putString(FINAL_DIAGNOSIS, "Severe Pneumonia OR very Severe Disease");
+        editor.apply();
     }
 
 }

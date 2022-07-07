@@ -90,11 +90,11 @@ public class HomeFragment extends Fragment {
             period =  res.getInt(1);
         }
 
-        if (period == 2){
-            getMinuteDifference();
-            databaseHelper.updatePeriod("1", 3);
-            Toast.makeText(getActivity(), "Yes", Toast.LENGTH_SHORT).show();
-        }
+//        if (period == 1){
+//            getMinuteDifference();
+//            databaseHelper.updatePeriod("1", 2);
+//            Toast.makeText(getActivity(), "Yes", Toast.LENGTH_SHORT).show();
+//        }
 
 //        getMinuteDifference();
 
@@ -111,7 +111,9 @@ public class HomeFragment extends Fragment {
     }
 
     private void getMinuteDifference() {
-        Constraints constraints = new Constraints.Builder().build();
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
 
         WorkRequest uploadWorkRequest = new PeriodicWorkRequest
                 .Builder(NotifyWorker2.class, 15, TimeUnit.MINUTES)

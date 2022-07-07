@@ -44,12 +44,12 @@ public class Sex extends Fragment {
     String value2 = "none";
     private static final int YES = 0;
     private static final int NO = 1;
-    public static final String MDIAGNOSIS = "mDiagnosis";
+    public static final String MDIAGNOSIS = "diagnosis_1";
     public static final String AGE = "age";
     public static final String AGE2 = "age2";
-    public static final String KILO = "kilo";
-    public static final String MUAC = "MUAC";
-    public static final String CHOICE = "choice";
+    public static final String KILO = "weight";
+    public static final String MUAC = "muac";
+    public static final String CHOICE = "gender";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor;

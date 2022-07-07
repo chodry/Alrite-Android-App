@@ -56,11 +56,11 @@ public class RRCounter extends Fragment {
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor;
-    public static final String FASTBREATHING = "fastBreathing";
-    public static final String FASTBREATHING2 = "fastBreathing2";
+    public static final String FASTBREATHING = "breathing_rate";
+    public static final String FASTBREATHING2 = "breathing_rate_2";
     public static final String SECOND = "second";
-    public static final String RATE = "rate";
-    public static final String RATE2 = "rate2";
+    public static final String RATE = "respiratory_rate";
+    public static final String RATE2 = "respiratory_rate_2";
     String age, rate, rating, check;
     float ag = 0;
     int score, taps = 0;

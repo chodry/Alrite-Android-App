@@ -31,8 +31,8 @@ public class HIVStatus extends Fragment {
     private static final int NO = 1;
     private static final int NOT = 2;
     private static final int SURE = 3;
-    public static final String CHOICE3 = "choice3";
-    public static final String HDIAGNOSIS = "hDiagnosis";
+    public static final String CHOICE3 = "hiv_status";
+    public static final String HDIAGNOSIS = "diagnosis_6";
     public static final String SHARED_PREFS = "sharedPrefs";
     String cough, hist, diagnosis;
     SharedPreferences sharedPreferences;

@@ -24,6 +24,7 @@ import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
 import static com.ug.air.alrite.Fragments.Patient.Cough.NODIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.CoughD.DAY1;
 import static com.ug.air.alrite.Fragments.Patient.Eczema.CHOICEX2;
+import static com.ug.air.alrite.Fragments.Patient.FTouch.FTDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.FTouch.TOUCH;
 import static com.ug.air.alrite.Fragments.Patient.HIVCare.CHOICEHC;
 import static com.ug.air.alrite.Fragments.Patient.HIVStatus.CHOICE3;
@@ -285,6 +286,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         String asDiagnosis = sharedPreferences.getString(ADIAGNOSIS, "");
         String tuDiagnosis = sharedPreferences.getString(TUDIAGNOSIS, "");
         String b3Diagnosis = sharedPreferences.getString(B3DIAGNOSIS, "");
+        String ftDiagnosis = sharedPreferences.getString(FTDIAGNOSIS, "");
 
         if (!aDiagnosis.isEmpty() || !oxDiagnosis.isEmpty() || !stDiagnosis.isEmpty() || !gnDiagnosis.isEmpty()){
             addToList2("Severe Pneumonia OR very Severe Disease");
@@ -303,6 +305,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         addToList2(asDiagnosis);
         addToList2(tuDiagnosis);
         addToList2(b3Diagnosis);
+        addToList2(ftDiagnosis);
 
 
         for (int i=0; i < messages.size(); i++) {
@@ -531,7 +534,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         Map<String, ?> all = sharedPreferences.getAll();
         for (Map.Entry<String, ?> x : all.entrySet()) {
             if (x.getValue().getClass().equals(String.class))  editor1.putString(x.getKey(),  (String)x.getValue());
-            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
+//            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
         }
         editor1.commit();
 

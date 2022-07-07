@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.Assess.FINAL_DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.FTouch.TOUCH;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
@@ -46,7 +47,7 @@ public class Oxygen extends Fragment {
     EditText etDay;
     Button back, next, btnSave, btSkip,btnContinue,btnContinue2;
     String oxy;
-    public static final String OXY = "oxy";
+    public static final String OXY = "blood_oxygen_saturation";
     public static final String OXDIAGNOSIS = "oxDiagnosis";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
@@ -257,6 +258,7 @@ public class Oxygen extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finalDiagnosis();
                 editor.putString(OXDIAGNOSIS, diagnosis);
                 editor.apply();
                 dialog.dismiss();
@@ -267,6 +269,7 @@ public class Oxygen extends Fragment {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finalDiagnosis();
                 editor.putString(OXDIAGNOSIS, diagnosis);
                 editor.apply();
                 dialog.dismiss();
@@ -277,6 +280,11 @@ public class Oxygen extends Fragment {
 //        dialog.getWindow().setLayout(650, 800);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.show();
+    }
+
+    private void finalDiagnosis() {
+        editor.putString(FINAL_DIAGNOSIS, "Severe Pneumonia OR very Severe Disease");
+        editor.apply();
     }
 
     private void showDialog2() {

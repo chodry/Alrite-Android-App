@@ -34,7 +34,7 @@ public class WheezD extends Fragment {
     private static final int YES = 0;
     private static final int NO = 1;
     private static final int NOT = 2;
-    public static final String CHOICEX = "choiceX";
+    public static final String CHOICEX = "wheezing_before_this_illness";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;

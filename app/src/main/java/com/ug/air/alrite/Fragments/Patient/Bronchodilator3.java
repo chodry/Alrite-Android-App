@@ -65,9 +65,9 @@ public class Bronchodilator3 extends Fragment {
     private static final int YES = 0;
     private static final int NO = 1;
     private static final int NOT = 2;
-    public static final String BRONC = "bron";
+    public static final String BRONC = "after_bronchodilator";
     public static final String FINAL = "final";
-    public static final String B3DIAGNOSIS = "b3Diagnosis";
+    public static final String B3DIAGNOSIS = "diagnosis_9";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;

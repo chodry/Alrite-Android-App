@@ -3,7 +3,6 @@ package com.ug.air.alrite.Fragments.Patient;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
-import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -53,7 +52,7 @@ public class CoughD extends Fragment {
     EditText etDay;
     Button back, next, btnSave;
     String day1;
-    public static final String DAY1 = "day1";
+    public static final String DAY1 = "days_with_breathing_difficulties";
     public static final String SHARED_PREFS = "sharedPrefs";
     Dialog dialog;
     TextView txtMessage;

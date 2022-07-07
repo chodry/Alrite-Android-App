@@ -65,9 +65,9 @@ public class Bronchodilator extends Fragment {
 //    public static final String SHARED_PREFS2 = "background";
     SharedPreferences sharedPreferences, sharedPreferences2;
     SharedPreferences.Editor editor, editor2;
-    public static final String DATE = "date";
+    public static final String DATE = "end_date";
     public static final String FILENAME = "filename";
-    public static final String UUIDS = "uuid";
+    public static final String UUIDS = "patient_uuid";
     TextView txtDisease, txtDefinition, txtOk, txtDiagnosis;
     LinearLayout linearLayoutDisease;
     LinearLayout linearLayout_instruction;
@@ -240,7 +240,7 @@ public class Bronchodilator extends Fragment {
         WorkRequest notifyWorkRequest = new OneTimeWorkRequest
                 .Builder(NotifyWorker.class)
                 .setInputData(inputData)
-                .setInitialDelay(15, TimeUnit.MINUTES)
+                .setInitialDelay(5, TimeUnit.SECONDS)
                 .addTag(filename)
                 .build();
 

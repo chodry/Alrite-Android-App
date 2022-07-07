@@ -49,8 +49,8 @@ public class Bronchodilator2 extends Fragment {
     String s, reason;
     EditText etOther;
     public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String REASON = "reason";
-    public static final String BDIAGNOSIS = "bDiagnosis";
+    public static final String REASON = "bronchodilator_not_given_reason";
+    public static final String BDIAGNOSIS = "diagnosis_8";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
     String diagnosis;

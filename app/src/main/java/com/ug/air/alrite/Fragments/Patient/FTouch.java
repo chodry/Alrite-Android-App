@@ -3,7 +3,6 @@ package com.ug.air.alrite.Fragments.Patient;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 import static com.ug.air.alrite.Fragments.Patient.Sex.KILO;
-import static com.ug.air.alrite.Fragments.Patient.Temperature.TDIAGNOSIS;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -49,7 +48,8 @@ public class FTouch extends Fragment {
     String value6 = "none";
     private static final int YES1 = 0;
     private static final int NO1 = 1;
-    public static final String TOUCH = "touch";
+    public static final String TOUCH = "febrile_to_touch";
+    public static final String FTDIAGNOSIS = "diagnosis_5";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -199,7 +199,7 @@ public class FTouch extends Fragment {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.putString(TDIAGNOSIS, diagnosis);
+                editor.putString(FTDIAGNOSIS, diagnosis);
                 editor.apply();
                 dialog.dismiss();
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();

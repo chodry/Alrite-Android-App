@@ -30,9 +30,9 @@ public class Initials extends Fragment {
    EditText etCin, etPin;
    Button back, next;
    String cin, pin, formattedDate;
-   public static final String CIN = "cin";
-   public static final String PIN = "pin";
-   public static final String INITIAL_DATE = "initial_date";
+   public static final String CIN = "patient_initials";
+   public static final String PIN = "parent_initials";
+   public static final String INITIAL_DATE = "start_date";
    public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;

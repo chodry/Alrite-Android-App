@@ -214,7 +214,7 @@ public class ActivePatients extends Fragment {
                 }
 
             }else{
-                Toast.makeText(getActivity(), "empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "There no patients' records", Toast.LENGTH_SHORT).show();
 
             }
         }

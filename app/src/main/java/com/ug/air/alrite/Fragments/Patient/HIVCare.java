@@ -29,7 +29,7 @@ public class HIVCare extends Fragment {
     String value4 = "none";
     private static final int YES = 0;
     private static final int NO = 1;
-    public static final String CHOICEHC = "choiceHc";
+    public static final String CHOICEHC = "child_in_hiv_care";
     public static final String SHARED_PREFS = "sharedPrefs";
     String cough, hist, diagnosis;
     SharedPreferences sharedPreferences;

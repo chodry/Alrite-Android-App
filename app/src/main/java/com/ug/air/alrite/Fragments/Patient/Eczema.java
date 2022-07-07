@@ -50,7 +50,7 @@ public class Eczema extends Fragment {
     private static final int YES = 0;
     private static final int NO = 1;
     private static final int NOT = 2;
-    public static final String CHOICEX2 = "choiceX2";
+    public static final String CHOICEX2 = "child_ever_had_eczema";
     public static final String SHARED_PREFS = "sharedPrefs";
 
     @Override

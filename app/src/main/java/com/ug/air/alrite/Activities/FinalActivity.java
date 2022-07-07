@@ -21,8 +21,8 @@ public class FinalActivity extends AppCompatActivity {
     EditText etOther1, etOther2;
     Button btnSave;
     String s1, s2, diagnosis, treatment, filename;
-    public static final String S6 = "s6";
-    public static final String S7 = "s7";
+    public static final String S6 = "clinician_treatment";
+    public static final String S7 = "clinician_diagnosis";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 

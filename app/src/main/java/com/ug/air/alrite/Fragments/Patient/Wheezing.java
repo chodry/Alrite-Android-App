@@ -2,7 +2,6 @@ package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
-import static com.ug.air.alrite.Fragments.Patient.Assess.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT;
 import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT2;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.SECOND;
@@ -77,9 +76,9 @@ public class Wheezing extends Fragment {
     private static final int YES = 0;
     private static final int NO = 1;
     private static final int NOT = 2;
-    public static final String CHECKSTETHO = "checkStetho";
-    public static final String CHOICE8 = "choice8";
-    public static final String CHOICE82 = "choice82";
+    public static final String CHECKSTETHO = "stethoscope_used";
+    public static final String CHOICE8 = "wheezing";
+    public static final String CHOICE82 = "wheezing_2";
     public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;

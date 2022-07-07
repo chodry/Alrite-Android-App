@@ -28,7 +28,7 @@ public class Smoke extends Fragment {
     private static final int YES = 0;
     private static final int NO = 1;
     private static final int NOT = 2;
-    public static final String CHOICET1 = "choiceT1";
+    public static final String CHOICET1 = "smoke_tobacco";
     public static final String SHARED_PREFS = "sharedPrefs";
 
     @Override

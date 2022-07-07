@@ -130,7 +130,7 @@ public class PatientActivity extends AppCompatActivity {
         Map<String, ?> all = sharedPreferences.getAll();
         for (Map.Entry<String, ?> x : all.entrySet()) {
             if (x.getValue().getClass().equals(String.class))  editor1.putString(x.getKey(),  (String)x.getValue());
-            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
+//            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
         }
         editor1.commit();
 

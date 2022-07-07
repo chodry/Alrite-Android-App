@@ -28,7 +28,7 @@ public class Allergies extends Fragment {
     private static final int YES = 0;
     private static final int NO = 1;
     private static final int NOT = 2;
-    public static final String CHOICEY2 = "choiceY2";
+    public static final String CHOICEY2 = "child_parents_with_allergies";
     public static final String SHARED_PREFS = "sharedPrefs";
 
     @Override

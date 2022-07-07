@@ -76,12 +76,12 @@ public class ChestIndrawing extends Fragment {
     private static final int YES = 1;
     private static final int NO = 0;
     private static final int NOT = 2;
-    public static final String CHOICE7 = "choice7";
-    public static final String POINT = "point";
-    public static final String POINT2 = "point2";
-    public static final String CHOICE72 = "choice72";
+    public static final String CHOICE7 = "chest_indrawing";
+    public static final String POINT = "respiratory_rate_score";
+    public static final String POINT2 = "respiratory_rate_score";
+    public static final String CHOICE72 = "cchest_indrawing_2";
     public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String CIDIAGNOSIS = "ciDiagnosis";
+    public static final String CIDIAGNOSIS = "diagnosis_7";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
     String fastBreathing;
