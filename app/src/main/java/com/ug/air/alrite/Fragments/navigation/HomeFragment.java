@@ -90,11 +90,11 @@ public class HomeFragment extends Fragment {
             period =  res.getInt(1);
         }
 
-        if (period == 2){
-            getMinuteDifference();
-            databaseHelper.updatePeriod("1", 3);
-            Toast.makeText(getActivity(), "Yes", Toast.LENGTH_SHORT).show();
-        }
+//        if (period == 2){
+//            getMinuteDifference();
+//            databaseHelper.updatePeriod("1", 3);
+//            Toast.makeText(getActivity(), "Yes", Toast.LENGTH_SHORT).show();
+//        }
 
 //        getMinuteDifference();
 
