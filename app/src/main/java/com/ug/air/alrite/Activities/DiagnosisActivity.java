@@ -273,14 +273,14 @@ public class DiagnosisActivity extends AppCompatActivity {
     private List<Diagnosis> buildItemList() {
         List<Diagnosis> diagnosisList = new ArrayList<>();
 
-        String aDiagnosis = sharedPreferences.getString(DIAGNOSIS, "");
+//        String aDiagnosis = sharedPreferences.getString(DIAGNOSIS, "");
         String mDiagnosis = sharedPreferences.getString(MDIAGNOSIS, "");
         String tDiagnosis = sharedPreferences.getString(TDIAGNOSIS, "");
-        String oxDiagnosis = sharedPreferences.getString(OXDIAGNOSIS, "");
+//        String oxDiagnosis = sharedPreferences.getString(OXDIAGNOSIS, "");
         String noDiagnosis = sharedPreferences.getString(NODIAGNOSIS, "");
         String hDiagnosis = sharedPreferences.getString(HDIAGNOSIS, "");
-        String stDiagnosis = sharedPreferences.getString(STDIAGNOSIS, "");
-        String gnDiagnosis = sharedPreferences.getString(GNDIAGNOSIS, "");
+//        String stDiagnosis = sharedPreferences.getString(STDIAGNOSIS, "");
+//        String gnDiagnosis = sharedPreferences.getString(GNDIAGNOSIS, "");
         String ciDiagnosis = sharedPreferences.getString(CIDIAGNOSIS, "");
         String wDiagnosis = sharedPreferences.getString(BDIAGNOSIS, "");
         String asDiagnosis = sharedPreferences.getString(ADIAGNOSIS, "");
@@ -288,9 +288,9 @@ public class DiagnosisActivity extends AppCompatActivity {
         String b3Diagnosis = sharedPreferences.getString(B3DIAGNOSIS, "");
         String ftDiagnosis = sharedPreferences.getString(FTDIAGNOSIS, "");
 
-        if (!aDiagnosis.isEmpty() || !oxDiagnosis.isEmpty() || !stDiagnosis.isEmpty() || !gnDiagnosis.isEmpty()){
-            addToList2("Severe Pneumonia OR very Severe Disease");
-        }
+//        if (!aDiagnosis.isEmpty() || !oxDiagnosis.isEmpty() || !stDiagnosis.isEmpty() || !gnDiagnosis.isEmpty()){
+//            addToList2("Severe Pneumonia OR very Severe Disease");
+//        }
 
 //        addToList2(aDiagnosis);
         addToList2(mDiagnosis);
@@ -388,7 +388,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         addToList("Child Wheezing", wheez2);
         addToList("Child has chest indrawing", chest2);
         addToList("Child's breathing after bronchodilator", better);
-        addToList("Respiratory score", point2);
+        addToList("Respiratory score 2", point2);
         addToList("Child has breathing difficulty", wheezD);
         addToList("Episodes in the past year", wheezY);
         addToList("Child his breathless", breathless);
@@ -440,6 +440,14 @@ public class DiagnosisActivity extends AppCompatActivity {
                 }else if (we >= 14.0) {
                     messageList = Arrays.asList(R.string.febril3, R.string.paracetamol3, R.string.febril5,
                             R.string.febril6, R.string.febril7);
+                }else {
+                    if (ag >= 2 && ag < 36){
+                        messageList = Arrays.asList(R.string.febril3, R.string.paracetamol2, R.string.febril5,
+                                R.string.febril6, R.string.febril7);
+                    }else  if (ag >= 36 && ag < 60){
+                        messageList = Arrays.asList(R.string.febril3, R.string.paracetamol3, R.string.febril5,
+                                R.string.febril6, R.string.febril7);
+                    }
                 }
             } else {
                 if (ag >= 2 && ag < 36){

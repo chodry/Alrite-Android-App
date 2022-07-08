@@ -72,6 +72,66 @@ public class Instructions {
                             R.string.other8, R.string.refer_urgently);
                 }
 
+            }else {
+                if (ag >= 2 && ag < 4){
+                    if (s.contains("Convulsions")){
+                        messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2, R.string.gentamicin2,
+                                R.string.convulsions, R.string.diazepam2, R.string.convulsions1,
+                                R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
+                                R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
+                                R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                                R.string.other8, R.string.refer_urgently);
+                    }else{
+                        messages = Arrays.asList(R.string.first_dose, R.string.ampicilin2, R.string.gentamicin2,
+                                R.string.other1, R.string.other2, R.string.other3,
+                                R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                                R.string.other8, R.string.refer_urgently);
+                    }
+                }else if (ag >= 4 && ag < 12){
+                    if (s.contains("Convulsions")){
+                        messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4, R.string.gentamicin4,
+                                R.string.convulsions, R.string.diazepam4, R.string.convulsions1,
+                                R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
+                                R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
+                                R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                                R.string.other8, R.string.refer_urgently);
+                    }else{
+                        messages = Arrays.asList(R.string.first_dose, R.string.ampicilin4, R.string.gentamicin4,
+                                R.string.other1, R.string.other2, R.string.other3,
+                                R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                                R.string.other8, R.string.refer_urgently);
+                    }
+                }else if (ag >= 12 && ag < 36){
+                    if (s.contains("Convulsions")){
+                        messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12, R.string.gentamicin12,
+                                R.string.convulsions, R.string.diazepam12, R.string.convulsions1,
+                                R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
+                                R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
+                                R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                                R.string.other8, R.string.refer_urgently);
+                    }else{
+                        messages = Arrays.asList(R.string.first_dose, R.string.ampicilin12, R.string.gentamicin12,
+                                R.string.other1, R.string.other2, R.string.other3,
+                                R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                                R.string.other8, R.string.refer_urgently);
+                    }
+
+                }else if (ag >= 36){
+                    if (s.contains("Convulsions")){
+                        messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3, R.string.gentamicin3,
+                                R.string.convulsions, R.string.diazepam3, R.string.convulsions1,
+                                R.string.convulsions2, R.string.convulsions3, R.string.convulsions4,
+                                R.string.convulsions5, R.string.other1, R.string.other2, R.string.other3,
+                                R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                                R.string.other8, R.string.refer_urgently);
+                    }else{
+                        messages = Arrays.asList(R.string.first_dose, R.string.ampicilin3, R.string.gentamicin3,
+                                R.string.other1, R.string.other2, R.string.other3,
+                                R.string.other4, R.string.other5, R.string.other6, R.string.other7,
+                                R.string.other8, R.string.refer_urgently);
+                    }
+
+                }
             }
 
         }else {
@@ -152,6 +212,14 @@ public class Instructions {
                 messages = Arrays.asList(R.string.amoxicillin12, R.string.pneumonia1, R.string.pneumonia2);
             }else if (we >= 14.0){
                 messages = Arrays.asList(R.string.amoxicillin3, R.string.pneumonia1, R.string.pneumonia2);
+            }else {
+                if (ag >= 2 && ag < 12){
+                    messages = Arrays.asList(R.string.amoxicillin2, R.string.pneumonia1, R.string.pneumonia2);
+                }else if (ag >= 12 && ag < 36){
+                    messages = Arrays.asList(R.string.amoxicillin12, R.string.pneumonia1, R.string.pneumonia2);
+                }else if (ag >= 36 && ag < 60){
+                    messages = Arrays.asList(R.string.amoxicillin3, R.string.pneumonia1, R.string.pneumonia2);
+                }
             }
         }else {
             if (ag >= 2 && ag < 12){
@@ -185,6 +253,20 @@ public class Instructions {
                 }
             }else if (we >= 14.0){
                 messages = Arrays.asList(R.string.febril1, R.string.artesunate4, R.string.iartesunate3, R.string.quinine3, R.string.paracetamol3, R.string.refer_urgently);
+            }else {
+                if (ag >= 2 && ag < 4 ){
+                    messages = Arrays.asList(R.string.febril1, R.string.artesunate2, R.string.iartesunate2, R.string.quinine2, R.string.paracetamol2, R.string.refer_urgently);
+                }else if (ag >= 4 && ag < 12){
+                    messages = Arrays.asList(R.string.febril1, R.string.artesunate4, R.string.iartesunate4, R.string.quinine4, R.string.paracetamol2, R.string.refer_urgently);
+                }else if (ag >= 12 && ag < 36 ){
+                    if (ag < 24 ){
+                        messages = Arrays.asList(R.string.febril1, R.string.artesunate4, R.string.iartesunate12, R.string.quinine12, R.string.paracetamol2, R.string.refer_urgently);
+                    }else {
+                        messages = Arrays.asList(R.string.febril1, R.string.artesunate5, R.string.iartesunate12, R.string.quinine24, R.string.paracetamol2, R.string.refer_urgently);
+                    }
+                }else if (ag >= 36  ){
+                    messages = Arrays.asList(R.string.febril1, R.string.artesunate5, R.string.iartesunate3, R.string.quinine3, R.string.paracetamol3, R.string.refer_urgently);
+                }
             }
         }else {
             if (ag >= 2 && ag < 4 ){

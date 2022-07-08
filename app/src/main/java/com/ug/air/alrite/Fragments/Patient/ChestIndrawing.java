@@ -78,8 +78,8 @@ public class ChestIndrawing extends Fragment {
     private static final int NOT = 2;
     public static final String CHOICE7 = "chest_indrawing";
     public static final String POINT = "respiratory_rate_score";
-    public static final String POINT2 = "respiratory_rate_score";
-    public static final String CHOICE72 = "cchest_indrawing_2";
+    public static final String POINT2 = "respiratory_rate_score_2";
+    public static final String CHOICE72 = "chest_indrawing_2";
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String CIDIAGNOSIS = "diagnosis_7";
     SharedPreferences sharedPreferences, sharedPreferences1;
