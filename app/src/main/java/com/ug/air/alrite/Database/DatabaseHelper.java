@@ -14,6 +14,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "alrite_table";
     public static final String COL_1 = "ID";
     public static final String COL_2 = "PERIOD";
+    public static final String COL_3 = "TOKEN";
 
 
     public DatabaseHelper(@Nullable Context context) {
@@ -22,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, PERIOD INTEGER) ");
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, PERIOD INTEGER, TOKEN TEXT) ");
     }
 
     @Override
@@ -31,10 +32,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(int period){
+    public boolean insertData(int period, String token){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2, period);
+        contentValues.put(COL_3, token);
         long results = db.insert(TABLE_NAME, null, contentValues);
         if (results == -1){
             return false;
@@ -54,6 +56,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, id);
         contentValues.put(COL_2, period);
+        db.update(TABLE_NAME, contentValues, "ID = ?", new String[] {id});
+        return true;
+    }
+
+    public boolean updateToken(String id, String token){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1, id);
+        contentValues.put(COL_3, token);
         db.update(TABLE_NAME, contentValues, "ID = ?", new String[] {id});
         return true;
     }

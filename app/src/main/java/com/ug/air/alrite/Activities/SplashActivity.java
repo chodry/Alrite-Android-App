@@ -67,7 +67,7 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }else {
-                    databaseHelper.insertData(1);
+                    databaseHelper.insertData(1, "");
                     i = new Intent(SplashActivity.this, Dashboard.class);
                     startActivity(i);
                     finish();
