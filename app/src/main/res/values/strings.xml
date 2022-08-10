@@ -201,4 +201,71 @@
     <string name="spacer16">If a spacer is being used for the first time, it should be primed by 4–5 extra puffs from the inhaler.</string>
     <string name="spacer17">If a spacer is being used for the first time, it should be primed by 4–5 extra puffs from the inhaler before giving it to the child.</string>
 
+    <!--   Learn   -->
+
+    <string name="chest1">Chest Indrawing</string>
+    <string name="chest2">The lower ribs on both sides of the chest are pulled in when the child breathes in, even when the child is not crying.</string>
+
+    <string name="chest3">Select Mild if the ribs and area below the chest are retracting moderately.</string>
+    <string name="chest4">Select Moderate if the above symptoms are present as well as flared nostrils or indrawing below the sternum (upper chest).</string>
+    <string name="chest5">Select Severe if there are large retractions in the upper and lower chest areas as well as nostril flaring or grunting noises.</string>
+
+    <string name="pulse1">Pulse Oximeter</string>
+    <string name="pulse2">A device that measures the oxygen saturation of blood in a patient.</string>
+    <string name="pulse3">A device that measures the oxygen saturation of blood in a patient. This clip device may be used on an earlobe, across the bridge of the nose, in the mouth, on a toe, or on a fingertip. Normal levels are above 90 percent.</string>
+
+    <string name="improve1">Improvise a Spacer</string>
+    <string name="improve2">A spacer is a device that can improve the effectiveness of inhalers by allowing more of the steroids to be inhaled deeply into the lungs.</string>
+    <string name="improve3">A spacer is a device that can improve the effectiveness of inhalers by allowing more of the steroids to be inhaled deeply into the lungs. If no spacers are available, they can be improvised using an empty plastic water bottle</string>
+
+    <string name="improve4">Find an empty plastic water bottle and remove the cap.</string>
+    <string name="improve5">Cut a hole into the bottom of the bottle in the same shape as the mouth of the inhaler.</string>
+    <string name="improve6">Cut the bottle between the upper quarter and lower &#190; and throw away the upper part.</string>
+    <string name="improve7">Soften the cut edge of the bottle with a lighter or candle flame.</string>
+    <string name="improve8">Insert the inhaler into the bottom opening as shown in the image.</string>
+    <string name="improve9">A mask can be made by following the above steps with a plastic cup.</string>
+
+    <string name="whe1">Wheezing</string>
+    <string name="whe2">A high-pitched whistling sound associated with labored breathing</string>
+
+    <string name="whe8">Listen to breathing with a stethoscope</string>
+    <string name="whe9">Select Mild if the child wheezes somewhat when breathing out</string>
+    <string name="whe10">Select Moderate if the child wheezes loudly when breathing out</string>
+    <string name="whe11">Select Severe if the child is wheezing loudly breathing in and out and/or the breaths are very soft.</string>
+
+    <string name="bro1">Inhaled Bronchodilator</string>
+    <string name="bro2">An inhaled medication that relaxes constricted air passages to make breathing easier</string>
+
+    <string name="bro4">Remove inhaler and spacer caps.</string>
+    <string name="bro5">Shake inhaler for 5 seconds.</string>
+    <string name="bro6">Insert inhaler into spacer.</string>
+    <string name="bro7">If the spacer has never been used, prepare it with 4 puffs from the inhaler.</string>
+    <string name="bro8">Put mask over nose and mouth with a good seal.</string>
+    <string name="bro9">Press inhaler down once.</string>
+    <string name="bro10">Breathe normally for 3 to 6 breaths to empty spacer. Slow your breathing if there is a whistle sound.</string>
+    <string name="bro11">Remove mask from child’s face and wait 10 seconds</string>
+    <string name="bro12">Shake inhaler then start with step 4 before each additional puff.</string>
+    <string name="bro13">Wipe skin around child’s mouth with a wet cloth when done.</string>
+    <string name="bro14">Reassess child in AT LEAST 10 minutes</string>
+
+    <string name="con1">Convulsions</string>
+    <string name="con2">Seizures, involuntary shaking movements of the body often caused by serious infections or high fever</string>
+    <string name="con3">A sudden, violent, irregular movement of a limb or of the body, caused by involuntary contraction of muscles and associated especially with brain disorders such as epilepsy, the presence of certain toxins or other agents in the blood, or fever in children.</string>
+
+    <string name="dia1">Diazepam</string>
+    <string name="dia2">A medicine used to stop convulsions</string>
+    <string name="dia3">Diazepam typically produces a calming effect. It is commonly used to treat a range of conditions including anxiety, alcohol withdrawal syndrome, muscle spasms, seizures, trouble sleeping, and restless legs syndrome. When given into a vein, effects begin in one to five minutes and last up to an hour. By mouth, effects may take 40 minutes to begin.</string>
+
+    <string name="pn1">Pneumonia</string>
+    <string name="pn2">Lung inflammation caused by bacterial or viral infection</string>
+    <string name="pn3">Pneumonia is an inflammatory condition of the lung affecting primarily the small air sacs known as alveoli. Symptoms can include productive or dry cough, chest pain, fever, and trouble breathing. Severity is variable.</string>
+
+    <string name="un1">Unresponsive</string>
+    <string name="un2">A condition in which a person does not respond to questions, commands or painful stimuli</string>
+    <string name="un3">If a person or their body is unresponsive, they do not react physically in a normal way, or do not make any movements.</string>
+
+    <string name="st1">Stridor</string>
+    <string name="st2">A noise on breathing in due to obstruction of the upper airway</string>
+    <string name="st4">Stridor is a loud whistling sound made when taking in a breath. It is a sign of upper airway blockage and must be treated right away to prevent the airway from completely closing.</string>
+
 </resources>

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.ug.air.alrite.APIs.ApiClient;
 import com.ug.air.alrite.APIs.JsonPlaceHolder;
 import com.ug.air.alrite.Activities.Dashboard;
+import com.ug.air.alrite.Activities.LearnActivity;
 import com.ug.air.alrite.Activities.PatientActivity;
 import com.ug.air.alrite.Activities.SplashActivity;
 import com.ug.air.alrite.BuildConfig;
@@ -88,8 +89,8 @@ public class HomeFragment extends Fragment {
         view.findViewById(R.id.btn_learn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), GlossaryActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), LearnActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -126,20 +127,20 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        Cursor res = databaseHelper.getData("1");
-        StringBuffer buffer = new StringBuffer();
-        while (res.moveToNext()){
-            period =  res.getInt(1);
-            token = res.getString(2);
-        }
-
-//        sendDataToServer();
+//        Cursor res = databaseHelper.getData("1");
+//        StringBuffer buffer = new StringBuffer();
+//        while (res.moveToNext()){
+//            period =  res.getInt(1);
+//            token = res.getString(2);
+//        }
 //
-        if (period == 1){
-            checkPatientReadiness();
-            sendDataToServer();
-            databaseHelper.updatePeriod("1", 2);
-        }
+////        sendDataToServer();
+////
+//        if (period == 1){
+//            checkPatientReadiness();
+////            sendDataToServer();
+//            databaseHelper.updatePeriod("1", 2);
+//        }
 
     }
 
