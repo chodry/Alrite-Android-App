@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "https://adsurv.herokuapp.com/apis/";
+    private static final String BASE_URL = "https://alrite.herokuapp.com/alrite/apis/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {

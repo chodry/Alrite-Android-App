@@ -9,6 +9,7 @@ import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Breathless.S5;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DURATION;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.FILENAME;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.BDIAGNOSIS;
@@ -41,6 +42,7 @@ import static com.ug.air.alrite.Fragments.Patient.Oxygen.OXDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Oxygen.OXY;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING2;
+import static com.ug.air.alrite.Fragments.Patient.RRCounter.INITIAL_DATE_2;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.SECOND;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE2;
@@ -91,6 +93,7 @@ import com.ug.air.alrite.R;
 import com.ug.air.alrite.Utils.Calculations.Instructions;
 
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,6 +104,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class DiagnosisActivity extends AppCompatActivity {
 
@@ -115,6 +119,8 @@ public class DiagnosisActivity extends AppCompatActivity {
     List<String> messages = new ArrayList<>();;
     List messageList = new ArrayList<>();;
     public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String DATE_2 = "end_date_2";
+    public static final String DURATION_2 = "duration_2";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
     String age, uniqueID, age2, folder;
@@ -517,13 +523,15 @@ public class DiagnosisActivity extends AppCompatActivity {
     private void saveForm() {
 
         String file = sharedPreferences.getString(FILENAME, "");
+
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+        String formattedDate = df.format(currentTime);
+
         if (file.isEmpty()){
-            Date currentTime = Calendar.getInstance().getTime();
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
-            String formattedDate = df.format(currentTime);
 
+            getDuration(currentTime);
             uniqueID = UUID.randomUUID().toString();
-
             editor.putString(DATE, formattedDate);
             editor.putString(UUIDS, uniqueID);
             editor.apply();
@@ -531,9 +539,52 @@ public class DiagnosisActivity extends AppCompatActivity {
             String filename = formattedDate + "_" + uniqueID;
             doLogic(filename);
         }else {
+
+            editor.putString(DATE_2, formattedDate);
+            editor.apply();
+
+            getDuration2(currentTime);
             doLogic(file);
         }
 
+    }
+
+    private void getDuration(Date currentTime) {
+        String initial_date = sharedPreferences.getString(INITIAL_DATE, "");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+        try {
+            Date d1 = format.parse(initial_date);
+
+            long diff = currentTime.getTime() - d1.getTime();//as given
+
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+            String duration = String.valueOf(minutes);
+            editor.putString(DURATION, duration);
+            editor.apply();
+            Log.d("Difference in time", "getTimeDifference: " + minutes);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getDuration2(Date currentTime) {
+        String initial_date = sharedPreferences.getString(INITIAL_DATE_2, "");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+        try {
+            Date d1 = format.parse(initial_date);
+
+            long diff = currentTime.getTime() - d1.getTime();//as given
+
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+            String duration = String.valueOf(minutes);
+            editor.putString(DURATION_2, duration);
+            editor.apply();
+            Log.d("Difference in time", "getTimeDifference: " + minutes);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     private void doLogic(String file) {

@@ -67,6 +67,8 @@ public class AccountFragment extends Fragment {
     }
 
     private void sendToServer() {
+        loginBtn.setEnabled(false);
+        progressBar.setVisibility(View.VISIBLE);
         User user = new User(username, password);
         Call<Token> call = jsonPlaceHolder.login(user);
         call.enqueue(new Callback<Token>() {
@@ -74,18 +76,27 @@ public class AccountFragment extends Fragment {
             public void onResponse(Call<Token> call, Response<Token> response) {
                 if (!response.isSuccessful()){
                     Toast.makeText(getActivity(), "Please check your username and password", Toast.LENGTH_SHORT).show();
+                    loginBtn.setEnabled(true);
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
+
+                loginBtn.setEnabled(true);
+                progressBar.setVisibility(View.INVISIBLE);
+
                 token = response.body().getToken();
-                databaseHelper.updateToken("1", token);
+                databaseHelper.insertData(1, token);
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.navHostFragment, new HomeFragment());
                 fr.commit();
+
             }
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
                 Toast.makeText(getActivity(), "Please turn on your internet connection", Toast.LENGTH_SHORT).show();
+                loginBtn.setEnabled(true);
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
     }

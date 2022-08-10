@@ -1,11 +1,18 @@
 package com.ug.air.alrite.Activities;
 
+import static com.ug.air.alrite.Activities.DiagnosisActivity.DATE_2;
+import static com.ug.air.alrite.Activities.DiagnosisActivity.DURATION_2;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DATE;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DURATION;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.FILENAME;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.BRONC;
 import static com.ug.air.alrite.Fragments.Patient.Initials.CIN;
+import static com.ug.air.alrite.Fragments.Patient.Initials.INITIAL_DATE;
 import static com.ug.air.alrite.Fragments.Patient.Initials.PIN;
+import static com.ug.air.alrite.Fragments.Patient.RRCounter.FASTBREATHING2;
+import static com.ug.air.alrite.Fragments.Patient.RRCounter.INITIAL_DATE_2;
 import static com.ug.air.alrite.Fragments.Patient.RRCounter.SECOND;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,12 +38,14 @@ import com.ug.air.alrite.Fragments.Patient.Wheezing;
 import com.ug.air.alrite.R;
 
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class PatientActivity extends AppCompatActivity {
 
@@ -105,16 +115,39 @@ public class PatientActivity extends AppCompatActivity {
                         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
                         String formattedDate = df.format(currentTime);
 
-                        String uniqueID = UUID.randomUUID().toString();
+                        String file = sharedPreferences.getString(FILENAME, "");
 
-                        editor.putString(DATE, formattedDate);
-                        editor.putString(UUIDS, uniqueID);
-                        editor.putString(INCOMPLETE, "incomplete");
-                        editor.apply();
+                        if (file.isEmpty()){
+                            getDuration(currentTime);
 
-                        String filename = formattedDate + "_" + uniqueID;
-                        doLogic(filename);
-                        dialog.dismiss();
+                            String uniqueID = UUID.randomUUID().toString();
+
+                            editor.putString(DATE, formattedDate);
+                            editor.putString(UUIDS, uniqueID);
+                            editor.putString(INCOMPLETE, "incomplete");
+                            editor.apply();
+
+                            String filename = formattedDate + "_" + uniqueID;
+                            doLogic(filename);
+                            dialog.dismiss();
+                        }
+                        else {
+                            String fast = sharedPreferences.getString(FASTBREATHING2, "");
+                            if (fast.isEmpty()){
+                                dialog.dismiss();
+                                startActivity(new Intent(PatientActivity.this, Dashboard.class));
+                                finish();
+                            }else{
+                                editor.putString(DATE_2, formattedDate);
+                                editor.putString(INCOMPLETE, "incomplete");
+                                editor.apply();
+
+                                getDuration2(currentTime);
+                                doLogic(file);
+                            }
+
+                        }
+
                     }
                 }
             });
@@ -122,6 +155,44 @@ public class PatientActivity extends AppCompatActivity {
             dialog.show();
         }
 
+    }
+
+    private void getDuration(Date currentTime) {
+        String initial_date = sharedPreferences.getString(INITIAL_DATE, "");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+        try {
+            Date d1 = format.parse(initial_date);
+
+            long diff = currentTime.getTime() - d1.getTime();//as given
+
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+            String duration = String.valueOf(minutes);
+            editor.putString(DURATION, duration);
+            editor.apply();
+            Log.d("Difference in time", "getTimeDifference: " + minutes);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getDuration2(Date currentTime) {
+        String initial_date = sharedPreferences.getString(INITIAL_DATE_2, "");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+        try {
+            Date d1 = format.parse(initial_date);
+
+            long diff = currentTime.getTime() - d1.getTime();//as given
+
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+            String duration = String.valueOf(minutes);
+            editor.putString(DURATION_2, duration);
+            editor.apply();
+            Log.d("Difference in time", "getTimeDifference: " + minutes);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     private void doLogic(String file) {

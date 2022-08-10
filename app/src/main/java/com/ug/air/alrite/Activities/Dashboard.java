@@ -3,22 +3,17 @@ package com.ug.air.alrite.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.ug.air.alrite.Fragments.Patient.Initials;
+import com.ug.air.alrite.Fragments.navigation.AccountFragment;
 import com.ug.air.alrite.R;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -44,6 +39,11 @@ public class Dashboard extends AppCompatActivity {
 
         NavController navController = androidx.navigation.Navigation.findNavController(this, R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.add(R.id.navigationView, new AccountFragment());
+//        fragmentTransaction.commit();
+
 
 
     }

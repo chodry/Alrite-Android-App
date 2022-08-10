@@ -2,6 +2,7 @@ package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.BDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.REASON;
+import static com.ug.air.alrite.Fragments.Patient.Initials.INITIAL_DATE;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -23,6 +24,7 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +43,7 @@ import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
 import com.ug.air.alrite.Worker.NotifyWorker;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,6 +71,7 @@ public class Bronchodilator extends Fragment {
     public static final String DATE = "end_date";
     public static final String FILENAME = "filename";
     public static final String UUIDS = "patient_uuid";
+    public static final String DURATION = "duration";
     TextView txtDisease, txtDefinition, txtOk, txtDiagnosis;
     LinearLayout linearLayoutDisease;
     LinearLayout linearLayout_instruction;
@@ -224,6 +228,8 @@ public class Bronchodilator extends Fragment {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
         String formattedDate = df.format(currentTime);
 
+        getDuration(currentTime);
+
         uniqueID = UUID.randomUUID().toString();
 
         editor.putString(DATE, formattedDate);
@@ -240,12 +246,31 @@ public class Bronchodilator extends Fragment {
         WorkRequest notifyWorkRequest = new OneTimeWorkRequest
                 .Builder(NotifyWorker.class)
                 .setInputData(inputData)
-                .setInitialDelay(5, TimeUnit.SECONDS)
+                .setInitialDelay(15, TimeUnit.SECONDS)
                 .addTag(filename)
                 .build();
 
         WorkManager.getInstance(getActivity()).enqueueUniqueWork(filename, ExistingWorkPolicy.REPLACE, (OneTimeWorkRequest) notifyWorkRequest);
 
         startActivity(new Intent(getActivity(), DiagnosisActivity.class));
+    }
+
+    private void getDuration(Date currentTime) {
+        String initial_date = sharedPreferences.getString(INITIAL_DATE, "");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+        try {
+            Date d1 = format.parse(initial_date);
+
+            long diff = currentTime.getTime() - d1.getTime();//as given
+
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+            String duration = String.valueOf(minutes);
+            editor.putString(DURATION, duration);
+            editor.apply();
+            Log.d("Difference in time", "getTimeDifference: " + minutes);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

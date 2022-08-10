@@ -28,8 +28,11 @@ import android.widget.Toast;
 import com.ug.air.alrite.R;
 import com.ug.air.alrite.Utils.Calculations.Instructions;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -58,6 +61,7 @@ public class RRCounter extends Fragment {
     SharedPreferences.Editor editor;
     public static final String FASTBREATHING = "breathing_rate";
     public static final String FASTBREATHING2 = "breathing_rate_2";
+    public static final String INITIAL_DATE_2 = "start_date_2";
     public static final String SECOND = "second";
     public static final String RATE = "respiratory_rate";
     public static final String RATE2 = "respiratory_rate_2";
@@ -489,12 +493,15 @@ public class RRCounter extends Fragment {
             editor.putString(POINT2, pot);
             editor.apply();
 
+            saveInitialDate();
+
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
             fr.replace(R.id.fragment_container, new Wheezing());
             fr.addToBackStack(null);
             fr.commit();
 
-        }else{
+        }
+        else{
             editor.putString(FASTBREATHING, rating);
             editor.putString(RATE, rate);
             editor.apply();
@@ -522,6 +529,14 @@ public class RRCounter extends Fragment {
             fr.commit();
         }
 
+    }
+
+    private void saveInitialDate() {
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+        String formattedDate = df.format(currentTime);
+
+        editor.putString(INITIAL_DATE_2, formattedDate);
     }
 
     private void loadData() {
