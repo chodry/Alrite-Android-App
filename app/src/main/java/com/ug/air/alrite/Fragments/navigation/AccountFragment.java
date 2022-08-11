@@ -85,7 +85,7 @@ public class AccountFragment extends Fragment {
                 progressBar.setVisibility(View.INVISIBLE);
 
                 token = response.body().getToken();
-                databaseHelper.insertData(1, token);
+                databaseHelper.insertData(1, token, username);
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.navHostFragment, new HomeFragment());
                 fr.commit();

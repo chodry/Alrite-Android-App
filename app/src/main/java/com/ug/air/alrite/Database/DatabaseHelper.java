@@ -62,11 +62,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean updateToken(String id, String token){
+    public boolean updateToken(String id, String token, String username){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, id);
         contentValues.put(COL_3, token);
+        contentValues.put(COL_4, username);
         db.update(TABLE_NAME, contentValues, "ID = ?", new String[] {id});
         return true;
     }

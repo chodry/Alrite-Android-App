@@ -29,6 +29,7 @@ import com.ug.air.alrite.Database.DatabaseHelper;
 import com.ug.air.alrite.Fragments.Patient.Nasal;
 import com.ug.air.alrite.Fragments.Patient.Wheezing;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Credentials;
 import com.ug.air.alrite.Worker.NotifyWorker2;
 import com.ug.air.alrite.Worker.NotifyWorker3;
 
@@ -51,19 +52,22 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
 
     View view;
-    DatabaseHelper databaseHelper;
     int period = 0;
+    DatabaseHelper databaseHelper;
     String token;
     File[] contents;
     JsonPlaceHolder jsonPlaceHolder;
+    Credentials credentials;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        view =  inflater.inflate(R.layout.fragment_home, container, false);
+
         databaseHelper = new DatabaseHelper(getActivity());
 
-        view =  inflater.inflate(R.layout.fragment_home, container, false);
+        credentials = new Credentials();
 
         checkCredentials();
 
@@ -73,8 +77,15 @@ public class HomeFragment extends Fragment {
     private void checkCredentials() {
         File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/databases/alrite.db");
         if (src.exists()){
-            intFunction();
-//            sendDataToServer();
+            String username = credentials.creds(getActivity()).getUsername();
+            if (username.equals("None")){
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.replace(R.id.navHostFragment, new AccountFragment());
+                fr.commit();
+            }else {
+                intFunction();
+            }
+
         }else {
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
             fr.replace(R.id.navHostFragment, new AccountFragment());
@@ -127,36 +138,31 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        Cursor res = databaseHelper.getData("1");
-        while (res.moveToNext()){
-            period =  res.getInt(1);
-        }
-
-        if (period == 1){
-            checkPatientReadiness();
-            sendDataToServer();
-            databaseHelper.updatePeriod("1", 2);
-        }
+        period = credentials.creds(getActivity()).getPeriod();
+        Toast.makeText(getActivity(), ""+period, Toast.LENGTH_SHORT).show();
+//        if (period == 1){
+//            checkPatientReadiness();
+//            sendDataToServer();
+//            databaseHelper.updatePeriod("1", 2);
+//        }
 
     }
 
-
     private void checkPatientReadiness() {
-        Constraints constraints = new Constraints.Builder().build();
 
         WorkRequest uploadWorkRequest = new PeriodicWorkRequest
                 .Builder(NotifyWorker2.class, 15, TimeUnit.MINUTES)
-                .setConstraints(constraints)
                 .build();
 
         WorkManager.getInstance(getActivity()).enqueue(uploadWorkRequest);
 
     }
 
-
     private void sendDataToServer(){
 
-        Constraints constraints = new Constraints.Builder().build();
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
 
         WorkRequest uploadWorkRequest = new PeriodicWorkRequest
                 .Builder(NotifyWorker3.class, 20, TimeUnit.MINUTES)

@@ -120,7 +120,7 @@ public class PatientActivity extends AppCompatActivity {
                         String file = sharedPreferences.getString(FILENAME, "");
 
                         Credentials credentials = new Credentials();
-                        String username = credentials.username(PatientActivity.this);
+                        String username = credentials.creds(PatientActivity.this).getUsername();
 
 
                         if (file.isEmpty()){

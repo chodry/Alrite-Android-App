@@ -38,6 +38,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.ug.air.alrite.Activities.DiagnosisActivity;
+import com.ug.air.alrite.Activities.PatientActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
@@ -233,7 +234,7 @@ public class Bronchodilator extends Fragment {
         getDuration(currentTime);
 
         Credentials credentials = new Credentials();
-        String username = credentials.username(getActivity());
+        String username = credentials.creds(getActivity()).getUsername();
         editor.putString(USERNAME, username);
 
         uniqueID = UUID.randomUUID().toString();

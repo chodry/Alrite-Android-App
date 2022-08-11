@@ -531,7 +531,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         String formattedDate = df.format(currentTime);
 
         Credentials credentials = new Credentials();
-        String username = credentials.username(DiagnosisActivity.this);
+        String username = credentials.creds(DiagnosisActivity.this).getUsername();
 
 
         if (file.isEmpty()){
