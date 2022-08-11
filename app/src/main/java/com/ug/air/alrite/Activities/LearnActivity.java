@@ -6,11 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +40,7 @@ public class LearnActivity extends AppCompatActivity {
     LinearLayout linearLayoutDisease, linearLayout_instruction;
     VideoView videoView;
     MediaPlayer mediaPlayer;
+    ImageView backBtn;
     Dialog dialog, dialog1;
     CardView inst, img, video, learn;
     ArrayList<Assessment> assessments;
@@ -47,6 +52,7 @@ public class LearnActivity extends AppCompatActivity {
         setContentView(R.layout.activity_learn);
 
         recyclerView = findViewById(R.id.learn);
+        backBtn = findViewById(R.id.back);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -75,6 +81,14 @@ public class LearnActivity extends AppCompatActivity {
                 showDialog(title);
             }
         });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LearnActivity.this, Dashboard.class));
+                finish();
+            }
+        });
     }
 
     private void addInforToList(int chest1, int chest2) {
@@ -98,8 +112,8 @@ public class LearnActivity extends AppCompatActivity {
         learn = dialog.findViewById(R.id.learn);
         img = dialog.findViewById(R.id.imageCard);
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         assessments = new ArrayList<>();
         assessmentAdapter = new AssessmentAdapter(assessments);
@@ -114,12 +128,19 @@ public class LearnActivity extends AppCompatActivity {
                 assessments.add(assessment);
             }
 
-            recyclerView.setAdapter(assessmentAdapter);
+            String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.chest_indrawing_glossary_video;
+            Uri uri = Uri.parse(videoPath);
+            videoView.setVideoURI(uri);
 
         }else if (title.equals("Convulsions")){
             setTitleAndDefinition(title, R.string.con3);
 
             inst.setVisibility(View.GONE);
+
+            String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.convulsions_glossary_video;
+            Uri uri = Uri.parse(videoPath);
+            videoView.setVideoURI(uri);
+
         }else if (title.equals("Diazepam")){
             setTitleAndDefinition(title, R.string.dia3);
 
@@ -149,6 +170,11 @@ public class LearnActivity extends AppCompatActivity {
                 Assessment assessment = new Assessment(messages.get(i));
                 assessments.add(assessment);
             }
+
+            String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.bronchodilator_glossary_video;
+            Uri uri = Uri.parse(videoPath);
+            videoView.setVideoURI(uri);
+
         }else if (title.equals("Pneumonia")){
             setTitleAndDefinition(title, R.string.pn3);
             inst.setVisibility(View.GONE);
@@ -161,6 +187,11 @@ public class LearnActivity extends AppCompatActivity {
         }else if (title.equals("Stridor")){
             setTitleAndDefinition(title, R.string.st4);
             inst.setVisibility(View.GONE);
+
+            String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.stridor_glossary_video;
+            Uri uri = Uri.parse(videoPath);
+            videoView.setVideoURI(uri);
+
         }else if (title.equals("Unresponsive")){
             setTitleAndDefinition(title, R.string.un3);
             inst.setVisibility(View.GONE);
@@ -174,9 +205,30 @@ public class LearnActivity extends AppCompatActivity {
                 Assessment assessment = new Assessment(messages.get(i));
                 assessments.add(assessment);
             }
+
+            String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.wheezing_glossary_video;
+            Uri uri = Uri.parse(videoPath);
+            videoView.setVideoURI(uri);
         }
 
-        recyclerView.setAdapter(assessmentAdapter);
+        recyclerView2.setAdapter(assessmentAdapter);
+
+        ImageView imPlay = dialog.findViewById(R.id.play);
+        imPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imPlay.setVisibility(View.GONE);
+                videoView.start();
+            }
+        });
+
+        videoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imPlay.setVisibility(View.VISIBLE);
+                videoView.pause();
+            }
+        });
 
         txtOk.setOnClickListener(new View.OnClickListener() {
             @Override
