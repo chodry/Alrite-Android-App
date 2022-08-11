@@ -15,6 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_1 = "ID";
     public static final String COL_2 = "PERIOD";
     public static final String COL_3 = "TOKEN";
+    public static final String COL_4 = "USERNAME";
 
 
     public DatabaseHelper(@Nullable Context context) {
@@ -23,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, PERIOD INTEGER, TOKEN TEXT) ");
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, PERIOD INTEGER, TOKEN TEXT, USERNAME TEXT) ");
     }
 
     @Override
@@ -32,11 +33,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(int period, String token){
+    public boolean insertData(int period, String token, String username){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2, period);
         contentValues.put(COL_3, token);
+        contentValues.put(COL_4, username);
         long results = db.insert(TABLE_NAME, null, contentValues);
         if (results == -1){
             return false;

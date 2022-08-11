@@ -11,6 +11,7 @@ import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DURATION;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.FILENAME;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.USERNAME;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.BDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.REASON;
@@ -91,6 +92,7 @@ import com.ug.air.alrite.Models.Diagnosis;
 import com.ug.air.alrite.Models.Summary;
 import com.ug.air.alrite.R;
 import com.ug.air.alrite.Utils.Calculations.Instructions;
+import com.ug.air.alrite.Utils.Credentials;
 
 import java.io.File;
 import java.text.ParseException;
@@ -528,9 +530,15 @@ public class DiagnosisActivity extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
         String formattedDate = df.format(currentTime);
 
+        Credentials credentials = new Credentials();
+        String username = credentials.username(DiagnosisActivity.this);
+
+
         if (file.isEmpty()){
 
             getDuration(currentTime);
+
+            editor.putString(USERNAME, username);
             uniqueID = UUID.randomUUID().toString();
             editor.putString(DATE, formattedDate);
             editor.putString(UUIDS, uniqueID);

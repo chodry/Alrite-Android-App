@@ -6,6 +6,7 @@ import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DURATION;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.FILENAME;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.USERNAME;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.UUIDS;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.BRONC;
 import static com.ug.air.alrite.Fragments.Patient.Initials.CIN;
@@ -36,6 +37,7 @@ import com.ug.air.alrite.Fragments.Patient.Initials;
 import com.ug.air.alrite.Fragments.Patient.OtherPatients;
 import com.ug.air.alrite.Fragments.Patient.Wheezing;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Credentials;
 
 import java.io.File;
 import java.text.ParseException;
@@ -117,12 +119,17 @@ public class PatientActivity extends AppCompatActivity {
 
                         String file = sharedPreferences.getString(FILENAME, "");
 
+                        Credentials credentials = new Credentials();
+                        String username = credentials.username(PatientActivity.this);
+
+
                         if (file.isEmpty()){
                             getDuration(currentTime);
 
                             String uniqueID = UUID.randomUUID().toString();
 
                             editor.putString(DATE, formattedDate);
+                            editor.putString(USERNAME, username);
                             editor.putString(UUIDS, uniqueID);
                             editor.putString(INCOMPLETE, "incomplete");
                             editor.apply();
@@ -138,6 +145,7 @@ public class PatientActivity extends AppCompatActivity {
                                 startActivity(new Intent(PatientActivity.this, Dashboard.class));
                                 finish();
                             }else{
+
                                 editor.putString(DATE_2, formattedDate);
                                 editor.putString(INCOMPLETE, "incomplete");
                                 editor.apply();

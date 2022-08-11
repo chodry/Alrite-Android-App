@@ -127,20 +127,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        Cursor res = databaseHelper.getData("1");
-//        StringBuffer buffer = new StringBuffer();
-//        while (res.moveToNext()){
-//            period =  res.getInt(1);
-//            token = res.getString(2);
-//        }
-//
-////        sendDataToServer();
-////
-//        if (period == 1){
-//            checkPatientReadiness();
-////            sendDataToServer();
-//            databaseHelper.updatePeriod("1", 2);
-//        }
+        Cursor res = databaseHelper.getData("1");
+        while (res.moveToNext()){
+            period =  res.getInt(1);
+        }
+
+        if (period == 1){
+            checkPatientReadiness();
+            sendDataToServer();
+            databaseHelper.updatePeriod("1", 2);
+        }
 
     }
 

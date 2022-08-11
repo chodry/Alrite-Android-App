@@ -62,9 +62,11 @@
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/respiratory_results_ayout.xml" value="0.25" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/layout/video_layout.xml" value="0.25" />
         <entry key="..\:/chodrine/MTN/android projects/Alrite/app/src/main/res/menu/navigation_menu.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/drawable/bg_button.xml" value="0.268" />
         <entry key="app/src/main/res/drawable/homebackground.xml" value="0.2055" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.2215" />
         <entry key="app/src/main/res/drawable/ic_add_circle_black_24dp.xml" value="0.2215" />
+        <entry key="app/src/main/res/drawable/ic_back.xml" value="0.268" />
         <entry key="app/src/main/res/drawable/ic_baseline_maximize_24.xml" value="0.2215" />
         <entry key="app/src/main/res/drawable/primary_button.xml" value="0.268" />
         <entry key="app/src/main/res/drawable/text_input_bg.xml" value="0.268" />

@@ -41,6 +41,7 @@ import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Credentials;
 import com.ug.air.alrite.Worker.NotifyWorker;
 
 import java.text.ParseException;
@@ -71,6 +72,7 @@ public class Bronchodilator extends Fragment {
     public static final String DATE = "end_date";
     public static final String FILENAME = "filename";
     public static final String UUIDS = "patient_uuid";
+    public static final String USERNAME = "clinician";
     public static final String DURATION = "duration";
     TextView txtDisease, txtDefinition, txtOk, txtDiagnosis;
     LinearLayout linearLayoutDisease;
@@ -230,6 +232,10 @@ public class Bronchodilator extends Fragment {
 
         getDuration(currentTime);
 
+        Credentials credentials = new Credentials();
+        String username = credentials.username(getActivity());
+        editor.putString(USERNAME, username);
+
         uniqueID = UUID.randomUUID().toString();
 
         editor.putString(DATE, formattedDate);
@@ -246,7 +252,7 @@ public class Bronchodilator extends Fragment {
         WorkRequest notifyWorkRequest = new OneTimeWorkRequest
                 .Builder(NotifyWorker.class)
                 .setInputData(inputData)
-                .setInitialDelay(15, TimeUnit.SECONDS)
+                .setInitialDelay(15, TimeUnit.MINUTES)
                 .addTag(filename)
                 .build();
 

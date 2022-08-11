@@ -46,7 +46,7 @@ import java.util.concurrent.TimeUnit;
 
 public class NotifyWorker2 extends Worker {
 
-    private NotificationManager notificationManager;
+    private NotificationManager notificationManager2;
     File[] contents;
     MediaPlayer mediaPlayer;
     AudioManager audioManager;
@@ -57,7 +57,7 @@ public class NotifyWorker2 extends Worker {
 
     public NotifyWorker2(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
-        notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+        notificationManager2 = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
 //        alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 //        mediaPlayer = MediaPlayer.create(getApplicationContext(), alarmSound);
 //        vibrator = (Vibrator) getApplicationContext().getSystemService(VIBRATOR_SERVICE);
@@ -67,7 +67,7 @@ public class NotifyWorker2 extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        readData();
+        readData2();
 //        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 //            @Override
 //            public void onCompletion(MediaPlayer mp) {
@@ -79,7 +79,7 @@ public class NotifyWorker2 extends Worker {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void readData() {
+    private void readData2() {
         Date currentTime = Calendar.getInstance().getTime();
         File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs");
         if (src.exists()){
@@ -135,22 +135,22 @@ public class NotifyWorker2 extends Worker {
 //                            vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
 //                            break;
 //                    }
-                    createForegroundInfo(s);
+                    createForegroundInfo2(s);
                 }
 
             }
         }
     }
 
-    private void createForegroundInfo(@NonNull String progress) {
+    private void createForegroundInfo2(@NonNull String progress) {
         // Build a notification using bytesRead and contentLength
 
-        Context context = getApplicationContext();
-        String id = "alright_2";
-        String title = "Other Patients Ready for Reassessment";
-        String cancel = "Cancel";
+        Context context2 = getApplicationContext();
+        String id2 = "alright_2";
+        String title2 = "Other Patients Ready for Reassessment";
+        String cancel2 = "Cancel";
         // This PendingIntent can be used to cancel the worker
-        PendingIntent intent = WorkManager.getInstance(context)
+        PendingIntent intent2 = WorkManager.getInstance(context2)
                 .createCancelPendingIntent(getId());
 
 //        Intent intent1 = new Intent(context, Bronchodilator.class);
@@ -159,32 +159,32 @@ public class NotifyWorker2 extends Worker {
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            createChannel();
+            createChannel2();
         }
 
-        NotificationCompat.Builder notification = new NotificationCompat.Builder(context, id)
-                .setContentTitle(title)
+        NotificationCompat.Builder notification2 = new NotificationCompat.Builder(context2, id2)
+                .setContentTitle(title2)
                 .setSmallIcon(R.drawable.alrite_logo)
                 .setContentText(progress)
                 .setAutoCancel(true)
 //                .setContentIntent(contentIntent)
-                .addAction(android.R.drawable.ic_delete, cancel, intent);
+                .addAction(android.R.drawable.ic_delete, cancel2, intent2);
 
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
-        notificationManagerCompat.notify(8, notification.build());
+        NotificationManagerCompat notificationManagerCompat2 = NotificationManagerCompat.from(getApplicationContext());
+        notificationManagerCompat2.notify(8, notification2.build());
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private void createChannel() {
+    private void createChannel2() {
         // Create a Notification channel
-        CharSequence name = "Worker Channel";
-        String description = progress;
-        int importance = NotificationManager.IMPORTANCE_DEFAULT;
-        NotificationChannel channel = new NotificationChannel("alright_2", name, importance);
-        channel.setDescription(description);
+        CharSequence name2 = "Checking patients ready for reassessment";
+        String description2 = progress;
+        int importance2 = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationChannel channel2 = new NotificationChannel("alright_2", name2, importance2);
+        channel2.setDescription(description2);
         // Register the channel with the system; you can't change the importance
         // or other notification behaviors after this
-        notificationManager.createNotificationChannel(channel);
+        notificationManager2.createNotificationChannel(channel2);
 
     }
 }
