@@ -537,6 +537,7 @@ public class RRCounter extends Fragment {
         String formattedDate = df.format(currentTime);
 
         editor.putString(INITIAL_DATE_2, formattedDate);
+        editor.apply();
     }
 
     private void loadData() {

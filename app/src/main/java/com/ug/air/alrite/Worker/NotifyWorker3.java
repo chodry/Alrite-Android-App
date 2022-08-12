@@ -151,7 +151,7 @@ public class NotifyWorker3 extends Worker {
                 .addAction(android.R.drawable.ic_delete, cancel22, intent22);
 
         NotificationManagerCompat notificationManagerCompat22 = NotificationManagerCompat.from(getApplicationContext());
-        notificationManagerCompat22.notify(8, notification22.build());
+        notificationManagerCompat22.notify(12, notification22.build());
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

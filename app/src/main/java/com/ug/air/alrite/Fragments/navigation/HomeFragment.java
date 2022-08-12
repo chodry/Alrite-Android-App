@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.work.Constraints;
 import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
@@ -30,6 +31,7 @@ import com.ug.air.alrite.Fragments.Patient.Nasal;
 import com.ug.air.alrite.Fragments.Patient.Wheezing;
 import com.ug.air.alrite.R;
 import com.ug.air.alrite.Utils.Credentials;
+import com.ug.air.alrite.Worker.NotifyWorker;
 import com.ug.air.alrite.Worker.NotifyWorker2;
 import com.ug.air.alrite.Worker.NotifyWorker3;
 
@@ -139,22 +141,22 @@ public class HomeFragment extends Fragment {
         });
 
         period = credentials.creds(getActivity()).getPeriod();
-        Toast.makeText(getActivity(), ""+period, Toast.LENGTH_SHORT).show();
-//        if (period == 1){
-//            checkPatientReadiness();
-//            sendDataToServer();
-//            databaseHelper.updatePeriod("1", 2);
-//        }
+
+        if (period == 1){
+            checkPatientReadiness();
+            sendDataToServer();
+            databaseHelper.updatePeriod("1", 2);
+        }
 
     }
 
     private void checkPatientReadiness() {
 
-        WorkRequest uploadWorkRequest = new PeriodicWorkRequest
+        WorkRequest checkWorkRequest = new PeriodicWorkRequest
                 .Builder(NotifyWorker2.class, 15, TimeUnit.MINUTES)
                 .build();
 
-        WorkManager.getInstance(getActivity()).enqueue(uploadWorkRequest);
+        WorkManager.getInstance(getActivity()).enqueue(checkWorkRequest);
 
     }
 
