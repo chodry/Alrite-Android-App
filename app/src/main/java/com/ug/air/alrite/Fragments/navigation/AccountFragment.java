@@ -15,11 +15,15 @@ import android.widget.Toast;
 
 import com.ug.air.alrite.APIs.ApiClient;
 import com.ug.air.alrite.APIs.JsonPlaceHolder;
+import com.ug.air.alrite.BuildConfig;
 import com.ug.air.alrite.Database.DatabaseHelper;
 import com.ug.air.alrite.Fragments.Patient.Allergies;
 import com.ug.air.alrite.Models.Token;
 import com.ug.air.alrite.Models.User;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Credentials;
+
+import java.io.File;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -85,7 +89,14 @@ public class AccountFragment extends Fragment {
                 progressBar.setVisibility(View.INVISIBLE);
 
                 token = response.body().getToken();
-                databaseHelper.insertData(1, token, username);
+
+                File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/databases/alrite.db");
+                if (src.exists()){
+                    databaseHelper.updateToken("1", token, username);
+                }else {
+                    databaseHelper.insertData(1, token, username);
+                }
+
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.navHostFragment, new HomeFragment());
                 fr.commit();
