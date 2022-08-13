@@ -7,24 +7,22 @@ import static com.ug.air.alrite.Activities.PatientActivity.INCOMPLETE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.BRONC;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Vibrator;
+import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.work.ForegroundInfo;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
@@ -73,12 +71,12 @@ public class NotifyWorker3 extends Worker {
     }
 
     private void readData3() {
+        setForegroundAsync(createForeInfo());
         jsonPlaceHolder = ApiClient.getClient().create(JsonPlaceHolder.class);
         File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs");
         if (src.exists()){
             contents = src.listFiles();
             if (contents.length != 0) {
-                createForeInfo();
                 for (File f : contents) {
                     if (f.isFile()) {
                         String name = f.getName();
@@ -124,7 +122,7 @@ public class NotifyWorker3 extends Worker {
         }
     }
 
-    private void createForeInfo() {
+    private ForegroundInfo createForeInfo() {
         Context context22 = getApplicationContext();
         String id22 = "alright_3";
         String title22 = "Data transfer";
@@ -142,16 +140,27 @@ public class NotifyWorker3 extends Worker {
             createChan();
         }
 
-        NotificationCompat.Builder notification22 = new NotificationCompat.Builder(context22, id22)
+//        NotificationCompat.Builder notification22 = new NotificationCompat.Builder(context22, id22)
+//                .setContentTitle(title22)
+//                .setSmallIcon(R.drawable.alrite_logo)
+//                .setContentText(progress)
+//                .setOngoing(true)
+////                .setContentIntent(contentIntent)
+//                .addAction(android.R.drawable.ic_delete, cancel22, intent22);
+//
+//        NotificationManagerCompat notificationManagerCompat22 = NotificationManagerCompat.from(getApplicationContext());
+//        notificationManagerCompat22.notify(12, notification22.build());
+
+
+        Notification notification = new NotificationCompat.Builder(context22, id22)
                 .setContentTitle(title22)
                 .setSmallIcon(R.drawable.alrite_logo)
                 .setContentText(progress)
-                .setAutoCancel(true)
-//                .setContentIntent(contentIntent)
-                .addAction(android.R.drawable.ic_delete, cancel22, intent22);
+                .setOngoing(true)
+                .addAction(android.R.drawable.ic_delete, cancel22, intent22)
+                .build();
 
-        NotificationManagerCompat notificationManagerCompat22 = NotificationManagerCompat.from(getApplicationContext());
-        notificationManagerCompat22.notify(12, notification22.build());
+        return new ForegroundInfo(12, notification);
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

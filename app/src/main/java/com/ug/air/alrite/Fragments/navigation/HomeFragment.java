@@ -147,7 +147,6 @@ public class HomeFragment extends Fragment {
             sendDataToServer();
             databaseHelper.updatePeriod("1", 2);
         }
-
     }
 
     private void checkPatientReadiness() {
