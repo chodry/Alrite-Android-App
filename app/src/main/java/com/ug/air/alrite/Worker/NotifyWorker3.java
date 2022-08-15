@@ -52,6 +52,7 @@ public class NotifyWorker3 extends Worker {
     public static JsonPlaceHolder jsonPlaceHolder;
     Call<String> call;
     DatabaseHelper databaseHelper;
+    NotificationManagerCompat notificationManagerCompat22;
 
     public NotifyWorker3(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -70,8 +71,9 @@ public class NotifyWorker3 extends Worker {
         return Result.success();
     }
 
+
     private void readData3() {
-        setForegroundAsync(createForeInfo());
+        createForeInfo();
         jsonPlaceHolder = ApiClient.getClient().create(JsonPlaceHolder.class);
         File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs");
         if (src.exists()){
@@ -117,12 +119,13 @@ public class NotifyWorker3 extends Worker {
                         }
                     }
                 }
+                notificationManagerCompat22.cancel(12);
                 Log.d("Background Task", "Executed successfully");
             }
         }
     }
 
-    private ForegroundInfo createForeInfo() {
+    private void createForeInfo() {
         Context context22 = getApplicationContext();
         String id22 = "alright_3";
         String title22 = "Data transfer";
@@ -140,27 +143,17 @@ public class NotifyWorker3 extends Worker {
             createChan();
         }
 
-//        NotificationCompat.Builder notification22 = new NotificationCompat.Builder(context22, id22)
-//                .setContentTitle(title22)
-//                .setSmallIcon(R.drawable.alrite_logo)
-//                .setContentText(progress)
-//                .setOngoing(true)
-////                .setContentIntent(contentIntent)
-//                .addAction(android.R.drawable.ic_delete, cancel22, intent22);
-//
-//        NotificationManagerCompat notificationManagerCompat22 = NotificationManagerCompat.from(getApplicationContext());
-//        notificationManagerCompat22.notify(12, notification22.build());
-
-
-        Notification notification = new NotificationCompat.Builder(context22, id22)
+        NotificationCompat.Builder notification22 = new NotificationCompat.Builder(context22, id22)
                 .setContentTitle(title22)
                 .setSmallIcon(R.drawable.alrite_logo)
                 .setContentText(progress)
-                .setOngoing(true)
-                .addAction(android.R.drawable.ic_delete, cancel22, intent22)
-                .build();
+                .setAutoCancel(true)
+//                .setContentIntent(contentIntent)
+                .addAction(android.R.drawable.ic_delete, cancel22, intent22);
 
-        return new ForegroundInfo(12, notification);
+        notificationManagerCompat22 = NotificationManagerCompat.from(getApplicationContext());
+        notificationManagerCompat22.notify(12, notification22.build());
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

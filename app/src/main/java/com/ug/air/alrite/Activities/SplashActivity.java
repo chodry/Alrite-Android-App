@@ -61,17 +61,17 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-//                File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/databases/alrite.db");
-//                if (src.exists()){
+                File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/databases/alrite.db");
+                if (src.exists()){
                     i = new Intent(SplashActivity.this, Dashboard.class);
                     startActivity(i);
                     finish();
-//                }else {
-//                    databaseHelper.insertData(1, "");
-//                    i = new Intent(SplashActivity.this, Dashboard.class);
-//                    startActivity(i);
-//                    finish();
-//                }
+                }else {
+                    databaseHelper.insertData(1, "None", "None");
+                    i = new Intent(SplashActivity.this, Dashboard.class);
+                    startActivity(i);
+                    finish();
+                }
 
             }
         }, timeout);

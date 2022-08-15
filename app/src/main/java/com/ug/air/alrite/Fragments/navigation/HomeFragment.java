@@ -1,9 +1,19 @@
 package com.ug.air.alrite.Fragments.navigation;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.work.Constraints;
@@ -41,6 +51,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
@@ -60,6 +71,10 @@ public class HomeFragment extends Fragment {
     File[] contents;
     JsonPlaceHolder jsonPlaceHolder;
     Credentials credentials;
+    // Inflate the layout for this fragment
+
+    NotificationManager notificationManager3;
+    NotificationManagerCompat notificationManagerCompat22;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,41 +84,36 @@ public class HomeFragment extends Fragment {
 
         databaseHelper = new DatabaseHelper(getActivity());
 
-        credentials = new Credentials();
-
         checkCredentials();
 
         return view;
     }
 
     private void checkCredentials() {
-        File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/databases/alrite.db");
-        if (src.exists()){
-            String username = credentials.creds(getActivity()).getUsername();
-            if (username.equals("None")){
-                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.navHostFragment, new AccountFragment());
-                fr.commit();
-            }else {
-                intFunction();
-            }
 
-        }else {
+        credentials = new Credentials();
+        String username = credentials.creds(getActivity()).getUsername();
+        if (username.equals("None")){
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
             fr.replace(R.id.navHostFragment, new AccountFragment());
             fr.commit();
+        }else {
+            intFunction();
         }
+
 
     }
 
     private void intFunction() {
-        // Inflate the layout for this fragment
+
+        notificationManager3 = (NotificationManager) requireActivity().getSystemService(Context.NOTIFICATION_SERVICE);
 
         view.findViewById(R.id.btn_learn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LearnActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), LearnActivity.class);
+//                startActivity(intent);
+                notificationManagerCompat22.cancel(123);
             }
         });
 
@@ -140,6 +150,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        credentials = new Credentials();
         period = credentials.creds(getActivity()).getPeriod();
 
         if (period == 1){
@@ -173,4 +184,6 @@ public class HomeFragment extends Fragment {
         WorkManager.getInstance(getActivity()).enqueue(uploadWorkRequest);
 
     }
+
+
 }
