@@ -58,9 +58,9 @@ public class NotifyWorker2 extends Worker {
     public NotifyWorker2(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
         notificationManager2 = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-        alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), alarmSound);
-        vibrator = (Vibrator) getApplicationContext().getSystemService(VIBRATOR_SERVICE);
+//        alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//        mediaPlayer = MediaPlayer.create(getApplicationContext(), alarmSound);
+//        vibrator = (Vibrator) getApplicationContext().getSystemService(VIBRATOR_SERVICE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -68,12 +68,12 @@ public class NotifyWorker2 extends Worker {
     @Override
     public Result doWork() {
         readData2();
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                mediaPlayer.stop();
-            }
-        });
+//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mp) {
+//                mediaPlayer.stop();
+//            }
+//        });
 //        Log.d("Background Task", "Executed successfully");
         return Result.success();
     }
@@ -123,17 +123,17 @@ public class NotifyWorker2 extends Worker {
                     }else {
                         s = "There are " + value + " patients ready for reassessment";
                     }
-                    audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-                    switch (audioManager.getRingerMode()){
-                        case AudioManager.RINGER_MODE_NORMAL:
-                            mediaPlayer.start();
-                            break;
-                        case AudioManager.RINGER_MODE_SILENT:
-                            break;
-                        case AudioManager.RINGER_MODE_VIBRATE:
-                            vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
-                            break;
-                    }
+//                    audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+//                    switch (audioManager.getRingerMode()){
+//                        case AudioManager.RINGER_MODE_NORMAL:
+//                            mediaPlayer.start();
+//                            break;
+//                        case AudioManager.RINGER_MODE_SILENT:
+//                            break;
+//                        case AudioManager.RINGER_MODE_VIBRATE:
+//                            vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+//                            break;
+//                    }
                     createForegroundInfo2(s);
                 }
 

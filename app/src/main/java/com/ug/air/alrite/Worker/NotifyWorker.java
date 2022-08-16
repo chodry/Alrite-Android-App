@@ -57,9 +57,9 @@ public class NotifyWorker extends Worker {
     public NotifyWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
         notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-        alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), alarmSound);
-        vibrator = (Vibrator) getApplicationContext().getSystemService(VIBRATOR_SERVICE);
+//        alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//        mediaPlayer = MediaPlayer.create(getApplicationContext(), alarmSound);
+//        vibrator = (Vibrator) getApplicationContext().getSystemService(VIBRATOR_SERVICE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -67,12 +67,12 @@ public class NotifyWorker extends Worker {
     @Override
     public Result doWork() {
         readData();
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                mediaPlayer.stop();
-            }
-        });
+//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mp) {
+//                mediaPlayer.stop();
+//            }
+//        });
         return Result.success();
     }
 
@@ -98,17 +98,17 @@ public class NotifyWorker extends Worker {
                             editor.putBoolean(REASSESS, true);
                             editor.apply();
                             Log.d("Background Task", "Executed successfully");
-                            audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-                            switch (audioManager.getRingerMode()){
-                                case AudioManager.RINGER_MODE_NORMAL:
-                                    mediaPlayer.start();
-                                    break;
-                                case AudioManager.RINGER_MODE_SILENT:
-                                    break;
-                                case AudioManager.RINGER_MODE_VIBRATE:
-                                    vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
-                                    break;
-                            }
+//                            audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+//                            switch (audioManager.getRingerMode()){
+//                                case AudioManager.RINGER_MODE_NORMAL:
+//                                    mediaPlayer.start();
+//                                    break;
+//                                case AudioManager.RINGER_MODE_SILENT:
+//                                    break;
+//                                case AudioManager.RINGER_MODE_VIBRATE:
+//                                    vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+//                                    break;
+//                            }
                             s = "Patient " + cin + " of Age " + ag + " is ready for reassessment";
                             createForegroundInfo(s);
                         }
