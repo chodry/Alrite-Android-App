@@ -1,5 +1,8 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Activities.SplashActivity.GRANT_COUNT;
+import static com.ug.air.alrite.Activities.SplashActivity.NASAL_COUNT;
+import static com.ug.air.alrite.Activities.SplashActivity.STRIDOR_COUNT;
 import static com.ug.air.alrite.Fragments.Patient.Assess.FINAL_DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE;
@@ -38,6 +41,7 @@ import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
 import com.ug.air.alrite.Utils.Calculations.Instructions;
+import com.ug.air.alrite.Utils.Counter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +134,8 @@ public class Nasal extends Fragment {
         btnNasal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Counter counter = new Counter();
+                counter.Count(requireActivity(), NASAL_COUNT);
                 showDialog();
             }
         });
@@ -137,6 +143,8 @@ public class Nasal extends Fragment {
         btnGrunting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Counter counter = new Counter();
+                counter.Count(requireActivity(), GRANT_COUNT);
                 showDialog2();
             }
         });

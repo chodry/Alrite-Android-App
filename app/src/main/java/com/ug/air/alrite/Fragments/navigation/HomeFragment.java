@@ -153,7 +153,7 @@ public class HomeFragment extends Fragment {
 
         if (period == 1){
             checkPatientReadiness();
-            sendDataToServer();
+//            sendDataToServer();
             databaseHelper.updatePeriod("1", 2);
         }
     }

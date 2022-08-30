@@ -1,5 +1,7 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Activities.SplashActivity.BRONCHODILATOR_COUNT;
+import static com.ug.air.alrite.Activities.SplashActivity.STRIDOR_COUNT;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.BDIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.REASON;
 import static com.ug.air.alrite.Fragments.Patient.Initials.INITIAL_DATE;
@@ -42,6 +44,7 @@ import com.ug.air.alrite.Activities.PatientActivity;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Counter;
 import com.ug.air.alrite.Utils.Credentials;
 import com.ug.air.alrite.Worker.NotifyWorker;
 
@@ -103,6 +106,8 @@ public class Bronchodilator extends Fragment {
         btnBron.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Counter counter = new Counter();
+                counter.Count(requireActivity(), BRONCHODILATOR_COUNT);
                 showVideoDialog();
             }
         });

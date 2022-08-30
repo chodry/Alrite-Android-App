@@ -1,5 +1,7 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Activities.SplashActivity.STRIDOR_COUNT;
+import static com.ug.air.alrite.Activities.SplashActivity.WHEEZING_COUNT;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT;
@@ -43,6 +45,7 @@ import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
 import com.ug.air.alrite.Utils.Calculations.Instructions;
+import com.ug.air.alrite.Utils.Counter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -163,6 +166,8 @@ public class Wheezing extends Fragment {
         btnWheez.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Counter counter = new Counter();
+                counter.Count(requireActivity(), WHEEZING_COUNT);
                 showDialog();
             }
         });

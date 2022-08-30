@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Activities.SplashActivity.RR_COUNTER_COUNT;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT;
 import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT2;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 
 import com.ug.air.alrite.R;
 import com.ug.air.alrite.Utils.Calculations.Instructions;
+import com.ug.air.alrite.Utils.Counter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -131,6 +133,8 @@ public class RRCounter extends Fragment {
 
             @Override
             public void onFinish() {
+                Counter counter = new Counter();
+                counter.Count(requireActivity(), RR_COUNTER_COUNT);
                 evalFastBreathing(ag);
                 showDialog();
             }

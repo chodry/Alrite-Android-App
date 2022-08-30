@@ -37,7 +37,15 @@ public class SplashActivity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
     public static final String APP_OPENING_COUNT = "app_opening_count";
     public static final String LEARN_OPENING_COUNT = "learn_opening_count";
+    public static final String RR_COUNTER_COUNT = "rr_counter_count";
     public static final String COUNTING_DATA = "counter_file";
+    public static final String BRONCHODILATOR_COUNT = "bronchodilator_count";
+    public static final String STRIDOR_COUNT = "stridor_count";
+    public static final String NASAL_COUNT = "nasal_count";
+    public static final String GRANT_COUNT = "grant_count";
+    public static final String WHEEZING_COUNT = "wheezing_count";
+    public static final String CHESTINDRWAING_COUNT = "chest_indrawing_count";
+    public static final String ECZEMA_COUNT = "eczema_count";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
@@ -83,6 +91,14 @@ public class SplashActivity extends AppCompatActivity {
             editor = sharedPreferences.edit();
             editor.putInt(APP_OPENING_COUNT, 0);
             editor.putInt(LEARN_OPENING_COUNT, 0);
+            editor.putInt(RR_COUNTER_COUNT, 0);
+            editor.putInt(BRONCHODILATOR_COUNT, 0);
+            editor.putInt(STRIDOR_COUNT, 0);
+            editor.putInt(NASAL_COUNT, 0);
+            editor.putInt(GRANT_COUNT, 0);
+            editor.putInt(WHEEZING_COUNT, 0);
+            editor.putInt(CHESTINDRWAING_COUNT, 0);
+            editor.putInt(ECZEMA_COUNT, 0);
             editor.apply();
         }
         checkDatabase();

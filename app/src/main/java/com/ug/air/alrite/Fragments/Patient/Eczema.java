@@ -1,5 +1,8 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Activities.SplashActivity.ECZEMA_COUNT;
+import static com.ug.air.alrite.Activities.SplashActivity.STRIDOR_COUNT;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -27,6 +30,7 @@ import android.widget.VideoView;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Counter;
 
 import java.util.ArrayList;
 
@@ -117,6 +121,8 @@ public class Eczema extends Fragment {
         btnEczema.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Counter counter = new Counter();
+                counter.Count(requireActivity(), ECZEMA_COUNT);
                 showDialog();
             }
         });

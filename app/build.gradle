@@ -28,6 +28,8 @@ android {
     buildFeatures {
         mlModelBinding true
     }
+    compileSdkVersion 33
+    buildToolsVersion '33.0.0'
 }
 
 dependencies {

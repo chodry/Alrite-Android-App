@@ -1,5 +1,8 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Activities.SplashActivity.CHESTINDRWAING_COUNT;
+import static com.ug.air.alrite.Activities.SplashActivity.STRIDOR_COUNT;
+import static com.ug.air.alrite.Activities.SplashActivity.WHEEZING_COUNT;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
 import static com.ug.air.alrite.Fragments.Patient.HIVStatus.HDIAGNOSIS;
@@ -51,6 +54,7 @@ import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.R;
 import com.ug.air.alrite.Utils.Calculations.Instructions;
+import com.ug.air.alrite.Utils.Counter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -168,6 +172,8 @@ public class ChestIndrawing extends Fragment {
         btnChest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Counter counter = new Counter();
+                counter.Count(requireActivity(), CHESTINDRWAING_COUNT);
                 showDialog();
             }
         });
