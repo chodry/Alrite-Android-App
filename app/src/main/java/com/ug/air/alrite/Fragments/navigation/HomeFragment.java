@@ -2,11 +2,15 @@ package com.ug.air.alrite.Fragments.navigation;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
+import static com.ug.air.alrite.Activities.SplashActivity.APP_OPENING_COUNT;
+import static com.ug.air.alrite.Activities.SplashActivity.COUNTING_DATA;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +44,7 @@ import com.ug.air.alrite.Database.DatabaseHelper;
 import com.ug.air.alrite.Fragments.Patient.Nasal;
 import com.ug.air.alrite.Fragments.Patient.Wheezing;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Counter;
 import com.ug.air.alrite.Utils.Credentials;
 import com.ug.air.alrite.Worker.NotifyWorker;
 import com.ug.air.alrite.Worker.NotifyWorker2;
@@ -71,10 +76,6 @@ public class HomeFragment extends Fragment {
     File[] contents;
     JsonPlaceHolder jsonPlaceHolder;
     Credentials credentials;
-    // Inflate the layout for this fragment
-
-    NotificationManager notificationManager3;
-    NotificationManagerCompat notificationManagerCompat22;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -105,8 +106,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void intFunction() {
-
-        notificationManager3 = (NotificationManager) requireActivity().getSystemService(Context.NOTIFICATION_SERVICE);
 
         view.findViewById(R.id.btn_learn).setOnClickListener(new View.OnClickListener() {
             @Override

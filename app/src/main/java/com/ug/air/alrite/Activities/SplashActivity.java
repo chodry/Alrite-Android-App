@@ -3,7 +3,9 @@ package com.ug.air.alrite.Activities;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.REASSESS;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,7 +18,10 @@ import android.widget.LinearLayout;
 
 import com.ug.air.alrite.BuildConfig;
 import com.ug.air.alrite.Database.DatabaseHelper;
+import com.ug.air.alrite.Fragments.navigation.AccountFragment;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Counter;
+import com.ug.air.alrite.Utils.Credentials;
 
 import java.io.File;
 import java.text.ParseException;
@@ -30,6 +35,11 @@ public class SplashActivity extends AppCompatActivity {
     LinearLayout logo;
     File[] contents;
     DatabaseHelper databaseHelper;
+    public static final String APP_OPENING_COUNT = "app_opening_count";
+    public static final String LEARN_OPENING_COUNT = "learn_opening_count";
+    public static final String COUNTING_DATA = "counter_file";
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,19 +71,38 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/databases/alrite.db");
-                if (src.exists()){
-                    i = new Intent(SplashActivity.this, Dashboard.class);
-                    startActivity(i);
-                    finish();
-                }else {
-                    databaseHelper.insertData(1, "None", "None");
-                    i = new Intent(SplashActivity.this, Dashboard.class);
-                    startActivity(i);
-                    finish();
-                }
-
+                createFileCounter();
             }
         }, timeout);
+    }
+
+    private void createFileCounter() {
+        File file = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs/counter_file.xml");
+        if (!file.exists()) {
+            sharedPreferences = getSharedPreferences(COUNTING_DATA, Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+            editor.putInt(APP_OPENING_COUNT, 0);
+            editor.putInt(LEARN_OPENING_COUNT, 0);
+            editor.apply();
+        }
+        checkDatabase();
+    }
+
+    private void checkDatabase() {
+        File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/databases/alrite.db");
+        if (src.exists()){
+
+            Credentials credentials = new Credentials();
+            String username = credentials.creds(this).getUsername();
+            if (!username.equals("None")){
+                Counter counter = new Counter();
+                counter.Count(this, APP_OPENING_COUNT);
+            }
+        }else {
+            databaseHelper.insertData(1, "None", "None");
+        }
+        i = new Intent(SplashActivity.this, Dashboard.class);
+        startActivity(i);
+        finish();
     }
 }

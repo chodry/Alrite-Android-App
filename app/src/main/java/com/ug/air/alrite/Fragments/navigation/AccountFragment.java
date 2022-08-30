@@ -1,5 +1,7 @@
 package com.ug.air.alrite.Fragments.navigation;
 
+import static com.ug.air.alrite.Activities.SplashActivity.APP_OPENING_COUNT;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,6 +23,7 @@ import com.ug.air.alrite.Fragments.Patient.Allergies;
 import com.ug.air.alrite.Models.Token;
 import com.ug.air.alrite.Models.User;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Counter;
 import com.ug.air.alrite.Utils.Credentials;
 
 import java.io.File;
@@ -97,6 +100,8 @@ public class AccountFragment extends Fragment {
                     databaseHelper.insertData(1, token, username);
                 }
 
+                Counter counter = new Counter();
+                counter.Count(requireActivity(), APP_OPENING_COUNT);
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.replace(R.id.navHostFragment, new HomeFragment());
                 fr.commit();

@@ -1,5 +1,7 @@
 package com.ug.air.alrite.Activities;
 
+import static com.ug.air.alrite.Activities.SplashActivity.LEARN_OPENING_COUNT;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +28,7 @@ import com.ug.air.alrite.Adapters.LearnAdapter;
 import com.ug.air.alrite.Models.Assessment;
 import com.ug.air.alrite.Models.Learn;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Counter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +57,9 @@ public class LearnActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.learn);
         backBtn = findViewById(R.id.back);
+
+        Counter counter = new Counter();
+        counter.Count(this, LEARN_OPENING_COUNT);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

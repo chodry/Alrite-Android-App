@@ -53,6 +53,7 @@ public class Dashboard extends AppCompatActivity {
                 String label = (String) navDestination.getLabel();
                 if (label.equals("Account")){
                     databaseHelper.updateToken("1", "None", "None");
+//                    something is missing
                 }
             }
         });

@@ -73,7 +73,7 @@ public class NotifyWorker3 extends Worker {
 
 
     private void readData3() {
-        createForeInfo();
+//        createForeInfo();
         jsonPlaceHolder = ApiClient.getClient().create(JsonPlaceHolder.class);
         File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs");
         if (src.exists()){
@@ -119,7 +119,7 @@ public class NotifyWorker3 extends Worker {
                         }
                     }
                 }
-                notificationManagerCompat22.cancel(12);
+//                notificationManagerCompat22.cancel(12);
                 Log.d("Background Task", "Executed successfully");
             }
         }
