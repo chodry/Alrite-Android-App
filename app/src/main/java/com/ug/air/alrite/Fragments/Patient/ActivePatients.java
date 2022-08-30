@@ -181,7 +181,7 @@ public class ActivePatients extends Fragment {
                 for (File f : contents) {
                     if (f.isFile()) {
                         String name = f.getName().toString();
-                        if (!name.equals("sharedPrefs.xml")){
+                        if (!name.equals("sharedPrefs.xml") && !name.equals("counter_file.xml")){
                             String names = name.replace(".xml", "");
                             sharedPreferences = requireActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
                             String bron = sharedPreferences.getString(BRONCHODILATOR, "");

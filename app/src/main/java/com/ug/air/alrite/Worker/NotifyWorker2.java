@@ -88,7 +88,7 @@ public class NotifyWorker2 extends Worker {
                 for (File f : contents) {
                     if (f.isFile()) {
                         String name = f.getName().replace(".xml", "");
-                        if (!name.equals("sharedPrefs")){
+                        if (!name.equals("sharedPrefs") && !name.equals("counter_file")){
                             SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(name, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             String bron = sharedPreferences.getString(BRONCHODILATOR, "");

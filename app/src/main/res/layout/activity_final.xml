@@ -177,7 +177,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Supportive care"
+                    android:text="Supportive care (Lemon tea/ honey tea)"
                     android:textSize="14sp" />
 
                 <CheckBox

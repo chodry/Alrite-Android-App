@@ -89,16 +89,16 @@ public class SplashActivity extends AppCompatActivity {
         if (!file.exists()) {
             sharedPreferences = getSharedPreferences(COUNTING_DATA, Context.MODE_PRIVATE);
             editor = sharedPreferences.edit();
-            editor.putInt(APP_OPENING_COUNT, 0);
-            editor.putInt(LEARN_OPENING_COUNT, 0);
-            editor.putInt(RR_COUNTER_COUNT, 0);
-            editor.putInt(BRONCHODILATOR_COUNT, 0);
-            editor.putInt(STRIDOR_COUNT, 0);
-            editor.putInt(NASAL_COUNT, 0);
-            editor.putInt(GRANT_COUNT, 0);
-            editor.putInt(WHEEZING_COUNT, 0);
-            editor.putInt(CHESTINDRWAING_COUNT, 0);
-            editor.putInt(ECZEMA_COUNT, 0);
+            editor.putString(APP_OPENING_COUNT, "0");
+            editor.putString(LEARN_OPENING_COUNT, "0");
+            editor.putString(RR_COUNTER_COUNT, "0");
+            editor.putString(BRONCHODILATOR_COUNT, "0");
+            editor.putString(STRIDOR_COUNT, "0");
+            editor.putString(NASAL_COUNT, "0");
+            editor.putString(GRANT_COUNT, "0");
+            editor.putString(WHEEZING_COUNT, "0");
+            editor.putString(CHESTINDRWAING_COUNT, "0");
+            editor.putString(ECZEMA_COUNT, "0");
             editor.apply();
         }
         checkDatabase();

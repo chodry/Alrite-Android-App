@@ -82,7 +82,7 @@ public class NotifyWorker3 extends Worker {
                 for (File f : contents) {
                     if (f.isFile()) {
                         String name = f.getName();
-                        if (!name.equals("sharedPrefs.xml")) {
+                        if (!name.equals("sharedPrefs.xml") && !name.equals("counter_file.xml")) {
                             String names = name.replace(".xml", "");
                             SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(names, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();

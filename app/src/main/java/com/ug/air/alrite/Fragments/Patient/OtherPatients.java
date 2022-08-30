@@ -114,7 +114,7 @@ public class OtherPatients extends Fragment {
                 }
                 Collections.reverse(files);
                 for(String name : files){
-                    if (!name.equals("sharedPrefs.xml")){
+                    if (!name.equals("sharedPrefs.xml") && !name.equals("counter_file.xml")){
                         String names = name.replace(".xml", "");
                         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
                         String bron = sharedPreferences.getString(BRONCHODILATOR, "");
