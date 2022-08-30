@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.squareup.picasso.Picasso;
 import com.ug.air.alrite.Adapters.AssessmentAdapter;
 import com.ug.air.alrite.Adapters.LearnAdapter;
 import com.ug.air.alrite.Models.Assessment;
@@ -40,7 +41,7 @@ public class LearnActivity extends AppCompatActivity {
     LinearLayout linearLayoutDisease, linearLayout_instruction;
     VideoView videoView;
     MediaPlayer mediaPlayer;
-    ImageView backBtn;
+    ImageView backBtn, imageView;
     Dialog dialog, dialog1;
     CardView inst, img, video, learn;
     ArrayList<Assessment> assessments;
@@ -111,6 +112,7 @@ public class LearnActivity extends AppCompatActivity {
         recyclerView2 = dialog.findViewById(R.id.recyclerView2);
         learn = dialog.findViewById(R.id.learn);
         img = dialog.findViewById(R.id.imageCard);
+        imageView = dialog.findViewById(R.id.image);
 
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -150,6 +152,8 @@ public class LearnActivity extends AppCompatActivity {
             setTitleAndDefinition(title, R.string.improve3);
 
             img.setVisibility(View.VISIBLE);
+            Picasso.get().load(R.drawable.improv_spacer_glossary_image).into(imageView);
+
             learn.setVisibility(View.GONE);
 
             List<Integer> messages = Arrays.asList(R.string.improve4, R.string.improve5, R.string.improve6, R.string.improve7, R.string.improve8, R.string.improve9);
@@ -162,6 +166,7 @@ public class LearnActivity extends AppCompatActivity {
             setTitleAndDefinition(title, R.string.bro2);
 
             img.setVisibility(View.VISIBLE);
+            Picasso.get().load(R.drawable.bronchodilator_glossary_image).into(imageView);
 
             List<Integer> messages = Arrays.asList(R.string.bro4, R.string.bro5, R.string.bro6, R.string.bro7,
                     R.string.bro8, R.string.bro9, R.string.bro10, R.string.bro11, R.string.bro12, R.string.bro13, R.string.bro14);
@@ -181,7 +186,10 @@ public class LearnActivity extends AppCompatActivity {
             learn.setVisibility(View.GONE);
         }else if (title.equals("Pulse Oximeter")){
             setTitleAndDefinition(title, R.string.pulse3);
+
             img.setVisibility(View.VISIBLE);
+            Picasso.get().load(R.drawable.pulse_oximeter_glossary_image).into(imageView);
+
             inst.setVisibility(View.GONE);
             learn.setVisibility(View.GONE);
         }else if (title.equals("Stridor")){
