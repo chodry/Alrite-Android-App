@@ -27,11 +27,12 @@ import java.util.Objects;
 public class Initials extends Fragment {
 
    View view;
-   EditText etCin, etPin;
+   EditText etCin, etPin, etStudy;
    Button back, next;
-   String cin, pin, formattedDate;
+   String cin, pin, formattedDate, studyId;
    public static final String CIN = "patient_initials";
    public static final String PIN = "parent_initials";
+   public static final String STUDY_ID = "study_id";
    public static final String INITIAL_DATE = "start_date";
    public static final String SHARED_PREFS = "sharedPrefs";
     SharedPreferences sharedPreferences;
@@ -45,6 +46,7 @@ public class Initials extends Fragment {
         view = inflater.inflate(R.layout.fragment_initials, container, false);
 
         etCin = view.findViewById(R.id.cin);
+        etStudy = view.findViewById(R.id.studyId);
         etPin = view.findViewById(R.id.pin);
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
@@ -61,8 +63,9 @@ public class Initials extends Fragment {
 
                 cin = etCin.getText().toString();
                 pin = etPin.getText().toString();
+                studyId = etStudy.getText().toString();
 
-                if (cin.isEmpty() || pin.isEmpty()){
+                if (cin.isEmpty() || pin.isEmpty() || studyId.isEmpty()){
                     Toast.makeText(getActivity(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                 }else {
                     saveData();
@@ -84,6 +87,7 @@ public class Initials extends Fragment {
 
         editor.putString(CIN, cin);
         editor.putString(PIN, pin);
+        editor.putString(STUDY_ID, studyId);
         if (formattedDate.isEmpty()){
             Date currentTime = Calendar.getInstance().getTime();
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
@@ -102,12 +106,14 @@ public class Initials extends Fragment {
     private void loadData() {
         pin = sharedPreferences.getString(PIN, "");
         cin = sharedPreferences.getString(CIN, "");
+        studyId = sharedPreferences.getString(STUDY_ID, "");
         formattedDate = sharedPreferences.getString(INITIAL_DATE, "");
     }
 
     private void updateViews() {
         etPin.setText(pin);
         etCin.setText(cin);
+        etStudy.setText(studyId);
     }
 
 }

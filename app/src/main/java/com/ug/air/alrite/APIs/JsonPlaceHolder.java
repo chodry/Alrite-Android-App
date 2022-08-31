@@ -27,4 +27,8 @@ public interface JsonPlaceHolder {
     @POST("saveData/")
     Call<String> sendFile(@Header("Authorization") String header, @Part MultipartBody.Part patient);
 
+    @Multipart
+    @POST("saveCounter/")
+    Call<String> sendCounterFile(@Header("Authorization") String header, @Part MultipartBody.Part counter);
+
 }

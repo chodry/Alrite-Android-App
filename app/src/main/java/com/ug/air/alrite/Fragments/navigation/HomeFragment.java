@@ -49,6 +49,7 @@ import com.ug.air.alrite.Utils.Credentials;
 import com.ug.air.alrite.Worker.NotifyWorker;
 import com.ug.air.alrite.Worker.NotifyWorker2;
 import com.ug.air.alrite.Worker.NotifyWorker3;
+import com.ug.air.alrite.Worker.NotifyWorker4;
 
 import java.io.File;
 import java.text.ParseException;
@@ -153,10 +154,12 @@ public class HomeFragment extends Fragment {
 
         if (period == 1){
             checkPatientReadiness();
-//            sendDataToServer();
+            sendDataToServer();
+            sendCounterDataToServer();
             databaseHelper.updatePeriod("1", 2);
         }
     }
+
 
     private void checkPatientReadiness() {
 
@@ -183,5 +186,18 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private void sendCounterDataToServer() {
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+
+        WorkRequest uploadWorkRequest = new PeriodicWorkRequest
+                .Builder(NotifyWorker4.class, 12, TimeUnit.HOURS)
+                .setConstraints(constraints)
+                .build();
+
+        WorkManager.getInstance(getActivity()).enqueue(uploadWorkRequest);
+
+    }
 
 }
