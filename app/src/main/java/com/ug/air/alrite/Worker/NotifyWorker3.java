@@ -6,6 +6,7 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 import static com.ug.air.alrite.Activities.PatientActivity.INCOMPLETE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.BRONC;
+import static com.ug.air.alrite.Fragments.Patient.Initials.STUDY_ID;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -32,6 +33,7 @@ import com.ug.air.alrite.APIs.JsonPlaceHolder;
 import com.ug.air.alrite.BuildConfig;
 import com.ug.air.alrite.Database.DatabaseHelper;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Credentials;
 
 import java.io.File;
 
@@ -53,11 +55,13 @@ public class NotifyWorker3 extends Worker {
     Call<String> call;
     DatabaseHelper databaseHelper;
     NotificationManagerCompat notificationManagerCompat22;
+    Credentials credentials;
 
     public NotifyWorker3(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
         notificationManager3 = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
         databaseHelper = new DatabaseHelper(getApplicationContext());
+        credentials = new Credentials();
         Cursor res = databaseHelper.getData("1");
         while (res.moveToNext()){
             token =  res.getString(2);
@@ -91,6 +95,13 @@ public class NotifyWorker3 extends Worker {
                             String incomplete = sharedPreferences.getString(INCOMPLETE, "");
 
                             if (!incomplete.isEmpty() || (bron.isEmpty() || bron.equals("Bronchodialtor Not Given") || !fin.isEmpty())){
+                                String studyID = sharedPreferences.getString(STUDY_ID, "");
+                                String code = credentials.creds2(getApplicationContext()).getCode();
+                                String h_code = credentials.creds2(getApplicationContext()).getH_code();
+                                String etCode = "AL"+h_code + "" + code + "" + studyID;
+                                editor.putString(STUDY_ID, etCode);
+                                editor.apply();
+
                                 File patient = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs/" + name);
                                 RequestBody filePart = RequestBody.create(MediaType.parse("*/*"), patient);
                                 MultipartBody.Part fileUpload = MultipartBody.Part.createFormData("patient", patient.getName() ,filePart);

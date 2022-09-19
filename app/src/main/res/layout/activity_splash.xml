@@ -21,7 +21,8 @@
             android:text="ALRITE"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="70sp"/>
+            android:textSize="70sp"
+            />
 
         <TextView
             android:id="@+id/HomeSloganText"

@@ -5,6 +5,7 @@ import android.database.Cursor;
 
 import com.ug.air.alrite.Database.DatabaseHelper;
 import com.ug.air.alrite.Models.Cred;
+import com.ug.air.alrite.Models.Cred2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,10 @@ import java.util.List;
 public class Credentials {
 
     DatabaseHelper databaseHelper;
-    String username, token;
+    String username, token, code, h_code, counter;
     int period;
 
     public Cred creds(Context context){
-
-//        List<String> credentials = new ArrayList<>();
 
         databaseHelper = new DatabaseHelper(context);
         Cursor res = databaseHelper.getData("1");
@@ -30,6 +29,26 @@ public class Credentials {
         Cred cred = new Cred(username, token, period);
 
         return cred;
+    }
+
+    public Cred2 creds2(Context context2){
+
+        databaseHelper = new DatabaseHelper(context2);
+        Cursor res = databaseHelper.getData("1");
+        while (res.moveToNext()){
+            code = res.getString(4);
+            h_code = res.getString(5);
+            counter = res.getString(6);
+        }
+
+        Cred2 cred2 = new Cred2(code, h_code, counter);
+
+        return cred2;
+    }
+
+    public void counting(Context context3, String count){
+        databaseHelper = new DatabaseHelper(context3);
+        databaseHelper.updateCounter("1", count);
     }
 
 }

@@ -115,7 +115,7 @@ public class SplashActivity extends AppCompatActivity {
                 counter.Count(this, APP_OPENING_COUNT);
             }
         }else {
-            databaseHelper.insertData(1, "None", "None");
+            databaseHelper.insertData(1, "None", "None", "None", "None", "None");
         }
         i = new Intent(SplashActivity.this, Dashboard.class);
         startActivity(i);

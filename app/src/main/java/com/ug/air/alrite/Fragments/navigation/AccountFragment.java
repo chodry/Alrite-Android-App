@@ -92,12 +92,14 @@ public class AccountFragment extends Fragment {
                 progressBar.setVisibility(View.INVISIBLE);
 
                 token = response.body().getToken();
+                String code = response.body().getInformation().getCode();
+                String h_code = response.body().getInformation().getHealthy_facility();
 
                 File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/databases/alrite.db");
                 if (src.exists()){
-                    databaseHelper.updateToken("1", token, username);
+                    databaseHelper.updateToken("1", token, username, code, h_code, "1");
                 }else {
-                    databaseHelper.insertData(1, token, username);
+                    databaseHelper.insertData(1, token, username, code, h_code, "1");
                 }
 
                 Counter counter = new Counter();

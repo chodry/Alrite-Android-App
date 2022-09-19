@@ -16,7 +16,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ug.air.alrite.Activities.Dashboard;
+import com.ug.air.alrite.Database.DatabaseHelper;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Credentials;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,16 +29,16 @@ import java.util.Objects;
 public class Initials extends Fragment {
 
    View view;
-   EditText etCin, etPin, etStudy;
+   EditText etCin, etPin, etStudy, etCode;
    Button back, next;
-   String cin, pin, formattedDate, studyId;
+   String cin, pin, formattedDate, studyId, code, h_code, counter;
    public static final String CIN = "patient_initials";
    public static final String PIN = "parent_initials";
    public static final String STUDY_ID = "study_id";
    public static final String INITIAL_DATE = "start_date";
    public static final String SHARED_PREFS = "sharedPrefs";
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+   SharedPreferences sharedPreferences;
+   SharedPreferences.Editor editor;
 
 
     @Override
@@ -46,6 +48,7 @@ public class Initials extends Fragment {
         view = inflater.inflate(R.layout.fragment_initials, container, false);
 
         etCin = view.findViewById(R.id.cin);
+        etCode = view.findViewById(R.id.code);
         etStudy = view.findViewById(R.id.studyId);
         etPin = view.findViewById(R.id.pin);
         next = view.findViewById(R.id.next);
@@ -65,7 +68,7 @@ public class Initials extends Fragment {
                 pin = etPin.getText().toString();
                 studyId = etStudy.getText().toString();
 
-                if (cin.isEmpty() || pin.isEmpty() || studyId.isEmpty()){
+                if (cin.isEmpty() || pin.isEmpty() || studyId.equals("0") || studyId.isEmpty()){
                     Toast.makeText(getActivity(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                 }else {
                     saveData();
@@ -97,6 +100,18 @@ public class Initials extends Fragment {
         }
         editor.apply();
 
+        int count = Integer.valueOf(counter);
+        int count2 = Integer.valueOf(studyId);
+
+//        Toast.makeText(getActivity(), count + " " + count2, Toast.LENGTH_SHORT).show();
+
+        if (count == count2){
+            count = count+1;
+            String ct = String.valueOf(count);
+            Credentials credentials = new Credentials();
+            credentials.counting(getActivity(), ct);
+        }
+
         FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
         fr.replace(R.id.fragment_container, new Sex());
         fr.addToBackStack(null);
@@ -113,7 +128,21 @@ public class Initials extends Fragment {
     private void updateViews() {
         etPin.setText(pin);
         etCin.setText(cin);
-        etStudy.setText(studyId);
+
+        Credentials credentials = new Credentials();
+        credentials.creds2(getActivity());
+        code = credentials.creds2(getActivity()).getCode();
+        h_code = credentials.creds2(getActivity()).getH_code();
+        counter = credentials.creds2(getActivity()).getCounter();
+        etCode.setText("AL"+h_code + "" + code);
+        etCode.setEnabled(false);
+
+        if (studyId.isEmpty()){
+            etStudy.setText(counter);
+        }else{
+            etStudy.setText(studyId);
+        }
+
     }
 
 }

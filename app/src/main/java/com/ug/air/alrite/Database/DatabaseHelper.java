@@ -16,6 +16,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_2 = "PERIOD";
     public static final String COL_3 = "TOKEN";
     public static final String COL_4 = "USERNAME";
+    public static final String COL_5 = "CODE";
+    public static final String COL_6 = "HFCODE";
+    public static final String COL_7 = "COUNTER";
 
 
     public DatabaseHelper(@Nullable Context context) {
@@ -24,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, PERIOD INTEGER, TOKEN TEXT, USERNAME TEXT) ");
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, PERIOD INTEGER, TOKEN TEXT, USERNAME TEXT, CODE TEXT, HFCODE TEXT, COUNTER TEXT) ");
     }
 
     @Override
@@ -33,12 +36,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(int period, String token, String username){
+    public boolean insertData(int period, String token, String username, String code, String hcode, String counter){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2, period);
         contentValues.put(COL_3, token);
         contentValues.put(COL_4, username);
+        contentValues.put(COL_5, code);
+        contentValues.put(COL_6, hcode);
+        contentValues.put(COL_6, counter);
         long results = db.insert(TABLE_NAME, null, contentValues);
         if (results == -1){
             return false;
@@ -62,12 +68,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean updateToken(String id, String token, String username){
+    public boolean updateCounter(String id, String counter){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1, id);
+        contentValues.put(COL_7, counter);
+        db.update(TABLE_NAME, contentValues, "ID = ?", new String[] {id});
+        return true;
+    }
+
+    public boolean updateToken(String id, String token, String username, String code, String hcode, String counter){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, id);
         contentValues.put(COL_3, token);
         contentValues.put(COL_4, username);
+        contentValues.put(COL_5, code);
+        contentValues.put(COL_6, hcode);
+        contentValues.put(COL_7, counter);
         db.update(TABLE_NAME, contentValues, "ID = ?", new String[] {id});
         return true;
     }
