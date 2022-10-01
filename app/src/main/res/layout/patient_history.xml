@@ -85,7 +85,7 @@
                 <ImageView
                     android:id="@+id/ready"
                     android:layout_width="0dp"
-                    android:layout_height="10dp"
+                    android:layout_height="20dp"
                     android:layout_weight=".1"
                     android:visibility="gone"
                     android:src="@drawable/circle2"/>

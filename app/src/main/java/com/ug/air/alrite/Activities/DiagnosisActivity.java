@@ -111,7 +111,7 @@ import java.util.concurrent.TimeUnit;
 public class DiagnosisActivity extends AppCompatActivity {
 
     LinearLayout linearLayout1, linearLayout2, linearLayout3, linearLayout4;
-    Button btnExit, btnExit2, btnContinue;
+    Button btnExit, btnExit2, btnContinue, btnSave;
     ImageView imageView1, imageView2;
     RecyclerView recyclerView1, recyclerView2;
     TextView txtInitials, txtAge, txtGender;
@@ -122,10 +122,11 @@ public class DiagnosisActivity extends AppCompatActivity {
     List messageList = new ArrayList<>();;
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String DATE_2 = "end_date_2";
+    public static final String PENDING = "pending";
     public static final String DURATION_2 = "duration_2";
     SharedPreferences sharedPreferences, sharedPreferences1;
     SharedPreferences.Editor editor, editor1;
-    String age, uniqueID, age2, folder;
+    String age, uniqueID, age2, folder, value;
     float ag;
     Dialog dialog;
     RecyclerView recyclerView;
@@ -151,16 +152,31 @@ public class DiagnosisActivity extends AppCompatActivity {
         linearLayout3 = findViewById(R.id.clickable2);
         linearLayout4 = findViewById(R.id.summary3);
         btnExit = findViewById(R.id.btnExit);
+        btnSave = findViewById(R.id.btnExit2);
         recyclerView2 = findViewById(R.id.recyclerView2);
 
         Intent intent = getIntent();
         if (intent.hasExtra("filename")){
             folder = intent.getExtras().getString("filename");
             sharedPreferences = getSharedPreferences(folder, Context.MODE_PRIVATE);
-            btnExit.setVisibility(View.GONE);
+
+            String pending = sharedPreferences.getString(PENDING, "");
+//            String incomplete = sharedPreferences.getString(INCOMPLETE, "");
+
+            if (pending.equals("pending")){
+                btnSave.setVisibility(View.GONE);
+                btnExit.setVisibility(View.VISIBLE);
+            } else{
+                btnSave.setVisibility(View.GONE);
+                btnExit.setVisibility(View.GONE);
+            }
+
         }else{
+            btnSave.setVisibility(View.GONE);
+            btnExit.setVisibility(View.VISIBLE);
             sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         }
+
         editor = sharedPreferences.edit();
 
         String initials = sharedPreferences.getString(CIN, "");
@@ -227,6 +243,15 @@ public class DiagnosisActivity extends AppCompatActivity {
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                value = "not pending";
+                saveForm();
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                value = "pending";
                 saveForm();
             }
         });
@@ -533,26 +558,35 @@ public class DiagnosisActivity extends AppCompatActivity {
         Credentials credentials = new Credentials();
         String username = credentials.creds(DiagnosisActivity.this).getUsername();
 
+        uniqueID = UUID.randomUUID().toString();
 
         if (file.isEmpty()){
 
             getDuration(currentTime);
 
             editor.putString(USERNAME, username);
-            uniqueID = UUID.randomUUID().toString();
             editor.putString(DATE, formattedDate);
             editor.putString(UUIDS, uniqueID);
+            editor.putString(PENDING, value);
+            editor.putString(INCOMPLETE, "complete");
             editor.apply();
 
             String filename = formattedDate + "_" + uniqueID;
+            editor.putString(FILENAME, filename);
+            editor.apply();
+            Toast.makeText(this, "empty", Toast.LENGTH_SHORT).show();
             doLogic(filename);
         }else {
-
-            editor.putString(DATE_2, formattedDate);
+            editor.putString(PENDING, value);
+            editor.putString(INCOMPLETE, "complete");
+            String filename = formattedDate + "_" + uniqueID;
+            editor.putString(FILENAME, filename);
+            editor.putString(DATE, formattedDate);
             editor.apply();
 
             getDuration2(currentTime);
-            doLogic(file);
+            Toast.makeText(this, "not empty", Toast.LENGTH_SHORT).show();
+            doLogic(filename);
         }
 
     }
@@ -604,6 +638,8 @@ public class DiagnosisActivity extends AppCompatActivity {
 //            else if (x.getValue().getClass().equals(Boolean.class)) editor1.putBoolean(x.getKey(), (Boolean)x.getValue());
         }
         editor1.commit();
+        editor.clear();
+        editor.commit();
 
         String filename = sharedPreferences1.getString(SECOND, "");
         if (!filename.isEmpty()){
@@ -611,11 +647,11 @@ public class DiagnosisActivity extends AppCompatActivity {
             File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs/" + filename);
             if (src.exists()){
                 src.delete();
+                Toast.makeText(this, "filename", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this, "no file filename", Toast.LENGTH_SHORT).show();
             }
         }
-
-        editor.clear();
-        editor.commit();
 
         String bron = sharedPreferences1.getString(BRONCHODILATOR, "");
         String fin = sharedPreferences1.getString(BRONC, "");
@@ -623,8 +659,14 @@ public class DiagnosisActivity extends AppCompatActivity {
         if (bron.equals("Bronchodialtor Given") && fin.isEmpty()){
             intent = new Intent(DiagnosisActivity.this, Dashboard.class);
         }else{
-            intent = new Intent(DiagnosisActivity.this, FinalActivity.class);
-            intent.putExtra("filename", file);
+            if (value.equals("not pending")){
+                intent = new Intent(DiagnosisActivity.this, FinalActivity.class);
+                intent.putExtra("filename", file);
+            }else {
+                editor1.putString(SECOND, file);
+                editor1.apply();
+                intent = new Intent(DiagnosisActivity.this, Dashboard.class);
+            }
         }
 
         startActivity(intent);

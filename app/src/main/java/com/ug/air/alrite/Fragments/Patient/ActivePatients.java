@@ -187,7 +187,7 @@ public class ActivePatients extends Fragment {
                             String bron = sharedPreferences.getString(BRONCHODILATOR, "");
                             String fin = sharedPreferences.getString(BRONC, "");
                             String incomplete = sharedPreferences.getString(INCOMPLETE, "");
-                            if (incomplete.isEmpty() && bron.equals("Bronchodialtor Given") && fin.isEmpty()){
+                            if (bron.equals("Bronchodialtor Given") && fin.isEmpty()){
                                 file.add(names);
                                 cin = sharedPreferences.getString(CIN, "");
                                 pin = sharedPreferences.getString(PIN, "");

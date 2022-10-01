@@ -110,7 +110,7 @@ public class HomeFragment extends Fragment {
 
         view.findViewById(R.id.btn_learn).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { 
                 Intent intent = new Intent(getActivity(), LearnActivity.class);
                 startActivity(intent);
             }
@@ -152,12 +152,12 @@ public class HomeFragment extends Fragment {
         credentials = new Credentials();
         period = credentials.creds(getActivity()).getPeriod();
 
-        if (period == 1){
-            checkPatientReadiness();
-            sendDataToServer();
-            sendCounterDataToServer();
-            databaseHelper.updatePeriod("1", 2);
-        }
+//        if (period == 1){
+//            checkPatientReadiness();
+//            sendDataToServer();
+//            sendCounterDataToServer();
+//            databaseHelper.updatePeriod("1", 2);
+//        }
     }
 
 

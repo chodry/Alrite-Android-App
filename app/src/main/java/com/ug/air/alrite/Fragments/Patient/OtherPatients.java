@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Activities.DiagnosisActivity.PENDING;
 import static com.ug.air.alrite.Activities.PatientActivity.INCOMPLETE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
@@ -21,12 +22,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ug.air.alrite.Activities.Dashboard;
 import com.ug.air.alrite.Activities.DiagnosisActivity;
+import com.ug.air.alrite.Activities.PatientActivity;
 import com.ug.air.alrite.Adapters.PatientAdapter;
 import com.ug.air.alrite.BuildConfig;
 import com.ug.air.alrite.Models.History;
@@ -48,12 +52,15 @@ public class OtherPatients extends Fragment {
     View view;
     RecyclerView recyclerView;
     EditText etSearch;
+    Button btnSubmit;
+    ProgressBar progressBar;
     ImageView back;
     ArrayList<Item> items;
     PatientAdapter patientAdapter;
-    String cin, pin, gender, age, search, dat;
+    String cin, pin, gender, age, search, dat, ag;
     ArrayList<String> types, files, file;
     SharedPreferences sharedPreferences;
+    Intent intent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +71,8 @@ public class OtherPatients extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView3);
         etSearch = view.findViewById(R.id.search);
         back = view.findViewById(R.id.back);
+        btnSubmit = view.findViewById(R.id.submit_btn);
+        progressBar = view.findViewById(R.id.progress_bar);
 
 //        back.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -90,7 +99,14 @@ public class OtherPatients extends Fragment {
             public void onItemClick(int position) {
                 History history = (History) items.get(position).getObject();
                 String name = history.getFilename();
-                Intent intent = new Intent(getActivity(), DiagnosisActivity.class);
+                String incomplete = history.getIncomplete();
+                if (incomplete.equals("incomplete")){
+                    intent = new Intent(getActivity(), PatientActivity.class);
+                    intent.putExtra("Fragment", 1);
+                }else {
+                    intent = new Intent(getActivity(), DiagnosisActivity.class);
+                }
+
                 intent.putExtra("filename", name);
                 startActivity(intent);
                 requireActivity().finish();
@@ -119,21 +135,28 @@ public class OtherPatients extends Fragment {
                         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
                         String bron = sharedPreferences.getString(BRONCHODILATOR, "");
                         String incomplete = sharedPreferences.getString(INCOMPLETE, "");
+                        String pending = sharedPreferences.getString(PENDING, "");
                         String fin = sharedPreferences.getString(BRONC, "");
-                        if (incomplete.isEmpty() && (bron.isEmpty() || bron.equals("Bronchodialtor Not Given") || !fin.isEmpty())){
+                        if (bron.isEmpty() || bron.equals("Bronchodialtor Not Given") || !fin.isEmpty()){
                             cin = sharedPreferences.getString(CIN, "");
                             pin = sharedPreferences.getString(PIN, "");
                             age = sharedPreferences.getString(AGE2, "");
                             gender = sharedPreferences.getString(CHOICE, "");
                             dat = sharedPreferences.getString(DATE, "");
-                            String[] split = age.split("\\.");
-                            String ag = split[0] + " years and " + split[1] + " months";
+                            if (age.isEmpty()){
+                               ag = "0 years 0 months";
+                               gender = "";
+                            }else {
+                                String[] split = age.split("\\.");
+                                ag = split[0] + " years and " + split[1] + " months";
+                            }
+
                             try {
                                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
                                 Date date = df.parse(dat);
                                 SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
                                 String formattedDate = df1.format(date);
-                                History history = new History("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names);
+                                History history = new History("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names, pending, incomplete);
                                 items.add(new Item(1, history));
                             } catch (ParseException e) {
                                 e.printStackTrace();

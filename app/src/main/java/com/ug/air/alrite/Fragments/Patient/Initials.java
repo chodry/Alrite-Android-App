@@ -1,5 +1,7 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Fragments.Patient.RRCounter.SECOND;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,14 +18,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ug.air.alrite.Activities.Dashboard;
+import com.ug.air.alrite.BuildConfig;
 import com.ug.air.alrite.Database.DatabaseHelper;
 import com.ug.air.alrite.R;
 import com.ug.air.alrite.Utils.Credentials;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 public class Initials extends Fragment {
@@ -31,13 +36,13 @@ public class Initials extends Fragment {
    View view;
    EditText etCin, etPin, etStudy, etCode;
    Button back, next;
-   String cin, pin, formattedDate, studyId, code, h_code, counter;
+   String cin, pin, formattedDate, studyId, code, h_code, counter, filename;
    public static final String CIN = "patient_initials";
    public static final String PIN = "parent_initials";
    public static final String STUDY_ID = "study_id";
    public static final String INITIAL_DATE = "start_date";
    public static final String SHARED_PREFS = "sharedPrefs";
-   SharedPreferences sharedPreferences;
+   SharedPreferences sharedPreferences, sharedPreferences1;
    SharedPreferences.Editor editor;
 
 
@@ -54,7 +59,24 @@ public class Initials extends Fragment {
         next = view.findViewById(R.id.next);
         back = view.findViewById(R.id.back);
 
-        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        Intent intent = getActivity().getIntent();
+        if (intent.hasExtra("filename")) {
+            filename = intent.getExtras().getString("filename");
+            sharedPreferences1 = requireActivity().getSharedPreferences(filename, Context.MODE_PRIVATE);
+            sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+            Map<String, ?> all = sharedPreferences1.getAll();
+            for (Map.Entry<String, ?> x : all.entrySet()) {
+                if (x.getValue().getClass().equals(String.class))  editor.putString(x.getKey(),  (String)x.getValue());
+            }
+            editor.commit();
+            editor.putString(SECOND, filename);
+            editor.apply();
+
+        }else {
+            sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        }
+
         editor = sharedPreferences.edit();
 
         loadData();

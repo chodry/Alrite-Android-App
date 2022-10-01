@@ -1,6 +1,8 @@
 package com.ug.air.alrite.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,7 @@ public class PatientAdapter extends RecyclerView.Adapter {
 
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == 0){
@@ -82,6 +85,18 @@ public class PatientAdapter extends RecyclerView.Adapter {
             holder1.age.setText(history.getAge());
             holder1.sex.setText(history.getSex());
             holder1.date.setText(history.getDate());
+
+            String pending = history.getPending();
+            if (pending.equals("pending")){
+                holder1.imageView.setVisibility(View.VISIBLE);
+                holder1.imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.pending));
+            }
+
+            String incomplete = history.getIncomplete();
+            if (incomplete.equals("incomplete")){
+                holder1.imageView.setVisibility(View.VISIBLE);
+                holder1.imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.incomplete));
+            }
         }
 
 
@@ -122,6 +137,7 @@ public class PatientAdapter extends RecyclerView.Adapter {
     public class HistoryHolder extends RecyclerView.ViewHolder {
 
         TextView initials, initial2, age, sex, date;
+        ImageView imageView;
 
         public HistoryHolder(@NonNull View itemView) {
             super(itemView);
@@ -131,6 +147,7 @@ public class PatientAdapter extends RecyclerView.Adapter {
             age = itemView.findViewById(R.id.patient_age);
             sex = itemView.findViewById(R.id.patient_sex);
             date = itemView.findViewById(R.id.date);
+            imageView = itemView.findViewById(R.id.ready);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
