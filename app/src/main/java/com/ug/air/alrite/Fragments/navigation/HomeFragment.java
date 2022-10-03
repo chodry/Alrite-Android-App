@@ -152,12 +152,12 @@ public class HomeFragment extends Fragment {
         credentials = new Credentials();
         period = credentials.creds(getActivity()).getPeriod();
 
-//        if (period == 1){
-//            checkPatientReadiness();
+        if (period == 1){
+            checkPatientReadiness();
 //            sendDataToServer();
-//            sendCounterDataToServer();
-//            databaseHelper.updatePeriod("1", 2);
-//        }
+            sendCounterDataToServer();
+            databaseHelper.updatePeriod("1", 2);
+        }
     }
 
 
