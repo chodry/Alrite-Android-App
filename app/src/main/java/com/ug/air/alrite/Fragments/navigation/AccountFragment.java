@@ -97,9 +97,9 @@ public class AccountFragment extends Fragment {
 
                 File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/databases/alrite.db");
                 if (src.exists()){
-                    databaseHelper.updateToken("1", token, username, code, h_code, "1");
+                    databaseHelper.updateToken("1", token, username, code, h_code, "1", password);
                 }else {
-                    databaseHelper.insertData(1, token, username, code, h_code, "1");
+                    databaseHelper.insertData(1, token, username, code, h_code, "1", password);
                 }
 
                 Counter counter = new Counter();

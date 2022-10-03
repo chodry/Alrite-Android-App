@@ -172,9 +172,15 @@ public class DiagnosisActivity extends AppCompatActivity {
             }
 
         }else{
-            btnSave.setVisibility(View.GONE);
-            btnExit.setVisibility(View.VISIBLE);
             sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+            String bron = sharedPreferences.getString(BRONCHODILATOR, "");
+            String fin = sharedPreferences.getString(BRONC, "");
+            if (bron.equals("Bronchodialtor Given") && fin.isEmpty()){
+                btnSave.setVisibility(View.GONE);
+            }else {
+                btnSave.setVisibility(View.VISIBLE);
+            }
+            btnExit.setVisibility(View.VISIBLE);
         }
 
         editor = sharedPreferences.edit();
@@ -574,7 +580,7 @@ public class DiagnosisActivity extends AppCompatActivity {
             String filename = formattedDate + "_" + uniqueID;
             editor.putString(FILENAME, filename);
             editor.apply();
-            Toast.makeText(this, "empty", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "empty", Toast.LENGTH_SHORT).show();
             doLogic(filename);
         }else {
             editor.putString(PENDING, value);
@@ -585,7 +591,7 @@ public class DiagnosisActivity extends AppCompatActivity {
             editor.apply();
 
             getDuration2(currentTime);
-            Toast.makeText(this, "not empty", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "not empty", Toast.LENGTH_SHORT).show();
             doLogic(filename);
         }
 

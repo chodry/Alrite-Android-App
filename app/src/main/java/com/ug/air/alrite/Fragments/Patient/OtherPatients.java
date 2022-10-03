@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.ug.air.alrite.Activities.DiagnosisActivity.PENDING;
 import static com.ug.air.alrite.Activities.PatientActivity.INCOMPLETE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DATE;
@@ -7,18 +8,22 @@ import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.BRONC;
 import static com.ug.air.alrite.Fragments.Patient.Initials.CIN;
 import static com.ug.air.alrite.Fragments.Patient.Initials.PIN;
+import static com.ug.air.alrite.Fragments.Patient.Initials.STUDY_ID;
 import static com.ug.air.alrite.Fragments.Patient.Sex.AGE2;
 import static com.ug.air.alrite.Fragments.Patient.Sex.CHOICE;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,15 +33,19 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.ug.air.alrite.APIs.ApiClient;
+import com.ug.air.alrite.APIs.JsonPlaceHolder;
 import com.ug.air.alrite.Activities.Dashboard;
 import com.ug.air.alrite.Activities.DiagnosisActivity;
 import com.ug.air.alrite.Activities.PatientActivity;
 import com.ug.air.alrite.Adapters.PatientAdapter;
 import com.ug.air.alrite.BuildConfig;
+import com.ug.air.alrite.Database.DatabaseHelper;
 import com.ug.air.alrite.Models.History;
 import com.ug.air.alrite.Models.Item;
 import com.ug.air.alrite.Models.Patient;
 import com.ug.air.alrite.R;
+import com.ug.air.alrite.Utils.Credentials;
 
 import java.io.File;
 import java.text.ParseException;
@@ -46,6 +55,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Objects;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class OtherPatients extends Fragment {
 
@@ -53,14 +69,18 @@ public class OtherPatients extends Fragment {
     RecyclerView recyclerView;
     EditText etSearch;
     Button btnSubmit;
+    File[] contents;
     ProgressBar progressBar;
     ImageView back;
     ArrayList<Item> items;
     PatientAdapter patientAdapter;
-    String cin, pin, gender, age, search, dat, ag;
+    String cin, pin, gender, age, search, dat, ag, token;
     ArrayList<String> types, files, file;
     SharedPreferences sharedPreferences;
     Intent intent;
+    JsonPlaceHolder jsonPlaceHolder;
+    DatabaseHelper databaseHelper;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,18 +88,23 @@ public class OtherPatients extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_other_patients, container, false);
 
+        databaseHelper = new DatabaseHelper(getActivity());
+        jsonPlaceHolder = ApiClient.getClient().create(JsonPlaceHolder.class);
+
         recyclerView = view.findViewById(R.id.recyclerView3);
         etSearch = view.findViewById(R.id.search);
         back = view.findViewById(R.id.back);
         btnSubmit = view.findViewById(R.id.submit_btn);
         progressBar = view.findViewById(R.id.progress_bar);
+        swipeRefreshLayout = view.findViewById(R.id.swipe);
 
-//        back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getActivity(), Dashboard.class));
-//            }
-//        });
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                accessSharedFile2();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         back.setVisibility(View.GONE);
 
@@ -113,10 +138,19 @@ public class OtherPatients extends Fragment {
             }
         });
 
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitData();
+            }
+        });
+
         return view;
     }
 
     private void accessSharedFile2(){
+        files.clear();
+        items.clear();
         File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs");
         if (src.exists()) {
             File[] contents = src.listFiles();
@@ -167,6 +201,71 @@ public class OtherPatients extends Fragment {
             }else {
                 Toast.makeText(getActivity(), "There are no patients' records", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    private void submitData() {
+        progressBar.setVisibility(View.VISIBLE);
+        btnSubmit.setEnabled(false);
+        Credentials credentials = new Credentials();
+        Cursor res = databaseHelper.getData("1");
+        while (res.moveToNext()){
+            token =  res.getString(2);
+        }
+        File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs");
+        if (src.exists()){
+            contents = src.listFiles();
+            if (contents.length != 0) {
+                for (File f : contents) {
+                    if (f.isFile()) {
+                        String name = f.getName();
+                        if (!name.equals("sharedPrefs.xml") && !name.equals("counter_file.xml")) {
+                            String names = name.replace(".xml", "");
+                            SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(names, MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            String bron = sharedPreferences.getString(BRONCHODILATOR, "");
+                            String fin = sharedPreferences.getString(BRONC, "");
+                            String pending = sharedPreferences.getString(PENDING, "");
+                            String incomplete = sharedPreferences.getString(INCOMPLETE, "");
+
+                            if (!pending.equals("pending") && (bron.isEmpty() || bron.equals("Bronchodialtor Not Given") || !fin.isEmpty())){
+                                File patient = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs/" + name);
+                                RequestBody filePart = RequestBody.create(MediaType.parse("*/*"), patient);
+                                MultipartBody.Part fileUpload = MultipartBody.Part.createFormData("patient", patient.getName() ,filePart);
+
+                                Call<String> call = jsonPlaceHolder.sendFile("Token " + token, fileUpload);
+                                call.enqueue(new Callback<String>() {
+                                    @Override
+                                    public void onResponse(Call<String> call, Response<String> response) {
+                                        if (!response.isSuccessful()){
+                                            Log.d("Alrite server issue", "There is an issue with the server" );
+                                            return;
+                                        }
+                                        String message = response.body();
+                                        Log.d("Alrite app: ", "Sever response: " + message);
+                                        patient.delete();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<String> call, Throwable t) {
+                                        Log.d("Alrite server issue", "No internet connection" );
+//                                    Toast.makeText(getActivity(), "Please turn on your internet connection", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
+                        }
+                    }
+                }
+                progressBar.setVisibility(View.GONE);
+                btnSubmit.setEnabled(true);
+            }else {
+                progressBar.setVisibility(View.GONE);
+                btnSubmit.setEnabled(true);
+            }
+        }else {
+            progressBar.setVisibility(View.GONE);
+            btnSubmit.setEnabled(true);
         }
     }
 }

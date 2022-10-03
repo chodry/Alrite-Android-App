@@ -40,6 +40,7 @@ public class Initials extends Fragment {
    public static final String CIN = "patient_initials";
    public static final String PIN = "parent_initials";
    public static final String STUDY_ID = "study_id";
+    public static final String STUDY_ID_2 = "study_id_2";
    public static final String INITIAL_DATE = "start_date";
    public static final String SHARED_PREFS = "sharedPrefs";
    SharedPreferences sharedPreferences, sharedPreferences1;
@@ -110,9 +111,12 @@ public class Initials extends Fragment {
 
     private void saveData() {
 
+        String new_study = etCode.getText().toString();
+        new_study = new_study + "_" + studyId;
         editor.putString(CIN, cin);
         editor.putString(PIN, pin);
-        editor.putString(STUDY_ID, studyId);
+        editor.putString(STUDY_ID_2, studyId);
+        editor.putString(STUDY_ID, new_study);
         if (formattedDate.isEmpty()){
             Date currentTime = Calendar.getInstance().getTime();
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
@@ -143,7 +147,7 @@ public class Initials extends Fragment {
     private void loadData() {
         pin = sharedPreferences.getString(PIN, "");
         cin = sharedPreferences.getString(CIN, "");
-        studyId = sharedPreferences.getString(STUDY_ID, "");
+        studyId = sharedPreferences.getString(STUDY_ID_2, "");
         formattedDate = sharedPreferences.getString(INITIAL_DATE, "");
     }
 

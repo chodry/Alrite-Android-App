@@ -13,7 +13,7 @@ import java.util.List;
 public class Credentials {
 
     DatabaseHelper databaseHelper;
-    String username, token, code, h_code, counter;
+    String username, token, code, h_code, counter, password;
     int period;
 
     public Cred creds(Context context){
@@ -24,9 +24,10 @@ public class Credentials {
             period = res.getInt(1);
             token = res.getString(2);
             username = res.getString(3);
+            password = res.getString(7);
         }
 
-        Cred cred = new Cred(username, token, period);
+        Cred cred = new Cred(username, token, period, password);
 
         return cred;
     }

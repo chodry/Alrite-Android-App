@@ -4,12 +4,14 @@ public class Cred {
 
     String username;
     String token;
+    String password;
     int period;
 
-    public Cred(String username, String token, int period) {
+    public Cred(String username, String token, int period, String password) {
         this.username = username;
         this.token = token;
         this.period = period;
+        this.password = password;
     }
 
     public String getUsername() {
@@ -22,5 +24,9 @@ public class Cred {
 
     public int getPeriod() {
         return period;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

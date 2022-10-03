@@ -52,7 +52,7 @@ public class Dashboard extends AppCompatActivity {
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
                 String label = (String) navDestination.getLabel();
                 if (label.equals("Account")){
-                    databaseHelper.updateToken("1", "None", "None", "None", "None", "None");
+                    databaseHelper.updateToken("1", "None", "None", "None", "None", "None", "None");
 //                    something is missing
                 }
             }
