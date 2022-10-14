@@ -1,5 +1,6 @@
 package com.ug.air.alrite.Fragments.Patient;
 
+import static com.ug.air.alrite.Activities.SplashActivity.MANUAL_COUNT;
 import static com.ug.air.alrite.Activities.SplashActivity.RR_COUNTER_COUNT;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.ChestIndrawing.POINT;
@@ -427,6 +428,8 @@ public class RRCounter extends Fragment {
                     double rt = Double.parseDouble(rate);
                     value = rt;
                     dialog.dismiss();
+                    Counter counter = new Counter();
+                    counter.Count(requireActivity(), MANUAL_COUNT);
                     completeMeasuring();
                 }
             }

@@ -38,6 +38,7 @@ public class Initials extends Fragment {
    Button back, next;
    String cin, pin, formattedDate, studyId, code, h_code, counter, filename;
    public static final String CIN = "patient_initials";
+    public static final String  VERSION = "app_version";
    public static final String PIN = "parent_initials";
    public static final String STUDY_ID = "study_id";
     public static final String STUDY_ID_2 = "study_id_2";
@@ -115,6 +116,7 @@ public class Initials extends Fragment {
         new_study = new_study + "_" + studyId;
         editor.putString(CIN, cin);
         editor.putString(PIN, pin);
+        editor.putString(VERSION, "2");
         editor.putString(STUDY_ID_2, studyId);
         editor.putString(STUDY_ID, new_study);
         if (formattedDate.isEmpty()){

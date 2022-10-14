@@ -94,12 +94,13 @@ public class AccountFragment extends Fragment {
                 token = response.body().getToken();
                 String code = response.body().getInformation().getCode();
                 String h_code = response.body().getInformation().getHealthy_facility();
+                String study_id = String.valueOf(response.body().getInformation().getStudy_id());
 
                 File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/databases/alrite.db");
                 if (src.exists()){
-                    databaseHelper.updateToken("1", token, username, code, h_code, "1", password);
+                    databaseHelper.updateToken("1", token, username, code, h_code, study_id, password);
                 }else {
-                    databaseHelper.insertData(1, token, username, code, h_code, "1", password);
+                    databaseHelper.insertData(1, token, username, code, h_code, study_id, password);
                 }
 
                 Counter counter = new Counter();

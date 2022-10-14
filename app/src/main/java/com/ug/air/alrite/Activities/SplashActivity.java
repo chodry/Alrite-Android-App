@@ -38,6 +38,7 @@ public class SplashActivity extends AppCompatActivity {
     public static final String APP_OPENING_COUNT = "app_opening_count";
     public static final String LEARN_OPENING_COUNT = "learn_opening_count";
     public static final String RR_COUNTER_COUNT = "rr_counter_count";
+    public static final String MANUAL_COUNT = "manual_count";
     public static final String COUNTING_DATA = "counter_file";
     public static final String BRONCHODILATOR_COUNT = "bronchodilator_count";
     public static final String STRIDOR_COUNT = "stridor_count";
