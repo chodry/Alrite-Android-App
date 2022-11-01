@@ -219,6 +219,7 @@ public class Stridor extends Fragment {
     private void checkIfNone() {
         if (value7.equals("No")){
             editor.remove(STDIAGNOSIS);
+            editor.remove(FINAL_DIAGNOSIS);
             editor.apply();
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
             fr.replace(R.id.fragment_container, new Wheezing());

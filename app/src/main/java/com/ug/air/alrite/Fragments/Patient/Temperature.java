@@ -155,7 +155,7 @@ public class Temperature extends Fragment {
         editor.apply();
         float tp = Float.parseFloat(temp);
         if (tp >= 38.5 && assess.contains("None of these")){
-            diagnosis = "Fever without danger signs";
+            diagnosis = "Fever";
             editor.putString(TDIAGNOSIS, diagnosis);
             editor.apply();
             showDialog();

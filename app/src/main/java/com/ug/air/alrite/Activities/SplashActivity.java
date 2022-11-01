@@ -100,6 +100,7 @@ public class SplashActivity extends AppCompatActivity {
             editor.putString(WHEEZING_COUNT, "0");
             editor.putString(CHESTINDRWAING_COUNT, "0");
             editor.putString(ECZEMA_COUNT, "0");
+            editor.putString(MANUAL_COUNT, "0");
             editor.apply();
         }
         checkDatabase();

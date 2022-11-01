@@ -108,7 +108,7 @@ public class FinalActivity extends AppCompatActivity {
             s1 += "Wheezing illness, ";
         }
         if(checkBox4.isChecked()){
-            s1 += "Cough/Cold/No pneumoni, ";
+            s1 += "Cough/Cold/No pneumonia, ";
         }
 //        if(checkBox14.isChecked()){
 //            s1 += "Malaria, ";

@@ -5,6 +5,7 @@ import static com.ug.air.alrite.Activities.FinalActivity.S7;
 import static com.ug.air.alrite.Activities.PatientActivity.INCOMPLETE;
 import static com.ug.air.alrite.Fragments.Patient.Allergies.CHOICEY2;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Assess.FINAL_DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Breathless.S5;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
@@ -312,8 +313,8 @@ public class DiagnosisActivity extends AppCompatActivity {
     private List<Diagnosis> buildItemList() {
         List<Diagnosis> diagnosisList = new ArrayList<>();
 
-//        String aDiagnosis = sharedPreferences.getString(DIAGNOSIS, "");
         String mDiagnosis = sharedPreferences.getString(MDIAGNOSIS, "");
+        String oneDiagnosis = sharedPreferences.getString(FINAL_DIAGNOSIS, "");
         String tDiagnosis = sharedPreferences.getString(TDIAGNOSIS, "");
 //        String oxDiagnosis = sharedPreferences.getString(OXDIAGNOSIS, "");
         String noDiagnosis = sharedPreferences.getString(NODIAGNOSIS, "");
@@ -331,7 +332,7 @@ public class DiagnosisActivity extends AppCompatActivity {
 //            addToList2("Severe Pneumonia OR very Severe Disease");
 //        }
 
-//        addToList2(aDiagnosis);
+        addToList2(oneDiagnosis);
         addToList2(mDiagnosis);
         addToList2(tDiagnosis);
 //        addToList2(oxDiagnosis);
@@ -653,9 +654,9 @@ public class DiagnosisActivity extends AppCompatActivity {
             File src = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/shared_prefs/" + filename);
             if (src.exists()){
                 src.delete();
-                Toast.makeText(this, "filename", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "filename", Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(this, "no file filename", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "no file filename", Toast.LENGTH_SHORT).show();
             }
         }
 

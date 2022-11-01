@@ -44,7 +44,7 @@ public class Sex extends Fragment {
     String value2 = "none";
     private static final int YES = 0;
     private static final int NO = 1;
-    public static final String MDIAGNOSIS = "diagnosis_1";
+    public static final String MDIAGNOSIS = "diagnosis_2";
     public static final String AGE = "age";
     public static final String AGE2 = "age2";
     public static final String KILO = "weight";

@@ -2,6 +2,7 @@ package com.ug.air.alrite.Fragments.Patient;
 
 import static com.ug.air.alrite.Fragments.Patient.Assess.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Assess.FINAL_DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 
 import android.app.Dialog;
@@ -133,8 +134,11 @@ public class Cough extends Fragment {
         editor.apply();
 
         if (value3.equals("No")){
-            editor.remove(NODIAGNOSIS);
-            editor.apply();
+            String final_diagnosis = sharedPreferences.getString(FINAL_DIAGNOSIS, "");
+            if (final_diagnosis.isEmpty()){
+                editor.remove(NODIAGNOSIS);
+                editor.apply();
+            }
             String assess = sharedPreferences.getString(S4, "");
             if (!assess.equals("None of these")){
                 startActivity(new Intent(getActivity(), DiagnosisActivity.class));

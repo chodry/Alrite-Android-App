@@ -3,6 +3,8 @@ package com.ug.air.alrite.Fragments.Patient;
 import static com.ug.air.alrite.Activities.SplashActivity.CHESTINDRWAING_COUNT;
 import static com.ug.air.alrite.Activities.SplashActivity.STRIDOR_COUNT;
 import static com.ug.air.alrite.Activities.SplashActivity.WHEEZING_COUNT;
+import static com.ug.air.alrite.Fragments.Patient.Assess.DIAGNOSIS;
+import static com.ug.air.alrite.Fragments.Patient.Assess.FINAL_DIAGNOSIS;
 import static com.ug.air.alrite.Fragments.Patient.Assess.S4;
 import static com.ug.air.alrite.Fragments.Patient.Cough.CHOICE2;
 import static com.ug.air.alrite.Fragments.Patient.HIVStatus.HDIAGNOSIS;
@@ -276,24 +278,28 @@ public class ChestIndrawing extends Fragment {
 
     private void makeAssessment(){
         String cough = sharedPreferences.getString(CHOICE2, "");
+        String fDiagnosis = sharedPreferences.getString(DIAGNOSIS, "");
         String oxDiagnosis = sharedPreferences.getString(OXDIAGNOSIS, "");
         String stDiagnosis = sharedPreferences.getString(STDIAGNOSIS, "");
         String gnDiagnosis = sharedPreferences.getString(GNDIAGNOSIS, "");
         String hDiagnosis = sharedPreferences.getString(HDIAGNOSIS, "");
+        String oneDiagnosis = sharedPreferences.getString(FINAL_DIAGNOSIS, "");
         fastBreathing = sharedPreferences.getString(FASTBREATHING, "");
         wheezing = sharedPreferences.getString(CHOICE8, "");
         String days = sharedPreferences.getString(DAY1, "");
         day = Long.parseLong(days);
-        boolean b = oxDiagnosis.isEmpty() && stDiagnosis.isEmpty() && gnDiagnosis.isEmpty() && hDiagnosis.isEmpty();
-        boolean b2 = oxDiagnosis.isEmpty() && stDiagnosis.isEmpty() && gnDiagnosis.isEmpty();
+        boolean cx = oneDiagnosis.isEmpty() && hDiagnosis.isEmpty();
+        boolean cx2 = oneDiagnosis.isEmpty();
+        boolean b = oxDiagnosis.isEmpty() && stDiagnosis.isEmpty() && gnDiagnosis.isEmpty() && fDiagnosis.isEmpty() && hDiagnosis.isEmpty();
+        boolean b2 = oxDiagnosis.isEmpty() && stDiagnosis.isEmpty() && gnDiagnosis.isEmpty() && fDiagnosis.isEmpty();
 
-        if (b && (cough.equals("Yes") && fastBreathing.equals("Fast Breathing"))){
+        if (cx && (cough.equals("Yes") && fastBreathing.equals("Fast Breathing"))){
             editor.putString(CIDIAGNOSIS, "Pneumonia");
             editor.apply();
-        }else if (b && (cough.equals("Yes") && (value8.equals("Mild") || value8.equals("Moderate/Severe")))){
+        }else if (cx && (cough.equals("Yes") && (value8.equals("Mild") || value8.equals("Moderate/Severe")))){
             editor.putString(CIDIAGNOSIS, "Pneumonia");
             editor.apply();
-        }else if(b2 && (cough.equals("Yes") && fastBreathing.equals("Normal Breathing") &&
+        }else if(cx2 && (cough.equals("Yes") && fastBreathing.equals("Normal Breathing") &&
                 value8.equals("No") && (wheezing.equals("Other abnormal breath sounds") || wheezing.equals("Normal breath sounds")))){
             editor.putString(CIDIAGNOSIS, "Cough/Cold/No Pneumonia");
             editor.apply();

@@ -244,6 +244,7 @@ public class Assess extends Fragment {
     private void checkIfNone() {
         if (s.contains("None of these")){
             editor.remove(DIAGNOSIS);
+            editor.remove(FINAL_DIAGNOSIS);
             editor.apply();
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
             fr.replace(R.id.fragment_container, new Cough());

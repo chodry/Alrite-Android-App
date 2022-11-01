@@ -159,16 +159,19 @@ public class Oxygen extends Fragment {
         percent = Integer.parseInt(oxy);
         if (percent >= 92){
             editor.remove(OXDIAGNOSIS);
+            editor.remove(FINAL_DIAGNOSIS);
             editor.apply();
             nextInterface();
         }else if (percent >= 90 && percent < 92){
             editor.remove(OXDIAGNOSIS);
+            editor.remove(FINAL_DIAGNOSIS);
             editor.apply();
             showDialog2();
         }else if (percent >= 85 && percent < 90){
             showDialog3("The oxgyen saturation is below normal. Are you sure you entered the right value?");
         }else {
             editor.remove(OXDIAGNOSIS);
+            editor.remove(FINAL_DIAGNOSIS);
             editor.apply();
             showDialog3("The child's oxygen levels are abnormally low, Are you sure you entered the right value?");
         }
@@ -301,6 +304,7 @@ public class Oxygen extends Fragment {
             @Override
             public void onClick(View view) {
                 editor.remove(OXDIAGNOSIS);
+                editor.remove(FINAL_DIAGNOSIS);
                 editor.apply();
                 dialog2.dismiss();
                 nextInterface();
@@ -324,4 +328,6 @@ public class Oxygen extends Fragment {
         fr.addToBackStack(null);
         fr.commit();
     }
+
+
 }

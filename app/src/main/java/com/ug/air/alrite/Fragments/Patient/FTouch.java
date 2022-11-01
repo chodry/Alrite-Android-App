@@ -133,6 +133,8 @@ public class FTouch extends Fragment {
         if (value6.equals("Yes") && !assess.equals("None of these")){
             showDialog();
         }else {
+            editor.remove(FTDIAGNOSIS);
+            editor.apply();
             FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
             fr.replace(R.id.fragment_container, new Oxygen());
             fr.addToBackStack(null);
