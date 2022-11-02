@@ -5,6 +5,7 @@ import static com.ug.air.alrite.Activities.PatientActivity.INCOMPLETE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.BRONCHODILATOR;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.DATE;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator.REASSESS;
+import static com.ug.air.alrite.Fragments.Patient.Bronchodilator2.REASON;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.BRONC;
 import static com.ug.air.alrite.Fragments.Patient.Bronchodilator3.FINAL;
 import static com.ug.air.alrite.Fragments.Patient.Initials.CIN;
@@ -43,9 +44,11 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class ActivePatients extends Fragment {
 
@@ -58,6 +61,7 @@ public class ActivePatients extends Fragment {
     String cin, pin, gender, age, search, dat;
     ArrayList<String> types, files, file;
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -184,6 +188,7 @@ public class ActivePatients extends Fragment {
                         if (!name.equals("sharedPrefs.xml") && !name.equals("counter_file.xml")){
                             String names = name.replace(".xml", "");
                             sharedPreferences = requireActivity().getSharedPreferences(names, Context.MODE_PRIVATE);
+                            editor = sharedPreferences.edit();
                             String bron = sharedPreferences.getString(BRONCHODILATOR, "");
                             String fin = sharedPreferences.getString(BRONC, "");
                             String incomplete = sharedPreferences.getString(INCOMPLETE, "");
@@ -203,8 +208,23 @@ public class ActivePatients extends Fragment {
                                     Date date = df.parse(dat);
                                     SimpleDateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm");
                                     String formattedDate = df1.format(date);
-                                    Patient patient = new Patient("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names, reassess);
-                                    items.add(new Item(0, patient));
+
+                                    Date currentTime = Calendar.getInstance().getTime();
+                                    long diff = currentTime.getTime() - date.getTime();
+                                    long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+                                    if (minutes >= 15 && minutes < 240){
+                                        editor.putBoolean(REASSESS, true);
+                                        editor.apply();
+                                        Patient patient = new Patient("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names, reassess);
+                                        items.add(new Item(0, patient));
+                                    }else if (minutes >= 240){
+                                        editor.putString(BRONCHODILATOR, "Bronchodialtor Not Given");
+                                        editor.putString(REASON, "A 4 hour time period elapsed");
+                                        editor.apply();
+                                    }else {
+                                        Patient patient = new Patient("Age: " + ag, "Gender: " + gender, cin, "Parent/Guardian: " + pin, formattedDate, names, reassess);
+                                        items.add(new Item(0, patient));
+                                    }
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
