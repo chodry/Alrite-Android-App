@@ -48,8 +48,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -64,45 +64,44 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:textSize="14sp"
-                        android:text="Bronchodilator out of stock" />
+                        android:text="Bronchodilator out of stock"
+                        android:textSize="14sp" />
 
                     <CheckBox
                         android:id="@+id/refuse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:textSize="14sp"
-                        android:text="Patient or family refused" />
+                        android:text="Patient or family refused"
+                        android:textSize="14sp" />
 
                     <CheckBox
                         android:id="@+id/need"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:textSize="14sp"
-                        android:text="Bronchodilator not needed by clinical assessment" />
+                        android:text="Bronchodilator not needed by clinical assessment"
+                        android:textSize="14sp" />
 
                     <CheckBox
                         android:id="@+id/enough"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:textSize="14sp"
-                        android:text="Not enough time" />
+                        android:text="Not enough time"
+                        android:textSize="14sp" />
 
                     <CheckBox
                         android:id="@+id/other"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:textSize="14sp"
-                        android:text="Other" />
+                        android:text="Other"
+                        android:textSize="14sp" />
 
 
                     <EditText
                         android:id="@+id/otherText"
-                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
                         android:layout_marginTop="20dp"
@@ -111,7 +110,8 @@
                         android:hint="Please provide other reasons"
                         android:inputType="textMultiLine"
                         android:padding="10dp"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 

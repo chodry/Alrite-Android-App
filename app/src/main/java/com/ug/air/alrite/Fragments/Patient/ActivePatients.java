@@ -89,7 +89,7 @@ public class ActivePatients extends Fragment {
         files = new ArrayList<String>();
 
         accessSharedFile();
-//
+
         etSearch.addTextChangedListener(textWatcher);
 
         patientAdapter = new PatientAdapter(getActivity(), items);
