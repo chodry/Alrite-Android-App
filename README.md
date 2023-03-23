@@ -1,1 +1,1 @@
-# Alrite android application developed using the android studio
+### Alrite android application developed using the android studio
